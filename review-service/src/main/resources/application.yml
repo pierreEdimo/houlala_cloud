@@ -1,0 +1,19 @@
+server:
+  port: 8086
+  servlet:
+    context-path: /review
+
+spring:
+  application:
+    name: review
+
+  h2:
+    console:
+      enabled: true
+
+  datasource:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
