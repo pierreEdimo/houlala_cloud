@@ -7,3 +7,7 @@ server:
 spring:
   application:
     name: country
+
+  h2:
+    console:
+      enabled: true

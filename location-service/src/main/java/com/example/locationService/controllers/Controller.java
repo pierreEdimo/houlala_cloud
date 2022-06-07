@@ -25,17 +25,22 @@ public class Controller {
     }
 
     @GetMapping("")
-    public List<LocationResponse> getAllLocations(){
+    public List<LocationResponse> getAllLocations() {
         return this.service.getAllLocations();
     }
 
     @PutMapping("/editLocation/{id}")
-    public Location editLocation(@RequestBody Location newLocation, @PathVariable long id){
+    public Location editLocation(@RequestBody Location newLocation, @PathVariable long id) {
         return this.service.editLocation(newLocation, id);
     }
 
     @DeleteMapping("/deleteLocation/{id}")
-    public void deleteLocation(@PathVariable long id){
+    public void deleteLocation(@PathVariable long id) {
         this.service.deleteLocation(id);
+    }
+
+    @GetMapping("/getLocationByCountryId/{id}")
+    public List<LocationResponse> getLocationByCountryId(@PathVariable long id) {
+        return this.service.getLocationsByCountryId(id);
     }
 }

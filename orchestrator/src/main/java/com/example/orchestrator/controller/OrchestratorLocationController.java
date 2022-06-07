@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/places")
+@RequestMapping("/locations")
 public class OrchestratorLocationController {
 
     private final LocationServiceFeignClient placeServiceFeignClient;
@@ -27,7 +27,7 @@ public class OrchestratorLocationController {
     }
 
     @PostMapping("/newLocation")
-    public Location createLocation(Location newLocation) {
+    public Location createLocation(@RequestBody Location newLocation) {
         try {
             return this.placeServiceFeignClient.addNewLocation(newLocation);
         } catch (OrchestratorException e) {

@@ -104,6 +104,24 @@ public class LocationServiceImpl implements LocationService {
         this.repository.delete(existingLocation);
     }
 
+    @Override
+    public List<LocationResponse> getLocationsByCountryId(long id) {
+        List<LocationResponse> existingLocations = new ArrayList<>();
+
+
+        List<Location> locations = this.repository.findLocationByCountryId(id); 
+        
+        for(Location location: locations){
+            try {
+                existingLocations.add(this.toLocationResponse(location));
+            } catch (LocationServiceException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        return existingLocations; 
+    }
+
 
     private LocationResponse toLocationResponse(Location location) throws LocationServiceException {
 

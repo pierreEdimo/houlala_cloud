@@ -6,3 +6,7 @@ server:
 spring:
   application:
     name: category
+
+  h2:
+    console:
+      enabled: true

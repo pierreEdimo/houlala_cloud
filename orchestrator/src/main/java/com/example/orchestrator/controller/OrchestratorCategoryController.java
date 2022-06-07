@@ -16,7 +16,7 @@ public class OrchestratorCategoryController {
 
     private final CategoryServiceFeignClient feignClient;
 
-    @GetMapping("/newCategory")
+    @PostMapping("/newCategory")
     public Category createCategory(@RequestBody Category newCategory) {
         try {
             return this.feignClient.createCategory(newCategory);
