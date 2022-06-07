@@ -70,7 +70,6 @@ public class CountryServiceImpl implements CountryService {
         }
 
         Country existingCountry = country.get();
-        existingCountry.setId(id);
         existingCountry.setCode(newCountry.getCode());
         existingCountry.setName(newCountry.getName());
 
