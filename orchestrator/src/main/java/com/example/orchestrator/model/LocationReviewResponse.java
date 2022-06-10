@@ -7,7 +7,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class ReviewResponseDto {
+public class LocationReviewResponse {
 
     private List<ReviewResponse> reviews;
 
