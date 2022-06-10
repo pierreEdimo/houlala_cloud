@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class Controller {
+public class LocationController {
 
     private final LocationService service;
 

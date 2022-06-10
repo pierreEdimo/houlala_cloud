@@ -28,4 +28,6 @@ public class LocationResponse {
     private String website;
 
     private Category category;
+
+    private ReviewResponseDto reviews;
 }

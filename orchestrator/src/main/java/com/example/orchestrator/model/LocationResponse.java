@@ -23,4 +23,8 @@ public class LocationResponse {
     private String email;
 
     private String website;
+
+    private Address address;
+
+    private ReviewResponseDto reviews;
 }

@@ -44,4 +44,9 @@ public class Controller {
     public ReviewResponseDto getAllReviewByLocationId(@PathVariable int locationId) {
         return this.service.getReviewByLocationId(locationId);
     }
+
+    @GetMapping("/getAllReviewsByAuthorId")
+    public List<ReviewResponse> getReviewsByAuthorId(@RequestParam(name = "authorId") String authorId) {
+        return this.service.getReviewsbyAuthorId(authorId);
+    }
 }

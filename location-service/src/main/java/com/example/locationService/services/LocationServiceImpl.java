@@ -3,10 +3,8 @@ package com.example.locationService.services;
 import com.example.locationService.exception.LocationServiceException;
 import com.example.locationService.feign.LocationCategoryFeignClient;
 import com.example.locationService.feign.LocationCountryFeignClient;
-import com.example.locationService.model.Category;
-import com.example.locationService.model.Country;
-import com.example.locationService.model.Location;
-import com.example.locationService.model.LocationResponse;
+import com.example.locationService.feign.LocationReviewFeignClient;
+import com.example.locationService.model.*;
 import com.example.locationService.repositories.LocationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -26,6 +24,8 @@ public class LocationServiceImpl implements LocationService {
     private final LocationCountryFeignClient client;
 
     private final LocationCategoryFeignClient categoryClient;
+
+    private final LocationReviewFeignClient reviewFeignClient;
 
     @Override
     public LocationResponse getLocation(long id) {
@@ -109,9 +109,9 @@ public class LocationServiceImpl implements LocationService {
         List<LocationResponse> existingLocations = new ArrayList<>();
 
 
-        List<Location> locations = this.repository.findLocationByCountryId(id); 
-        
-        for(Location location: locations){
+        List<Location> locations = this.repository.findLocationByCountryId(id);
+
+        for (Location location : locations) {
             try {
                 existingLocations.add(this.toLocationResponse(location));
             } catch (LocationServiceException e) {
@@ -119,7 +119,7 @@ public class LocationServiceImpl implements LocationService {
             }
         }
 
-        return existingLocations; 
+        return existingLocations;
     }
 
 
@@ -127,6 +127,7 @@ public class LocationServiceImpl implements LocationService {
 
         Country countryLocation = this.client.getASingleCountry(location.getCountryId());
         Category categoryLocation = this.categoryClient.getSingleCategory(location.getCategoryId());
+        ReviewResponseDto reviews = this.reviewFeignClient.getReviewsByLocation(Math.toIntExact(location.getId()));
 
         LocationResponse response = new LocationResponse();
 
@@ -139,6 +140,8 @@ public class LocationServiceImpl implements LocationService {
         response.setCountry(countryLocation);
         response.setTelephoneNumber(location.getTelephoneNumber());
         response.setCategory(categoryLocation);
+        response.setReviews(reviews);
+        response.setAddress(location.getAddress());
 
         return response;
     }
