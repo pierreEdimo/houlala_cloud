@@ -111,6 +111,20 @@ public class ReviewServiceImpl implements ReviewService {
 
     }
 
+    @Override
+    public List<ReviewResponse> getReviewsbyAuthorId(String authorId) {
+        List<ReviewResponse> responses = new ArrayList<>();
+        List<Review> reviews;
+
+        reviews = this.repository.findReviewsByAuthorId(authorId);
+
+        for(Review review: reviews){
+            responses.add(this.toReviewResponse(review));
+        }
+
+        return responses;
+    }
+
     private ReviewResponse toReviewResponse(Review review) {
 
         ReviewResponse response = new ReviewResponse();
