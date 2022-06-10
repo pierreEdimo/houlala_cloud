@@ -3,6 +3,7 @@ package com.example.orchestrator.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.sql.Time;
 import java.time.LocalDate;
 
 @Getter
@@ -11,7 +12,7 @@ public class Availability {
 
     private String date;
 
-    private LocalDate opening;
+    private Time opening;
 
-    private LocalDate closing;
+    private Time closing;
 }
