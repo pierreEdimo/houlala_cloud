@@ -21,4 +21,12 @@ public class Address {
     private String streetName;
 
     private String poBox;
+
+    public Address(){}
+
+    public Address(String city, String streetName, String poBox){
+        this.city = city;
+        this.streetName  = streetName;
+        this.poBox = poBox;
+    }
 }

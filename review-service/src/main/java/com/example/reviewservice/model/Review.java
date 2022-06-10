@@ -1,6 +1,7 @@
 package com.example.reviewservice.model;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -9,6 +10,16 @@ import javax.persistence.*;
 @Getter
 @Setter
 public class Review {
+
+    public Review() {
+    }
+
+    public Review(String authorId, int locationId, String content, int rating) {
+        this.authorId = authorId;
+        this.locationId = locationId;
+        this.content = content;
+        this.rating = rating;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,4 +34,5 @@ public class Review {
 
     @Column(nullable = false)
     private int rating;
+
 }

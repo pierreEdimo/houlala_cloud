@@ -24,11 +24,11 @@ public class Location {
     private long categoryId;
 
     @OneToMany(targetEntity = Availability.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "place_fk", referencedColumnName = "id", nullable = true)
+    @JoinColumn(name = "location_id", referencedColumnName = "id")
     private List<Availability> availabilityList;
 
     @OneToOne(targetEntity = Address.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "place_fk", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "address_id", referencedColumnName = "id", nullable = false)
     private Address address;
 
     private String telephoneNumber;
@@ -36,5 +36,26 @@ public class Location {
     private String email;
 
     private String website;
+
+    public Location(){}
+
+    public Location( String name,
+                     String description,
+                     long countryId,
+                     long categoryId,
+                     Address address,
+                     String telephoneNumber,
+                     String email,
+                     String website
+                     ){
+        this.name = name;
+        this.description = description;
+        this.countryId = countryId;
+        this.categoryId = categoryId;
+        this.address = address;
+        this.telephoneNumber = telephoneNumber;
+        this.email = email;
+        this.website = website;
+    }
 
 }

@@ -16,8 +16,13 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String thumbNail;
-
     private String name;
+
+    public Category(){}
+
+    public Category(String thumbNail, String name){
+        this.name = name;
+        this.thumbNail = thumbNail;
+    }
 }

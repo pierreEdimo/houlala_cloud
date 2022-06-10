@@ -7,7 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.time.LocalDate;
+import java.sql.Time;
+import java.time.LocalTime;
 
 @Entity
 @Getter
@@ -20,7 +21,16 @@ public class Availability {
 
     private String date;
 
-    private LocalDate opening;
+    private Time opening;
 
-    private LocalDate closing;
+    private Time closing;
+
+    public Availability() {
+    }
+
+    public Availability(String date, LocalTime opening, LocalTime closing) {
+        this.date = date;
+        this.opening = Time.valueOf(opening);
+        this.closing = Time.valueOf(closing);
+    }
 }
