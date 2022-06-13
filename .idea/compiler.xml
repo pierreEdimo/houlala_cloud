@@ -12,6 +12,7 @@
         <module name="discovery" />
         <module name="location-service" />
         <module name="review-service" />
+        <module name="booking-service" />
         <module name="room-service" />
         <module name="country-service" />
         <module name="gateway" />
@@ -19,6 +20,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="booking-service" target="17" />
+      <module name="booking_service" target="17" />
       <module name="category-service" target="17" />
       <module name="country-service" target="17" />
       <module name="discovery" target="17" />
@@ -34,6 +36,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="booking-service" options="-parameters" />
+      <module name="booking_service" options="-parameters" />
       <module name="category-service" options="-parameters" />
       <module name="country-service" options="-parameters" />
       <module name="discovery" options="-parameters" />
