@@ -26,5 +26,5 @@ public class LocationResponse {
 
     private Address address;
 
-    private ReviewResponseDto reviews;
+    private LocationReviewResponse reviews;
 }

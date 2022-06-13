@@ -12,12 +12,13 @@
         <module name="discovery" />
         <module name="location-service" />
         <module name="review-service" />
+        <module name="room-service" />
         <module name="country-service" />
         <module name="gateway" />
-        <module name="hotel-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="booking-service" target="17" />
       <module name="category-service" target="17" />
       <module name="country-service" target="17" />
       <module name="discovery" target="17" />
@@ -27,10 +28,12 @@
       <module name="message-sender" target="17" />
       <module name="orchestrator" target="17" />
       <module name="review-service" target="17" />
+      <module name="room-service" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="booking-service" options="-parameters" />
       <module name="category-service" options="-parameters" />
       <module name="country-service" options="-parameters" />
       <module name="discovery" options="-parameters" />
@@ -40,6 +43,7 @@
       <module name="message-sender" options="-parameters" />
       <module name="orchestrator" options="-parameters" />
       <module name="review-service" options="-parameters" />
+      <module name="room-service" options="-parameters" />
     </option>
   </component>
 </project>
