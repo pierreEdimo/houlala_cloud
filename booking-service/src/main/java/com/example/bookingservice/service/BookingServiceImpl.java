@@ -1,10 +1,7 @@
 package com.example.bookingservice.service;
 
-import com.example.bookingservice.exception.BookingServiceException;
-import com.example.bookingservice.feign.BookingRoomFeignClient;
 import com.example.bookingservice.model.Booking;
 import com.example.bookingservice.model.BookingResponse;
-import com.example.bookingservice.model.RoomResponse;
 import com.example.bookingservice.repository.BookingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,7 +18,6 @@ public class BookingServiceImpl implements BookingService {
 
     private final BookingRepository repository;
 
-    private final BookingRoomFeignClient feignClient;
 
     @Override
     public List<BookingResponse> getAllBookings() {
