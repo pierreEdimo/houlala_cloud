@@ -1,0 +1,12 @@
+server:
+  port: 8085
+  servlet:
+    context-path: /room
+
+spring:
+  application:
+    name: room
+
+  h2:
+    console:
+      enabled: true
