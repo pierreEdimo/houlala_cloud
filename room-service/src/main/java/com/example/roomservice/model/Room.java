@@ -24,6 +24,14 @@ public class Room {
 
     private int priceProNight;
 
+    private int numberOfBedRooms;
+
+    private boolean breakFastIncluded;
+
+    private int breakFastPrice;
+
+    private int size;
+
     @ManyToOne(targetEntity = RoomCategory.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private RoomCategory category;
