@@ -4,6 +4,7 @@ import com.example.locationService.exception.LocationServiceException;
 import com.example.locationService.feign.LocationCategoryFeignClient;
 import com.example.locationService.feign.LocationCountryFeignClient;
 import com.example.locationService.feign.LocationReviewFeignClient;
+import com.example.locationService.feign.LocationRoomFeignClient;
 import com.example.locationService.model.*;
 import com.example.locationService.repositories.LocationRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @Service
@@ -26,6 +28,8 @@ public class LocationServiceImpl implements LocationService {
     private final LocationCategoryFeignClient categoryClient;
 
     private final LocationReviewFeignClient reviewFeignClient;
+
+    private final LocationRoomFeignClient roomFeignClient;
 
     @Override
     public LocationResponse getLocation(long id) {
@@ -128,6 +132,7 @@ public class LocationServiceImpl implements LocationService {
         Country countryLocation = this.client.getASingleCountry(location.getCountryId());
         Category categoryLocation = this.categoryClient.getSingleCategory(location.getCategoryId());
         ReviewResponseDto reviews = this.reviewFeignClient.getReviewsByLocation(Math.toIntExact(location.getId()));
+        RoomOverviewDto rooms = this.roomFeignClient.getRoomsFromLocationId(location.getId());
 
         LocationResponse response = new LocationResponse();
 
@@ -142,6 +147,10 @@ public class LocationServiceImpl implements LocationService {
         response.setCategory(categoryLocation);
         response.setReviews(reviews);
         response.setAddress(location.getAddress());
+
+        if (response.getCategory().getName().equals("Hotel".toLowerCase(Locale.ROOT))) {
+            response.setAvailableRooms(rooms);
+        }
 
         return response;
     }
