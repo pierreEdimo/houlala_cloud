@@ -30,4 +30,6 @@ public class LocationResponse {
     private Category category;
 
     private ReviewResponseDto reviews;
+
+    private RoomOverviewDto availableRooms;
 }
