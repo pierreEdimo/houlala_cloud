@@ -14,11 +14,17 @@ public class BootstrapData implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Category newCategory = new Category("" +
+        Category newCategory = new Category(
+                "\uD83C\uDFE8",
+                "Hotel"
+        );
+
+        Category newCategory2 = new Category(
                 "\uD83C\uDF7D",
                 "Restaurant"
         );
 
         this.repository.save(newCategory);
+        this.repository.save(newCategory2);
     }
 }
