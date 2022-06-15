@@ -27,4 +27,8 @@ public class LocationResponse {
     private Address address;
 
     private LocationReviewResponse reviews;
+
+    private Category category;
+
+    private RoomOverviewDto availableRooms;
 }
