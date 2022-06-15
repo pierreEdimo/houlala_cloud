@@ -16,8 +16,6 @@ public class Room {
 
     private long locationId;
 
-    private String renterId;
-
     private String roomDescription;
 
     private int availableQuantity;
@@ -40,13 +38,12 @@ public class Room {
     public Room() {
     }
 
-    public Room(String renterId,
-                String roomDescription,
-                int availableQuantity,
-                int priceProNight,
-                RoomCategory category,
-                long locationId) {
-        this.renterId = renterId;
+    public Room(
+            String roomDescription,
+            int availableQuantity,
+            int priceProNight,
+            RoomCategory category,
+            long locationId) {
         this.category = category;
         this.roomDescription = roomDescription;
         this.availableQuantity = availableQuantity;
