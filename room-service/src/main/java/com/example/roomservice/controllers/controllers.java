@@ -1,6 +1,7 @@
 package com.example.roomservice.controllers;
 
 import com.example.roomservice.model.Room;
+import com.example.roomservice.model.RoomOverViewDto;
 import com.example.roomservice.model.RoomResponse;
 import com.example.roomservice.services.RoomService;
 import lombok.RequiredArgsConstructor;
@@ -37,6 +38,11 @@ public class controllers {
     @GetMapping("/singleRoom/{id}")
     public RoomResponse getRoom(@PathVariable long id) {
         return this.roomService.getSingleRoom(id);
+    }
+
+    @GetMapping("/getRoomsByLocationId/{id}")
+    public RoomOverViewDto getRoomsByLocationId(@PathVariable long id){
+        return this.roomService.getRoomsByLocationId(id);
     }
 
 }
