@@ -37,17 +37,18 @@ public class Location {
 
     private String website;
 
-    public Location(){}
+    public Location() {
+    }
 
-    public Location( String name,
-                     String description,
-                     long countryId,
-                     long categoryId,
-                     Address address,
-                     String telephoneNumber,
-                     String email,
-                     String website
-                     ){
+    public Location(String name,
+                    String description,
+                    long countryId,
+                    long categoryId,
+                    Address address,
+                    String telephoneNumber,
+                    String email,
+                    String website
+    ) {
         this.name = name;
         this.description = description;
         this.countryId = countryId;
