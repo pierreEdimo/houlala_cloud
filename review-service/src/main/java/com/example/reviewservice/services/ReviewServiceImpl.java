@@ -92,6 +92,7 @@ public class ReviewServiceImpl implements ReviewService {
     public ReviewResponseDto getReviewByLocationId(int id) {
         double average = 0;
         int sum = 0;
+
         List<ReviewResponse> reviewResponses = new ArrayList<>();
         ReviewResponseDto reviewResponseDto = new ReviewResponseDto();
 
@@ -105,7 +106,6 @@ public class ReviewServiceImpl implements ReviewService {
         if (reviews.toArray().length >= 1) {
             average = (float) sum / reviewResponses.size();
         }
-
 
         reviewResponseDto.setReviews(reviewResponses);
         reviewResponseDto.setAverageRating(average);
