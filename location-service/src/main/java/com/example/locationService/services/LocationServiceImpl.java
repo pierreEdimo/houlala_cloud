@@ -148,7 +148,7 @@ public class LocationServiceImpl implements LocationService {
         response.setReviews(reviews);
         response.setAddress(location.getAddress());
 
-        if (response.getCategory().getName().equals("Hotel".toLowerCase(Locale.ROOT))) {
+        if (response.getCategory().getName().equals("Hotel")) {
             response.setAvailableRooms(rooms);
         }
 
