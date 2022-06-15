@@ -70,7 +70,6 @@ public class RoomServiceImpl implements RoomService {
             createdRoom.setLocationId(newRoom.getLocationId());
             createdRoom.setPriceProNight(newRoom.getPriceProNight());
             createdRoom.setAvailableQuantity(newRoom.getAvailableQuantity());
-            createdRoom.setRenterId(newRoom.getRenterId());
             createdRoom.setCategory(categoryOptional.get());
             this.repository.save(createdRoom);
         }
