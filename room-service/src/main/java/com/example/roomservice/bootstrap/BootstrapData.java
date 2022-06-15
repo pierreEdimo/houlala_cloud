@@ -17,9 +17,7 @@ public class BootstrapData implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        Room room = new Room(
-                "edimo",
-                "lorem ipsuum indolor in samor ino dolor",
+        Room room = new Room("lorem ipsuum indolor in samor ino dolor",
                 10,
                 7500,
                 new RoomCategory(
@@ -29,7 +27,6 @@ public class BootstrapData implements CommandLineRunner {
         );
 
         Room room2 = new Room(
-                "edimo",
                 "lorem ipsuum indolor in samor ino dolor",
                 10,
                 12000,
