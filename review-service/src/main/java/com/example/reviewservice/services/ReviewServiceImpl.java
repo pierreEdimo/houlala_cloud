@@ -118,7 +118,7 @@ public class ReviewServiceImpl implements ReviewService {
 
         reviews = this.repository.findReviewsByAuthorId(authorId);
 
-        for(Review review: reviews){
+        for (Review review : reviews) {
             responses.add(this.toReviewResponse(review));
         }
 

@@ -40,12 +40,18 @@ public class Room {
     public Room() {
     }
 
-    public Room(String renterId, String roomDescription, int availableQuantity, int priceProNight, RoomCategory category) {
+    public Room(String renterId,
+                String roomDescription,
+                int availableQuantity,
+                int priceProNight,
+                RoomCategory category,
+                long locationId) {
         this.renterId = renterId;
         this.category = category;
         this.roomDescription = roomDescription;
         this.availableQuantity = availableQuantity;
         this.priceProNight = priceProNight;
+        this.locationId = locationId;
 
     }
 
