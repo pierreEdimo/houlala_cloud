@@ -10038,11 +10038,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/pierre/Workspace/houlala_smart_project/user-service/user-service.csproj",
+      "projectUniqueName": "/home/pierre/workspace/SpringProject/houlala_smart_project/user-service/user-service.csproj",
       "projectName": "user-service",
-      "projectPath": "/home/pierre/Workspace/houlala_smart_project/user-service/user-service.csproj",
+      "projectPath": "/home/pierre/workspace/SpringProject/houlala_smart_project/user-service/user-service.csproj",
       "packagesPath": "/home/pierre/.nuget/packages/",
-      "outputPath": "/home/pierre/Workspace/houlala_smart_project/user-service/obj/",
+      "outputPath": "/home/pierre/workspace/SpringProject/houlala_smart_project/user-service/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/pierre/.nuget/NuGet/NuGet.Config"
@@ -10134,7 +10134,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.300/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.301/RuntimeIdentifierGraph.json"
       }
     }
   }
