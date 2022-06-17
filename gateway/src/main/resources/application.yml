@@ -7,7 +7,7 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: orchestrator
-          uri: lb://orchestrator
+        - id: api
+          uri: lb://api
           predicates:
             - Path=/**

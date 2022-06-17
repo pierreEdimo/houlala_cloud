@@ -12,7 +12,8 @@
         <option value="$PROJECT_DIR$/location-service/pom.xml" />
         <option value="$PROJECT_DIR$/review-service/pom.xml" />
         <option value="$PROJECT_DIR$/room-service/pom.xml" />
-        <option value="$PROJECT_DIR$/booking-service/pom.xml" />
+        <option value="$PROJECT_DIR$/offer-service/pom.xml" />
+        <option value="$PROJECT_DIR$/marketplace-client/pom.xml" />
       </list>
     </option>
   </component>

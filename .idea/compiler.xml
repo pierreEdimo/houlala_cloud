@@ -7,18 +7,20 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="orchestrator" />
         <module name="category-service" />
         <module name="discovery" />
         <module name="location-service" />
         <module name="review-service" />
-        <module name="booking-service" />
+        <module name="offer-service" />
+        <module name="marketplace-client" />
         <module name="room-service" />
+        <module name="api" />
         <module name="country-service" />
         <module name="gateway" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="api" target="17" />
       <module name="booking-service" target="17" />
       <module name="booking_service" target="17" />
       <module name="category-service" target="17" />
@@ -27,14 +29,16 @@
       <module name="gateway" target="17" />
       <module name="hotel-service" target="17" />
       <module name="location-service" target="17" />
+      <module name="marketplace-client" target="17" />
       <module name="message-sender" target="17" />
-      <module name="orchestrator" target="17" />
+      <module name="offer-service" target="17" />
       <module name="review-service" target="17" />
       <module name="room-service" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="api" options="-parameters" />
       <module name="booking-service" options="-parameters" />
       <module name="booking_service" options="-parameters" />
       <module name="category-service" options="-parameters" />
@@ -43,8 +47,9 @@
       <module name="gateway" options="-parameters" />
       <module name="hotel-service" options="-parameters" />
       <module name="location-service" options="-parameters" />
+      <module name="marketplace-client" options="-parameters" />
       <module name="message-sender" options="-parameters" />
-      <module name="orchestrator" options="-parameters" />
+      <module name="offer-service" options="-parameters" />
       <module name="review-service" options="-parameters" />
       <module name="room-service" options="-parameters" />
     </option>
