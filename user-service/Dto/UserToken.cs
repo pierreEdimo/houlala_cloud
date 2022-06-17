@@ -2,8 +2,10 @@ namespace user_service.Dto
 {
     public class UserToken
     {
-        public UserDto? User { get; set; }
-        public String? Token { get; set; }
+        public String? UserId {get; set; }
+        public  String? Email {get; set; }
+        public String? UserName{get; set; }
+        public String? Token{get; set; }
     }
 
 }

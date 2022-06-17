@@ -130,7 +130,9 @@ namespace user_service.Controller
             return new UserToken()
             {
                 Token = new JwtSecurityTokenHandler().WriteToken(token),
-                User = loggedUserDto
+                UserName = loggedUserDto.UserName, 
+                Email = loggedUserDto.Email, 
+                UserId = loggedUserDto.Id
             };
         }
     }
