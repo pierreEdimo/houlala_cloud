@@ -4,6 +4,6 @@ namespace user_service.Model
 {
     public class User : IdentityUser
     {
-
+        
     }
 }
