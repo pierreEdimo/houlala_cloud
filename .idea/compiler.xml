@@ -17,11 +17,13 @@
         <module name="api" />
         <module name="country-service" />
         <module name="gateway" />
+        <module name="authentication-client" />
         <module name="discovery-orchestrator" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="api" target="17" />
+      <module name="authentication-client" target="17" />
       <module name="booking-service" target="17" />
       <module name="booking_service" target="17" />
       <module name="category-service" target="17" />
@@ -41,6 +43,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="api" options="-parameters" />
+      <module name="authentication-client" options="-parameters" />
       <module name="booking-service" options="-parameters" />
       <module name="booking_service" options="-parameters" />
       <module name="category-service" options="-parameters" />
