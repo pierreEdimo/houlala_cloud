@@ -6,7 +6,7 @@ using user_service.Model;
 using user_service.DbContext;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using System.Text; 
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 IConfiguration Configuration = builder.Configuration;
@@ -24,6 +24,13 @@ builder.Services.AddDbContext<UserDbContext>(options =>
 options.UseInMemoryDatabase("User"));
 
 builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddCors(options => options.AddPolicy("EnableAll", builder =>
+{
+    builder.AllowAnyOrigin()
+           .AllowAnyHeader()
+           .AllowAnyMethod();
+}));
 
 JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
@@ -69,9 +76,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseResponseCaching(); 
+
+app.UseCors("EnableAll");
+
 app.UseHttpsRedirection();
 
-app.UseAuthentication(); 
+app.UseAuthentication();
 
 app.UseAuthorization();
 
