@@ -7,7 +7,7 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: api
-          uri: lb://api
+        - id: discovery-orchestrator
+          uri: lb://discovery-orchestrator
           predicates:
             - Path=/**
