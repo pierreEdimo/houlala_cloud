@@ -6,3 +6,9 @@ server:
 spring:
   application:
     name: marketplace
+
+feign:
+  client:
+    config:
+      default:
+        errorDecoder: com.example.marketplaceclient.MarketplaceErrorDecoder

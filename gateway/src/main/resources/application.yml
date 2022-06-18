@@ -19,6 +19,10 @@ spring:
           uri: lb://authentication
           predicates:
             Path=/authentication/**
+        - id: marketplace
+          uri: https://houlala.herokuapp.com/
+          predicates:
+            Path=/api/**
 eureka:
   client:
     serviceUrl:
