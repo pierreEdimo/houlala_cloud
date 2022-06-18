@@ -1,5 +1,6 @@
 package com.example.marketplaceclient.feign;
 
+import com.example.marketplaceclient.exception.MarketplaceException;
 import com.example.marketplaceclient.model.Product;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,5 +11,5 @@ import java.util.List;
 public interface ProductServiceFeignClient {
 
     @GetMapping("")
-    List<Product> getAllProducts();
+    List<Product> getAllProducts() throws MarketplaceException;
 }

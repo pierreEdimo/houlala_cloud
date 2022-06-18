@@ -12,7 +12,6 @@
         <option value="$PROJECT_DIR$/location-service/pom.xml" />
         <option value="$PROJECT_DIR$/review-service/pom.xml" />
         <option value="$PROJECT_DIR$/room-service/pom.xml" />
-        <option value="$PROJECT_DIR$/offer-service/pom.xml" />
         <option value="$PROJECT_DIR$/marketplace-client/pom.xml" />
         <option value="$PROJECT_DIR$/discovery-orchestrator/pom.xml" />
         <option value="$PROJECT_DIR$/authentication-client/pom.xml" />

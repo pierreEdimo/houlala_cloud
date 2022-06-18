@@ -10,7 +10,6 @@
         <module name="category-service" />
         <module name="location-service" />
         <module name="review-service" />
-        <module name="offer-service" />
         <module name="discovery" />
         <module name="marketplace-client" />
         <module name="room-service" />
