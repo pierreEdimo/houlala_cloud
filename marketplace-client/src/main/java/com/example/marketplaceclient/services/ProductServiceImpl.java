@@ -53,15 +53,6 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductResponse> getProductsByPageId(String pageId, int limit) {
-        try {
-            return this.feignClient.getProductByPageId(pageId, limit);
-        } catch (MarketplaceException e) {
-            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
-        }
-    }
-
-    @Override
     public List<ProductResponse> getProductsByCategoryId(String categoryId, int limit) {
         try {
             return this.feignClient.getProductByCategoryId(categoryId, limit);

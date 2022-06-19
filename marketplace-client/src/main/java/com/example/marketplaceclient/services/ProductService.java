@@ -15,8 +15,6 @@ public interface ProductService {
 
     List<ProductResponse> getRandomProducts(int size, String categoryId);
 
-    List<ProductResponse> getProductsByPageId(String pageId, int limit);
-
     List<ProductResponse> getProductsByCategoryId(String categoryId, int limit);
 
     List<ProductResponse> getProductsByTypeAndCategoryId(String categoryId, String productType);

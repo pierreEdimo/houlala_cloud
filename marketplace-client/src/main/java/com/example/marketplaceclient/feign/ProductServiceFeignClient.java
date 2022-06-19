@@ -23,9 +23,6 @@ public interface ProductServiceFeignClient {
     @GetMapping("/getRandomProducts")
     List<ProductResponse> getRandomProducts(@RequestParam int size, @RequestParam String categoryId) throws MarketplaceException;
 
-    @GetMapping("/filterProductByPageId")
-    List<ProductResponse> getProductByPageId(@RequestParam String pageId, @RequestParam int limit) throws MarketplaceException;
-
     @GetMapping("/filterProductsByCategoryId")
     List<ProductResponse> getProductByCategoryId(@RequestParam String categoryId, @RequestParam int limit) throws MarketplaceException;
 

@@ -38,11 +38,6 @@ public class ProductController {
         return this.productService.getRandomProducts(size, categoryId);
     }
 
-    @GetMapping("/filterProductByPageId")
-    public List<ProductResponse> getProductsPageId(@RequestParam String pageId, @RequestParam int limit){
-        return this.productService.getProductsByPageId(pageId, limit);
-    }
-
     @GetMapping("/filterProductsByCategoryId")
     public List<ProductResponse> getProductsByCategoryId(@RequestParam String categoryId, @RequestParam int limit){
         return this.productService.getProductsByCategoryId(categoryId, limit);
