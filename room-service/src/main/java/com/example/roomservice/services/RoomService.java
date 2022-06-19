@@ -16,7 +16,7 @@ public interface RoomService {
 
     List<RoomResponse> getAllRooms();
 
-    RoomOverViewDto getRoomsByLocationId(long id);
+    RoomOverViewDto getRoomsByLocationId(String id);
 
     void deleteRoom(long id);
 }

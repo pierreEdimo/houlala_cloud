@@ -23,7 +23,7 @@ public class BootstrapData implements CommandLineRunner {
                 new RoomCategory(
                         "Suite de Luxe"
                 ),
-                2L
+                "Mut"
         );
 
         Room room2 = new Room(
@@ -33,7 +33,7 @@ public class BootstrapData implements CommandLineRunner {
                 new RoomCategory(
                         "Studio"
                 ),
-                2L
+                "Mut"
         );
 
         this.repository.save(room);

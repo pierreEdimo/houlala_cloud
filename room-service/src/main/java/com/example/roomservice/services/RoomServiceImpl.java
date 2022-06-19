@@ -90,7 +90,7 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public RoomOverViewDto getRoomsByLocationId(long id) {
+    public RoomOverViewDto getRoomsByLocationId(String id) {
         List<RoomResponse> roomResponses = new ArrayList<>();
         List<Room> rooms = this.repository.findRoomsByLocationId(id);
         int total = 0;

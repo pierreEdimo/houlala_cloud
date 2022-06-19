@@ -41,7 +41,7 @@ public class controllers {
     }
 
     @GetMapping("/getRoomsByLocationId/{id}")
-    public RoomOverViewDto getRoomsByLocationId(@PathVariable long id){
+    public RoomOverViewDto getRoomsByLocationId(@PathVariable String id){
         return this.roomService.getRoomsByLocationId(id);
     }
 

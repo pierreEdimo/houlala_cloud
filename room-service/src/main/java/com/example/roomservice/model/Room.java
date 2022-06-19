@@ -14,7 +14,7 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private long locationId;
+    private String locationId;
 
     private String roomDescription;
 
@@ -43,7 +43,7 @@ public class Room {
             int availableQuantity,
             int priceProNight,
             RoomCategory category,
-            long locationId) {
+            String locationId) {
         this.category = category;
         this.roomDescription = roomDescription;
         this.availableQuantity = availableQuantity;
