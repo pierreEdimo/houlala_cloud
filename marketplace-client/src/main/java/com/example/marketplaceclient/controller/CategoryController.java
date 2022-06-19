@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/Categories")
+@RequestMapping("/categories")
 public class CategoryController {
 
     private final CategoryServiceFeignClient feignClient;
