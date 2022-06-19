@@ -10,6 +10,8 @@ import java.util.List;
 public class Order {
     private List<CartItem> cartItems;
 
+    private int totalQuantity;
+
     private int totalPrice;
 
     private String status;
@@ -17,4 +19,8 @@ public class Order {
     private String payMentMode;
 
     private String orderOptions;
+
+    private UserInformation userInformation;
+
+    private Address address;
 }
