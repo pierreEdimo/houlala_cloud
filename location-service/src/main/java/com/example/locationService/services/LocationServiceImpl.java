@@ -131,8 +131,8 @@ public class LocationServiceImpl implements LocationService {
 
         Country countryLocation = this.client.getASingleCountry(location.getCountryId());
         Category categoryLocation = this.categoryClient.getSingleCategory(location.getCategoryId());
-        ReviewResponseDto reviews = this.reviewFeignClient.getReviewsByLocation(Math.toIntExact(location.getId()));
-        RoomOverviewDto rooms = this.roomFeignClient.getRoomsFromLocationId(location.getId());
+        ReviewResponseDto reviews = this.reviewFeignClient.getReviewsByLocation(location.getSku());
+        RoomOverviewDto rooms = this.roomFeignClient.getRoomsFromLocationId(location.getSku());
 
         LocationResponse response = new LocationResponse();
 

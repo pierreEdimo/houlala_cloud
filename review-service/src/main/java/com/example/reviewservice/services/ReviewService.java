@@ -18,7 +18,7 @@ public interface ReviewService {
 
     List<ReviewResponse> getAllReviews();
 
-    ReviewResponseDto getReviewByLocationId(int id);
+    ReviewResponseDto getReviewByLocationId(String id);
 
     List<ReviewResponse> getReviewsbyAuthorId(String authorId);
 }

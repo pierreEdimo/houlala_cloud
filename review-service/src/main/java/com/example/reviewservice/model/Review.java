@@ -14,7 +14,7 @@ public class Review {
     public Review() {
     }
 
-    public Review(String authorId, int locationId, String content, int rating) {
+    public Review(String authorId, String locationId, String content, int rating) {
         this.authorId = authorId;
         this.locationId = locationId;
         this.content = content;
@@ -27,7 +27,7 @@ public class Review {
 
     private String authorId;
 
-    private int locationId;
+    private String locationId;
 
     @Column(nullable = false)
     private String content;

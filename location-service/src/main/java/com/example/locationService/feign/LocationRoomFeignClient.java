@@ -10,5 +10,5 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface LocationRoomFeignClient {
 
     @GetMapping("/getRoomsByLocationId/{id}")
-    RoomOverviewDto getRoomsFromLocationId(@PathVariable long id) throws LocationServiceException;
+    RoomOverviewDto getRoomsFromLocationId(@PathVariable String id) throws LocationServiceException;
 }

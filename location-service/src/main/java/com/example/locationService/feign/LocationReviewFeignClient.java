@@ -9,5 +9,5 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient(name = "review", path = "review")
 public interface LocationReviewFeignClient {
     @GetMapping("/getAllReviewByLocationId/{locationId}")
-    ReviewResponseDto getReviewsByLocation(@PathVariable int locationId) throws LocationServiceException;
+    ReviewResponseDto getReviewsByLocation(@PathVariable String locationId) throws LocationServiceException;
 }

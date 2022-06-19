@@ -16,13 +16,13 @@ public class BootStrapData implements CommandLineRunner {
     public void run(String... args) throws Exception {
         Review review = new Review(
                 "edimo",
-                1,
+                "Mut",
                 "Hello Content",
                 4);
 
         Review review1 = new Review(
                 "edimo",
-                1,
+                "Mut",
                 "Hello Location 2 is dope",
                 3
         );

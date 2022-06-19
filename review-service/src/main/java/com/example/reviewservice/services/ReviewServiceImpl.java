@@ -89,7 +89,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public ReviewResponseDto getReviewByLocationId(int id) {
+    public ReviewResponseDto getReviewByLocationId(String id) {
         double average = 0;
         int sum = 0;
 

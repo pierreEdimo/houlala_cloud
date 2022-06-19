@@ -41,7 +41,7 @@ public class Controller {
     }
 
     @GetMapping("/getAllReviewByLocationId/{locationId}")
-    public ReviewResponseDto getAllReviewByLocationId(@PathVariable int locationId) {
+    public ReviewResponseDto getAllReviewByLocationId(@PathVariable String locationId) {
         return this.service.getReviewByLocationId(locationId);
     }
 
