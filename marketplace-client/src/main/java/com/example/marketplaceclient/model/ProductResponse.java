@@ -13,6 +13,6 @@ public class ProductResponse {
     private int weight;
     private String imageUrl;
     private int initialPrice;
-    private long locationId;
+    private String locationId;
 }
 

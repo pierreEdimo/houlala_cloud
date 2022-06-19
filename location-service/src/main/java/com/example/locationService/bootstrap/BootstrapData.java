@@ -117,7 +117,9 @@ public class BootstrapData implements CommandLineRunner {
                 address,
                 "12345678",
                 "muster@gmail.com",
-                "www.musterweb.com"
+                "www.musterweb.com",
+                false,
+                "mu"
 
         );
 
@@ -131,7 +133,9 @@ public class BootstrapData implements CommandLineRunner {
                 address2,
                 "12345678",
                 "muster@gmail.com",
-                "www.musterweb.com"
+                "www.musterweb.com",
+                false,
+                "Mut"
         );
 
         location2.setAvailabilityList(availabilityList2);

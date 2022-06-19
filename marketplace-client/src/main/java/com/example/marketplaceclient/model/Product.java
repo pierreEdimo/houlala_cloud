@@ -10,7 +10,7 @@ public class Product {
     private String description;
     private int weight;
     private int sellingPrice;
-    private long locationId;
+    private String locationId;
     private String productType;
     private String categoryId;
 }
