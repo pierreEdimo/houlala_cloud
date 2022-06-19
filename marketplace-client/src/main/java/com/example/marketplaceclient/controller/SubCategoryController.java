@@ -7,18 +7,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.ws.rs.Path;
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/product-types")
-public class ProductTypeController {
+@RequestMapping("/sub-categories")
+public class SubCategoryController {
 
     private final ProductTypeFeignClient feignClient;
 
     @GetMapping("")
-    public List<ProductType> getAllProductTypes() {
+    public List<ProductType> getAllSubCategories() {
         try {
             return this.feignClient.getAllProductTypes();
         } catch (MarketplaceException e) {
@@ -27,7 +26,7 @@ public class ProductTypeController {
     }
 
     @PostMapping("")
-    public ProductType addProductType(@RequestBody ProductType newType) {
+    public ProductType addSubCategory(@RequestBody ProductType newType) {
         try {
             return this.feignClient.addProductType(newType);
         } catch (MarketplaceException e) {
@@ -36,7 +35,7 @@ public class ProductTypeController {
     }
 
     @GetMapping("/{id}")
-    public ProductType getSingleProductType(@PathVariable String id){
+    public ProductType getSingleSubCategory(@PathVariable String id){
         try {
             return this.feignClient.getSingleProductType(id);
         } catch (MarketplaceException e) {
@@ -45,7 +44,7 @@ public class ProductTypeController {
     }
 
     @DeleteMapping("/{id}")
-    public ProductType deleteProductType(@PathVariable String id){
+    public ProductType deleteSubCategory(@PathVariable String id){
         try {
             return this.feignClient.deleteProductType(id);
         } catch (MarketplaceException e) {
@@ -54,7 +53,7 @@ public class ProductTypeController {
     }
 
     @PatchMapping("/{id}")
-    public ProductType editProductType(@RequestBody ProductType newType, @PathVariable String id){
+    public ProductType editSubCategory(@RequestBody ProductType newType, @PathVariable String id){
         try {
             return this.feignClient.editProductType(newType, id);
         } catch (MarketplaceException e) {
