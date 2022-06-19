@@ -11,4 +11,4 @@ feign:
   client:
     config:
       default:
-        errorDecoder: com.example.marketplaceclient.MarketplaceErrorDecoder
+        errorDecoder: com.example.marketplaceclient.errorDecoder.MarketplaceErrorDecoder
