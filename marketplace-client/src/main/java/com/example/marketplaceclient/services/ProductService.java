@@ -22,4 +22,12 @@ public interface ProductService {
     ProductResponse deleteProduct(String id);
 
     ProductResponse editProduct(String id, Product newProduct);
+
+    void addProductToFavorite(String userId, String id);
+
+    List<ProductResponse> getFavoritesProduct(String userId);
+
+    List<ProductResponse> getProductByLocationId(String locationId, int limit);
+
+    ProductResponse getProductByIdAndIsFavorite(String id, String userId);
 }
