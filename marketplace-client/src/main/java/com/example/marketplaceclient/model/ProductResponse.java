@@ -14,5 +14,6 @@ public class ProductResponse {
     private String imageUrl;
     private int initialPrice;
     private String locationId;
+    private boolean isFavorite;
 }
 
