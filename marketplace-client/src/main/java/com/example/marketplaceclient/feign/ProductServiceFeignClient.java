@@ -35,4 +35,16 @@ public interface ProductServiceFeignClient {
     @PatchMapping("/{id}")
     ProductResponse editProduct(@PathVariable String id, @RequestBody Product editProduct) throws MarketplaceException;
 
+    @PatchMapping("/addFavorite/{id}")
+    void addProductToFavorite(@RequestParam String userId, @PathVariable String id) throws MarketplaceException;
+
+    @GetMapping("/favorites")
+    List<ProductResponse> getFavoritesProduct(@RequestParam String userId) throws MarketplaceException;
+
+    @GetMapping("/filterProductByPageId")
+    List<ProductResponse> getProductByLocationId(@RequestParam String locationId, @RequestParam int limit) throws MarketplaceException;
+
+    @GetMapping("/productId/{id}")
+    ProductResponse getProductByIdAndIsFavorite(@PathVariable String id, @RequestParam String userId) throws MarketplaceException;
+
 }
