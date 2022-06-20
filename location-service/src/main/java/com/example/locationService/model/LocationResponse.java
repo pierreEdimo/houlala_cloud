@@ -32,4 +32,8 @@ public class LocationResponse {
     private ReviewResponseDto reviews;
 
     private RoomOverviewDto availableRooms;
+
+    private String sku;
+
+    private boolean isStore;
 }

@@ -31,4 +31,8 @@ public class LocationResponse {
     private Category category;
 
     private RoomOverviewDto availableRooms;
+
+    private String sku;
+
+    private boolean isStore;
 }
