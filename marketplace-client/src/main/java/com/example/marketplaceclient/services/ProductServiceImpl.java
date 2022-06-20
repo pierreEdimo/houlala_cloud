@@ -87,4 +87,40 @@ public class ProductServiceImpl implements ProductService {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
     }
+
+    @Override
+    public void addProductToFavorite(String userId, String id) {
+        try {
+            this.feignClient.addProductToFavorite(userId, id);
+        } catch (MarketplaceException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+    }
+
+    @Override
+    public List<ProductResponse> getFavoritesProduct(String userId) {
+        try {
+            return this.feignClient.getFavoritesProduct(userId);
+        } catch (MarketplaceException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+    }
+
+    @Override
+    public List<ProductResponse> getProductByLocationId(String locationId, int limit) {
+        try {
+            return this.feignClient.getProductByLocationId(locationId, limit);
+        } catch (MarketplaceException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+    }
+
+    @Override
+    public ProductResponse getProductByIdAndIsFavorite(String id, String userId) {
+        try {
+            return this.feignClient.getProductByIdAndIsFavorite(id, userId);
+        } catch (MarketplaceException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+    }
 }
