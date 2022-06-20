@@ -40,7 +40,7 @@ public class ProductController {
     }
 
     @GetMapping("/filterProductsByCategoryId")
-    public List<ProductResponse> getProductsByCategoryId(@RequestParam String categoryId, @RequestParam int limit) {
+    public List<ProductResponse> getProductsByCategoryId(@RequestParam String categoryId, @RequestParam(required = false) int limit) {
         return this.productService.getProductsByCategoryId(categoryId, limit);
     }
 
@@ -77,6 +77,11 @@ public class ProductController {
     @GetMapping("/productId/{id}")
     public ProductResponse getProductByIdAndIsFavorite(@PathVariable String id, @RequestParam String userId) {
         return this.productService.getProductByIdAndIsFavorite(id, userId);
+    }
+
+    @GetMapping("/filterProductWithLimit")
+    public List<ProductResponse> getProductsWithLimit(@RequestParam int limit){
+        return this.productService.getProductsWithLimit(limit);
     }
 
 }

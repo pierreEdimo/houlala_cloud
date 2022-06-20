@@ -30,4 +30,6 @@ public interface ProductService {
     List<ProductResponse> getProductByLocationId(String locationId, int limit);
 
     ProductResponse getProductByIdAndIsFavorite(String id, String userId);
+
+    List<ProductResponse> getProductsWithLimit(int limit);
 }

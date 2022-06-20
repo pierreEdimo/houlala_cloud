@@ -12,8 +12,8 @@ public class ProductResponse {
     private String description;
     private int weight;
     private String imageUrl;
-    private int initialPrice;
+    private int sellingPrice;
     private String locationId;
-    private boolean isFavorite;
+    private boolean bookMarked;
 }
 

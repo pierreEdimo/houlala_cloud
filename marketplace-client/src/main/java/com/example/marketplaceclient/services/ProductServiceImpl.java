@@ -123,4 +123,15 @@ public class ProductServiceImpl implements ProductService {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
     }
+
+    @Override
+    public List<ProductResponse> getProductsWithLimit(int limit) {
+        try {
+            return this.feignClient.getProductsWithLimit(limit);
+        } catch (MarketplaceException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+    }
+
+
 }

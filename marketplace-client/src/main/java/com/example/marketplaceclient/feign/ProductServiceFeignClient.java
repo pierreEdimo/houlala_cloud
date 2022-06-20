@@ -5,6 +5,7 @@ import com.example.marketplaceclient.model.Product;
 import com.example.marketplaceclient.model.ProductResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
+import org.yaml.snakeyaml.error.Mark;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public interface ProductServiceFeignClient {
     List<ProductResponse> getRandomProducts(@RequestParam int size, @RequestParam String categoryId) throws MarketplaceException;
 
     @GetMapping("/filterProductsByCategoryId")
-    List<ProductResponse> getProductByCategoryId(@RequestParam String categoryId, @RequestParam int limit) throws MarketplaceException;
+    List<ProductResponse> getProductByCategoryId(@RequestParam String categoryId, @RequestParam(required = false) int limit) throws MarketplaceException;
 
     @GetMapping("/filterProductsByCategoryAndProductType")
     List<ProductResponse> getProductsByTypeAndCategoryId(@RequestParam String categoryId, @RequestParam String productType) throws MarketplaceException;
@@ -46,5 +47,8 @@ public interface ProductServiceFeignClient {
 
     @GetMapping("/productId/{id}")
     ProductResponse getProductByIdAndIsFavorite(@PathVariable String id, @RequestParam String userId) throws MarketplaceException;
+
+    @GetMapping("/filterProductWithLimit")
+    List<ProductResponse> getProductsWithLimit(@RequestParam int limit) throws MarketplaceException;
 
 }
