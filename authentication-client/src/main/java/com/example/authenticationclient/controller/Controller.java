@@ -19,11 +19,6 @@ public class Controller {
 
     private final AuthenticationFeignClient feignClient;
 
-    @GetMapping("")
-    public String getHello(){
-        return "Hello authentication";
-    }
-
     @PostMapping("/register")
     public UserToken register(@RequestBody Register model) {
         try {

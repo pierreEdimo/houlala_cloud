@@ -1,7 +1,6 @@
 package com.example.inventoryservice.service;
 
 import com.example.inventoryservice.model.ProductInformation;
-import com.example.inventoryservice.repository.ProductInformationRepository;
 
 import java.util.List;
 

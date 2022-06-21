@@ -5,7 +5,6 @@ import com.example.marketplaceclient.model.Product;
 import com.example.marketplaceclient.model.ProductResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
-import org.yaml.snakeyaml.error.Mark;
 
 import java.util.List;
 

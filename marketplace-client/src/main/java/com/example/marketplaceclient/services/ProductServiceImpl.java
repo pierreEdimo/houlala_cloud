@@ -26,8 +26,8 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductDto> getAllProducts() {
 
         List<ProductDto> productDtoList = new ArrayList<>();
-        List<ProductAdditionalInformation> infos = new ArrayList<>();
-        List<ProductResponse> productResponses = new ArrayList<>();
+        List<ProductAdditionalInformation> infos;
+        List<ProductResponse> productResponses;
 
         try {
            productResponses = this.feignClient.getAllProducts();
@@ -139,8 +139,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDto getProductByIdAndIsFavorite(String id, String userId) {
-        ProductResponse response = new ProductResponse();
-        ProductAdditionalInformation additionalInformation= new ProductAdditionalInformation();
+        ProductResponse response;
+        ProductAdditionalInformation additionalInformation;
 
         try {
             response =  this.feignClient.getProductByIdAndIsFavorite(id, userId);
