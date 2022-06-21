@@ -1,15 +1,11 @@
 package com.example.marketplaceclient.controller;
 
-import com.example.marketplaceclient.exception.MarketplaceException;
-import com.example.marketplaceclient.feign.ProductServiceFeignClient;
 import com.example.marketplaceclient.model.Product;
 import com.example.marketplaceclient.model.ProductResponse;
 import com.example.marketplaceclient.model.dto.ProductDto;
 import com.example.marketplaceclient.services.ProductService;
-import feign.Response;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -21,7 +17,7 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping("")
-    public List<ProductResponse> getAllProducts() {
+    public List<ProductDto> getAllProducts() {
         return this.productService.getAllProducts();
     }
 

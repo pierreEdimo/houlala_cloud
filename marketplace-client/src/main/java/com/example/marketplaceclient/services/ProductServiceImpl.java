@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,12 +23,28 @@ public class ProductServiceImpl implements ProductService {
     private final InventoryServiceFeignClient inventoryServiceFeignClient;
 
     @Override
-    public List<ProductResponse> getAllProducts() {
+    public List<ProductDto> getAllProducts() {
+
+        List<ProductDto> productDtoList = new ArrayList<>();
+        List<ProductAdditionalInformation> infos = new ArrayList<>();
+        List<ProductResponse> productResponses = new ArrayList<>();
+
         try {
-            return this.feignClient.getAllProducts();
+           productResponses = this.feignClient.getAllProducts();
+           infos = this.inventoryServiceFeignClient.getAllProductInfos();
         } catch (MarketplaceException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
+
+        for(ProductResponse response: productResponses){
+            for(ProductAdditionalInformation info: infos){
+                if(response.get_id().equals(info.getProductId())){
+                    productDtoList.add(this.toProductDto(response, info));
+                }
+            }
+        }
+
+        return productDtoList;
     }
 
     @Override
@@ -123,13 +140,17 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDto getProductByIdAndIsFavorite(String id, String userId) {
         ProductResponse response = new ProductResponse();
+        ProductAdditionalInformation additionalInformation= new ProductAdditionalInformation();
+
         try {
             response =  this.feignClient.getProductByIdAndIsFavorite(id, userId);
+            additionalInformation = this.inventoryServiceFeignClient.getASingleInfo(response.get_id());
+
         } catch (MarketplaceException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
 
-        return this.toProductDto(response);
+        return this.toProductDto(response, additionalInformation);
     }
 
     @Override
@@ -142,14 +163,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
 
-    private ProductDto toProductDto(ProductResponse response){
-        ProductAdditionalInformation additionalInformation = new ProductAdditionalInformation();
-        try {
-            additionalInformation = this.inventoryServiceFeignClient.getASingleInfo(response.get_id());
-        } catch (MarketplaceException e) {
-            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
-        }
-
+    private ProductDto toProductDto(ProductResponse response , ProductAdditionalInformation additionalInformation){
         return new ProductDto(
                 response.get_id(),
                 response.getName(),

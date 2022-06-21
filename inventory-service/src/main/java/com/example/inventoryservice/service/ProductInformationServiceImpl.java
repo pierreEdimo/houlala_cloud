@@ -1,6 +1,8 @@
 package com.example.inventoryservice.service;
 
+import com.example.inventoryservice.model.Origin;
 import com.example.inventoryservice.model.ProductInformation;
+import com.example.inventoryservice.repository.OriginRepository;
 import com.example.inventoryservice.repository.ProductInformationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,6 +18,8 @@ import java.util.Optional;
 public class ProductInformationServiceImpl implements ProductInformationService {
 
     private final ProductInformationRepository repository;
+
+    private final OriginRepository originRepository;
 
     @Override
     public ProductInformation getProductInfoById(String id) {
@@ -58,7 +62,22 @@ public class ProductInformationServiceImpl implements ProductInformationService 
 
     @Override
     public ProductInformation addProduct(ProductInformation newInfo) {
-        return this.repository.save(newInfo);
+        ProductInformation createdInfo = new ProductInformation();
+
+        Optional<Origin> origin = this.originRepository.findOriginByLabel(newInfo.getOriginLabel().getLabel());
+
+        if(origin.isEmpty()){
+            createdInfo = this.repository.save(newInfo);
+        } else {
+            createdInfo.setProductId(newInfo.getProductId());
+            createdInfo.setQuantity(newInfo.getQuantity());
+            createdInfo.setArrivalDate(newInfo.getArrivalDate());
+            createdInfo.setOriginLabel(origin.get());
+            createdInfo.setQuantitySold(newInfo.getQuantitySold());
+            createdInfo.setBuyingPrice(newInfo.getBuyingPrice());
+        }
+
+        return createdInfo;
     }
 
     @Override

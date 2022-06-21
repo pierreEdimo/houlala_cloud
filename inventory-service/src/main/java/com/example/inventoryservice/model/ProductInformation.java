@@ -2,9 +2,9 @@ package com.example.inventoryservice.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import java.time.LocalDateTime;
+
+import javax.persistence.*;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -16,29 +16,32 @@ public class ProductInformation {
 
     private int quantity;
 
-    private LocalDateTime arrivalDate;
+    private LocalDate arrivalDate;
 
     private double buyingPrice;
 
     private int quantitySold;
 
-    private String originLabel;
+    @ManyToOne(targetEntity = Origin.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "origin_id", referencedColumnName = "id")
+    private Origin originLabel;
 
 
-
-    public ProductInformation(){}
+    public ProductInformation() {
+    }
 
     public ProductInformation(
             String productId,
             int quantity,
-            LocalDateTime arrivalDate,
+            LocalDate arrivalDate,
             int buyingPrice,
-            String originLabel
-    ){
+            String label
+    ) {
         this.productId = productId;
         this.quantity = quantity;
         this.buyingPrice = buyingPrice;
         this.quantitySold = 0;
-        this.originLabel = originLabel;
+        this.arrivalDate = arrivalDate;
+        this.originLabel = new Origin(label);
     }
 }
