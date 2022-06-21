@@ -1,12 +1,14 @@
 package com.example.inventoryservice.bootstap;
 
+import com.example.inventoryservice.model.Origin;
 import com.example.inventoryservice.model.ProductInformation;
 import com.example.inventoryservice.repository.ProductInformationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+
 
 @Component
 @RequiredArgsConstructor
@@ -17,20 +19,24 @@ public class BootstrapData implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+        Origin origin  = new Origin("Cameroun");
+
+        Origin origin1 = new Origin("Ghana");
+
         ProductInformation info = new ProductInformation(
                 "624601d2be57262127759a19",
                 10,
-                LocalDateTime.now(),
+                LocalDate.now(),
                 123,
-                "Cameroun"
+                origin.getLabel()
         );
 
         ProductInformation info2 = new ProductInformation(
                 "624605ffbe57262127759a2e",
                 20,
-                LocalDateTime.now(),
+                LocalDate.now(),
                 222,
-                "Cameroun"
+                origin1.getLabel()
         );
 
         this.repository.save(info);
