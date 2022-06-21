@@ -2,6 +2,7 @@ package com.example.inventoryservice.service;
 
 import com.example.inventoryservice.model.Origin;
 import com.example.inventoryservice.model.ProductInformation;
+import com.example.inventoryservice.model.dto.CreateProductInfoDto;
 import com.example.inventoryservice.repository.OriginRepository;
 import com.example.inventoryservice.repository.ProductInformationRepository;
 import lombok.RequiredArgsConstructor;
@@ -61,23 +62,24 @@ public class ProductInformationServiceImpl implements ProductInformationService 
     }
 
     @Override
-    public ProductInformation addProduct(ProductInformation newInfo) {
-        ProductInformation createdInfo = new ProductInformation();
+    public ProductInformation addProduct(CreateProductInfoDto newInfo) {
+        ProductInformation createdInfo = new ProductInformation(
+                newInfo.getProductId(),
+                newInfo.getQuantity(),
+                newInfo.getArrivalDate(),
+                newInfo.getBuyingPrice(),
+                newInfo.getOriginLabel()
+        );
 
-        Optional<Origin> origin = this.originRepository.findOriginByLabel(newInfo.getOriginLabel().getLabel());
+        Optional<Origin> origin = this.originRepository.findOriginByLabel(newInfo.getOriginLabel());
 
         if(origin.isEmpty()){
-            createdInfo = this.repository.save(newInfo);
+            return this.repository.save(createdInfo);
         } else {
-            createdInfo.setProductId(newInfo.getProductId());
-            createdInfo.setQuantity(newInfo.getQuantity());
-            createdInfo.setArrivalDate(newInfo.getArrivalDate());
             createdInfo.setOriginLabel(origin.get());
-            createdInfo.setQuantitySold(newInfo.getQuantitySold());
-            createdInfo.setBuyingPrice(newInfo.getBuyingPrice());
         }
 
-        return createdInfo;
+        return this.repository.save(createdInfo);
     }
 
     @Override

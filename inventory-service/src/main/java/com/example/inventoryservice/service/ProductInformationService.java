@@ -1,6 +1,7 @@
 package com.example.inventoryservice.service;
 
 import com.example.inventoryservice.model.ProductInformation;
+import com.example.inventoryservice.model.dto.CreateProductInfoDto;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ public interface ProductInformationService {
 
     void deleteProduct(String id);
 
-    ProductInformation addProduct(ProductInformation newInfor);
+    ProductInformation addProduct(CreateProductInfoDto newInfor);
 
     List<ProductInformation> getAllInfos();
 }
