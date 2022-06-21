@@ -4,6 +4,7 @@ import com.example.marketplaceclient.exception.MarketplaceException;
 import com.example.marketplaceclient.feign.ProductServiceFeignClient;
 import com.example.marketplaceclient.model.Product;
 import com.example.marketplaceclient.model.ProductResponse;
+import com.example.marketplaceclient.model.dto.ProductDto;
 import com.example.marketplaceclient.services.ProductService;
 import feign.Response;
 import lombok.RequiredArgsConstructor;
@@ -75,7 +76,7 @@ public class ProductController {
     }
 
     @GetMapping("/productId/{id}")
-    public ProductResponse getProductByIdAndIsFavorite(@PathVariable String id, @RequestParam String userId) {
+    public ProductDto getProductByIdAndIsFavorite(@PathVariable String id, @RequestParam String userId) {
         return this.productService.getProductByIdAndIsFavorite(id, userId);
     }
 

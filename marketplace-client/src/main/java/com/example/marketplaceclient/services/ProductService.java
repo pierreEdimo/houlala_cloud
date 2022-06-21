@@ -2,6 +2,7 @@ package com.example.marketplaceclient.services;
 
 import com.example.marketplaceclient.model.Product;
 import com.example.marketplaceclient.model.ProductResponse;
+import com.example.marketplaceclient.model.dto.ProductDto;
 
 import java.util.List;
 
@@ -29,7 +30,7 @@ public interface ProductService {
 
     List<ProductResponse> getProductByLocationId(String locationId, int limit);
 
-    ProductResponse getProductByIdAndIsFavorite(String id, String userId);
+    ProductDto getProductByIdAndIsFavorite(String id, String userId);
 
     List<ProductResponse> getProductsWithLimit(int limit);
 }

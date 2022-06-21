@@ -1,9 +1,12 @@
 package com.example.marketplaceclient.services;
 
 import com.example.marketplaceclient.exception.MarketplaceException;
+import com.example.marketplaceclient.feign.InventoryServiceFeignClient;
 import com.example.marketplaceclient.feign.ProductServiceFeignClient;
 import com.example.marketplaceclient.model.Product;
+import com.example.marketplaceclient.model.ProductAdditionalInformation;
 import com.example.marketplaceclient.model.ProductResponse;
+import com.example.marketplaceclient.model.dto.ProductDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -15,6 +18,8 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductServiceFeignClient feignClient;
+
+    private final InventoryServiceFeignClient inventoryServiceFeignClient;
 
     @Override
     public List<ProductResponse> getAllProducts() {
@@ -116,12 +121,15 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductResponse getProductByIdAndIsFavorite(String id, String userId) {
+    public ProductDto getProductByIdAndIsFavorite(String id, String userId) {
+        ProductResponse response = new ProductResponse();
         try {
-            return this.feignClient.getProductByIdAndIsFavorite(id, userId);
+            response =  this.feignClient.getProductByIdAndIsFavorite(id, userId);
         } catch (MarketplaceException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
+
+        return this.toProductDto(response);
     }
 
     @Override
@@ -131,6 +139,31 @@ public class ProductServiceImpl implements ProductService {
         } catch (MarketplaceException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
+    }
+
+
+    private ProductDto toProductDto(ProductResponse response){
+        ProductAdditionalInformation additionalInformation = new ProductAdditionalInformation();
+        try {
+            additionalInformation = this.inventoryServiceFeignClient.getASingleInfo(response.get_id());
+        } catch (MarketplaceException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+
+        return new ProductDto(
+                response.get_id(),
+                response.getName(),
+                response.getDescription(),
+                response.getWeight(),
+                response.getImageUrl(),
+                response.getSellingPrice(),
+                response.getLocationId(),
+                response.isBookMarked(),
+                additionalInformation.getQuantity(),
+                additionalInformation.getArrivalDate(),
+                additionalInformation.getBuyingPrice(),
+                additionalInformation.getOriginLabel()
+        );
     }
 
 
