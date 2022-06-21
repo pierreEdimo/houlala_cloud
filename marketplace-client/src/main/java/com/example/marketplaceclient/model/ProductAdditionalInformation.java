@@ -3,17 +3,19 @@ package com.example.marketplaceclient.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Getter
 @Setter
 public class ProductAdditionalInformation {
 
+    private String productId;
+
     private int quantity;
 
-    private LocalDateTime arrivalDate;
+    private LocalDate arrivalDate;
 
     private double buyingPrice;
 
-    private String originLabel;
+    private Origin originLabel;
 }
