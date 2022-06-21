@@ -34,7 +34,7 @@ public class ProductInformation {
             String productId,
             int quantity,
             LocalDate arrivalDate,
-            int buyingPrice,
+            double buyingPrice,
             String label
     ) {
         this.productId = productId;
