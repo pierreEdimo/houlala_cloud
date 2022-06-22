@@ -2,6 +2,7 @@ package com.example.marketplaceclient.services;
 
 import com.example.marketplaceclient.model.Product;
 import com.example.marketplaceclient.model.ProductResponse;
+import com.example.marketplaceclient.model.dto.CreateProductDto;
 import com.example.marketplaceclient.model.dto.ProductDto;
 
 import java.util.List;
@@ -33,4 +34,6 @@ public interface ProductService {
     ProductDto getProductByIdAndIsFavorite(String id, String userId);
 
     List<ProductResponse> getProductsWithLimit(int limit);
+
+    ProductResponse addProduct(CreateProductDto newProduct);
 }
