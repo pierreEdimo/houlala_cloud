@@ -2,9 +2,11 @@ package com.example.marketplaceclient.controller;
 
 import com.example.marketplaceclient.model.Product;
 import com.example.marketplaceclient.model.ProductResponse;
+import com.example.marketplaceclient.model.dto.CreateProductDto;
 import com.example.marketplaceclient.model.dto.ProductDto;
 import com.example.marketplaceclient.services.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -47,16 +49,19 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public ProductResponse deleteProduct(@PathVariable String id) {
         return this.productService.deleteProduct(id);
     }
 
     @PatchMapping("/{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public ProductResponse editProduct(@PathVariable String id, @RequestBody Product newProduct) {
         return this.productService.editProduct(id, newProduct);
     }
 
     @PatchMapping("/addFavorite/{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public void addProductToFavorite(@PathVariable String id, @RequestParam String userId) {
         this.productService.addProductToFavorite(userId, id);
     }
@@ -79,6 +84,12 @@ public class ProductController {
     @GetMapping("/filterProductWithLimit")
     public List<ProductResponse> getProductsWithLimit(@RequestParam int limit){
         return this.productService.getProductsWithLimit(limit);
+    }
+
+    @PostMapping("/newProduct")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ProductResponse addProduct(@RequestBody CreateProductDto newProduct){
+        return this.productService.addProduct(newProduct);
     }
 
 }
