@@ -24,7 +24,7 @@ public class BootstrapData implements CommandLineRunner {
         Origin origin1 = new Origin("Ghana");
 
         ProductInformation info = new ProductInformation(
-                "624601d2be57262127759a19",
+                "anasku",
                 10,
                 LocalDate.now(),
                 123,
@@ -32,7 +32,7 @@ public class BootstrapData implements CommandLineRunner {
         );
 
         ProductInformation info2 = new ProductInformation(
-                "624605ffbe57262127759a2e",
+                "folesku",
                 20,
                 LocalDate.now(),
                 222,
