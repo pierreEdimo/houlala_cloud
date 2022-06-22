@@ -64,14 +64,14 @@ public class ProductInformationServiceImpl implements ProductInformationService 
     @Override
     public ProductInformation addProduct(CreateProductInfoDto newInfo) {
         ProductInformation createdInfo = new ProductInformation(
-                newInfo.getProductId(),
+                newInfo.getProductSku(),
                 newInfo.getQuantity(),
                 newInfo.getArrivalDate(),
                 newInfo.getBuyingPrice(),
-                newInfo.getOriginLabel()
+                newInfo.getOriginLabel().getLabel()
         );
 
-        Optional<Origin> origin = this.originRepository.findOriginByLabel(newInfo.getOriginLabel());
+        Optional<Origin> origin = this.originRepository.findOriginByLabel(newInfo.getOriginLabel().getLabel());
 
         if(origin.isEmpty()){
             return this.repository.save(createdInfo);
