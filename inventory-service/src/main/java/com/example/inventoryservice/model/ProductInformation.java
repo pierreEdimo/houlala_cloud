@@ -12,7 +12,8 @@ import java.time.LocalDate;
 public class ProductInformation {
 
     @Id
-    private String productId;
+    @Column(unique = true)
+    private String productSku;
 
     private int quantity;
 
@@ -31,13 +32,13 @@ public class ProductInformation {
     }
 
     public ProductInformation(
-            String productId,
+            String productSku,
             int quantity,
             LocalDate arrivalDate,
             double buyingPrice,
             String label
     ) {
-        this.productId = productId;
+        this.productSku = productSku;
         this.quantity = quantity;
         this.buyingPrice = buyingPrice;
         this.quantitySold = 0;
