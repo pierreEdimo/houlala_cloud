@@ -3,9 +3,11 @@ package com.example.marketplaceclient.services;
 import com.example.marketplaceclient.exception.MarketplaceException;
 import com.example.marketplaceclient.feign.InventoryServiceFeignClient;
 import com.example.marketplaceclient.feign.ProductServiceFeignClient;
+import com.example.marketplaceclient.model.CreateProduct;
 import com.example.marketplaceclient.model.Product;
 import com.example.marketplaceclient.model.ProductAdditionalInformation;
 import com.example.marketplaceclient.model.ProductResponse;
+import com.example.marketplaceclient.model.dto.CreateProductDto;
 import com.example.marketplaceclient.model.dto.ProductDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -30,15 +32,15 @@ public class ProductServiceImpl implements ProductService {
         List<ProductResponse> productResponses;
 
         try {
-           productResponses = this.feignClient.getAllProducts();
-           infos = this.inventoryServiceFeignClient.getAllProductInfos();
+            productResponses = this.feignClient.getAllProducts();
+            infos = this.inventoryServiceFeignClient.getAllProductInfos();
         } catch (MarketplaceException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
 
-        for(ProductResponse response: productResponses){
-            for(ProductAdditionalInformation info: infos){
-                if(response.get_id().equals(info.getProductId())){
+        for (ProductResponse response : productResponses) {
+            for (ProductAdditionalInformation info : infos) {
+                if (response.getProductSku().equals(info.getProductSku())) {
                     productDtoList.add(this.toProductDto(response, info));
                 }
             }
@@ -143,7 +145,7 @@ public class ProductServiceImpl implements ProductService {
         ProductAdditionalInformation additionalInformation;
 
         try {
-            response =  this.feignClient.getProductByIdAndIsFavorite(id, userId);
+            response = this.feignClient.getProductByIdAndIsFavorite(id, userId);
             additionalInformation = this.inventoryServiceFeignClient.getASingleInfo(response.get_id());
 
         } catch (MarketplaceException e) {
@@ -162,8 +164,46 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
+    @Override
+    public ProductResponse addProduct(CreateProductDto newProduct) {
 
-    private ProductDto toProductDto(ProductResponse response , ProductAdditionalInformation additionalInformation){
+        CreateProduct product = new CreateProduct(
+                newProduct.getName(),
+                newProduct.getDescription(),
+                newProduct.getWeight(),
+                newProduct.getSellingPrice(),
+                newProduct.getLocationId(),
+                newProduct.getProductSku(),
+                newProduct.getCategoryId(),
+                newProduct.getProductType()
+        );
+
+        ProductAdditionalInformation info = new ProductAdditionalInformation(
+                newProduct.getProductSku(),
+                newProduct.getQuantity(),
+                newProduct.getBuyingPrice(),
+                newProduct.getOriginLabel()
+        );
+
+        try {
+            this.feignClient.addProduct(product);
+            this.inventoryServiceFeignClient.addInfo(info);
+        } catch (MarketplaceException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+
+        return new ProductResponse(
+                newProduct.getName(),
+                newProduct.getDescription(),
+                newProduct.getWeight(),
+                newProduct.getSellingPrice(),
+                newProduct.getLocationId(),
+                newProduct.getProductSku()
+        );
+    }
+
+
+    private ProductDto toProductDto(ProductResponse response, ProductAdditionalInformation additionalInformation) {
         return new ProductDto(
                 response.get_id(),
                 response.getName(),
@@ -176,7 +216,8 @@ public class ProductServiceImpl implements ProductService {
                 additionalInformation.getQuantity(),
                 additionalInformation.getArrivalDate(),
                 additionalInformation.getBuyingPrice(),
-                additionalInformation.getOriginLabel()
+                additionalInformation.getOriginLabel(),
+                additionalInformation.getProductSku()
         );
     }
 
