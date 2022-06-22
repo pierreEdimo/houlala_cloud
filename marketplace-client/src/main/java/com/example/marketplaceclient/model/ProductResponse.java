@@ -15,5 +15,26 @@ public class ProductResponse {
     private int sellingPrice;
     private String locationId;
     private boolean bookMarked;
+    private String productSku;
+
+
+
+    public ProductResponse(){}
+
+    public ProductResponse(
+            String name,
+            String description,
+            int weight,
+            int sellingPrice,
+            String locationId,
+            String productSku
+    ){
+        this.name = name;
+        this.description = description;
+        this.weight = weight;
+        this.sellingPrice = sellingPrice;
+        this.locationId = locationId;
+        this.productSku = productSku;
+    }
 }
 
