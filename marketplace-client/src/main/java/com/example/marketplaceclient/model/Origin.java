@@ -9,4 +9,10 @@ public class Origin {
 
     private String label;
 
+    public Origin(){}
+
+    public Origin(String label){
+        this.label = label;
+    }
+
 }
