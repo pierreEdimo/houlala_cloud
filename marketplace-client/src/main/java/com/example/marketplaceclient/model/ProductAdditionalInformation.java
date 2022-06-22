@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Setter
 public class ProductAdditionalInformation {
 
-    private String productId;
+    private String productSku;
 
     private int quantity;
 
@@ -18,4 +18,18 @@ public class ProductAdditionalInformation {
     private double buyingPrice;
 
     private Origin originLabel;
+
+    public ProductAdditionalInformation(){}
+
+    public ProductAdditionalInformation(
+            String productSku,
+            int quantity,
+            double buyingPrice,
+            String originLabel
+    ){
+        this.productSku = productSku;
+        this.quantity = quantity;
+        this.buyingPrice = buyingPrice;
+        this.originLabel = new Origin(originLabel);
+    }
 }
