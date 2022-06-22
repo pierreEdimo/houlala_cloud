@@ -1,8 +1,10 @@
 package com.example.marketplaceclient.feign;
 
 import com.example.marketplaceclient.exception.MarketplaceException;
+import com.example.marketplaceclient.model.CreateProduct;
 import com.example.marketplaceclient.model.Product;
 import com.example.marketplaceclient.model.ProductResponse;
+import com.example.marketplaceclient.model.dto.ProductDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,5 +51,8 @@ public interface ProductServiceFeignClient {
 
     @GetMapping("/filterProductWithLimit")
     List<ProductResponse> getProductsWithLimit(@RequestParam int limit) throws MarketplaceException;
+
+    @PostMapping("")
+    ProductResponse addProduct(@RequestBody CreateProduct newProduct) throws MarketplaceException;
 
 }
