@@ -1,13 +1,13 @@
 package com.example.marketplaceclient.controller;
 
+import com.example.marketplaceclient.model.CreateProduct;
 import com.example.marketplaceclient.model.Product;
-import com.example.marketplaceclient.model.ProductResponse;
-import com.example.marketplaceclient.model.dto.CreateProductDto;
 import com.example.marketplaceclient.model.dto.ProductDto;
 import com.example.marketplaceclient.services.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -24,39 +24,39 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ProductResponse getSingleProduct(@PathVariable String id) {
+    public Product getSingleProduct(@PathVariable String id) {
         return this.productService.getProduct(id);
     }
 
     @GetMapping("/search")
-    public List<ProductResponse> searchProducts(@RequestParam String searchWord) {
+    public List<Product> searchProducts(@RequestParam String searchWord) {
         return this.productService.searchProduct(searchWord);
     }
 
     @GetMapping("/getRandomProducts")
-    public List<ProductResponse> getRandomProducts(@RequestParam int size, @RequestParam String categoryId) {
+    public List<Product> getRandomProducts(@RequestParam int size, @RequestParam String categoryId) {
         return this.productService.getRandomProducts(size, categoryId);
     }
 
     @GetMapping("/filterProductsByCategoryId")
-    public List<ProductResponse> getProductsByCategoryId(@RequestParam String categoryId, @RequestParam(required = false) int limit) {
+    public List<Product> getProductsByCategoryId(@RequestParam String categoryId, @RequestParam(required = false) int limit) {
         return this.productService.getProductsByCategoryId(categoryId, limit);
     }
 
     @GetMapping("/filterProductsByCategoryAndProductType")
-    public List<ProductResponse> getProductsByTypeAndCategoryId(@RequestParam String categoryId, @RequestParam String productType) {
+    public List<Product> getProductsByTypeAndCategoryId(@RequestParam String categoryId, @RequestParam String productType) {
         return this.productService.getProductsByTypeAndCategoryId(categoryId, productType);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public ProductResponse deleteProduct(@PathVariable String id) {
+    public Product deleteProduct(@PathVariable String id) {
         return this.productService.deleteProduct(id);
     }
 
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public ProductResponse editProduct(@PathVariable String id, @RequestBody Product newProduct) {
+    public Product editProduct(@PathVariable String id, @RequestBody CreateProduct newProduct) {
         return this.productService.editProduct(id, newProduct);
     }
 
@@ -67,12 +67,12 @@ public class ProductController {
     }
 
     @GetMapping("/favorites")
-    public List<ProductResponse> getFavoritesProduct(@RequestParam String userId) {
+    public List<Product> getFavoritesProduct(@RequestParam String userId) {
         return this.productService.getFavoritesProduct(userId);
     }
 
     @GetMapping("/filterProductByPageId")
-    public List<ProductResponse> getProductByLocationId(@RequestParam String locationId, @RequestParam int limit) {
+    public List<Product> getProductByLocationId(@RequestParam String locationId, @RequestParam int limit) {
         return this.productService.getProductByLocationId(locationId, limit);
     }
 
@@ -82,14 +82,15 @@ public class ProductController {
     }
 
     @GetMapping("/filterProductWithLimit")
-    public List<ProductResponse> getProductsWithLimit(@RequestParam int limit){
+    public List<Product> getProductsWithLimit(@RequestParam int limit){
         return this.productService.getProductsWithLimit(limit);
     }
 
-    @PostMapping("/newProduct")
+    @PostMapping("/createProduct")
     @ResponseStatus(HttpStatus.CREATED)
-    public ProductResponse addProduct(@RequestBody CreateProductDto newProduct){
-        return this.productService.addProduct(newProduct);
+    public String createProduct(@RequestPart(name = "product") String product, @RequestPart(name = "file") MultipartFile file){
+        return this.productService.createProduct(product, file);
     }
 
 }
+
