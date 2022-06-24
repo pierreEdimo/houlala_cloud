@@ -3,8 +3,6 @@ package com.example.marketplaceclient.feign;
 import com.example.marketplaceclient.exception.MarketplaceException;
 import com.example.marketplaceclient.model.CreateProduct;
 import com.example.marketplaceclient.model.Product;
-import com.example.marketplaceclient.model.ProductResponse;
-import com.example.marketplaceclient.model.dto.ProductDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,45 +12,45 @@ import java.util.List;
 public interface ProductServiceFeignClient {
 
     @GetMapping("")
-    List<ProductResponse> getAllProducts() throws MarketplaceException;
+    List<Product> getAllProducts() throws MarketplaceException;
 
     @GetMapping("/{id}")
-    ProductResponse getSingleProduct(@PathVariable String id) throws MarketplaceException;
+    Product getSingleProduct(@PathVariable String id) throws MarketplaceException;
 
     @GetMapping("/search")
-    List<ProductResponse> searchProduct(@RequestParam String searchWord) throws MarketplaceException;
+    List<Product> searchProduct(@RequestParam String searchWord) throws MarketplaceException;
 
     @GetMapping("/getRandomProducts")
-    List<ProductResponse> getRandomProducts(@RequestParam int size, @RequestParam String categoryId) throws MarketplaceException;
+    List<Product> getRandomProducts(@RequestParam int size, @RequestParam String categoryId) throws MarketplaceException;
 
     @GetMapping("/filterProductsByCategoryId")
-    List<ProductResponse> getProductByCategoryId(@RequestParam String categoryId, @RequestParam(required = false) int limit) throws MarketplaceException;
+    List<Product> getProductByCategoryId(@RequestParam String categoryId, @RequestParam(required = false) int limit) throws MarketplaceException;
 
     @GetMapping("/filterProductsByCategoryAndProductType")
-    List<ProductResponse> getProductsByTypeAndCategoryId(@RequestParam String categoryId, @RequestParam String productType) throws MarketplaceException;
+    List<Product> getProductsByTypeAndCategoryId(@RequestParam String categoryId, @RequestParam String productType) throws MarketplaceException;
 
     @DeleteMapping("/{id}")
-    ProductResponse deleteProduct(@PathVariable String id) throws MarketplaceException;
+    Product deleteProduct(@PathVariable String id) throws MarketplaceException;
 
     @PatchMapping("/{id}")
-    ProductResponse editProduct(@PathVariable String id, @RequestBody Product editProduct) throws MarketplaceException;
+    Product editProduct(@PathVariable String id, @RequestBody CreateProduct editProduct) throws MarketplaceException;
 
     @PatchMapping("/addFavorite/{id}")
     void addProductToFavorite(@RequestParam String userId, @PathVariable String id) throws MarketplaceException;
 
     @GetMapping("/favorites")
-    List<ProductResponse> getFavoritesProduct(@RequestParam String userId) throws MarketplaceException;
+    List<Product> getFavoritesProduct(@RequestParam String userId) throws MarketplaceException;
 
     @GetMapping("/filterProductByPageId")
-    List<ProductResponse> getProductByLocationId(@RequestParam String locationId, @RequestParam int limit) throws MarketplaceException;
+    List<Product> getProductByLocationId(@RequestParam String locationId, @RequestParam int limit) throws MarketplaceException;
 
     @GetMapping("/productId/{id}")
-    ProductResponse getProductByIdAndIsFavorite(@PathVariable String id, @RequestParam String userId) throws MarketplaceException;
+    Product getProductByIdAndIsFavorite(@PathVariable String id, @RequestParam String userId) throws MarketplaceException;
 
     @GetMapping("/filterProductWithLimit")
-    List<ProductResponse> getProductsWithLimit(@RequestParam int limit) throws MarketplaceException;
+    List<Product> getProductsWithLimit(@RequestParam int limit) throws MarketplaceException;
 
     @PostMapping("")
-    ProductResponse addProduct(@RequestBody CreateProduct newProduct) throws MarketplaceException;
+    Product addProduct(@RequestBody CreateProduct newProduct) throws MarketplaceException;
 
 }
