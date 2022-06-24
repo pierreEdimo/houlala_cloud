@@ -2,10 +2,10 @@ package com.example.uploadservice.controller;
 
 import com.example.uploadservice.service.UploadService;
 import lombok.RequiredArgsConstructor;
-import org.apache.http.Header;
 import org.springframework.core.io.Resource;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,8 +19,8 @@ public class Controller {
     private final UploadService service;
 
 
-    @PostMapping("/upload")
-    public String uploadFile(@RequestParam(name = "file")MultipartFile file){
+    @PostMapping("/newFile")
+    public String uploadFile(@RequestPart(value = "file") MultipartFile file){
         Resource resource;
         String url = "";
         try {
