@@ -14,7 +14,6 @@ public class CreateProductDto {
 
     private int sellingPrice;
 
-
     private String categoryId;
 
     private String locationId;
@@ -27,5 +26,4 @@ public class CreateProductDto {
 
     private String originLabel;
 
-    private String productSku;
 }
