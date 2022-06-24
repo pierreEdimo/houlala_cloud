@@ -1,9 +1,9 @@
 package com.example.marketplaceclient.services;
 
+import com.example.marketplaceclient.model.CreateProduct;
 import com.example.marketplaceclient.model.Product;
-import com.example.marketplaceclient.model.ProductResponse;
-import com.example.marketplaceclient.model.dto.CreateProductDto;
 import com.example.marketplaceclient.model.dto.ProductDto;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -11,29 +11,29 @@ public interface ProductService {
 
     List<ProductDto> getAllProducts();
 
-    ProductResponse getProduct(String id);
+    Product getProduct(String id);
 
-    List<ProductResponse> searchProduct(String searchWord);
+    List<Product> searchProduct(String searchWord);
 
-    List<ProductResponse> getRandomProducts(int size, String categoryId);
+    List<Product> getRandomProducts(int size, String categoryId);
 
-    List<ProductResponse> getProductsByCategoryId(String categoryId, int limit);
+    List<Product> getProductsByCategoryId(String categoryId, int limit);
 
-    List<ProductResponse> getProductsByTypeAndCategoryId(String categoryId, String productType);
+    List<Product> getProductsByTypeAndCategoryId(String categoryId, String productType);
 
-    ProductResponse deleteProduct(String id);
+    Product deleteProduct(String id);
 
-    ProductResponse editProduct(String id, Product newProduct);
+    Product editProduct(String id, CreateProduct newProduct);
 
     void addProductToFavorite(String userId, String id);
 
-    List<ProductResponse> getFavoritesProduct(String userId);
+    List<Product> getFavoritesProduct(String userId);
 
-    List<ProductResponse> getProductByLocationId(String locationId, int limit);
+    List<Product> getProductByLocationId(String locationId, int limit);
 
     ProductDto getProductByIdAndIsFavorite(String id, String userId);
 
-    List<ProductResponse> getProductsWithLimit(int limit);
+    List<Product> getProductsWithLimit(int limit);
 
-    ProductResponse addProduct(CreateProductDto newProduct);
+    String createProduct(String product, MultipartFile file);
 }
