@@ -11,7 +11,7 @@ public class CartItemResponse {
 
     private String userId;
 
-    private ProductResponse product;
+    private Product product;
 
     private int totalPrice;
 
