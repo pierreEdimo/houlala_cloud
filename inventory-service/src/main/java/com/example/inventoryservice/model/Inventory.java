@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -16,7 +17,9 @@ public class Inventory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDateTime createdAt;
+    private LocalDate createdAt = LocalDate.now();
+
+    private LocalDate updatedAt = LocalDate.now();
 
     private String locationId;
 
@@ -24,5 +27,12 @@ public class Inventory {
     @JoinColumn(name = "product_information_id", referencedColumnName = "id")
     private List<ProductInformation> availableProducts;
 
+    public Inventory(){}
+
+    public Inventory(String locationId){
+        this.locationId = locationId;
+        this.createdAt = LocalDate.now();
+        this.updatedAt = LocalDate.now();
+    }
 
 }
