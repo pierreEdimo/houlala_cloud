@@ -1,7 +1,7 @@
 package com.example.marketplaceclient.services;
 
 import com.example.marketplaceclient.exception.MarketplaceException;
-import com.example.marketplaceclient.feign.InventoryServiceFeignClient;
+import com.example.marketplaceclient.feign.StockServiceFeignClient;
 import com.example.marketplaceclient.feign.ProductServiceFeignClient;
 import com.example.marketplaceclient.feign.UploadServiceFeignClient;
 import com.example.marketplaceclient.model.CreateProduct;
@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
+
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductServiceFeignClient feignClient;
 
-    private final InventoryServiceFeignClient inventoryServiceFeignClient;
+    private final StockServiceFeignClient inventoryServiceFeignClient;
 
     private final UploadServiceFeignClient uploadServiceFeignClient;
 
@@ -184,7 +185,7 @@ public class ProductServiceImpl implements ProductService {
             System.out.println("Error");
         }
 
-        String productSku = this.skuGenerator(newProduct.getName(), newProduct.getOriginLabel());
+        String productSku = this.skuGenerator(newProduct.getName(), newProduct.getOriginLabel(), newProduct.getLocationId());
 
         CreateProduct product = new CreateProduct(
                 newProduct.getName(),
@@ -201,7 +202,8 @@ public class ProductServiceImpl implements ProductService {
                 productSku.toLowerCase(),
                 newProduct.getQuantity(),
                 newProduct.getBuyingPrice(),
-                newProduct.getOriginLabel()
+                newProduct.getOriginLabel(),
+                newProduct.getLocationId()
         );
 
         try {
@@ -236,16 +238,23 @@ public class ProductServiceImpl implements ProductService {
         );
     }
 
-    private String skuGenerator(String productName, String originLabel) {
+    private String skuGenerator(String productName,
+                                String originLabel,
+                                String locationId) {
         String result;
         LocalDateTime date = LocalDateTime.now();
         int year = date.getYear();
         int hour = date.getHour();
         int min = date.getMinute();
-        String productFirst3Chars = productName.substring(0, Math.min(productName.length(), 3));
-        String originFirst3Chars = originLabel.substring(0, Math.min(productName.length(), 3));
-        result = productFirst3Chars + "-" + originFirst3Chars + "-" + year + "-" + hour + "" + min;
+        String locationIdFirst3Chars = this.getThreeFirstChars(locationId);
+        String productFirst3Chars = this.getThreeFirstChars(productName);
+        String originFirst3Chars = this.getThreeFirstChars(originLabel) ;
+        result = locationIdFirst3Chars + "-" + productFirst3Chars + "-" + originFirst3Chars + "-" + year + "-" + hour + "" + min;
         return result;
+    }
+
+    private String getThreeFirstChars(String str) {
+        return str.substring(0, Math.min(str.length(), 3));
     }
 
 

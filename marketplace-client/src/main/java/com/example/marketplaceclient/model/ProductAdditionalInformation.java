@@ -19,17 +19,21 @@ public class ProductAdditionalInformation {
 
     private Origin originLabel;
 
+    private String locationId;
+
     public ProductAdditionalInformation(){}
 
     public ProductAdditionalInformation(
             String productSku,
             int quantity,
             double buyingPrice,
-            String originLabel
+            String originLabel,
+            String locationId
     ){
         this.productSku = productSku;
         this.quantity = quantity;
         this.buyingPrice = buyingPrice;
         this.originLabel = new Origin(originLabel);
+        this.locationId = locationId;
     }
 }
