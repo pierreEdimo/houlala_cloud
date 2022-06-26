@@ -120,6 +120,23 @@ public class ProductInformationServiceImpl implements ProductInformationService 
 
     }
 
+    @Override
+    public void getInfoAndUpdateQuantity(String productSku, int quantity) {
+
+        Optional<ProductInformation> informationOptional = this.repository.findProductInformationByProductSku(productSku);
+
+        if(informationOptional.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product with sku " + productSku + " was not found" );
+        }
+
+        ProductInformation product = informationOptional.get();
+        product.increaseQuantitySold(quantity);
+        product.decreaseAvailableQuantity(quantity);
+
+        this.repository.save(product);
+
+    }
+
     private ProductDto toProductDto(ProductInformation information, Product product) {
         return new ProductDto(
                 information.getProductSku(),

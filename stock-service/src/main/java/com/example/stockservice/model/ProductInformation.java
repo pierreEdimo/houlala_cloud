@@ -49,4 +49,12 @@ public class ProductInformation {
         this.originLabel = new Origin(label);
         this.locationId = locationId;
     }
+
+    public void increaseQuantitySold(int quantity){
+        this.quantitySold += quantity;
+    }
+
+    public void decreaseAvailableQuantity(int quantitySold){
+        this.quantity -= quantitySold;
+    }
 }

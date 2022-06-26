@@ -3,10 +3,7 @@ package com.example.marketplaceclient.feign;
 import com.example.marketplaceclient.exception.MarketplaceException;
 import com.example.marketplaceclient.model.ProductAdditionalInformation;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,5 +18,8 @@ public interface StockServiceFeignClient {
 
     @PostMapping("/newProduct")
     ProductAdditionalInformation addInfo(@RequestBody ProductAdditionalInformation info) throws MarketplaceException;
+
+    @PutMapping("/getInfoAndUdateQuantity")
+    void getProductAndUpdateQuantity(@RequestParam String productSku, @RequestParam int quantity) throws MarketplaceException;
 
 }

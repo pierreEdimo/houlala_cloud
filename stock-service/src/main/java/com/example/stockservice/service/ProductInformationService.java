@@ -18,4 +18,7 @@ public interface ProductInformationService {
     List<ProductInformation> getAllInfos();
 
     Stock getStockFromLocationId(String locationId);
+
+    void getInfoAndUpdateQuantity(String productSku, int quantity);
+
 }

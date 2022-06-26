@@ -4,6 +4,7 @@ import com.example.marketplaceclient.exception.MarketplaceException;
 import com.example.marketplaceclient.model.SentOrder;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -25,5 +26,8 @@ public interface SentOrderServiceFeignClient {
 
     @GetMapping("/filterOrderByStatus")
     List<SentOrder> getOrderByStatus(@RequestParam String locationId, @RequestParam String status) throws MarketplaceException;
+
+    @PutMapping("/changeOrderStatus")
+    SentOrder changeOrderStatus(@RequestParam String id) throws MarketplaceException;
 
 }

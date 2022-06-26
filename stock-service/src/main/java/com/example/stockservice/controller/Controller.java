@@ -44,4 +44,10 @@ public class Controller {
     public Stock getStockFromLocationId(@RequestParam String locationId){
         return this.service.getStockFromLocationId(locationId);
     }
+
+    @PutMapping("/getInfoAndUdateQuantity")
+    public void updateQuantitySoldForProduct(@RequestParam String productSku, @RequestParam int quantity){
+        this.service.getInfoAndUpdateQuantity(productSku, quantity);
+    }
+
 }
