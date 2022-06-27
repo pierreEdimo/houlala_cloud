@@ -8,8 +8,8 @@ import java.util.List;
 
 @Getter
 @Setter
-public class OrderResponse {
-    private List<CartItemResponse> cartItems;
+public class OrderDto {
+    private List<CartItemDto> cartItems;
 
     private int totalQuantity;
 
