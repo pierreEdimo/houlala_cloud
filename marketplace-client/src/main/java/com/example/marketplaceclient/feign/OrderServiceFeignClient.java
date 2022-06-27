@@ -2,7 +2,7 @@ package com.example.marketplaceclient.feign;
 
 import com.example.marketplaceclient.exception.MarketplaceException;
 import com.example.marketplaceclient.model.Order;
-import com.example.marketplaceclient.model.OrderResponse;
+import com.example.marketplaceclient.model.OrderDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,11 +15,11 @@ import java.util.List;
 public interface OrderServiceFeignClient {
 
     @GetMapping("")
-    List<OrderResponse> getAllOrders() throws MarketplaceException;
+    List<OrderDto> getAllOrders() throws MarketplaceException;
 
     @PostMapping("")
-    OrderResponse sendOrders(@RequestBody Order newOrder) throws MarketplaceException;
+    OrderDto sendOrders(@RequestBody Order newOrder) throws MarketplaceException;
 
     @GetMapping("/getOrdersFromUsers")
-    List<OrderResponse> getOrdersFromUsers(@RequestParam String email) throws MarketplaceException;
+    List<OrderDto> getOrdersFromUsers(@RequestParam String email) throws MarketplaceException;
 }
