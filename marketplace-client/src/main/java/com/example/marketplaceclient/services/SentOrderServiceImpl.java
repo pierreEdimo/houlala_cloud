@@ -3,7 +3,7 @@ package com.example.marketplaceclient.services;
 import com.example.marketplaceclient.exception.MarketplaceException;
 import com.example.marketplaceclient.feign.SentOrderServiceFeignClient;
 import com.example.marketplaceclient.feign.StockServiceFeignClient;
-import com.example.marketplaceclient.model.CartItemResponse;
+import com.example.marketplaceclient.model.CartItemDto;
 import com.example.marketplaceclient.model.SentOrder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -32,9 +32,9 @@ public class SentOrderServiceImpl implements SentOrderService {
         }
 
         if(order.getStatus().equals("Delivre")){
-            List<CartItemResponse> items = order.getCartItems();
+            List<CartItemDto> items = order.getCartItems();
 
-            for(CartItemResponse item : items){
+            for(CartItemDto item : items){
                 try {
                     this.stockServiceFeignClient.getProductAndUpdateQuantity(item.getProduct().getProductSku(), item.getQuantity());
                 } catch (MarketplaceException e) {
