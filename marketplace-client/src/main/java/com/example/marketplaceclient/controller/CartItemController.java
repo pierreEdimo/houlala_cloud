@@ -3,7 +3,7 @@ package com.example.marketplaceclient.controller;
 import com.example.marketplaceclient.exception.MarketplaceException;
 import com.example.marketplaceclient.feign.CartItemServiceFeignClient;
 import com.example.marketplaceclient.model.CartItem;
-import com.example.marketplaceclient.model.CartItemResponse;
+import com.example.marketplaceclient.model.CartItemDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -18,7 +18,7 @@ public class CartItemController {
     private final CartItemServiceFeignClient feignClient;
 
     @GetMapping("")
-    public List<CartItemResponse> getAllItems(){
+    public List<CartItemDto> getAllItems(){
         try {
             return this.feignClient.getAllItems();
         } catch (MarketplaceException e) {
@@ -27,7 +27,7 @@ public class CartItemController {
     }
 
     @DeleteMapping("/{id}")
-    public CartItemResponse deleteItem(@PathVariable String id){
+    public CartItemDto deleteItem(@PathVariable String id){
         try {
             return this.feignClient.deleteItem(id);
         } catch (MarketplaceException e) {
@@ -36,7 +36,7 @@ public class CartItemController {
     }
 
     @PostMapping("")
-    public CartItemResponse addItem(@RequestBody CartItem newItem){
+    public CartItemDto addItem(@RequestBody CartItem newItem){
         try {
             return this.feignClient.addItem(newItem);
         } catch (MarketplaceException e) {
@@ -45,7 +45,7 @@ public class CartItemController {
     }
 
     @GetMapping("/getCartsFromUsers")
-    public List<CartItemResponse> getAllCartFromUsers(@RequestParam String id){
+    public List<CartItemDto> getAllCartFromUsers(@RequestParam String id){
         try {
             return this.feignClient.getAllCartFromUsers(id);
         } catch (MarketplaceException e) {
@@ -54,7 +54,7 @@ public class CartItemController {
     }
 
     @PatchMapping("/{id}")
-    public CartItemResponse editCartItem(@PathVariable String id, @RequestBody CartItem newItem){
+    public CartItemDto editCartItem(@PathVariable String id, @RequestBody CartItem newItem){
         try {
             return this.feignClient.editCartItem(id, newItem);
         } catch (MarketplaceException e) {
@@ -72,7 +72,7 @@ public class CartItemController {
     }
 
     @DeleteMapping("/deleteMany")
-    CartItemResponse deleteItemsFromUser(@RequestParam String userId){
+    CartItemDto deleteItemsFromUser(@RequestParam String userId){
         try {
             return this.feignClient.deleteItemsFromUser(userId);
         } catch (MarketplaceException e) {
