@@ -2,7 +2,7 @@ package com.example.marketplaceclient.feign;
 
 import com.example.marketplaceclient.exception.MarketplaceException;
 import com.example.marketplaceclient.model.CartItem;
-import com.example.marketplaceclient.model.CartItemResponse;
+import com.example.marketplaceclient.model.CartItemDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,23 +12,23 @@ import java.util.List;
 public interface CartItemServiceFeignClient {
 
     @PostMapping("")
-    CartItemResponse addItem(@RequestBody CartItem newItem) throws MarketplaceException;
+    CartItemDto addItem(@RequestBody CartItem newItem) throws MarketplaceException;
 
     @GetMapping("")
-    List<CartItemResponse> getAllItems() throws MarketplaceException;
+    List<CartItemDto> getAllItems() throws MarketplaceException;
 
     @DeleteMapping("/{id}")
-    CartItemResponse deleteItem(@PathVariable String id) throws MarketplaceException;
+    CartItemDto deleteItem(@PathVariable String id) throws MarketplaceException;
 
     @GetMapping("/getCartsFromUsers")
-    List<CartItemResponse> getAllCartFromUsers(@RequestParam String userId) throws MarketplaceException;
+    List<CartItemDto> getAllCartFromUsers(@RequestParam String userId) throws MarketplaceException;
 
     @PatchMapping("/{id}")
-    CartItemResponse editCartItem(@PathVariable String id, @RequestBody CartItem newItem) throws MarketplaceException;
+    CartItemDto editCartItem(@PathVariable String id, @RequestBody CartItem newItem) throws MarketplaceException;
 
     @GetMapping("/cartItemCount/{id}")
     int getCartItemCount(@PathVariable String id) throws MarketplaceException;
 
     @DeleteMapping("/deleteMany")
-    CartItemResponse deleteItemsFromUser(@RequestParam String userId) throws MarketplaceException;
+    CartItemDto deleteItemsFromUser(@RequestParam String userId) throws MarketplaceException;
 }
