@@ -8,8 +8,9 @@ import java.util.List;
 @Getter
 @Setter
 public class SentOrder {
+    private String _id;
     private String locationId;
-    private List<CartItemResponse> cartItems;
+    private List<CartItemDto> cartItems;
     private String status;
     private UserInformation userInformation;
     private Address address;
