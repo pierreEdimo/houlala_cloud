@@ -7,3 +7,9 @@ spring:
   application:
     name: marketplace
 
+feign:
+  client:
+    config:
+      default:
+        error-decoder: com.example.marketplaceclient.errorDecoder.MarketplaceErrorDecoder
+
