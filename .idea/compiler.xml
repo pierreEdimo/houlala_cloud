@@ -13,6 +13,7 @@
         <module name="review-service" />
         <module name="marketplace-client" />
         <module name="authentication-client" />
+        <module name="inventory-service" />
         <module name="discovery" />
         <module name="room-service" />
         <module name="upload-service" />
@@ -33,6 +34,7 @@
       <module name="discovery-orchestrator" target="17" />
       <module name="gateway" target="17" />
       <module name="hotel-service" target="17" />
+      <module name="inventory-service" target="17" />
       <module name="location-service" target="17" />
       <module name="marketplace-client" target="17" />
       <module name="message-sender" target="17" />
@@ -55,6 +57,7 @@
       <module name="discovery-orchestrator" options="-parameters" />
       <module name="gateway" options="-parameters" />
       <module name="hotel-service" options="-parameters" />
+      <module name="inventory-service" options="-parameters" />
       <module name="location-service" options="-parameters" />
       <module name="marketplace-client" options="-parameters" />
       <module name="message-sender" options="-parameters" />
