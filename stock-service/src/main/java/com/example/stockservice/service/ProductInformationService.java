@@ -21,4 +21,6 @@ public interface ProductInformationService {
 
     void getInfoAndUpdateQuantity(String productSku, int quantity);
 
+    ProductInformation getInfoBySku(String productSku);
+
 }
