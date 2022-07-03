@@ -20,28 +20,32 @@ public class Inventory {
 
     private LocalDateTime updatedAt = LocalDateTime.now();
 
-    @OneToMany(targetEntity = Product.class, cascade = CascadeType.MERGE)
-    @JoinColumn(name = "product_id", referencedColumnName = "productSku")
-    private List<Product> productList;
+    @OneToMany(targetEntity = InventoryItem.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    private List<InventoryItem> productList;
 
-    private int totalDeficit;
+    private int totalDeficit = 0;
 
     private String locationId;
 
-    public Inventory(){
-        this.calculateDeficit();
-    }
+    public Inventory(){}
 
-    public Inventory(List<Product> productList,
-                     String locationId){
-        this.productList = productList;
+    public Inventory(
+            String locationId,
+            List<InventoryItem> productList
+    ){
         this.locationId = locationId;
-        this.calculateDeficit();
+        this.productList = productList;
+        this.totalDeficit = calculateDeficit();
     }
 
-    public void calculateDeficit(){
-        for(Product product: this.productList){
-            this.totalDeficit += product.getDeficit();
+    private int calculateDeficit(){
+        if(this.productList != null){
+            for (InventoryItem item : productList){
+                this.totalDeficit +=  item.getDeficit();
+            }
         }
+        return this.totalDeficit;
     }
+
 }
