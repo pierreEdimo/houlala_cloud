@@ -1,6 +1,8 @@
 package com.example.inventoryservice.controller;
 
 import com.example.inventoryservice.model.Inventory;
+import com.example.inventoryservice.model.dto.CreateInventoryDto;
+import com.example.inventoryservice.model.dto.InventoryDto;
 import com.example.inventoryservice.service.InventoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -14,33 +16,33 @@ public class Controller {
     private final InventoryService service;
 
     @PostMapping("/newInventory")
-    public Inventory createInventory(@RequestBody Inventory newInventory){
+    public InventoryDto createInventory(@RequestBody CreateInventoryDto newInventory) {
         return this.service.createInventory(newInventory);
     }
 
     @GetMapping("/getSingleInventory/{id}")
-    public Inventory getSingleInventory(@PathVariable long id){
+    public InventoryDto getSingleInventory(@PathVariable long id) {
         return this.service.getASingleInventory(id);
     }
 
     @DeleteMapping("/deleteInventory/{id}")
-    public void deleteInventory(@PathVariable long id){
+    public void deleteInventory(@PathVariable long id) {
         this.service.deleteInventory(id);
     }
 
     @GetMapping("")
-    public List<Inventory> getAllInventories(){
+    public List<InventoryDto> getAllInventories() {
         return this.service.getAllInventories();
     }
 
     @GetMapping("/getInventoriesFromLocationId")
-    public List<Inventory> getInventoriesFromLocationId(@RequestParam String locationId){
+    public List<InventoryDto> getInventoriesFromLocationId(@RequestParam String locationId) {
         return this.service.getInventoriesFromLocationId(locationId);
     }
 
     @PutMapping("/editInventory/{id}")
-    public Inventory editInventory(@PathVariable long id, @RequestBody Inventory newInventory){
-        return this.service.editInventory(id,newInventory);
+    public InventoryDto editInventory(@PathVariable long id, @RequestBody CreateInventoryDto newInventory) {
+        return this.service.editInventory(id, newInventory);
     }
 
 }
