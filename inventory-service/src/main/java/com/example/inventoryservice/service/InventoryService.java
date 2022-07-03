@@ -1,20 +1,22 @@
 package com.example.inventoryservice.service;
 
 import com.example.inventoryservice.model.Inventory;
+import com.example.inventoryservice.model.dto.CreateInventoryDto;
+import com.example.inventoryservice.model.dto.InventoryDto;
 
 import java.util.List;
 
 public interface InventoryService {
 
-    Inventory createInventory(Inventory newInventory);
+    InventoryDto createInventory(CreateInventoryDto newInventory);
 
-    Inventory getASingleInventory(long id);
+    InventoryDto getASingleInventory(long id);
 
-    List<Inventory> getAllInventories();
+    List<InventoryDto> getAllInventories();
 
-    List<Inventory> getInventoriesFromLocationId(String locationId);
+    List<InventoryDto> getInventoriesFromLocationId(String locationId);
 
     void deleteInventory(long id);
 
-    Inventory editInventory(long id, Inventory newInventory);
+    InventoryDto editInventory(long id, CreateInventoryDto newInventory);
 }
