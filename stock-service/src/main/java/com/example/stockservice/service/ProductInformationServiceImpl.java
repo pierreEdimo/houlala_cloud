@@ -137,6 +137,17 @@ public class ProductInformationServiceImpl implements ProductInformationService 
 
     }
 
+    @Override
+    public ProductInformation getInfoBySku(String productSku) {
+        Optional<ProductInformation> informationOptional = this.repository.findProductInformationByProductSku(productSku);
+
+        if(informationOptional.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product was not found");
+        }
+
+        return informationOptional.get();
+    }
+
     private ProductDto toProductDto(ProductInformation information, Product product) {
         return new ProductDto(
                 information.getProductSku(),
