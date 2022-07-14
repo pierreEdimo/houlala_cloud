@@ -24,7 +24,7 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public Product getSingleProduct(@PathVariable String id) {
+    public ProductDto getSingleProduct(@PathVariable String id) {
         return this.productService.getProduct(id);
     }
 
@@ -34,17 +34,17 @@ public class ProductController {
     }
 
     @GetMapping("/getRandomProducts")
-    public List<Product> getRandomProducts(@RequestParam int size, @RequestParam String categoryId) {
+    public List<ProductDto> getRandomProducts(@RequestParam int size, @RequestParam String categoryId) {
         return this.productService.getRandomProducts(size, categoryId);
     }
 
     @GetMapping("/filterProductsByCategoryId")
-    public List<Product> getProductsByCategoryId(@RequestParam String categoryId, @RequestParam(required = false) int limit) {
+    public List<ProductDto> getProductsByCategoryId(@RequestParam String categoryId, @RequestParam(required = false) int limit) {
         return this.productService.getProductsByCategoryId(categoryId, limit);
     }
 
     @GetMapping("/filterProductsByCategoryAndProductType")
-    public List<Product> getProductsByTypeAndCategoryId(@RequestParam String categoryId, @RequestParam String productType) {
+    public List<ProductDto> getProductsByTypeAndCategoryId(@RequestParam String categoryId, @RequestParam String productType) {
         return this.productService.getProductsByTypeAndCategoryId(categoryId, productType);
     }
 
@@ -72,7 +72,7 @@ public class ProductController {
     }
 
     @GetMapping("/filterProductByPageId")
-    public List<Product> getProductByLocationId(@RequestParam String locationId, @RequestParam int limit) {
+    public List<ProductDto> getProductByLocationId(@RequestParam String locationId, @RequestParam int limit) {
         return this.productService.getProductByLocationId(locationId, limit);
     }
 
@@ -82,7 +82,7 @@ public class ProductController {
     }
 
     @GetMapping("/filterProductWithLimit")
-    public List<Product> getProductsWithLimit(@RequestParam int limit) {
+    public List<ProductDto> getProductsWithLimit(@RequestParam int limit) {
         return this.productService.getProductsWithLimit(limit);
     }
 
