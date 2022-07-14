@@ -13,4 +13,8 @@ public interface SentOrderService {
     Order addProductToCart(CreateProductCartDto newCart);
 
     UserCart getTheCartByUserEmail(String email);
+
+    int getOrderCount(String email);
+
+    void confirmCommand(String email);
 }

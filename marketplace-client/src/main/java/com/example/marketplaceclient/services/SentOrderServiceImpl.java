@@ -24,8 +24,6 @@ public class SentOrderServiceImpl implements SentOrderService {
 
     private final OrderServiceFeignClient feignClient;
 
-    private final StockServiceFeignClient stockServiceFeignClient;
-
     @Override
     public List<OrderDto> getOrdersByLocationId(String locationId) {
         List<Order> orderList;
@@ -79,7 +77,33 @@ public class SentOrderServiceImpl implements SentOrderService {
         );
     }
 
-//    public void getSentOrderAndUpdateQuantity(String id) {
+    @Override
+    public int getOrderCount(String email) {
+        int totalQuantity = 0;
+        List<CartItem> cartItemList;
+
+        try {
+            cartItemList = this.feignClient.getCartsByEmail(email);
+        } catch (MarketplaceException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+        for (CartItem item : cartItemList) {
+            totalQuantity += item.getTotalQuantity();
+        }
+
+        return totalQuantity;
+    }
+
+    @Override
+    public void confirmCommand(String email) {
+        try {
+            this.feignClient.confirmCommand(email);
+        } catch (MarketplaceException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    //    public void getSentOrderAndUpdateQuantity(String id) {
 //
 //        SentOrder order;
 //

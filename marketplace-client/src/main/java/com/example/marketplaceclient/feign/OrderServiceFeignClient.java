@@ -5,16 +5,12 @@ import com.example.marketplaceclient.model.CartItem;
 import com.example.marketplaceclient.model.Order;
 import com.example.marketplaceclient.model.dto.CreateProductCartDto;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @FeignClient(url = "https://houlala.herokuapp.com/api/sent-orders", name = "sent-orders")
 public interface OrderServiceFeignClient {
-
 
     @GetMapping("/filterOrdersByLocationId")
     List<Order> fetchOrderFromLocationId(@RequestParam String locationId) throws MarketplaceException;
@@ -24,5 +20,8 @@ public interface OrderServiceFeignClient {
 
     @GetMapping("/filterCartItems")
     List<CartItem> getCartsByEmail(@RequestParam String email) throws MarketplaceException;
+
+    @PatchMapping("/confirmCommand")
+    void confirmCommand(@RequestParam String email) throws MarketplaceException;
 
 }

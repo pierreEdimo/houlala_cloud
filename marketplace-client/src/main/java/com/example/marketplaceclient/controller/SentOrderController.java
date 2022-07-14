@@ -35,4 +35,14 @@ public class SentOrderController {
         return this.orderService.getTheCartByUserEmail(email);
     }
 
+    @GetMapping("/getCartItemCount")
+    public int getCartItemCount(@RequestParam String email){
+        return this.orderService.getOrderCount(email);
+    }
+
+    @PatchMapping("/confirmCommand")
+    public void confirmCommand(@RequestParam String email){
+        this.orderService.confirmCommand(email);
+    }
+
 }
