@@ -31,6 +31,7 @@ public class ProductServiceImpl implements ProductService {
 
     private final UploadServiceFeignClient uploadServiceFeignClient;
 
+
     @Override
     public List<ProductDto> getAllProducts() {
 
@@ -57,12 +58,18 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product getProduct(String id) {
+    public ProductDto getProduct(String id) {
+        Product product;
+        ProductAdditionalInformation info;
+
         try {
-            return this.feignClient.getSingleProduct(id);
+            product = this.feignClient.getSingleProduct(id);
+            info = this.stockerServiceFeignClient.getASingleInfo(product.get_id());
         } catch (MarketplaceException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
+
+        return this.toProductDto(product, info);
     }
 
     @Override
@@ -90,30 +97,76 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getRandomProducts(int size, String categoryId) {
+    public List<ProductDto> getRandomProducts(int size, String categoryId) {
+        List<ProductDto> productDtoList = new ArrayList<>();
+        List<Product> productList;
+        List<ProductAdditionalInformation> infos;
+
         try {
-            return this.feignClient.getRandomProducts(size, categoryId);
+            productList = this.feignClient.getRandomProducts(size, categoryId);
+            infos = this.stockerServiceFeignClient.getAllProductInfos();
         } catch (MarketplaceException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
+
+        for (Product response : productList) {
+            for (ProductAdditionalInformation info : infos) {
+                if (response.getProductSku().equals(info.getProductSku())) {
+                    productDtoList.add(this.toProductDto(response, info));
+                }
+            }
+        }
+
+        return productDtoList;
     }
 
     @Override
-    public List<Product> getProductsByCategoryId(String categoryId, int limit) {
+    public List<ProductDto> getProductsByCategoryId(String categoryId, int limit) {
+        List<ProductDto> productDtoList = new ArrayList<>();
+        List<Product> productList;
+        List<ProductAdditionalInformation> infos;
+
         try {
-            return this.feignClient.getProductByCategoryId(categoryId, limit);
+            productList = this.feignClient.getProductByCategoryId(categoryId, limit);
+            infos = this.stockerServiceFeignClient.getAllProductInfos();
         } catch (MarketplaceException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
+
+        for (Product response : productList) {
+            for (ProductAdditionalInformation info : infos) {
+                if (response.getProductSku().equalsIgnoreCase(info.getProductSku())) {
+                    productDtoList.add(this.toProductDto(response, info));
+                }
+            }
+        }
+
+        return productDtoList;
     }
 
     @Override
-    public List<Product> getProductsByTypeAndCategoryId(String categoryId, String productType) {
+    public List<ProductDto> getProductsByTypeAndCategoryId(String categoryId, String productType) {
+
+        List<Product> productList;
+        List<ProductDto> productDtoList = new ArrayList<>();
+        List<ProductAdditionalInformation> infos;
+
         try {
-            return this.feignClient.getProductsByTypeAndCategoryId(categoryId, productType);
+            productList = this.feignClient.getProductsByTypeAndCategoryId(categoryId, productType);
+            infos = this.stockerServiceFeignClient.getAllProductInfos();
         } catch (MarketplaceException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
+
+        for (Product response : productList) {
+            for (ProductAdditionalInformation info : infos) {
+                if (response.getProductSku().equalsIgnoreCase(info.getProductSku())) {
+                    productDtoList.add(this.toProductDto(response, info));
+                }
+            }
+        }
+
+        return productDtoList;
     }
 
     @Override
@@ -153,12 +206,27 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getProductByLocationId(String locationId, int limit) {
+    public List<ProductDto> getProductByLocationId(String locationId, int limit) {
+        List<Product> productList;
+        List<ProductAdditionalInformation> infos;
+        List<ProductDto> productDtoList = new ArrayList<>();
+
         try {
-            return this.feignClient.getProductByLocationId(locationId, limit);
+            productList = this.feignClient.getProductByLocationId(locationId, limit);
+            infos = this.stockerServiceFeignClient.getAllProductInfos();
         } catch (MarketplaceException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
+
+        for (Product product : productList) {
+            for (ProductAdditionalInformation info : infos) {
+                if (product.getProductSku().equalsIgnoreCase(info.getProductSku())) {
+                    productDtoList.add(this.toProductDto(product, info));
+                }
+            }
+        }
+
+        return productDtoList;
     }
 
     @Override
@@ -178,12 +246,26 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getProductsWithLimit(int limit) {
+    public List<ProductDto> getProductsWithLimit(int limit) {
+
+        List<ProductDto> productDtoList = new ArrayList<>();
+        List<Product> productList;
+        List<ProductAdditionalInformation> informations;
+
         try {
-            return this.feignClient.getProductsWithLimit(limit);
+            productList = this.feignClient.getProductsWithLimit(limit);
+            informations = this.stockerServiceFeignClient.getAllProductInfos();
         } catch (MarketplaceException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
+
+        for (Product product : productList) {
+            for (ProductAdditionalInformation info : informations) {
+                productDtoList.add(this.toProductDto(product, info));
+            }
+        }
+
+        return productDtoList;
     }
 
     @Override

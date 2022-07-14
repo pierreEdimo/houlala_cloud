@@ -11,15 +11,15 @@ public interface ProductService {
 
     List<ProductDto> getAllProducts();
 
-    Product getProduct(String id);
+    ProductDto getProduct(String id);
 
     List<ProductDto> searchProduct(String searchWord);
 
-    List<Product> getRandomProducts(int size, String categoryId);
+    List<ProductDto> getRandomProducts(int size, String categoryId);
 
-    List<Product> getProductsByCategoryId(String categoryId, int limit);
+    List<ProductDto> getProductsByCategoryId(String categoryId, int limit);
 
-    List<Product> getProductsByTypeAndCategoryId(String categoryId, String productType);
+    List<ProductDto> getProductsByTypeAndCategoryId(String categoryId, String productType);
 
     Product deleteProduct(String id);
 
@@ -29,11 +29,11 @@ public interface ProductService {
 
     List<Product> getFavoritesProduct(String userId);
 
-    List<Product> getProductByLocationId(String locationId, int limit);
+    List<ProductDto> getProductByLocationId(String locationId, int limit);
 
     ProductDto getProductByIdAndIsFavorite(String id, String userId);
 
-    List<Product> getProductsWithLimit(int limit);
+    List<ProductDto> getProductsWithLimit(int limit);
 
     String createProduct(String product, MultipartFile file);
 }
