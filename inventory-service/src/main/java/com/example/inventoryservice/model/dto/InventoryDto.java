@@ -16,9 +16,8 @@ public class InventoryDto {
 
     private Map<String, InventoryItem> productList;
 
-    private int totalDeficit = 0;
-
     private String locationId;
+
 
     public InventoryDto(){}
 
@@ -26,12 +25,12 @@ public class InventoryDto {
                         LocalDateTime createdAt,
                         LocalDateTime updatedAt,
                         Map<String, InventoryItem> productList,
-                        int totalDeficit,
-                        String locationId){
+                        String locationId
+                        ){
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.productList = productList;
-        this.totalDeficit = totalDeficit;
         this.locationId = locationId;
+
     }
 }

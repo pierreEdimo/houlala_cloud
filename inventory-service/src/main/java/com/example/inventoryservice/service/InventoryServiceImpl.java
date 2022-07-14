@@ -56,7 +56,8 @@ public class InventoryServiceImpl implements InventoryService {
                             information.getQuantity(),
                             item.getIstQuantity(),
                             item.getProductSku(),
-                            product.getName()
+                            product.getName(),
+                            information.getQuantitySold()
                     );
                     newItems.add(createdItem);
                 }
@@ -66,6 +67,7 @@ public class InventoryServiceImpl implements InventoryService {
         Inventory inventory = new Inventory(
                 newInventory.getLocationId(),
                 newItems);
+
 
         this.inventoryRepository.save(inventory);
 
@@ -123,9 +125,9 @@ public class InventoryServiceImpl implements InventoryService {
         Inventory inventory = optionalInventory.get();
         List<InventoryItem> items = inventory.getProductList();
 
-        for(InventoryItem item: items){
-            for(CreateItemDto newItem: newInventory.getProductLists()){
-                if(item.getProductSku().equalsIgnoreCase(newItem.getProductSku())){
+        for (InventoryItem item : items) {
+            for (CreateItemDto newItem : newInventory.getProductLists()) {
+                if (item.getProductSku().equalsIgnoreCase(newItem.getProductSku())) {
                     item.setIstQuantity(newItem.getIstQuantity());
                 }
 
@@ -134,9 +136,9 @@ public class InventoryServiceImpl implements InventoryService {
 
         inventory.setProductList(items);
 
-       this.inventoryRepository.save(inventory);
+        this.inventoryRepository.save(inventory);
 
-       return this.toInventoryDto(inventory);
+        return this.toInventoryDto(inventory);
     }
 
     private InventoryDto toInventoryDto(Inventory inventory) {
@@ -147,14 +149,14 @@ public class InventoryServiceImpl implements InventoryService {
                 a.getSollQuantity(),
                 a.getIstQuantity() + b.getIstQuantity(),
                 a.getProductSku(),
-                a.getName()
+                a.getName(),
+                a.getQuantitySold()
         )));
 
         return new InventoryDto(
                 inventory.getCreatedAt(),
                 inventory.getUpdatedAt(),
                 createdItems,
-                inventory.getTotalDeficit(),
                 inventory.getLocationId()
         );
 

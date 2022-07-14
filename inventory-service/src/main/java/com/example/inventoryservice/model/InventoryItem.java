@@ -28,18 +28,22 @@ public class InventoryItem {
 
     private String productSku;
 
+    private int quantitySold;
+
     public InventoryItem() {}
 
     public InventoryItem(
             int sollQuantity,
             int istQuantity,
             String productSku,
-            String name
+            String name,
+            int quantitySold
     ){
         this.name = name;
         this.sollQuantity = sollQuantity;
         this.istQuantity = istQuantity;
         this.productSku = productSku;
         this.deficit = this.istQuantity - this.sollQuantity;
+        this.quantitySold = quantitySold;
     }
 }

@@ -10,7 +10,8 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-public class Inventory {
+public class
+Inventory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,28 +25,19 @@ public class Inventory {
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     private List<InventoryItem> productList;
 
-    private int totalDeficit = 0;
 
     private String locationId;
 
-    public Inventory(){}
+    public Inventory() {
+    }
 
     public Inventory(
             String locationId,
             List<InventoryItem> productList
-    ){
+    ) {
         this.locationId = locationId;
         this.productList = productList;
-        this.totalDeficit = calculateDeficit();
     }
 
-    private int calculateDeficit(){
-        if(this.productList != null){
-            for (InventoryItem item : productList){
-                this.totalDeficit +=  item.getDeficit();
-            }
-        }
-        return this.totalDeficit;
-    }
 
 }
