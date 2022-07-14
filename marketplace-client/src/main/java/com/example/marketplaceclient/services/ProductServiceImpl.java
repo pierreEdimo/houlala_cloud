@@ -27,7 +27,7 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductServiceFeignClient feignClient;
 
-    private final StockServiceFeignClient inventoryServiceFeignClient;
+    private final StockServiceFeignClient stockerServiceFeignClient;
 
     private final UploadServiceFeignClient uploadServiceFeignClient;
 
@@ -40,7 +40,7 @@ public class ProductServiceImpl implements ProductService {
 
         try {
             productResponses = this.feignClient.getAllProducts();
-            infos = this.inventoryServiceFeignClient.getAllProductInfos();
+            infos = this.stockerServiceFeignClient.getAllProductInfos();
         } catch (MarketplaceException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
@@ -66,12 +66,27 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> searchProduct(String searchWord) {
+    public List<ProductDto> searchProduct(String searchWord) {
+        List<Product> productResponses;
+        List<ProductDto> productDtoList = new ArrayList<>();
+        List<ProductAdditionalInformation> infos;
+
         try {
-            return this.feignClient.searchProduct(searchWord);
+            productResponses = this.feignClient.searchProduct(searchWord);
+            infos = this.stockerServiceFeignClient.getAllProductInfos();
         } catch (MarketplaceException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
+
+        for (Product response : productResponses) {
+            for (ProductAdditionalInformation info : infos) {
+                if (response.getProductSku().equals(info.getProductSku())) {
+                    productDtoList.add(this.toProductDto(response, info));
+                }
+            }
+        }
+
+        return productDtoList;
     }
 
     @Override
@@ -153,7 +168,7 @@ public class ProductServiceImpl implements ProductService {
 
         try {
             response = this.feignClient.getProductByIdAndIsFavorite(id, userId);
-            additionalInformation = this.inventoryServiceFeignClient.getASingleInfo(response.get_id());
+            additionalInformation = this.stockerServiceFeignClient.getASingleInfo(response.get_id());
 
         } catch (MarketplaceException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
@@ -211,7 +226,7 @@ public class ProductServiceImpl implements ProductService {
             imageUrl = this.uploadServiceFeignClient.uploadFile(file);
             product.setImageUrl(imageUrl);
             this.feignClient.addProduct(product);
-            this.inventoryServiceFeignClient.addInfo(info);
+            this.stockerServiceFeignClient.addInfo(info);
 
         } catch (MarketplaceException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
@@ -248,7 +263,7 @@ public class ProductServiceImpl implements ProductService {
         int min = date.getMinute();
         String locationIdFirst3Chars = this.getThreeFirstChars(locationId);
         String productFirst3Chars = this.getThreeFirstChars(productName);
-        String originFirst3Chars = this.getThreeFirstChars(originLabel) ;
+        String originFirst3Chars = this.getThreeFirstChars(originLabel);
         result = locationIdFirst3Chars + "-" + productFirst3Chars + "-" + originFirst3Chars + "-" + year + "-" + hour + "" + min;
         return result;
     }

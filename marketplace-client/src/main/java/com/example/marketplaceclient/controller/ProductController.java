@@ -29,7 +29,7 @@ public class ProductController {
     }
 
     @GetMapping("/search")
-    public List<Product> searchProducts(@RequestParam String searchWord) {
+    public List<ProductDto> searchProducts(@RequestParam String searchWord) {
         return this.productService.searchProduct(searchWord);
     }
 
@@ -82,13 +82,13 @@ public class ProductController {
     }
 
     @GetMapping("/filterProductWithLimit")
-    public List<Product> getProductsWithLimit(@RequestParam int limit){
+    public List<Product> getProductsWithLimit(@RequestParam int limit) {
         return this.productService.getProductsWithLimit(limit);
     }
 
     @PostMapping("/createProduct")
     @ResponseStatus(HttpStatus.CREATED)
-    public String createProduct(@RequestPart(name = "product") String product, @RequestPart(name = "file") MultipartFile file){
+    public String createProduct(@RequestPart(name = "product") String product, @RequestPart(name = "file") MultipartFile file) {
         return this.productService.createProduct(product, file);
     }
 

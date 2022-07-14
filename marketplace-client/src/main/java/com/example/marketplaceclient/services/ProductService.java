@@ -13,7 +13,7 @@ public interface ProductService {
 
     Product getProduct(String id);
 
-    List<Product> searchProduct(String searchWord);
+    List<ProductDto> searchProduct(String searchWord);
 
     List<Product> getRandomProducts(int size, String categoryId);
 
