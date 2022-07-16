@@ -32,10 +32,10 @@ public interface ProductServiceFeignClient {
     @DeleteMapping("/{id}")
     Product deleteProduct(@PathVariable String id) throws MarketplaceException;
 
-    @PatchMapping("/{id}")
+    @PutMapping("/{id}")
     Product editProduct(@PathVariable String id, @RequestBody CreateProduct editProduct) throws MarketplaceException;
 
-    @PatchMapping("/addFavorite/{id}")
+    @PutMapping("/addFavorite/{id}")
     void addProductToFavorite(@RequestParam String userId, @PathVariable String id) throws MarketplaceException;
 
     @GetMapping("/favorites")
