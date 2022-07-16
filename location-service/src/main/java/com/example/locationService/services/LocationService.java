@@ -16,5 +16,8 @@ public interface LocationService {
     Location editLocation(Location location, long id);
 
     void deleteLocation(long id);
+
     List<LocationResponse> getLocationsByCountryId(long id);
+
+    LocationResponse getLocationByUniqueIdentifier(String uniqueIdentifier);
 }

@@ -125,13 +125,28 @@ public class LocationServiceImpl implements LocationService {
         return existingLocations;
     }
 
+    @Override
+    public LocationResponse getLocationByUniqueIdentifier(String uniqueIdentifier) {
+        Optional<Location> locationOptional = this.repository.findLocationByUniqueIdentifier(uniqueIdentifier);
+
+        if (locationOptional.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Location doesn't exist");
+        }
+
+        try {
+            return this.toLocationResponse(locationOptional.get());
+        } catch (LocationServiceException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+    }
+
 
     private LocationResponse toLocationResponse(Location location) throws LocationServiceException {
 
         Country countryLocation = this.client.getASingleCountry(location.getCountryId());
         Category categoryLocation = this.categoryClient.getSingleCategory(location.getCategoryId());
-        ReviewResponseDto reviews = this.reviewFeignClient.getReviewsByLocation(location.getSku());
-        RoomOverviewDto rooms = this.roomFeignClient.getRoomsFromLocationId(location.getSku());
+        ReviewResponseDto reviews = this.reviewFeignClient.getReviewsByLocation(location.getUniqueIdentifier());
+        RoomOverviewDto rooms = this.roomFeignClient.getRoomsFromLocationId(location.getUniqueIdentifier());
 
         LocationResponse response = new LocationResponse();
 
@@ -146,7 +161,7 @@ public class LocationServiceImpl implements LocationService {
         response.setCategory(categoryLocation);
         response.setReviews(reviews);
         response.setAddress(location.getAddress());
-        response.setSku(location.getSku());
+        response.setUniqueIdentifier(location.getUniqueIdentifier());
         response.setStore(location.isStore());
 
 
