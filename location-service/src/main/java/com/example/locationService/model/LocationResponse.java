@@ -33,7 +33,7 @@ public class LocationResponse {
 
     private RoomOverviewDto availableRooms;
 
-    private String sku;
+    private String uniqueIdentifier;
 
     private boolean isStore;
 }
