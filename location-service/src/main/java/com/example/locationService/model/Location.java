@@ -38,7 +38,7 @@ public class Location {
     private String website;
 
     @Column(unique = true)
-    private String sku;
+    private String uniqueIdentifier;
 
     private boolean isStore;
 
@@ -54,7 +54,7 @@ public class Location {
                     String email,
                     String website,
                     boolean isStore,
-                    String sku
+                    String uniqueIdentifier
     ) {
         this.name = name;
         this.description = description;
@@ -65,7 +65,7 @@ public class Location {
         this.email = email;
         this.website = website;
         this.isStore = isStore;
-        this.sku = sku;
+        this.uniqueIdentifier = uniqueIdentifier;
     }
 
 }
