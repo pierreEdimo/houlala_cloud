@@ -11,6 +11,7 @@ import com.example.marketplaceclient.model.dto.CreateProductDto;
 import com.example.marketplaceclient.model.dto.ProductDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
@@ -271,7 +272,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public String createProduct(String createProduct, MultipartFile file) {
 
-        CreateProductDto newProduct = new CreateProductDto();
+        CreateProductDto newProduct;
         String imageUrl;
 
 
@@ -279,7 +280,7 @@ public class ProductServiceImpl implements ProductService {
             ObjectMapper objectMapper = new ObjectMapper();
             newProduct = objectMapper.readValue(createProduct, CreateProductDto.class);
         } catch (IOException io) {
-            System.out.println("Error");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, io.getMessage());
         }
 
         String productSku = this.skuGenerator(newProduct.getName(), newProduct.getOriginLabel(), newProduct.getLocationId());
