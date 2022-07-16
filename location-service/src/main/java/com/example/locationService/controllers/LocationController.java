@@ -43,4 +43,9 @@ public class LocationController {
     public List<LocationResponse> getLocationByCountryId(@PathVariable long id) {
         return this.service.getLocationsByCountryId(id);
     }
+
+    @GetMapping("/getLocationByUniqueIdentifier")
+    public LocationResponse getLocationByUniqueIdentifier(@RequestParam String uniqueIdentifier){
+        return this.service.getLocationByUniqueIdentifier(uniqueIdentifier);
+    }
 }
