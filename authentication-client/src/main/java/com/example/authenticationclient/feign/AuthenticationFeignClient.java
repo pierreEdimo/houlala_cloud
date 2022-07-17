@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
-@FeignClient(url = "https://newsplace.azurewebsites.net/api/", name = "authentication")
+@FeignClient(url = "http://localhost:5125/api", name = "authentication")
 public interface AuthenticationFeignClient {
 
     @PostMapping("/User/Register")
