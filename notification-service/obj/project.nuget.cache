@@ -1,15 +1,20 @@
 {
   "version": 2,
-  "dgSpecHash": "ClVEWESZR0ZI+kJHoRQ5yOMBHkF4mbFaYe7V8uCIWVwrjLrNvFS++on1Aw9jx494fLhOsItej2zdP3wRaPTyIw==",
+  "dgSpecHash": "LM2/PhoE6gUXHAbz5CZ+7hNWVvCFCCj4PkR2SvXKX5coGiPtYfb5alm30SJJanzCrwUVgdsh2ZcTR2ayl/s5+g==",
   "success": true,
   "projectFilePath": "/home/pierre/workspace/SpringProject/houlala_smart_project/notification-service/notification-service.csproj",
   "expectedPackageFiles": [
+    "/home/pierre/.nuget/packages/mailkit/3.3.0/mailkit.3.3.0.nupkg.sha512",
     "/home/pierre/.nuget/packages/microsoft.extensions.apidescription.server/3.0.0/microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "/home/pierre/.nuget/packages/microsoft.openapi/1.2.3/microsoft.openapi.1.2.3.nupkg.sha512",
+    "/home/pierre/.nuget/packages/mimekit/3.3.0/mimekit.3.3.0.nupkg.sha512",
+    "/home/pierre/.nuget/packages/portable.bouncycastle/1.9.0/portable.bouncycastle.1.9.0.nupkg.sha512",
     "/home/pierre/.nuget/packages/swashbuckle.aspnetcore/6.2.3/swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
     "/home/pierre/.nuget/packages/swashbuckle.aspnetcore.swagger/6.2.3/swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
     "/home/pierre/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.2.3/swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
-    "/home/pierre/.nuget/packages/swashbuckle.aspnetcore.swaggerui/6.2.3/swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512"
+    "/home/pierre/.nuget/packages/swashbuckle.aspnetcore.swaggerui/6.2.3/swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512",
+    "/home/pierre/.nuget/packages/system.formats.asn1/6.0.0/system.formats.asn1.6.0.0.nupkg.sha512",
+    "/home/pierre/.nuget/packages/system.security.cryptography.pkcs/6.0.0/system.security.cryptography.pkcs.6.0.0.nupkg.sha512"
   ],
   "logs": []
 }
