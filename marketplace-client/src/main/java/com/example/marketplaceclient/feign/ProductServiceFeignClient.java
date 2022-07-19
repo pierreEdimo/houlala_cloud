@@ -53,4 +53,7 @@ public interface ProductServiceFeignClient {
     @PostMapping("")
     Product addProduct(@RequestBody CreateProduct newProduct) throws MarketplaceException;
 
+    @GetMapping("/getProductBySku")
+    Product getProductBySku(@RequestParam(name = "sku") String productSku) throws MarketplaceException;
+
 }
