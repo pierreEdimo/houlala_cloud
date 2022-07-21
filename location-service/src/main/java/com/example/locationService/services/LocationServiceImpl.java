@@ -1,15 +1,14 @@
 package com.example.locationService.services;
 
 import com.example.locationService.exception.LocationServiceException;
-import com.example.locationService.feign.LocationCategoryFeignClient;
-import com.example.locationService.feign.LocationCountryFeignClient;
-import com.example.locationService.feign.LocationReviewFeignClient;
-import com.example.locationService.feign.LocationRoomFeignClient;
+import com.example.locationService.feign.*;
 import com.example.locationService.model.*;
 import com.example.locationService.repositories.LocationRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
@@ -30,6 +29,8 @@ public class LocationServiceImpl implements LocationService {
 
     private final LocationRoomFeignClient roomFeignClient;
 
+    private final UploadServiceFeignClient uploadServiceFeignClient;
+
     @Override
     public LocationResponse getLocation(long id) {
 
@@ -49,8 +50,19 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
-    public Location createNewLocation(Location location) {
-        return this.repository.save(location);
+    public Location createNewLocation(String location, MultipartFile file) {
+        Location newLocation;
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        try {
+            newLocation = objectMapper.readValue(location, Location.class);
+            String imageUrl = this.uploadServiceFeignClient.uploadFile(file);
+            newLocation.setImageUrl(imageUrl);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+        return this.repository.save(newLocation);
     }
 
     @Override

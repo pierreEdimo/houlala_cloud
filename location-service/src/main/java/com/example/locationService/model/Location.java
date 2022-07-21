@@ -37,6 +37,8 @@ public class Location {
 
     private String website;
 
+    private String imageUrl;
+
     @Column(unique = true)
     private String uniqueIdentifier;
 
@@ -54,7 +56,8 @@ public class Location {
                     String email,
                     String website,
                     boolean isStore,
-                    String uniqueIdentifier
+                    String uniqueIdentifier,
+                    String imageUrl
     ) {
         this.name = name;
         this.description = description;
@@ -66,6 +69,7 @@ public class Location {
         this.website = website;
         this.isStore = isStore;
         this.uniqueIdentifier = uniqueIdentifier;
+        this.imageUrl = imageUrl;
     }
 
 }
