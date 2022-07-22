@@ -15,17 +15,17 @@ public interface PostServiceFeignClient {
     @GetMapping("")
     List<Post> getAllPosts() throws MarketplaceException;
 
-    @GetMapping("/getRandomPosts")
+    @GetMapping("/random")
     List<Post> getRandomPosts(@RequestParam int size) throws MarketplaceException;
 
-    @GetMapping("/filterPostByPageId")
-    List<Post> getPostByLocationId(@RequestParam String locationId) throws MarketplaceException;
+    @GetMapping("/location/{id}")
+    List<Post> getPostByLocationId(@PathVariable("id") String locationId) throws MarketplaceException;
 
     @DeleteMapping("/{id}")
     void deletePost(@PathVariable String id) throws MarketplaceException;
 
-    @GetMapping("/getRandomPostsByPageId")
-    List<Post> getRandomPostsByLocationId(@RequestParam int size, @RequestParam String locationId) throws MarketplaceException;
+    @GetMapping("/random/location/{locationId}")
+    List<Post> getRandomPostsByLocationId(@RequestParam int size, @PathVariable String locationId) throws MarketplaceException;
 
     @PostMapping("")
     Post createPost(@RequestBody CreatePost newPost) throws MarketplaceException;
@@ -33,13 +33,13 @@ public interface PostServiceFeignClient {
     @PutMapping("/{id}")
     void editPost(@PathVariable String id, @RequestBody CreatePost editPost) throws MarketplaceException;
 
-    @PostMapping("/postWithImage")
+    @PostMapping("/image")
     Post createPostWithImage(@RequestBody CreatePost newPost, @RequestPart(name = "image") MultipartFile file) throws MarketplaceException;
 
     @GetMapping("/{id}")
     Post getPostById(@PathVariable String id, @RequestParam String userId) throws MarketplaceException;
 
-    @PutMapping("/likePost/{id}")
+    @PutMapping("/like/{id}")
     void likePost(@PathVariable String id, @RequestParam String userId) throws MarketplaceException;
 
 }

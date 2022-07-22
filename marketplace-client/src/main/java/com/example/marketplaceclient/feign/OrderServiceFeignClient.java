@@ -9,22 +9,22 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(url = "https://houlala.herokuapp.com/api/order", name = "orders")
+@FeignClient(url = "https://houlala.herokuapp.com/api/orders", name = "orders")
 public interface OrderServiceFeignClient {
 
     @GetMapping("")
     List<Order> getAllOrders() throws MarketplaceException;
 
-    @GetMapping("/cartEmails")
+    @GetMapping("/carts")
     List<Order> getNonConfirmedOrders(@RequestParam String email) throws MarketplaceException;
 
-    @GetMapping("/confirmedOrdersByLocationId")
-    List<Order> getConfirmedOrdersByLocationId(@RequestParam String locationId) throws MarketplaceException;
+    @GetMapping("/confirmed/location/{id}")
+    List<Order> getConfirmedOrdersByLocationId(@PathVariable("id") String locationId) throws MarketplaceException;
 
-    @GetMapping("/confirmedOrders")
-    List<Order> getConfirmedOrdersByLocationIdAndStatus(@RequestParam String locationId, @RequestParam String status) throws MarketplaceException;
+    @GetMapping("/confirmed/location/{id}/status/{status}")
+    List<Order> getConfirmedOrdersByLocationIdAndStatus(@PathVariable("id") String locationId, @PathVariable("status") String status) throws MarketplaceException;
 
-    @PutMapping("/sendCommandToSeller")
+    @PutMapping("/command")
     void sendCommandToSeller(@RequestBody UserInformation userInformation) throws MarketplaceException;
 
     @PostMapping("")
