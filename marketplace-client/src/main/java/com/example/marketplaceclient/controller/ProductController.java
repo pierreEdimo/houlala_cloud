@@ -33,21 +33,6 @@ public class ProductController {
         return this.productService.searchProduct(searchWord);
     }
 
-    @GetMapping("/getRandomProducts")
-    public List<ProductDto> getRandomProducts(@RequestParam int size, @RequestParam String categoryId) {
-        return this.productService.getRandomProducts(size, categoryId);
-    }
-
-    @GetMapping("/filterProductsByCategoryId")
-    public List<ProductDto> getProductsByCategoryId(@RequestParam String categoryId, @RequestParam(required = false) int limit) {
-        return this.productService.getProductsByCategoryId(categoryId, limit);
-    }
-
-    @GetMapping("/filterProductsByCategoryAndProductType")
-    public List<ProductDto> getProductsByTypeAndCategoryId(@RequestParam String categoryId, @RequestParam String productType) {
-        return this.productService.getProductsByTypeAndCategoryId(categoryId, productType);
-    }
-
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public Product deleteProduct(@PathVariable String id) {
@@ -60,7 +45,7 @@ public class ProductController {
         return this.productService.editProduct(id, newProduct);
     }
 
-    @PatchMapping("/addFavorite/{id}")
+    @PostMapping("/favorites/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void addProductToFavorite(@PathVariable String id, @RequestParam String userId) {
         this.productService.addProductToFavorite(userId, id);
@@ -71,22 +56,22 @@ public class ProductController {
         return this.productService.getFavoritesProduct(userId);
     }
 
-    @GetMapping("/filterProductByPageId")
-    public List<ProductDto> getProductByLocationId(@RequestParam String locationId, @RequestParam int limit) {
+    @GetMapping("/location/{id}")
+    public List<ProductDto> getProductByLocationId(@PathVariable("id") String locationId, @RequestParam int limit) {
         return this.productService.getProductByLocationId(locationId, limit);
     }
 
-    @GetMapping("/productId/{id}")
+    @GetMapping("/favorites/{id}")
     public ProductDto getProductByIdAndIsFavorite(@PathVariable String id, @RequestParam String userId) {
         return this.productService.getProductByIdAndIsFavorite(id, userId);
     }
 
-    @GetMapping("/filterProductWithLimit")
+    @GetMapping("/filter")
     public List<ProductDto> getProductsWithLimit(@RequestParam int limit) {
         return this.productService.getProductsWithLimit(limit);
     }
 
-    @PostMapping("/createProduct")
+    @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
     public String createProduct(@RequestPart(name = "product") String product, @RequestPart(name = "file") MultipartFile file) {
         return this.productService.createProduct(product, file);
