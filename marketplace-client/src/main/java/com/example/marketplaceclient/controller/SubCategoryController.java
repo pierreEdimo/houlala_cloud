@@ -60,4 +60,13 @@ public class SubCategoryController {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
     }
+
+    @GetMapping("/category/{id}")
+    public List<ProductType> getTypesByCategoryId(@PathVariable("id") String categoryId){
+        try {
+            return this.feignClient.getTypesByCategoryId(categoryId);
+        } catch (MarketplaceException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+    }
 }

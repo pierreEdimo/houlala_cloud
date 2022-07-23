@@ -24,4 +24,7 @@ public interface ProductTypeFeignClient {
 
     @DeleteMapping("/{id}")
     ProductType deleteProductType(@PathVariable String id) throws MarketplaceException;
+
+    @GetMapping("/categiry/{id}")
+    List<ProductType> getTypesByCategoryId(@PathVariable("id") String categoryId) throws MarketplaceException;
 }
