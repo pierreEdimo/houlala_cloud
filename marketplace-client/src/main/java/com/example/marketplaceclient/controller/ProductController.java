@@ -77,5 +77,20 @@ public class ProductController {
         return this.productService.createProduct(product, file);
     }
 
+    @GetMapping("/random/location/{id}")
+    public List<ProductDto> getRandomProductsByLocationId(@PathVariable("id") String locationId, @RequestParam int size) {
+        return this.productService.getRandomProductsByLocationId(locationId, size);
+    }
+
+    @GetMapping("/name/{name}")
+    public ProductDto getProductByNameAndIsFavorite(@PathVariable String name, @RequestParam String userId) {
+        return this.productService.getProductByNameAndIsFavorite(name, userId);
+    }
+
+    @GetMapping("type/{id}")
+    public List<ProductDto> getProductsByType(@PathVariable("id") String typeId, @RequestParam int limit) {
+        return this.productService.getProductsByType(typeId, limit);
+    }
+
 }
 

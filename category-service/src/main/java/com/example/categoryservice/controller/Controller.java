@@ -23,6 +23,16 @@ public class Controller {
         return this.service.createCategory(newCategory);
     }
 
+    @GetMapping("/store")
+    public List<Category> getCategorieStore(){
+        return this.service.getCategoryStore();
+    }
+
+    @PostMapping("/store")
+    public Category createCategorieStore(@RequestBody Category newCategory){
+        return this.service.createCategoryStore(newCategory);
+    }
+
     @GetMapping("")
     public List<Category> getAllCategories() {
         return this.service.getAllCategories();

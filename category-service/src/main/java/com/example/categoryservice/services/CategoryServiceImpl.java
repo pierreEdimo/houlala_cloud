@@ -35,14 +35,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<Category> getAllCategories() {
-        List<Category> categories = new ArrayList<>();
-        Iterable<Category> categoryIterable;
-
-        categoryIterable = this.repository.findAll();
-
-        categoryIterable.forEach(categories::add);
-
-        return categories;
+        return this.repository.findAll();
     }
 
     @Override
@@ -59,6 +52,17 @@ public class CategoryServiceImpl implements CategoryService {
         existingCategory.setThumbNail(newCategory.getThumbNail());
 
         return this.repository.save(existingCategory);
+    }
+
+    @Override
+    public List<Category> getCategoryStore() {
+        return this.repository.findCategoriesByStoreCategoryIsTrue();
+    }
+
+    @Override
+    public Category createCategoryStore(Category newCategoryStore) {
+        newCategoryStore.setStoreCategory(true);
+        return this.repository.save(newCategoryStore);
     }
 
     @Override

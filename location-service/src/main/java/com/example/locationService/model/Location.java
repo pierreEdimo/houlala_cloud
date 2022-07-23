@@ -41,9 +41,6 @@ public class Location {
 
     @Column(unique = true)
     private String uniqueIdentifier;
-
-    private boolean isStore;
-
     public Location() {
     }
 
@@ -55,7 +52,6 @@ public class Location {
                     String telephoneNumber,
                     String email,
                     String website,
-                    boolean isStore,
                     String uniqueIdentifier,
                     String imageUrl
     ) {
@@ -67,7 +63,6 @@ public class Location {
         this.telephoneNumber = telephoneNumber;
         this.email = email;
         this.website = website;
-        this.isStore = isStore;
         this.uniqueIdentifier = uniqueIdentifier;
         this.imageUrl = imageUrl;
     }

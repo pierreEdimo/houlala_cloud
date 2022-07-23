@@ -16,12 +16,14 @@ public class BootstrapData implements CommandLineRunner {
     public void run(String... args) throws Exception {
         Category newCategory = new Category(
                 "\uD83C\uDFE8",
-                "Hotel"
+                "Hotel",
+                false
         );
 
         Category newCategory2 = new Category(
                 "\uD83C\uDF7D",
-                "Restaurant"
+                "Restaurant",
+                false
         );
 
         this.repository.save(newCategory);

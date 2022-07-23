@@ -34,7 +34,7 @@ public class CategoryController {
         }
     }
 
-    @GetMapping("/filterCategoriesWithLimit")
+    @GetMapping("/filter")
     public List<Category> getCategoriesWithLimit(@RequestParam int limit) {
         try {
             return this.feignClient.getCategoriesWithLimit(limit);

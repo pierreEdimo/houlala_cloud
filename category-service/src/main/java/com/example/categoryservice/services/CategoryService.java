@@ -13,5 +13,9 @@ public interface CategoryService {
 
     Category editCategory(Category newCategory, long id);
 
+    List<Category> getCategoryStore();
+
+    Category createCategoryStore(Category newCategoryStore);
+
     void deleteCategory(long id);
 }

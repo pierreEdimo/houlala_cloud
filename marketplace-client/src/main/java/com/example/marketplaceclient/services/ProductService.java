@@ -15,12 +15,6 @@ public interface ProductService {
 
     List<ProductDto> searchProduct(String searchWord);
 
-    List<ProductDto> getRandomProducts(int size, String categoryId);
-
-    List<ProductDto> getProductsByCategoryId(String categoryId, int limit);
-
-    List<ProductDto> getProductsByTypeAndCategoryId(String categoryId, String productType);
-
     Product deleteProduct(String id);
 
     Product editProduct(String id, CreateProduct newProduct);
@@ -36,4 +30,10 @@ public interface ProductService {
     List<ProductDto> getProductsWithLimit(int limit);
 
     String createProduct(String product, MultipartFile file);
+
+    ProductDto getProductByNameAndIsFavorite(String name, String userId);
+
+    List<ProductDto> getRandomProductsByLocationId(String locationId, int size);
+
+    List<ProductDto> getProductsByType(String typeId, int limit);
 }

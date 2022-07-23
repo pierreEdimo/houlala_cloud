@@ -1,6 +1,5 @@
 package com.example.inventoryservice.controller;
 
-import com.example.inventoryservice.model.Inventory;
 import com.example.inventoryservice.model.dto.CreateInventoryDto;
 import com.example.inventoryservice.model.dto.InventoryDto;
 import com.example.inventoryservice.service.InventoryService;
@@ -11,21 +10,22 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/inventories")
 public class Controller {
 
     private final InventoryService service;
 
-    @PostMapping("/newInventory")
+    @PostMapping("")
     public InventoryDto createInventory(@RequestBody CreateInventoryDto newInventory) {
         return this.service.createInventory(newInventory);
     }
 
-    @GetMapping("/getSingleInventory/{id}")
+    @GetMapping("/{id}")
     public InventoryDto getSingleInventory(@PathVariable long id) {
         return this.service.getASingleInventory(id);
     }
 
-    @DeleteMapping("/deleteInventory/{id}")
+    @DeleteMapping("/{id}")
     public void deleteInventory(@PathVariable long id) {
         this.service.deleteInventory(id);
     }
@@ -35,12 +35,12 @@ public class Controller {
         return this.service.getAllInventories();
     }
 
-    @GetMapping("/getInventoriesFromLocationId")
-    public List<InventoryDto> getInventoriesFromLocationId(@RequestParam String locationId) {
+    @GetMapping("/location/{id}")
+    public List<InventoryDto> getInventoriesFromLocationId(@PathVariable("id") String locationId) {
         return this.service.getInventoriesFromLocationId(locationId);
     }
 
-    @PutMapping("/editInventory/{id}")
+    @PutMapping("/{id}")
     public InventoryDto editInventory(@PathVariable long id, @RequestBody CreateInventoryDto newInventory) {
         return this.service.editInventory(id, newInventory);
     }

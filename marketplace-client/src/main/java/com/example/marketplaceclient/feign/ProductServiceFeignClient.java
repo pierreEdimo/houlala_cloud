@@ -20,40 +20,41 @@ public interface ProductServiceFeignClient {
     @GetMapping("/search")
     List<Product> searchProduct(@RequestParam String searchWord) throws MarketplaceException;
 
-    @GetMapping("/getRandomProducts")
-    List<Product> getRandomProducts(@RequestParam int size, @RequestParam String categoryId) throws MarketplaceException;
-
-    @GetMapping("/filterProductsByCategoryId")
-    List<Product> getProductByCategoryId(@RequestParam String categoryId, @RequestParam(required = false) int limit) throws MarketplaceException;
-
-    @GetMapping("/filterProductsByCategoryAndProductType")
-    List<Product> getProductsByTypeAndCategoryId(@RequestParam String categoryId, @RequestParam String productType) throws MarketplaceException;
-
     @DeleteMapping("/{id}")
     Product deleteProduct(@PathVariable String id) throws MarketplaceException;
 
     @PutMapping("/{id}")
     Product editProduct(@PathVariable String id, @RequestBody CreateProduct editProduct) throws MarketplaceException;
 
-    @PutMapping("/addFavorite/{id}")
+    @PostMapping("/favorites/{id}")
     void addProductToFavorite(@RequestParam String userId, @PathVariable String id) throws MarketplaceException;
 
     @GetMapping("/favorites")
     List<Product> getFavoritesProduct(@RequestParam String userId) throws MarketplaceException;
 
-    @GetMapping("/filterProductByPageId")
-    List<Product> getProductByLocationId(@RequestParam String locationId, @RequestParam int limit) throws MarketplaceException;
+    @GetMapping("/location/{id}")
+    List<Product> getProductByLocationId(@PathVariable("id") String locationId, @RequestParam int limit) throws MarketplaceException;
 
-    @GetMapping("/productId/{id}")
+    @GetMapping("/product/{id}")
     Product getProductByIdAndIsFavorite(@PathVariable String id, @RequestParam String userId) throws MarketplaceException;
 
-    @GetMapping("/filterProductWithLimit")
-    List<Product> getProductsWithLimit(@RequestParam int limit) throws MarketplaceException;
+    @GetMapping("/limit/{limit}")
+    List<Product> getProductsWithLimit(@PathVariable int limit) throws MarketplaceException;
 
     @PostMapping("")
     Product addProduct(@RequestBody CreateProduct newProduct) throws MarketplaceException;
 
-    @GetMapping("/getProductBySku")
-    Product getProductBySku(@RequestParam(name = "sku") String productSku) throws MarketplaceException;
+    @GetMapping("/sku/{sku}")
+    Product getProductBySku(@PathVariable(name = "sku") String productSku) throws MarketplaceException;
+
+    @GetMapping("name/{name}")
+    Product getProductByNameAndIsFavorite(@PathVariable String name, @RequestParam String userId) throws MarketplaceException;
+
+    @GetMapping("random/location/{id}")
+    List<Product> getRandomProductsByLocationId(@PathVariable("id") String locationId, @RequestParam int size) throws MarketplaceException;
+
+    @GetMapping("type/{id}")
+    List<Product> getProductsByType(@PathVariable("id") String typeId, @RequestParam int limit) throws MarketplaceException;
+
 
 }

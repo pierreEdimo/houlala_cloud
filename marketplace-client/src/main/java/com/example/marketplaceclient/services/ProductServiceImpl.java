@@ -98,79 +98,6 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductDto> getRandomProducts(int size, String categoryId) {
-        List<ProductDto> productDtoList = new ArrayList<>();
-        List<Product> productList;
-        List<ProductAdditionalInformation> infos;
-
-        try {
-            productList = this.feignClient.getRandomProducts(size, categoryId);
-            infos = this.stockerServiceFeignClient.getAllProductInfos();
-        } catch (MarketplaceException e) {
-            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
-        }
-
-        for (Product response : productList) {
-            for (ProductAdditionalInformation info : infos) {
-                if (response.getProductSku().equals(info.getProductSku())) {
-                    productDtoList.add(this.toProductDto(response, info));
-                }
-            }
-        }
-
-        return productDtoList;
-    }
-
-    @Override
-    public List<ProductDto> getProductsByCategoryId(String categoryId, int limit) {
-        List<ProductDto> productDtoList = new ArrayList<>();
-        List<Product> productList;
-        List<ProductAdditionalInformation> infos;
-
-        try {
-            productList = this.feignClient.getProductByCategoryId(categoryId, limit);
-            infos = this.stockerServiceFeignClient.getAllProductInfos();
-        } catch (MarketplaceException e) {
-            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
-        }
-
-        for (Product response : productList) {
-            for (ProductAdditionalInformation info : infos) {
-                if (response.getProductSku().equalsIgnoreCase(info.getProductSku())) {
-                    productDtoList.add(this.toProductDto(response, info));
-                }
-            }
-        }
-
-        return productDtoList;
-    }
-
-    @Override
-    public List<ProductDto> getProductsByTypeAndCategoryId(String categoryId, String productType) {
-
-        List<Product> productList;
-        List<ProductDto> productDtoList = new ArrayList<>();
-        List<ProductAdditionalInformation> infos;
-
-        try {
-            productList = this.feignClient.getProductsByTypeAndCategoryId(categoryId, productType);
-            infos = this.stockerServiceFeignClient.getAllProductInfos();
-        } catch (MarketplaceException e) {
-            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
-        }
-
-        for (Product response : productList) {
-            for (ProductAdditionalInformation info : infos) {
-                if (response.getProductSku().equalsIgnoreCase(info.getProductSku())) {
-                    productDtoList.add(this.toProductDto(response, info));
-                }
-            }
-        }
-
-        return productDtoList;
-    }
-
-    @Override
     public Product deleteProduct(String id) {
         try {
             return this.feignClient.deleteProduct(id);
@@ -262,7 +189,9 @@ public class ProductServiceImpl implements ProductService {
 
         for (Product product : productList) {
             for (ProductAdditionalInformation info : informations) {
-                productDtoList.add(this.toProductDto(product, info));
+                if (product.getProductSku().equalsIgnoreCase(info.getProductSku())) {
+                    productDtoList.add(this.toProductDto(product, info));
+                }
             }
         }
 
@@ -316,6 +245,69 @@ public class ProductServiceImpl implements ProductService {
         }
 
         return "createProduct has been succesfully created";
+    }
+
+    @Override
+    public ProductDto getProductByNameAndIsFavorite(String name, String userId) {
+        Product product;
+        ProductAdditionalInformation information;
+
+        try {
+            product = this.feignClient.getProductByNameAndIsFavorite(name, userId);
+            information = this.stockerServiceFeignClient.getASingleInfo(product.get_id());
+        } catch (MarketplaceException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+
+        return this.toProductDto(product, information);
+    }
+
+    @Override
+    public List<ProductDto> getRandomProductsByLocationId(String locationId, int size) {
+        List<Product> productList;
+        List<ProductDto> productDtoList = new ArrayList<>();
+        List<ProductAdditionalInformation> informations;
+
+        try {
+            productList = this.feignClient.getRandomProductsByLocationId(locationId, size);
+            informations = this.stockerServiceFeignClient.getAllProductInfos();
+        } catch (MarketplaceException e) {
+            throw new RuntimeException(e);
+        }
+
+        for (Product product : productList) {
+            for (ProductAdditionalInformation info : informations) {
+                if (product.getProductSku().equalsIgnoreCase(info.getProductSku())) {
+                    productDtoList.add(this.toProductDto(product, info));
+                }
+            }
+        }
+
+        return productDtoList;
+    }
+
+    @Override
+    public List<ProductDto> getProductsByType(String typeId, int limit) {
+        List<Product> productList;
+        List<ProductDto> productDtoList = new ArrayList<>();
+        List<ProductAdditionalInformation> informations;
+
+        try {
+            productList = this.feignClient.getProductsByType(typeId, limit);
+            informations = this.stockerServiceFeignClient.getAllProductInfos();
+        } catch (MarketplaceException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+
+        for(Product product: productList){
+            for(ProductAdditionalInformation info: informations){
+                if(product.getProductSku().equalsIgnoreCase(info.getProductSku())){
+                    productDtoList.add(this.toProductDto(product, info));
+                }
+            }
+        }
+
+        return productDtoList;
     }
 
     private ProductDto toProductDto(Product response, ProductAdditionalInformation additionalInformation) {

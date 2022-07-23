@@ -27,8 +27,8 @@ public class PostController {
         return this.service.getRandomPosts(size);
     }
 
-    @GetMapping("/getPostFormLocationId")
-    public List<PostDto> getPostByLocationId(@RequestParam String locationId) {
+    @GetMapping("/location/{id}")
+    public List<PostDto> getPostByLocationId(@PathVariable(name = "id") String locationId) {
         return this.service.getPostsByLocationId(locationId);
     }
 
@@ -47,8 +47,8 @@ public class PostController {
         this.service.editPost(id, newPost);
     }
 
-    @GetMapping("/getRandomPostsByLocationId")
-    public List<PostDto> getPostByLocationId(@RequestParam int size, @RequestParam String locationId) {
+    @GetMapping("/random/location/{id}")
+    public List<PostDto> getPostByLocationId(@RequestParam int size, @PathVariable(name = "id") String locationId) {
         return this.service.getRandomPostsByLocationId(size, locationId);
     }
 

@@ -19,10 +19,17 @@ public class Category {
     private String thumbNail;
     private String name;
 
-    public Category(){}
+    private boolean storeCategory = false;
 
-    public Category(String thumbNail, String name){
+    public Category() {
+    }
+
+    public Category(String thumbNail,
+                    String name,
+                    boolean storeCategory
+    ) {
         this.name = name;
         this.thumbNail = thumbNail;
+        this.storeCategory = storeCategory;
     }
 }

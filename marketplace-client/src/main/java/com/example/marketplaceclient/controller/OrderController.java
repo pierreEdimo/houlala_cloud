@@ -21,22 +21,22 @@ public class OrderController {
         return this.orderService.getAllOrders();
     }
 
-    @GetMapping("/cartItems")
+    @GetMapping("/carts")
     public List<OrderDto> getCartItems(@RequestParam String email) {
         return this.orderService.getNonConfirmedOrders(email);
     }
 
-    @GetMapping("/confirmedOrdersByLocationId/")
-    public List<OrderDto> getConfirmedOrdersByLocationId(@RequestParam String locationId) {
+    @GetMapping("/orders/location/{id}")
+    public List<OrderDto> getConfirmedOrdersByLocationId(@PathVariable("id") String locationId) {
         return this.orderService.getConfirmedOrdersByLocationId(locationId);
     }
 
-    @GetMapping("/confirmedOrdersByLocationIdAndStatus")
-    public List<OrderDto> getConfirmedOrdersByLocationIdAndStatus(@RequestParam String locationId, @RequestParam String status) {
+    @GetMapping("/orders/location/{id}/status/{status}")
+    public List<OrderDto> getConfirmedOrdersByLocationIdAndStatus(@PathVariable("id") String locationId, @PathVariable String status) {
         return this.orderService.getConfirmedOrderByLocationIdAndStatus(locationId, status);
     }
 
-    @PutMapping("/confirmOrder")
+    @PutMapping("/confirm")
     public void sendOrderToSeller(@RequestBody UserInformation userInformation) {
         this.orderService.sendCommentToSeller(userInformation);
     }
