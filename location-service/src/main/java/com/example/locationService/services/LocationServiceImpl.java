@@ -76,7 +76,7 @@ public class LocationServiceImpl implements LocationService {
             try {
                 allLocations.add(this.toLocationResponse(location));
             } catch (LocationServiceException e) {
-                throw new RuntimeException(e);
+                throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
             }
         });
 
@@ -174,7 +174,7 @@ public class LocationServiceImpl implements LocationService {
         response.setReviews(reviews);
         response.setAddress(location.getAddress());
         response.setUniqueIdentifier(location.getUniqueIdentifier());
-        response.setStore(location.isStore());
+        response.setImageUrl(location.getImageUrl());
 
 
         if (response.getCategory().getName().equals("Hotel")) {

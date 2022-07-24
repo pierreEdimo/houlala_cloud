@@ -30,4 +30,7 @@ public interface CategoryServiceFeignClient {
 
     @DeleteMapping("/{id}")
     Category deleteCategory(@PathVariable String id) throws MarketplaceException;
+
+    @GetMapping("/random")
+    List<Category> getRandomCategories(@RequestParam int size) throws MarketplaceException;
 }

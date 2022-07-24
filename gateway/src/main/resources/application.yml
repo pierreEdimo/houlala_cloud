@@ -24,7 +24,7 @@ spring:
           predicates:
             Path=/marketplace/**
         - id: inventory
-          uri: lb//inventory
+          uri: lb://inventory
           predicates:
             Path=/inventory/**
 eureka:

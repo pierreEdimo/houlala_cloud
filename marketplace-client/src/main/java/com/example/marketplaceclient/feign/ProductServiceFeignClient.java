@@ -47,8 +47,8 @@ public interface ProductServiceFeignClient {
     @GetMapping("/sku/{sku}")
     Product getProductBySku(@PathVariable(name = "sku") String productSku) throws MarketplaceException;
 
-    @GetMapping("name/{name}")
-    Product getProductByNameAndIsFavorite(@PathVariable String name, @RequestParam String userId) throws MarketplaceException;
+    @GetMapping("/name/{name}")
+    Product getProductByNameAndIsFavorite(@PathVariable("name") String name, @RequestParam String userId) throws MarketplaceException;
 
     @GetMapping("random/location/{id}")
     List<Product> getRandomProductsByLocationId(@PathVariable("id") String locationId, @RequestParam int size) throws MarketplaceException;

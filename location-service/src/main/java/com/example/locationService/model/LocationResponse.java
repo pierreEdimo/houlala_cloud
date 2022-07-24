@@ -36,4 +36,6 @@ public class LocationResponse {
     private String uniqueIdentifier;
 
     private boolean isStore;
+
+    private String imageUrl;
 }

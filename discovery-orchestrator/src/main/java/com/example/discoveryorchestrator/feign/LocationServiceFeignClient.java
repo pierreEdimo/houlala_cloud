@@ -10,7 +10,7 @@ import java.util.List;
 
 @FeignClient(name = "location", path = "location")
 public interface LocationServiceFeignClient {
-    @GetMapping("/getASingleLocation/{id}")
+    @GetMapping("/{id}")
     LocationResponse getSingleLocation(@PathVariable long id) throws OrchestratorException;
 
     @GetMapping("")

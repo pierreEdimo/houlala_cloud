@@ -22,7 +22,7 @@ public class PostController {
         return this.service.getAllPosts();
     }
 
-    @GetMapping("/getRandomPosts")
+    @GetMapping("/random")
     public List<PostDto> getRandomPosts(@RequestParam int size) {
         return this.service.getRandomPosts(size);
     }

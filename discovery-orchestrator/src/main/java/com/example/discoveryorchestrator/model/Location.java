@@ -27,4 +27,8 @@ public class Location {
     private String email;
 
     private String website;
+
+    private String uniqueIdentifier;
+
+    private String imageUrl;
 }

@@ -164,7 +164,7 @@ public class ProductServiceImpl implements ProductService {
 
         try {
             response = this.feignClient.getProductByIdAndIsFavorite(id, userId);
-            additionalInformation = this.stockerServiceFeignClient.getASingleInfo(response.get_id());
+            additionalInformation = this.stockerServiceFeignClient.getASingleInfo(response.getProductSku());
 
         } catch (MarketplaceException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
@@ -254,7 +254,7 @@ public class ProductServiceImpl implements ProductService {
 
         try {
             product = this.feignClient.getProductByNameAndIsFavorite(name, userId);
-            information = this.stockerServiceFeignClient.getASingleInfo(product.get_id());
+            information = this.stockerServiceFeignClient.getASingleInfo(product.getProductSku());
         } catch (MarketplaceException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }

@@ -17,7 +17,7 @@ public class OrchestratorLocationController {
 
     private final LocationServiceFeignClient placeServiceFeignClient;
 
-    @GetMapping("/getASingleLocation/{id}")
+    @GetMapping("/{id}")
     public LocationResponse getLocation(@PathVariable long id) {
         try {
             return this.placeServiceFeignClient.getSingleLocation(id);
@@ -26,7 +26,7 @@ public class OrchestratorLocationController {
         }
     }
 
-    @PostMapping("/newLocation")
+    @PostMapping("")
     public Location createLocation(@RequestBody Location newLocation) {
         try {
             return this.placeServiceFeignClient.addNewLocation(newLocation);
@@ -35,7 +35,7 @@ public class OrchestratorLocationController {
         }
     }
 
-    @PutMapping("/editLocation/{id}")
+    @PutMapping("/{id}")
     public Location editLocation(@RequestBody Location newLocation, @PathVariable long id) {
         try {
             return this.placeServiceFeignClient.editLocation(newLocation, id);
@@ -44,7 +44,7 @@ public class OrchestratorLocationController {
         }
     }
 
-    @DeleteMapping("/deleteLocation/{id}")
+    @DeleteMapping("/{id}")
     public void deleteLocation(@PathVariable long id) {
         try {
             this.placeServiceFeignClient.deleteLocation(id);

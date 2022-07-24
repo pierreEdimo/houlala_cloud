@@ -78,4 +78,13 @@ public class CategoryController {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
     }
+
+    @GetMapping("/random")
+    public List<Category> getRandomCategories(@RequestParam int size){
+        try {
+            return this.feignClient.getRandomCategories(size);
+        } catch (MarketplaceException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+    }
 }

@@ -83,11 +83,11 @@ public class ProductController {
     }
 
     @GetMapping("/name/{name}")
-    public ProductDto getProductByNameAndIsFavorite(@PathVariable String name, @RequestParam String userId) {
+    public ProductDto getProductByNameAndIsFavorite(@PathVariable("name") String name, @RequestParam String userId) {
         return this.productService.getProductByNameAndIsFavorite(name, userId);
     }
 
-    @GetMapping("type/{id}")
+    @GetMapping("/type/{id}")
     public List<ProductDto> getProductsByType(@PathVariable("id") String typeId, @RequestParam int limit) {
         return this.productService.getProductsByType(typeId, limit);
     }
