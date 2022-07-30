@@ -9,7 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/discovery/discovery.iml" filepath="$PROJECT_DIR$/discovery/discovery.iml" />
       <module fileurl="file://$PROJECT_DIR$/discovery-orchestrator/discovery-orchestrator.iml" filepath="$PROJECT_DIR$/discovery-orchestrator/discovery-orchestrator.iml" />
       <module fileurl="file://$PROJECT_DIR$/gateway/gateway.iml" filepath="$PROJECT_DIR$/gateway/gateway.iml" />
-      <module fileurl="file://$PROJECT_DIR$/houlala_smart_project.iml" filepath="$PROJECT_DIR$/houlala_smart_project.iml" />
+      <module fileurl="file://$PROJECT_DIR$/houlala_cloud.iml" filepath="$PROJECT_DIR$/houlala_cloud.iml" />
       <module fileurl="file://$PROJECT_DIR$/inventory-service/inventory-service.iml" filepath="$PROJECT_DIR$/inventory-service/inventory-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/location-service/location-service.iml" filepath="$PROJECT_DIR$/location-service/location-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/marketplace-client/marketplace-client.iml" filepath="$PROJECT_DIR$/marketplace-client/marketplace-client.iml" />

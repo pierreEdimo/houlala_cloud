@@ -21,4 +21,10 @@ public interface LocationService {
     List<LocationResponse> getLocationsByCountryId(long id);
 
     LocationResponse getLocationByUniqueIdentifier(String uniqueIdentifier);
+
+    List<LocationResponse> getStores(Long limit);
+
+    List<LocationResponse> getStoreByCategoryId(long categoryId);
+
+    List<LocationResponse> getLocations();
 }

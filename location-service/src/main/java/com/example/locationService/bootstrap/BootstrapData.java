@@ -126,10 +126,12 @@ public class BootstrapData implements CommandLineRunner {
         location.setAvailabilityList(availabilityList);
 
         Location location2 = new Location(
-                "MuterHotel",
-                "lorem ipsum in dolor in somor",
+                "Houlala",
+                "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt" +
+                        " ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores " +
+                        "et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
                 1L,
-                1L,
+                3L,
                 address2,
                 "12345678",
                 "muster@gmail.com",
@@ -139,6 +141,7 @@ public class BootstrapData implements CommandLineRunner {
         );
 
         location2.setAvailabilityList(availabilityList2);
+        location2.setStore(true);
 
 
         this.repository.save(location);

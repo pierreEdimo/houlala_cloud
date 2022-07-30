@@ -12,8 +12,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -130,7 +132,7 @@ public class LocationServiceImpl implements LocationService {
             try {
                 existingLocations.add(this.toLocationResponse(location));
             } catch (LocationServiceException e) {
-                throw new RuntimeException(e);
+                throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
             }
         }
 
@@ -150,6 +152,63 @@ public class LocationServiceImpl implements LocationService {
         } catch (LocationServiceException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
+    }
+
+    @Override
+    public List<LocationResponse> getStores(Long limit) {
+        List<LocationResponse> locationResponses = new ArrayList<>();
+
+        List<Location> locationsList = this.repository.getStore();
+
+
+        locationsList.forEach(location -> {
+            try {
+                locationResponses.add(this.toLocationResponse(location));
+            } catch (LocationServiceException e) {
+                throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+            }
+        });
+
+        if (limit != null) {
+            Collections.shuffle(locationResponses);
+            return locationResponses.stream().limit(limit).collect(Collectors.toList());
+        } else {
+            return locationResponses;
+        }
+    }
+
+    @Override
+    public List<LocationResponse> getStoreByCategoryId(long categoryId){
+        List<LocationResponse> locationResponses = new ArrayList<>();
+
+        List<Location> locationList = this.repository.getStoreByCategoryId(categoryId);
+
+        locationList.forEach(location -> {
+            try {
+                locationResponses.add(this.toLocationResponse(location));
+            } catch (LocationServiceException e){
+                throw new ResponseStatusException(e.getHttpStatus(),e.getMessage());
+            }
+        });
+
+        return locationResponses;
+    }
+
+    @Override
+    public List<LocationResponse> getLocations() {
+        List<LocationResponse> locationResponses = new ArrayList<>();
+
+        List<Location> locationList = this.repository.getLocations();
+
+        locationList.forEach(location -> {
+            try {
+                locationResponses.add(this.toLocationResponse(location));
+            } catch (LocationServiceException e) {
+                throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+            }
+        });
+
+        return locationResponses;
     }
 
 

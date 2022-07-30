@@ -1,5 +1,6 @@
 package com.example.locationService.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,6 +18,7 @@ public class Location {
 
     private String name;
 
+    @Column(length = 100000)
     private String description;
 
     private long countryId;
@@ -38,6 +40,9 @@ public class Location {
     private String website;
 
     private String imageUrl;
+
+    @JsonIgnore
+    private boolean isStore = false;
 
     @Column(unique = true)
     private String uniqueIdentifier;

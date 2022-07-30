@@ -10,18 +10,24 @@ import java.util.List;
 @FeignClient(name = "category", path = "category")
 public interface CategoryServiceFeignClient {
 
-    @GetMapping("/getSingleCategory/{id}")
+    @GetMapping("/{id}")
     Category getCategory(@PathVariable long id) throws OrchestratorException;
 
-    @PostMapping("/newCategory")
+    @PostMapping("")
     Category createCategory(@RequestBody Category newCategory) throws OrchestratorException;
 
     @GetMapping("")
     List<Category> getAllCategories() throws OrchestratorException;
 
-    @PutMapping("/editCategory/{id}")
+    @PutMapping("/{id}")
     Category editCategory(@RequestBody Category newCategory, @PathVariable long id) throws OrchestratorException;
 
-    @DeleteMapping("/deleteCategory/{id}")
+    @DeleteMapping("/{id}")
     void deleteCategory(@PathVariable long id) throws OrchestratorException;
+
+    @GetMapping("/store")
+    List<Category> getCategoriesStore() throws OrchestratorException;
+
+    @PostMapping("/store")
+    Category createCategorieStore(@RequestBody Category newCategory) throws OrchestratorException;
 }

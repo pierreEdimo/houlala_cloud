@@ -13,12 +13,12 @@ public class Controller {
 
     private final CategoryService service;
 
-    @GetMapping("/getSingleCategory/{id}")
+    @GetMapping("/{id}")
     public Category getCategory(@PathVariable long id){
         return this.service.getCategory(id);
     }
 
-    @PostMapping("/newCategory")
+    @PostMapping("")
     public Category createCategory(@RequestBody Category newCategory){
         return this.service.createCategory(newCategory);
     }
@@ -38,12 +38,12 @@ public class Controller {
         return this.service.getAllCategories();
     }
 
-    @PutMapping("/editCategory/{id}")
+    @PutMapping("/{id}")
     public Category editCategory(@RequestBody Category newCategory, @PathVariable long id){
         return this.service.editCategory(newCategory, id);
     }
 
-    @DeleteMapping("/deleteCategory/{id}")
+    @DeleteMapping("/{id}")
     public void deleteCategory(@PathVariable long id){
         this.service.deleteCategory(id);
     }

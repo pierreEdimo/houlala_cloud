@@ -26,7 +26,21 @@ public class BootstrapData implements CommandLineRunner {
                 false
         );
 
+        Category newCategory3 = new Category(
+                "\uD83C\uDF4C",
+                "Fruits & Legumes",
+                true
+        );
+
+        Category newCategory4 = new Category(
+                "\uD83D\uDCBB",
+                "Electroniques",
+                true
+        );
+
         this.repository.save(newCategory);
         this.repository.save(newCategory2);
+        this.repository.save(newCategory3);
+        this.repository.save(newCategory4);
     }
 }

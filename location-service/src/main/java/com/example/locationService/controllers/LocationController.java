@@ -49,4 +49,14 @@ public class LocationController {
     public LocationResponse getLocationByUniqueIdentifier(@PathVariable("uid") String uniqueIdentifier) {
         return this.service.getLocationByUniqueIdentifier(uniqueIdentifier);
     }
+
+    @GetMapping("/store")
+    public List<LocationResponse> getAllStores(@RequestParam(required = false) Long limit) {
+        return this.service.getStores(limit);
+    }
+
+    @GetMapping("/category/{id}")
+    public List<LocationResponse> getStoresByCategoryId(@PathVariable("id") long categoryId){
+        return this.service.getStoreByCategoryId(categoryId);
+    }
 }

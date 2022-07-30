@@ -16,7 +16,7 @@ public class OrchestratorCategoryController {
 
     private final CategoryServiceFeignClient feignClient;
 
-    @PostMapping("/newCategory")
+    @PostMapping("")
     public Category createCategory(@RequestBody Category newCategory) {
         try {
             return this.feignClient.createCategory(newCategory);
@@ -25,7 +25,7 @@ public class OrchestratorCategoryController {
         }
     }
 
-    @DeleteMapping("/deleteCategory/{id}")
+    @DeleteMapping("/{id}")
     public void deleteCategory(@PathVariable long id) {
         try {
             this.feignClient.deleteCategory(id);
@@ -43,7 +43,7 @@ public class OrchestratorCategoryController {
         }
     }
 
-    @PutMapping("/editCategory/{id}")
+    @PutMapping("/{id}")
     public Category editCategory(@RequestBody Category newCategory, @PathVariable long id) {
         try {
             return this.feignClient.editCategory(newCategory, id);
@@ -52,12 +52,30 @@ public class OrchestratorCategoryController {
         }
     }
 
-    @GetMapping("/getSingleCategory/{id}")
+    @GetMapping("/{id}")
     public Category getSingleCategory(@PathVariable long id) {
         try {
             return this.feignClient.getCategory(id);
         } catch (OrchestratorException ex) {
             throw new ResponseStatusException(ex.getHttpStatus(), ex.getMessage());
+        }
+    }
+
+    @GetMapping("/store")
+    public List<Category> getCategoriesStore() {
+        try {
+            return this.feignClient.getCategoriesStore();
+        } catch (OrchestratorException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+    }
+
+    @PostMapping("/store")
+    public Category createCategorieStore(@RequestBody Category newCategory) {
+        try {
+            return this.feignClient.createCategorieStore(newCategory);
+        } catch (OrchestratorException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
     }
 }

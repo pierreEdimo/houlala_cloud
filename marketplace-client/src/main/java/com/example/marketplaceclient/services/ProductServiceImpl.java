@@ -299,9 +299,33 @@ public class ProductServiceImpl implements ProductService {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
 
-        for(Product product: productList){
-            for(ProductAdditionalInformation info: informations){
-                if(product.getProductSku().equalsIgnoreCase(info.getProductSku())){
+        for (Product product : productList) {
+            for (ProductAdditionalInformation info : informations) {
+                if (product.getProductSku().equalsIgnoreCase(info.getProductSku())) {
+                    productDtoList.add(this.toProductDto(product, info));
+                }
+            }
+        }
+
+        return productDtoList;
+    }
+
+    @Override
+    public List<ProductDto> getRandomProductsByCategoryId(String categoryId, int size) {
+        List<Product> productList;
+        List<ProductDto> productDtoList = new ArrayList<>();
+        List<ProductAdditionalInformation> informations;
+
+        try {
+            productList = this.feignClient.getProductsByCategoryId(categoryId, size);
+            informations = this.stockerServiceFeignClient.getAllProductInfos();
+        } catch (MarketplaceException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+
+        for (Product product : productList) {
+            for (ProductAdditionalInformation info : informations) {
+                if (product.getProductSku().equalsIgnoreCase(info.getProductSku())) {
                     productDtoList.add(this.toProductDto(product, info));
                 }
             }

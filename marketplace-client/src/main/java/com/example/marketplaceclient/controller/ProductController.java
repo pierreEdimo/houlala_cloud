@@ -92,5 +92,10 @@ public class ProductController {
         return this.productService.getProductsByType(typeId, limit);
     }
 
+    @GetMapping("/random/category/{id}")
+    public List<ProductDto> getRandomProductsByCategoryId(@PathVariable("id") String categoryId, @RequestParam int size){
+        return this.productService.getRandomProductsByCategoryId(categoryId, size);
+    }
+
 }
 

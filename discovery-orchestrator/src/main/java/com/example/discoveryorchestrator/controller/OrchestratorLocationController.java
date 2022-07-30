@@ -61,4 +61,23 @@ public class OrchestratorLocationController {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
     }
+
+    @GetMapping("/store")
+    public List<LocationResponse> getAllStores(@RequestParam(required = false) Long limit) {
+
+        try {
+            return this.placeServiceFeignClient.getAllStores(limit);
+        } catch (OrchestratorException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+    }
+
+    @GetMapping("/category/{id}")
+    public List<LocationResponse> getStoresByCategoryId(@PathVariable("id") long categoryId) {
+        try {
+            return this.placeServiceFeignClient.getStoreByCategoryId(categoryId);
+        } catch (OrchestratorException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+    }
 }

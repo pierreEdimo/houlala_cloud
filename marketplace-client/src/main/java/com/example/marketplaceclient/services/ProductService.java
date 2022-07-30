@@ -36,4 +36,6 @@ public interface ProductService {
     List<ProductDto> getRandomProductsByLocationId(String locationId, int size);
 
     List<ProductDto> getProductsByType(String typeId, int limit);
+
+    List<ProductDto> getRandomProductsByCategoryId(String categoryId, int size);
 }

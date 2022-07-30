@@ -56,5 +56,8 @@ public interface ProductServiceFeignClient {
     @GetMapping("type/{id}")
     List<Product> getProductsByType(@PathVariable("id") String typeId, @RequestParam int limit) throws MarketplaceException;
 
+    @GetMapping("/random/category/{id}")
+    List<Product> getProductsByCategoryId(@PathVariable("id") String categoryId, @RequestParam int size) throws MarketplaceException;
+
 
 }
