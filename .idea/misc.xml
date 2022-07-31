@@ -18,6 +18,7 @@
         <option value="$PROJECT_DIR$/inventory-service/pom.xml" />
         <option value="$PROJECT_DIR$/upload-service/pom.xml" />
         <option value="$PROJECT_DIR$/stock-service/pom.xml" />
+        <option value="$PROJECT_DIR$/notification-client/pom.xml" />
       </list>
     </option>
   </component>

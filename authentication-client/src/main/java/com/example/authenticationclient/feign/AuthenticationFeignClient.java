@@ -7,12 +7,13 @@ import com.example.authenticationclient.model.UserDto;
 import com.example.authenticationclient.model.UserToken;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
-@FeignClient(url = "http://localhost:5125/api", name = "authentication")
+@FeignClient(url = "https://houlala-login.herokuapp.com/api/", name = "authentication")
 public interface AuthenticationFeignClient {
 
     @PostMapping("/User/Register")
@@ -27,8 +28,11 @@ public interface AuthenticationFeignClient {
     @GetMapping("/User/GetAllUsers")
     List<UserDto> getAllUsers() throws AuthenticationException;
 
-    @PostMapping("/User/renewPassWord                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ")
+    @PostMapping("/User/renewPassWord")
     UserToken renewPassWord(@RequestBody Login model) throws AuthenticationException;
+
+    @GetMapping("/User/GetUserByEmail/{Email}")
+    UserDto getSingleUserByEmail(@PathVariable("Email") String email) throws AuthenticationException;
 
 
 }

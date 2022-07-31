@@ -13,6 +13,7 @@
       <module fileurl="file://$PROJECT_DIR$/inventory-service/inventory-service.iml" filepath="$PROJECT_DIR$/inventory-service/inventory-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/location-service/location-service.iml" filepath="$PROJECT_DIR$/location-service/location-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/marketplace-client/marketplace-client.iml" filepath="$PROJECT_DIR$/marketplace-client/marketplace-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/notification-client/notification-client.iml" filepath="$PROJECT_DIR$/notification-client/notification-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/review-service/review-service.iml" filepath="$PROJECT_DIR$/review-service/review-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/room-service/room-service.iml" filepath="$PROJECT_DIR$/room-service/room-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/stock-service/stock-service.iml" filepath="$PROJECT_DIR$/stock-service/stock-service.iml" />

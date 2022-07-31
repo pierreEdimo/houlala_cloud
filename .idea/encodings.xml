@@ -15,6 +15,7 @@
     <file url="file://$PROJECT_DIR$/location-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/marketplace-client/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/message-sender/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/notification-client/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/offer-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/review-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/room-service/src/main/java" charset="UTF-8" />

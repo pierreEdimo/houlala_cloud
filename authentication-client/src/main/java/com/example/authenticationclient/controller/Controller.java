@@ -7,6 +7,7 @@ import com.example.authenticationclient.model.Register;
 import com.example.authenticationclient.model.UserDto;
 import com.example.authenticationclient.model.UserToken;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -20,6 +21,7 @@ public class Controller {
     private final AuthenticationFeignClient feignClient;
 
     @PostMapping("/register")
+    @ResponseStatus(HttpStatus.CREATED)
     public UserToken register(@RequestBody Register model) {
         try {
             return this.feignClient.register(model);
@@ -29,6 +31,7 @@ public class Controller {
     }
 
     @PostMapping("/login")
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public UserToken login(@RequestBody Login model) {
         try {
             return this.feignClient.login(model);
@@ -59,6 +62,15 @@ public class Controller {
     public UserToken renewPassWord(@RequestBody Login model) {
         try {
             return this.feignClient.renewPassWord(model);
+        } catch (AuthenticationException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+    }
+
+    @GetMapping("/{email}")
+    public UserDto getSingleUserByEmail(@PathVariable String email) {
+        try {
+            return this.feignClient.getSingleUserByEmail(email);
         } catch (AuthenticationException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }

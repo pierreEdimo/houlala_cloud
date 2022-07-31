@@ -5,8 +5,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class UserToken {
-    private UserDto user;
-
+public class
+UserToken {
+    private String userName;
+    private String email;
+    private String userId;
     private String token;
 }
