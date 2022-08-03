@@ -2,7 +2,9 @@ package com.example.marketplaceclient.controller;
 
 import com.example.marketplaceclient.exception.MarketplaceException;
 import com.example.marketplaceclient.feign.CommentServiceFeignClient;
+import com.example.marketplaceclient.feign.LoginFeignClient;
 import com.example.marketplaceclient.model.Comment;
+import com.example.marketplaceclient.model.User;
 import com.example.marketplaceclient.model.dto.CommentDto;
 import com.example.marketplaceclient.model.dto.CreateCommentDto;
 import com.example.marketplaceclient.model.dto.EditCommentDto;
@@ -21,6 +23,8 @@ public class CommentController {
 
     private final CommentServiceFeignClient feignClient;
 
+    private final LoginFeignClient loginFeignClient;
+
     @GetMapping("")
     public List<CommentDto> getCommentFromPost(@RequestParam String postId) {
         List<Comment> commentList;
@@ -38,21 +42,18 @@ public class CommentController {
     }
 
     @PostMapping("/{id}")
-    public CommentDto addCommentToPost(@PathVariable(name = "id") String postId, @RequestBody CreateCommentDto newComment) {
-        Comment comment;
-
+    public void addCommentToPost(@PathVariable(name = "id") String postId, @RequestBody CreateCommentDto newComment) {
         try {
-            comment = this.feignClient.addComment(postId, newComment);
+            this.feignClient.addComment(postId, newComment);
         } catch (MarketplaceException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
 
-        return this.toCommentDto(comment);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public CommentDto editComment(@PathVariable(name = "id") String id, @RequestParam String commentId, @RequestBody EditCommentDto newComment){
+    public CommentDto editComment(@PathVariable(name = "id") String id, @RequestParam String commentId, @RequestBody EditCommentDto newComment) {
         Comment comment;
 
         try {
@@ -66,7 +67,7 @@ public class CommentController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteComment(@PathVariable(name="id") String postId, @RequestParam String commentId ){
+    public void deleteComment(@PathVariable(name = "id") String postId, @RequestParam String commentId) {
         try {
             this.feignClient.deleteComment(postId, commentId);
         } catch (MarketplaceException e) {
@@ -75,11 +76,19 @@ public class CommentController {
     }
 
     private CommentDto toCommentDto(Comment comment) {
+        User author;
+        try {
+            author = this.loginFeignClient.getSingleUserByEmail(comment.getUserId());
+        } catch (MarketplaceException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
         return new CommentDto(
                 comment.getContent(),
                 comment.get_id(),
                 comment.getCreatedAt(),
-                comment.getUpdatedAt()
+                comment.getUpdatedAt(),
+                comment.getPostId(),
+                author
         );
     }
 }

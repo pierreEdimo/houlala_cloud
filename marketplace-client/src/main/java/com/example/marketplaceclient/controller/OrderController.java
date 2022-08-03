@@ -5,6 +5,7 @@ import com.example.marketplaceclient.model.dto.CreateOrderDto;
 import com.example.marketplaceclient.model.dto.OrderDto;
 import com.example.marketplaceclient.services.OrderService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,11 +38,13 @@ public class OrderController {
     }
 
     @PutMapping("/confirm")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void sendOrderToSeller(@RequestBody UserInformation userInformation) {
         this.orderService.sendCommentToSeller(userInformation);
     }
 
     @PostMapping("")
+    @ResponseStatus(HttpStatus.CREATED)
     public OrderDto addProductToCartItems(@RequestBody CreateOrderDto newOrder) {
         return this.orderService.addProductToCartItems(newOrder);
     }

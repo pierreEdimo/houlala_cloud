@@ -27,4 +27,6 @@ public interface LocationService {
     List<LocationResponse> getStoreByCategoryId(long categoryId);
 
     List<LocationResponse> getLocations();
+
+    List<LocationResponse> filterStoreByName(String searchWord);
 }

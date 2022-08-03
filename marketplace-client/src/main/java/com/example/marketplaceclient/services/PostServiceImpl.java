@@ -2,6 +2,7 @@ package com.example.marketplaceclient.services;
 
 import com.example.marketplaceclient.exception.MarketplaceException;
 import com.example.marketplaceclient.feign.LocationServiceFeignClient;
+import com.example.marketplaceclient.feign.LoginFeignClient;
 import com.example.marketplaceclient.feign.PostServiceFeignClient;
 import com.example.marketplaceclient.model.Location;
 import com.example.marketplaceclient.model.Post;

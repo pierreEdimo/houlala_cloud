@@ -18,7 +18,7 @@ public interface ProductServiceFeignClient {
     Product getSingleProduct(@PathVariable String id) throws MarketplaceException;
 
     @GetMapping("/search")
-    List<Product> searchProduct(@RequestParam String searchWord) throws MarketplaceException;
+    List<Product> searchProduct(@RequestParam(value = "searchword") String searchWord) throws MarketplaceException;
 
     @DeleteMapping("/{id}")
     Product deleteProduct(@PathVariable String id) throws MarketplaceException;

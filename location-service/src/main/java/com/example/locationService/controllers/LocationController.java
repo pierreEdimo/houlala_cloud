@@ -59,4 +59,9 @@ public class LocationController {
     public List<LocationResponse> getStoresByCategoryId(@PathVariable("id") long categoryId){
         return this.service.getStoreByCategoryId(categoryId);
     }
+
+    @GetMapping("/search")
+    public List<LocationResponse> filterStoreByName(@RequestParam String word){
+        return this.service.filterStoreByName(word);
+    }
 }

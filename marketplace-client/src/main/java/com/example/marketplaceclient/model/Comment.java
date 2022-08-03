@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Comment {
-    private String user;
+    private String userId;
     private String content;
     private String postId;
     private String _id;

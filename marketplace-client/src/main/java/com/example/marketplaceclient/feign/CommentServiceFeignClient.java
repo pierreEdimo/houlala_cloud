@@ -12,16 +12,16 @@ import java.util.List;
 @FeignClient(url ="https://houlala.herokuapp.com/api/posts", name = "comments")
 public interface CommentServiceFeignClient {
 
-    @GetMapping("/getCommentFromPost")
+    @GetMapping("/comment/filter")
     List<Comment> getCommentFromPostId(@RequestParam String postId) throws MarketplaceException;
 
-    @PutMapping("/addComment/{id}")
-    Comment addComment(@PathVariable(name = "id") String postId, @RequestBody CreateCommentDto newComment) throws MarketplaceException;
+    @PostMapping("/comment/{id}")
+    void addComment(@PathVariable(name = "id") String postId, @RequestBody CreateCommentDto newComment) throws MarketplaceException;
 
-    @PutMapping("/editCommentFromPost/{id}")
+    @PutMapping("/comment/{id}")
     Comment editComment(@PathVariable(name = "id") String postId, @RequestParam String commentId, @RequestBody EditCommentDto newComment) throws MarketplaceException;
 
-    @PutMapping("/deleteComment/{id}")
+    @DeleteMapping("/comment/{id}")
     void deleteComment(@PathVariable(name ="id") String postId, @RequestParam String commentId) throws MarketplaceException;
 
 }

@@ -80,4 +80,13 @@ public class OrchestratorLocationController {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
     }
+
+    @GetMapping("/search")
+    public List<LocationResponse> filterStoreByName(@RequestParam String word) {
+        try {
+            return this.placeServiceFeignClient.filterStoreByName(word);
+        } catch (OrchestratorException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+    }
 }

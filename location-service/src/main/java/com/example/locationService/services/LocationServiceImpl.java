@@ -178,7 +178,7 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
-    public List<LocationResponse> getStoreByCategoryId(long categoryId){
+    public List<LocationResponse> getStoreByCategoryId(long categoryId) {
         List<LocationResponse> locationResponses = new ArrayList<>();
 
         List<Location> locationList = this.repository.getStoreByCategoryId(categoryId);
@@ -186,8 +186,8 @@ public class LocationServiceImpl implements LocationService {
         locationList.forEach(location -> {
             try {
                 locationResponses.add(this.toLocationResponse(location));
-            } catch (LocationServiceException e){
-                throw new ResponseStatusException(e.getHttpStatus(),e.getMessage());
+            } catch (LocationServiceException e) {
+                throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
             }
         });
 
@@ -201,6 +201,23 @@ public class LocationServiceImpl implements LocationService {
         List<Location> locationList = this.repository.getLocations();
 
         locationList.forEach(location -> {
+            try {
+                locationResponses.add(this.toLocationResponse(location));
+            } catch (LocationServiceException e) {
+                throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+            }
+        });
+
+        return locationResponses;
+    }
+
+    @Override
+    public List<LocationResponse> filterStoreByName(String searchWord) {
+        List<LocationResponse> locationResponses = new ArrayList<>();
+
+        List<Location> locations = this.repository.getStore().stream().filter(location -> location.getName().toLowerCase().contains(searchWord.toLowerCase())).toList();
+
+        locations.forEach(location -> {
             try {
                 locationResponses.add(this.toLocationResponse(location));
             } catch (LocationServiceException e) {

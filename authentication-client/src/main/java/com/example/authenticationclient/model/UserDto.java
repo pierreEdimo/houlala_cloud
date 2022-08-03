@@ -13,4 +13,18 @@ public class UserDto {
 
     private String userName;
 
+    private String name;
+
+    private String streetName;
+
+    private String poBox;
+
+    private String city;
+
+    private String country;
+
+    private String houseNumber;
+
+    private String phoneNumber;
+
 }

@@ -30,4 +30,7 @@ public interface LocationServiceFeignClient {
 
     @GetMapping("/category/{id}")
     List<LocationResponse> getStoreByCategoryId(@PathVariable("id") long categoryId) throws OrchestratorException;
+
+    @GetMapping("/search")
+    List<LocationResponse> filterStoreByName(@RequestParam String word) throws OrchestratorException;
 }
