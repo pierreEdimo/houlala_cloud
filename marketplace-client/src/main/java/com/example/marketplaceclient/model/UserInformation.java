@@ -8,9 +8,11 @@ import lombok.Setter;
 public class UserInformation {
     private String name;
     private String email;
-    private String telephoneNumber;
+    private String phoneNumber;
     private String city;
     private String country;
     private String streetName;
     private String poBox;
+    private String userName;
+    private String houseNumber;
 }
