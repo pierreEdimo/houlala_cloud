@@ -18,6 +18,9 @@ public interface OrderServiceFeignClient {
     @GetMapping("/carts")
     List<Order> getNonConfirmedOrders(@RequestParam String email) throws MarketplaceException;
 
+    @GetMapping("/confirmed")
+    List<Order> getConfirmedOrders(@RequestParam String email) throws MarketplaceException;
+
     @GetMapping("/confirmed/location/{id}")
     List<Order> getConfirmedOrdersByLocationId(@PathVariable("id") String locationId) throws MarketplaceException;
 

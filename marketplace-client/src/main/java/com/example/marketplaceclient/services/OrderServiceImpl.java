@@ -143,6 +143,22 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
+    @Override
+    public List<OrderDto> getConfirmedOrders(String email) {
+        List<OrderDto> orderDtoList = new ArrayList<>();
+        List<Order> orders;
+
+        try {
+            orders = this.feignClient.getConfirmedOrders(email);
+        } catch (MarketplaceException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+
+        orders.forEach(order -> orderDtoList.add(this.toOrderDto(order)));
+
+        return orderDtoList;
+    }
+
     private OrderDto toOrderDto(Order order) {
         List<CartItemDto> cartItemDtos = new ArrayList<>();
         Location location = new Location();

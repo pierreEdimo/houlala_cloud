@@ -58,4 +58,10 @@ public class OrderController {
     public void cancelOrder(@PathVariable String id) {
         this.orderService.cancelOrder(id);
     }
+
+
+    @GetMapping("/confirmed")
+    public List<OrderDto> getConfirmedByEmail(@RequestParam String email){
+        return this.orderService.getConfirmedOrders(email);
+    }
 }

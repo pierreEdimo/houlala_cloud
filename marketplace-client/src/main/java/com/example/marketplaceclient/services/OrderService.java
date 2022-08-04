@@ -24,4 +24,6 @@ public interface OrderService {
     void updateOrder(String id);
 
     void cancelOrder(String id);
+
+    List<OrderDto> getConfirmedOrders(String email);
 }
