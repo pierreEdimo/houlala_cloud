@@ -1,15 +1,9 @@
 package com.example.authenticationclient.feign;
 
 import com.example.authenticationclient.exception.AuthenticationException;
-import com.example.authenticationclient.model.Login;
-import com.example.authenticationclient.model.Register;
-import com.example.authenticationclient.model.UserDto;
-import com.example.authenticationclient.model.UserToken;
+import com.example.authenticationclient.model.*;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,6 +27,12 @@ public interface AuthenticationFeignClient {
 
     @GetMapping("/User/GetUserByEmail/{Email}")
     UserDto getSingleUserByEmail(@PathVariable("Email") String email) throws AuthenticationException;
+
+    @PutMapping("/User/editUserInformations")
+    UserToken editPersonalData(@RequestBody PersonalData model) throws AuthenticationException;
+
+    @PutMapping("/User/editAddressInformations")
+    UserToken editAddressInfos(@RequestBody AddressData model) throws AuthenticationException;
 
 
 }

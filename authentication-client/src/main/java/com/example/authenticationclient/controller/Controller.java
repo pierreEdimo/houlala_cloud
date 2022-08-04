@@ -2,10 +2,7 @@ package com.example.authenticationclient.controller;
 
 import com.example.authenticationclient.exception.AuthenticationException;
 import com.example.authenticationclient.feign.AuthenticationFeignClient;
-import com.example.authenticationclient.model.Login;
-import com.example.authenticationclient.model.Register;
-import com.example.authenticationclient.model.UserDto;
-import com.example.authenticationclient.model.UserToken;
+import com.example.authenticationclient.model.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -71,6 +68,24 @@ public class Controller {
     public UserDto getSingleUserByEmail(@PathVariable String email) {
         try {
             return this.feignClient.getSingleUserByEmail(email);
+        } catch (AuthenticationException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+    }
+
+    @PutMapping("/singleUser")
+    public UserToken editPeronalData(@RequestBody PersonalData model) {
+        try {
+            return this.feignClient.editPersonalData(model);
+        } catch (AuthenticationException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+    }
+
+    @PutMapping("/address")
+    public UserToken editAddressData(@RequestBody AddressData model){
+        try {
+            return this.feignClient.editAddressInfos(model);
         } catch (AuthenticationException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
