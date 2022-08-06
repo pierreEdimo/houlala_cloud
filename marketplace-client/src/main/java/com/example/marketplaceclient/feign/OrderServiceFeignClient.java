@@ -38,4 +38,13 @@ public interface OrderServiceFeignClient {
 
     @PutMapping("/cancel/{id}")
     Order cancelOrder(@PathVariable(name = "id") String id) throws MarketplaceException;
+
+    @PutMapping("/cartItems/increase/{id}/sku/{sku}")
+    void increaseQuantity(@PathVariable String id, @PathVariable String sku) throws MarketplaceException;
+
+    @PutMapping("/cartItems/decrease/{id}/sku/{sku}")
+    void decreaseQuantity(@PathVariable String id, @PathVariable String sku) throws MarketplaceException;
+
+    @DeleteMapping("cartItems/{id}/sku/{sku}")
+    void deleteItemFromOrder(@PathVariable String id, @PathVariable String sku) throws MarketplaceException;
 }

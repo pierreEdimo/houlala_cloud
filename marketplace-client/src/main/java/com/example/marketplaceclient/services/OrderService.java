@@ -25,4 +25,10 @@ public interface OrderService {
     void cancelOrder(String id);
 
     List<OrderDto> getConfirmedOrders(String userId);
+
+    void increaseQuantity(String id, String sku);
+
+    void decreaseQuantity(String id, String sku);
+
+    void deleteItemFromOrder(String id, String sku);
 }

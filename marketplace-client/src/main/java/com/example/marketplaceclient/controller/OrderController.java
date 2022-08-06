@@ -61,7 +61,22 @@ public class OrderController {
 
 
     @GetMapping("/confirmed")
-    public List<OrderDto> getConfirmedByEmail(@RequestParam String userId){
+    public List<OrderDto> getConfirmedByUserId(@RequestParam String userId) {
         return this.orderService.getConfirmedOrders(userId);
+    }
+
+    @PutMapping("/cartItems/increase/{id}/sku/{sku}")
+    public void increaseQuantity(@PathVariable String id, @PathVariable String sku) {
+        this.orderService.increaseQuantity(id, sku);
+    }
+
+    @PutMapping("/cartItems/decrease/{id}/sku/{sku}")
+    public void decreaseQuantity(@PathVariable String id, @PathVariable String sku) {
+        this.orderService.decreaseQuantity(id, sku);
+    }
+
+    @DeleteMapping("/cartItems/{id}sku/{sku}")
+    public void deleItemFromOrder(@PathVariable String id, @PathVariable String sku) {
+        this.orderService.deleteItemFromOrder(id, sku);
     }
 }

@@ -159,6 +159,33 @@ public class OrderServiceImpl implements OrderService {
         return orderDtoList;
     }
 
+    @Override
+    public void increaseQuantity(String id, String sku) {
+        try {
+            this.feignClient.increaseQuantity(id, sku);
+        } catch (MarketplaceException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+    }
+
+    @Override
+    public void decreaseQuantity(String id, String sku) {
+        try {
+            this.feignClient.decreaseQuantity(id,sku);
+        } catch (MarketplaceException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+    }
+
+    @Override
+    public void deleteItemFromOrder(String id, String sku) {
+        try {
+            this.feignClient.deleteItemFromOrder(id, sku);
+        } catch (MarketplaceException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+    }
+
     private OrderDto toOrderDto(Order order) {
         List<CartItemDto> cartItemDtos = new ArrayList<>();
         Location location = new Location();
