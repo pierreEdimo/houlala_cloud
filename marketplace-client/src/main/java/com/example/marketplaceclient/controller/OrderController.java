@@ -23,8 +23,8 @@ public class OrderController {
     }
 
     @GetMapping("/carts")
-    public List<OrderDto> getCartItems(@RequestParam String email) {
-        return this.orderService.getNonConfirmedOrders(email);
+    public List<OrderDto> getCartItems(@RequestParam String userId) {
+        return this.orderService.getNonConfirmedOrders(userId);
     }
 
     @GetMapping("/orders/location/{id}")
@@ -61,7 +61,7 @@ public class OrderController {
 
 
     @GetMapping("/confirmed")
-    public List<OrderDto> getConfirmedByEmail(@RequestParam String email){
-        return this.orderService.getConfirmedOrders(email);
+    public List<OrderDto> getConfirmedByEmail(@RequestParam String userId){
+        return this.orderService.getConfirmedOrders(userId);
     }
 }

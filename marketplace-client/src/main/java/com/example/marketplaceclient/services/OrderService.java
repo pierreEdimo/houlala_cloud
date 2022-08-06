@@ -3,7 +3,6 @@ package com.example.marketplaceclient.services;
 import com.example.marketplaceclient.model.UserInformation;
 import com.example.marketplaceclient.model.dto.CreateOrderDto;
 import com.example.marketplaceclient.model.dto.OrderDto;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -11,9 +10,9 @@ public interface OrderService {
 
     List<OrderDto> getAllOrders();
 
-    List<OrderDto> getNonConfirmedOrders(@RequestParam String email);
+    List<OrderDto> getNonConfirmedOrders(String userId);
 
-    List<OrderDto> getConfirmedOrdersByLocationId(@RequestParam String locationId);
+    List<OrderDto> getConfirmedOrdersByLocationId(String locationId);
 
     List<OrderDto> getConfirmedOrderByLocationIdAndStatus(String locationId, String status);
 
@@ -25,5 +24,5 @@ public interface OrderService {
 
     void cancelOrder(String id);
 
-    List<OrderDto> getConfirmedOrders(String email);
+    List<OrderDto> getConfirmedOrders(String userId);
 }

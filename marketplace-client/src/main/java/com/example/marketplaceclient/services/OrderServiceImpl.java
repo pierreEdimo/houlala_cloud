@@ -44,12 +44,12 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderDto> getNonConfirmedOrders(String email) {
+    public List<OrderDto> getNonConfirmedOrders(String userId) {
         List<Order> orderList;
         List<OrderDto> orderDtoList = new ArrayList<>();
 
         try {
-            orderList = this.feignClient.getNonConfirmedOrders(email);
+            orderList = this.feignClient.getNonConfirmedOrders(userId);
         } catch (MarketplaceException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
@@ -144,12 +144,12 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderDto> getConfirmedOrders(String email) {
+    public List<OrderDto> getConfirmedOrders(String userId) {
         List<OrderDto> orderDtoList = new ArrayList<>();
         List<Order> orders;
 
         try {
-            orders = this.feignClient.getConfirmedOrders(email);
+            orders = this.feignClient.getConfirmedOrders(userId);
         } catch (MarketplaceException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }

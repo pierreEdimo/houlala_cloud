@@ -28,11 +28,12 @@ public interface AuthenticationFeignClient {
     @GetMapping("/User/GetUserByEmail/{Email}")
     UserDto getSingleUserByEmail(@PathVariable("Email") String email) throws AuthenticationException;
 
-    @PutMapping("/User/editUserInformations")
-    UserToken editPersonalData(@RequestBody PersonalData model) throws AuthenticationException;
+    @PutMapping("/User/editUserInformations/{Email}")
+    UserToken editPersonalData(@RequestBody PersonalData model, @PathVariable("Email") String email) throws AuthenticationException;
 
-    @PutMapping("/User/editAddressInformations")
-    UserToken editAddressInfos(@RequestBody AddressData model) throws AuthenticationException;
+    @PutMapping("/User/editAddressInformations/{Email}")
+    UserToken editAddressInfos(@RequestBody AddressData model, @PathVariable("Email") String email) throws AuthenticationException;
 
-
+    @PutMapping("/User/editUserEmail/{Email}")
+    UserToken editEmail(@RequestBody EditEmail model, @PathVariable("Email") String email) throws AuthenticationException;
 }

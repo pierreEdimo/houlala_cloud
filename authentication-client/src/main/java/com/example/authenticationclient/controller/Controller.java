@@ -73,19 +73,28 @@ public class Controller {
         }
     }
 
-    @PutMapping("/singleUser")
-    public UserToken editPeronalData(@RequestBody PersonalData model) {
+    @PutMapping("/singleUser/{email}")
+    public UserToken editPeronalData(@RequestBody PersonalData model, @PathVariable String email) {
         try {
-            return this.feignClient.editPersonalData(model);
+            return this.feignClient.editPersonalData(model, email);
         } catch (AuthenticationException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
     }
 
-    @PutMapping("/address")
-    public UserToken editAddressData(@RequestBody AddressData model){
+    @PutMapping("/address/{email}")
+    public UserToken editAddressData(@RequestBody AddressData model, @PathVariable String email){
         try {
-            return this.feignClient.editAddressInfos(model);
+            return this.feignClient.editAddressInfos(model, email);
+        } catch (AuthenticationException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+    }
+
+    @PutMapping("/email/{email}")
+    public UserToken editUserEmail(@RequestBody EditEmail model, @PathVariable String email){
+        try {
+            return this.feignClient.editEmail(model, email);
         } catch (AuthenticationException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }

@@ -9,7 +9,7 @@ import java.util.List;
 @Getter
 @Setter
 public class CreateOrderDto {
-    private String email;
+    private String userId;
     private String locationId;
     private List<CartItem> cartItems;
 }
