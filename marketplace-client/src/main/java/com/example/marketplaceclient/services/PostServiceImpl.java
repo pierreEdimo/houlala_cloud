@@ -164,7 +164,8 @@ public class PostServiceImpl implements PostService {
         List<PostDto> postDtoList = new ArrayList<>();
 
         try {
-            posts = this.feignClient.getAllPosts().stream().filter(post -> post.getContent().contains(word)).toList();
+            posts = this.feignClient.getAllPosts().stream().filter(post -> post.getContent()
+                    .toLowerCase().contains(word.toLowerCase())).toList();
         } catch (MarketplaceException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
