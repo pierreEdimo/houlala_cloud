@@ -9,5 +9,5 @@ public class CartItem {
     private String productSku;
     private int quantity;
     private int price;
-    private String _id;
+    private int initialPrice;
 }

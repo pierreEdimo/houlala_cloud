@@ -45,6 +45,6 @@ public interface OrderServiceFeignClient {
     @PutMapping("/cartItems/decrease/{id}/sku/{sku}")
     void decreaseQuantity(@PathVariable String id, @PathVariable String sku) throws MarketplaceException;
 
-    @DeleteMapping("cartItems/{id}/sku/{sku}")
+    @DeleteMapping("/cartItems/{id}/sku/{sku}")
     void deleteItemFromOrder(@PathVariable String id, @PathVariable String sku) throws MarketplaceException;
 }

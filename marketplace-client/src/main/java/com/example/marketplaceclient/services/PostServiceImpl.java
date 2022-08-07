@@ -2,7 +2,6 @@ package com.example.marketplaceclient.services;
 
 import com.example.marketplaceclient.exception.MarketplaceException;
 import com.example.marketplaceclient.feign.LocationServiceFeignClient;
-import com.example.marketplaceclient.feign.LoginFeignClient;
 import com.example.marketplaceclient.feign.PostServiceFeignClient;
 import com.example.marketplaceclient.model.Location;
 import com.example.marketplaceclient.model.Post;
@@ -157,6 +156,21 @@ public class PostServiceImpl implements PostService {
         } catch (MarketplaceException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
+    }
+
+    @Override
+    public List<PostDto> filterPost(String word) {
+        List<Post> posts;
+        List<PostDto> postDtoList = new ArrayList<>();
+
+        try {
+            posts = this.feignClient.getAllPosts().stream().filter(post -> post.getContent().contains(word)).toList();
+        } catch (MarketplaceException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+
+        posts.forEach(post -> postDtoList.add(this.toPostDto(post)));
+        return postDtoList;
     }
 
 

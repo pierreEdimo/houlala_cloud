@@ -28,4 +28,6 @@ public interface PostService {
 
     void likePost(String id, String userId);
 
+    List<PostDto> filterPost(String word);
+
 }

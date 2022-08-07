@@ -67,4 +67,9 @@ public class PostController {
         this.service.likePost(id, userId);
     }
 
+    @GetMapping("/search")
+    public List<PostDto> filterPosts(@RequestParam String word){
+        return this.service.filterPost(word);
+    }
+
 }

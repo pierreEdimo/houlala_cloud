@@ -75,8 +75,8 @@ public class OrderController {
         this.orderService.decreaseQuantity(id, sku);
     }
 
-    @DeleteMapping("/cartItems/{id}sku/{sku}")
-    public void deleItemFromOrder(@PathVariable String id, @PathVariable String sku) {
+    @DeleteMapping("/cartItems/{id}/sku/{sku}")
+    public void deleteItemFromOrder(@PathVariable String id, @PathVariable String sku) {
         this.orderService.deleteItemFromOrder(id, sku);
     }
 }
