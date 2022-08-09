@@ -17,4 +17,5 @@ public class Order {
     private String updatedAt;
     private List<CartItem> cartItems;
     private UserInformation userInformation;
+    private String deliveryDate;
 }

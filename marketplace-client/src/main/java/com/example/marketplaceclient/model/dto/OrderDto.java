@@ -20,8 +20,8 @@ public class OrderDto {
     private List<CartItemDto> cartItems;
     private int totalQuantity;
     private int totalPrice;
-
     private Location location;
+    private String deliveryDate;
 
     public OrderDto(
             String _id,
@@ -32,7 +32,8 @@ public class OrderDto {
             String updatedAt,
             UserInformation userInformation,
             List<CartItemDto> cartItems,
-            Location location
+            Location location,
+            String deliveryDate
     ) {
         this._id = _id;
         this.status = status;
@@ -45,6 +46,7 @@ public class OrderDto {
         this.calculateToTalQuantity();
         this.calculateTotalPrice();
         this.location = location;
+        this.deliveryDate = deliveryDate;
     }
 
     private void calculateToTalQuantity() {

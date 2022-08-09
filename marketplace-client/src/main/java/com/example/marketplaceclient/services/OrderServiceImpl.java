@@ -234,7 +234,8 @@ public class OrderServiceImpl implements OrderService {
                 order.getUpdatedAt(),
                 order.getUserInformation(),
                 cartItemDtos,
-                location
+                location,
+                order.getDeliveryDate()
         );
     }
 }
