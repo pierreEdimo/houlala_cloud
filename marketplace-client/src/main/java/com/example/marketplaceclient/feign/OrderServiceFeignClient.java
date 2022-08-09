@@ -4,6 +4,7 @@ import com.example.marketplaceclient.exception.MarketplaceException;
 import com.example.marketplaceclient.model.Order;
 import com.example.marketplaceclient.model.UserInformation;
 import com.example.marketplaceclient.model.dto.CreateOrderDto;
+import com.example.marketplaceclient.model.dto.CreateUnregisteredUserOrder;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,4 +48,7 @@ public interface OrderServiceFeignClient {
 
     @DeleteMapping("/cartItems/{id}/sku/{sku}")
     void deleteItemFromOrder(@PathVariable String id, @PathVariable String sku) throws MarketplaceException;
+
+    @PostMapping("/unregistereds")
+    Order sendOrderFromUnregisteredUsers(@RequestBody CreateUnregisteredUserOrder order) throws MarketplaceException;
 }

@@ -2,6 +2,7 @@ package com.example.marketplaceclient.controller;
 
 import com.example.marketplaceclient.model.UserInformation;
 import com.example.marketplaceclient.model.dto.CreateOrderDto;
+import com.example.marketplaceclient.model.dto.CreateUnregisteredUserOrder;
 import com.example.marketplaceclient.model.dto.OrderDto;
 import com.example.marketplaceclient.services.OrderService;
 import lombok.RequiredArgsConstructor;
@@ -78,5 +79,11 @@ public class OrderController {
     @DeleteMapping("/cartItems/{id}/sku/{sku}")
     public void deleteItemFromOrder(@PathVariable String id, @PathVariable String sku) {
         this.orderService.deleteItemFromOrder(id, sku);
+    }
+
+    @PostMapping("/unregistereds")
+    @ResponseStatus(HttpStatus.CREATED)
+    public OrderDto sendUnregisteredUserOrder(@RequestBody CreateUnregisteredUserOrder order){
+        return this.orderService.sendUnregisteredUserOrder(order);
     }
 }

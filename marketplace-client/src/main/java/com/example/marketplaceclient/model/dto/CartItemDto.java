@@ -12,17 +12,21 @@ public class CartItemDto {
     private int quantity;
     private int price;
 
+    private int initialPrice;
+
     public CartItemDto(
             String productSku,
             String product,
             String imageUrl,
             int quantity,
-            int price
+            int price,
+            int initialPrice
     ){
         this.productSku = productSku;
         this.product = product;
         this.imageUrl = imageUrl;
         this.quantity = quantity;
         this.price = price;
+        this.initialPrice = initialPrice;
     }
 }

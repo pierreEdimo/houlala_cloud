@@ -1,10 +1,12 @@
 package com.example.marketplaceclient.services;
 
 import com.example.marketplaceclient.exception.MarketplaceException;
+import com.example.marketplaceclient.feign.LocationServiceFeignClient;
 import com.example.marketplaceclient.feign.StockServiceFeignClient;
 import com.example.marketplaceclient.feign.ProductServiceFeignClient;
 import com.example.marketplaceclient.feign.UploadServiceFeignClient;
 import com.example.marketplaceclient.model.CreateProduct;
+import com.example.marketplaceclient.model.Location;
 import com.example.marketplaceclient.model.ProductAdditionalInformation;
 import com.example.marketplaceclient.model.Product;
 import com.example.marketplaceclient.model.dto.CreateProductDto;
@@ -31,6 +33,8 @@ public class ProductServiceImpl implements ProductService {
     private final StockServiceFeignClient stockerServiceFeignClient;
 
     private final UploadServiceFeignClient uploadServiceFeignClient;
+
+    private final LocationServiceFeignClient locationFeignClient;
 
 
     @Override
@@ -335,6 +339,15 @@ public class ProductServiceImpl implements ProductService {
     }
 
     private ProductDto toProductDto(Product response, ProductAdditionalInformation additionalInformation) {
+
+        Location location;
+
+        try {
+            location = this.locationFeignClient.getALocation(response.getLocationId());
+        } catch (MarketplaceException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+
         return new ProductDto(
                 response.get_id(),
                 response.getName(),
@@ -348,7 +361,8 @@ public class ProductServiceImpl implements ProductService {
                 additionalInformation.getArrivalDate(),
                 additionalInformation.getBuyingPrice(),
                 additionalInformation.getOriginLabel(),
-                additionalInformation.getProductSku()
+                additionalInformation.getProductSku(),
+                location.getName()
         );
     }
 

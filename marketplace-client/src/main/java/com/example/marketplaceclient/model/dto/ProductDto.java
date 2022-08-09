@@ -21,8 +21,9 @@ public class ProductDto {
     private LocalDate arrivalDate;
     private double buyingPrice;
     private String originLabel;
-
     private String productSku;
+
+    private String locationName;
 
     public ProductDto(
             String id,
@@ -37,7 +38,8 @@ public class ProductDto {
             LocalDate arrivalDate,
             double buyingPrice,
             Origin originLabel,
-            String productSku
+            String productSku,
+            String locationName
     ){
         this._id = id;
         this.name = name;
@@ -52,5 +54,6 @@ public class ProductDto {
         this.buyingPrice = buyingPrice;
         this.originLabel = originLabel.getLabel();
         this.productSku = productSku;
+        this.locationName = locationName;
     }
 }

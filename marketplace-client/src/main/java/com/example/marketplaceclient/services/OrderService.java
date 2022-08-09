@@ -2,6 +2,7 @@ package com.example.marketplaceclient.services;
 
 import com.example.marketplaceclient.model.UserInformation;
 import com.example.marketplaceclient.model.dto.CreateOrderDto;
+import com.example.marketplaceclient.model.dto.CreateUnregisteredUserOrder;
 import com.example.marketplaceclient.model.dto.OrderDto;
 
 import java.util.List;
@@ -31,4 +32,6 @@ public interface OrderService {
     void decreaseQuantity(String id, String sku);
 
     void deleteItemFromOrder(String id, String sku);
+
+    OrderDto sendUnregisteredUserOrder(CreateUnregisteredUserOrder order);
 }

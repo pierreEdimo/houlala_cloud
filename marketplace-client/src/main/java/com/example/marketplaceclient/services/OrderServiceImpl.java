@@ -8,6 +8,7 @@ import com.example.marketplaceclient.feign.StockServiceFeignClient;
 import com.example.marketplaceclient.model.*;
 import com.example.marketplaceclient.model.dto.CartItemDto;
 import com.example.marketplaceclient.model.dto.CreateOrderDto;
+import com.example.marketplaceclient.model.dto.CreateUnregisteredUserOrder;
 import com.example.marketplaceclient.model.dto.OrderDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -186,6 +187,19 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
+    @Override
+    public OrderDto sendUnregisteredUserOrder(CreateUnregisteredUserOrder order) {
+        Order createdOrder;
+
+        try {
+            createdOrder =  this.feignClient.sendOrderFromUnregisteredUsers(order);
+        } catch (MarketplaceException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+
+        return this.toOrderDto(createdOrder);
+    }
+
     private OrderDto toOrderDto(Order order) {
         List<CartItemDto> cartItemDtos = new ArrayList<>();
         Location location = new Location();
@@ -201,7 +215,8 @@ public class OrderServiceImpl implements OrderService {
                         product.getName(),
                         product.getImageUrl(),
                         item.getQuantity(),
-                        item.getPrice()
+                        item.getPrice(),
+                        item.getInitialPrice()
                 );
 
                 cartItemDtos.add(cartItemDto);
