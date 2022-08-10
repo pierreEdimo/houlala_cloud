@@ -12,6 +12,7 @@
         <module name="location-service" />
         <module name="review-service" />
         <module name="marketplace-client" />
+        <module name="upload-client" />
         <module name="authentication-client" />
         <module name="notification-client" />
         <module name="inventory-service" />
@@ -44,6 +45,7 @@
       <module name="review-service" target="17" />
       <module name="room-service" target="17" />
       <module name="stock-service" target="17" />
+      <module name="upload-client" target="17" />
       <module name="upload-service" target="17" />
     </bytecodeTargetLevel>
   </component>
@@ -68,6 +70,7 @@
       <module name="review-service" options="-parameters" />
       <module name="room-service" options="-parameters" />
       <module name="stock-service" options="-parameters" />
+      <module name="upload-client" options="-parameters" />
       <module name="upload-service" options="-parameters" />
     </option>
   </component>
