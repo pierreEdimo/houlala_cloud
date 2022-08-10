@@ -3,13 +3,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Houlala</title>
 </head>
-   <body>
-      <p>
-          Test de l'envoie de l'Email
-
-      </p>
-   <p>
-       ${to}
-   </p>
-   </body>
+<body>
+<p>
+    Test de l'envoie de l'Email
+</p>
+<p>
+    ${to}
+</p>
+</body>
 </html>

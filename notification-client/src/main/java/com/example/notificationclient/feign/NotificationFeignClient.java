@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @FeignClient(url = "https://houlala-notification.herokuapp.com/api/", name = "notifications")
 public interface NotificationFeignClient {
-
-
     @PostMapping("/Email")
     String sendEmailNotification(@RequestBody NotificationModel model) throws NotificationException;
 }

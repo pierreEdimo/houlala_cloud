@@ -12,9 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
 import java.io.IOException;
-import java.util.Map;
 
-import static com.fasterxml.jackson.databind.type.LogicalType.Map;
 
 @Service
 @RequiredArgsConstructor
