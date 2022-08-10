@@ -1,0 +1,8 @@
+server:
+  port: 8091
+  servlet:
+    context-path: /notificatiion
+
+spring:
+  application:
+    name: notification
