@@ -1,11 +1,12 @@
 package com.example.categoryservice.services;
 
 import com.example.categoryservice.model.Category;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 public interface CategoryService {
-    Category createCategory(Category newCategory);
+    Category createCategory(String newCategory, MultipartFile image);
 
     Category getCategory(long id);
 
@@ -15,7 +16,7 @@ public interface CategoryService {
 
     List<Category> getCategoryStore();
 
-    Category createCategoryStore(Category newCategoryStore);
+    Category createCategoryStore(String newCategory, MultipartFile image);
 
     void deleteCategory(long id);
 }

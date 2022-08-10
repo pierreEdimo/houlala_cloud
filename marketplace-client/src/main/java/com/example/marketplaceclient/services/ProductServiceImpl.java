@@ -203,7 +203,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public String createProduct(String createProduct, MultipartFile file) {
+    public String createProduct(String createProduct, MultipartFile image) {
 
         CreateProductDto newProduct;
         String imageUrl;
@@ -239,7 +239,7 @@ public class ProductServiceImpl implements ProductService {
 
         try {
 
-            imageUrl = this.uploadServiceFeignClient.uploadFile(file);
+            imageUrl = this.uploadServiceFeignClient.uploadImage(image);
             product.setImageUrl(imageUrl);
             this.feignClient.addProduct(product);
             this.stockerServiceFeignClient.addInfo(info);

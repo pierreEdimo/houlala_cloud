@@ -52,14 +52,14 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
-    public Location createNewLocation(String location, MultipartFile file) {
+    public Location createNewLocation(String location, MultipartFile image) {
         Location newLocation;
 
         ObjectMapper objectMapper = new ObjectMapper();
 
         try {
             newLocation = objectMapper.readValue(location, Location.class);
-            String imageUrl = this.uploadServiceFeignClient.uploadFile(file);
+            String imageUrl = this.uploadServiceFeignClient.uploadImage(image);
             newLocation.setImageUrl(imageUrl);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());

@@ -4,6 +4,7 @@ import com.example.categoryservice.model.Category;
 import com.example.categoryservice.services.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -14,23 +15,23 @@ public class Controller {
     private final CategoryService service;
 
     @GetMapping("/{id}")
-    public Category getCategory(@PathVariable long id){
+    public Category getCategory(@PathVariable long id) {
         return this.service.getCategory(id);
     }
 
     @PostMapping("")
-    public Category createCategory(@RequestBody Category newCategory){
-        return this.service.createCategory(newCategory);
+    public Category createCategory(@RequestPart String newCategory, @RequestPart MultipartFile image) {
+        return this.service.createCategory(newCategory, image);
     }
 
     @GetMapping("/store")
-    public List<Category> getCategorieStore(){
+    public List<Category> getCategorieStore() {
         return this.service.getCategoryStore();
     }
 
     @PostMapping("/store")
-    public Category createCategorieStore(@RequestBody Category newCategory){
-        return this.service.createCategoryStore(newCategory);
+    public Category createCategorieStore(@RequestPart String newCategory, @RequestPart MultipartFile image) {
+        return this.service.createCategoryStore(newCategory, image);
     }
 
     @GetMapping("")
@@ -39,12 +40,12 @@ public class Controller {
     }
 
     @PutMapping("/{id}")
-    public Category editCategory(@RequestBody Category newCategory, @PathVariable long id){
+    public Category editCategory(@RequestBody Category newCategory, @PathVariable long id) {
         return this.service.editCategory(newCategory, id);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteCategory(@PathVariable long id){
+    public void deleteCategory(@PathVariable long id) {
         this.service.deleteCategory(id);
     }
 }

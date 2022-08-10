@@ -73,8 +73,8 @@ public class ProductController {
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    public String createProduct(@RequestPart(name = "product") String product, @RequestPart(name = "file") MultipartFile file) {
-        return this.productService.createProduct(product, file);
+    public String createProduct(@RequestPart(name = "product") String product, @RequestPart MultipartFile image) {
+        return this.productService.createProduct(product, image);
     }
 
     @GetMapping("/random/location/{id}")

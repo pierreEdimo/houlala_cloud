@@ -29,7 +29,7 @@ public interface ProductService {
 
     List<ProductDto> getProductsWithLimit(int limit);
 
-    String createProduct(String product, MultipartFile file);
+    String createProduct(String product, MultipartFile image);
 
     ProductDto getProductByNameAndIsFavorite(String name, String userId);
 

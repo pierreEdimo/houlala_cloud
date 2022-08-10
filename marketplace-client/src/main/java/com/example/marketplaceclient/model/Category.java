@@ -13,4 +13,15 @@ public class Category {
     private String imageUrl;
 
     private String description;
+
+    public Category() {
+    }
+
+    public Category(
+            String name,
+            String description
+    ) {
+        this.name = name;
+        this.description = description;
+    }
 }

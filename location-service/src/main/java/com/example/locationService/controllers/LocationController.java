@@ -21,8 +21,8 @@ public class LocationController {
     }
 
     @PostMapping("")
-    public Location addLocation(@RequestPart(name = "location") String newLocation, @RequestPart(name = "file") MultipartFile file) {
-        return this.service.createNewLocation(newLocation, file);
+    public Location addLocation(@RequestPart(name = "location") String newLocation, @RequestPart MultipartFile image) {
+        return this.service.createNewLocation(newLocation, image);
     }
 
     @GetMapping("")
@@ -56,12 +56,12 @@ public class LocationController {
     }
 
     @GetMapping("/category/{id}")
-    public List<LocationResponse> getStoresByCategoryId(@PathVariable("id") long categoryId){
+    public List<LocationResponse> getStoresByCategoryId(@PathVariable("id") long categoryId) {
         return this.service.getStoreByCategoryId(categoryId);
     }
 
     @GetMapping("/search")
-    public List<LocationResponse> filterStoreByName(@RequestParam String word){
+    public List<LocationResponse> filterStoreByName(@RequestParam String word) {
         return this.service.filterStoreByName(word);
     }
 }
