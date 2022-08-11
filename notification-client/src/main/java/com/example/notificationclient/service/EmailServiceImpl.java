@@ -25,7 +25,7 @@ public class EmailServiceImpl implements EmailService {
     @Override
     public void sendEmail(SendEmaildto newEmailDto) {
         try {
-            Template template = configuration.getTemplate("test.template.ftl");
+            Template template = configuration.getTemplate("order.template.ftl");
             String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, newEmailDto);
 
             NotificationModel model = new NotificationModel(
