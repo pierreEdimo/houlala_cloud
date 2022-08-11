@@ -12,13 +12,11 @@
         <module name="location-service" />
         <module name="review-service" />
         <module name="marketplace-client" />
-        <module name="upload-client" />
         <module name="authentication-client" />
         <module name="notification-client" />
         <module name="inventory-service" />
         <module name="discovery" />
         <module name="room-service" />
-        <module name="upload-service" />
         <module name="api" />
         <module name="country-service" />
         <module name="gateway" />

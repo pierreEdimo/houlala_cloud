@@ -2,7 +2,6 @@ package com.example.locationService.services;
 
 import com.example.locationService.model.Location;
 import com.example.locationService.model.LocationResponse;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -10,7 +9,7 @@ public interface LocationService {
 
     LocationResponse getLocation(long id);
 
-    Location createNewLocation(String location, MultipartFile file);
+    Location createNewLocation(Location location);
 
     List<LocationResponse> getAllLocations();
 

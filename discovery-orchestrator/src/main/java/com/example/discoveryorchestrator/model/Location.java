@@ -31,4 +31,26 @@ public class Location {
     private String uniqueIdentifier;
 
     private String imageUrl;
+
+    public Location(){}
+
+    public Location(
+            String name,
+            String description,
+            long countryId,
+            long categoryId,
+            Address address,
+            String telephoneNumber,
+            String email,
+            String website
+    ){
+        this.name = name;
+        this.description = description;
+        this.countryId = countryId;
+        this.categoryId = categoryId;
+        this.address = address;
+        this.telephoneNumber = telephoneNumber;
+        this.email = email;
+        this.website = website;
+    }
 }

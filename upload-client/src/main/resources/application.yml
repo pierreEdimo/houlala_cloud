@@ -1,8 +1,0 @@
-server:
-  port: 8092
-  servlet:
-    context-path: /storage
-
-spring:
-  application:
-    name: storage

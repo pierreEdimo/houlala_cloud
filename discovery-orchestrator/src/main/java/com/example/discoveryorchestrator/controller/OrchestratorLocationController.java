@@ -2,12 +2,19 @@ package com.example.discoveryorchestrator.controller;
 
 import com.example.discoveryorchestrator.exception.OrchestratorException;
 import com.example.discoveryorchestrator.feign.LocationServiceFeignClient;
+import com.example.discoveryorchestrator.feign.UploadServiceFeignClient;
 import com.example.discoveryorchestrator.model.Location;
 import com.example.discoveryorchestrator.model.LocationResponse;
+import com.example.discoveryorchestrator.model.dto.CreateLocationDto;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -16,6 +23,8 @@ import java.util.List;
 public class OrchestratorLocationController {
 
     private final LocationServiceFeignClient placeServiceFeignClient;
+
+    private final UploadServiceFeignClient uploadServiceFeignClient;
 
     @GetMapping("/{id}")
     public LocationResponse getLocation(@PathVariable long id) {
@@ -27,12 +36,40 @@ public class OrchestratorLocationController {
     }
 
     @PostMapping("")
-    public Location createLocation(@RequestBody Location newLocation) {
+    public Location createLocation(@RequestPart String newLocation, @RequestPart MultipartFile image) {
+        CreateLocationDto createLocationDto;
+        String imageUrl;
+        String uniqueIdentifier;
+
         try {
-            return this.placeServiceFeignClient.addNewLocation(newLocation);
+            ObjectMapper objectMapper = new ObjectMapper();
+            createLocationDto = objectMapper.readValue(newLocation, CreateLocationDto.class);
+        } catch (IOException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+
+        Location location = new Location(
+                createLocationDto.getName(),
+                createLocationDto.getDescription(),
+                createLocationDto.getCountryId(),
+                createLocationDto.getCategoryId(),
+                createLocationDto.getAddress(),
+                createLocationDto.getTelephoneNumber(),
+                createLocationDto.getEmail(),
+                createLocationDto.getWebsite()
+        );
+
+        uniqueIdentifier = this.skuGenerator(createLocationDto.getName());
+
+        try {
+            imageUrl = this.uploadServiceFeignClient.uploadImage(image);
+            location.setImageUrl(imageUrl);
+            location.setUniqueIdentifier(uniqueIdentifier);
+            return this.placeServiceFeignClient.addNewLocation(location);
         } catch (OrchestratorException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
+
     }
 
     @PutMapping("/{id}")
@@ -88,5 +125,20 @@ public class OrchestratorLocationController {
         } catch (OrchestratorException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
+    }
+
+
+    private String skuGenerator(String name) {
+        String result;
+        LocalDateTime date = LocalDateTime.now();
+        int year = date.getYear();
+        int day = date.getDayOfMonth();
+        String productFirst3Chars = this.getThreeFirstChars(name);
+        result = productFirst3Chars + "" + year + "" + day;
+        return result;
+    }
+
+    private String getThreeFirstChars(String str) {
+        return str.substring(0, Math.min(str.length(), 3));
     }
 }

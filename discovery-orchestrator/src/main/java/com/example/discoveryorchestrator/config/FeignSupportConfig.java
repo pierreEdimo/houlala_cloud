@@ -1,4 +1,4 @@
-package com.example.uploadclient.config;
+package com.example.discoveryorchestrator.config;
 
 import feign.form.spring.SpringFormEncoder;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
@@ -12,3 +12,4 @@ public class FeignSupportConfig {
         return new SpringFormEncoder(new SpringEncoder(() -> new HttpMessageConverters(new RestTemplate().getMessageConverters())));
     }
 }
+

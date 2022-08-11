@@ -5,7 +5,6 @@ import com.example.locationService.model.LocationResponse;
 import com.example.locationService.services.LocationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -21,8 +20,8 @@ public class LocationController {
     }
 
     @PostMapping("")
-    public Location addLocation(@RequestPart(name = "location") String newLocation, @RequestPart MultipartFile image) {
-        return this.service.createNewLocation(newLocation, image);
+    public Location addLocation(@RequestBody  Location newLocation) {
+        return this.service.createNewLocation(newLocation);
     }
 
     @GetMapping("")
