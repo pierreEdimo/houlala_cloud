@@ -1,7 +1,7 @@
 server:
   port: 8091
   servlet:
-    context-path: /notificatiion
+    context-path: /notification
 
 spring:
   application:

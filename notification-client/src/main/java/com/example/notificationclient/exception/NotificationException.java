@@ -1,7 +1,7 @@
 package com.example.notificationclient.exception;
 
 import lombok.Getter;
-import org.apache.http.HttpStatus;
+import org.springframework.http.HttpStatus;
 
 public class NotificationException extends Exception {
     @Getter
