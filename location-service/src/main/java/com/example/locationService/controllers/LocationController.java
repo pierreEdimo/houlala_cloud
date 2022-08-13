@@ -63,4 +63,9 @@ public class LocationController {
     public List<LocationResponse> filterStoreByName(@RequestParam String word) {
         return this.service.filterStoreByName(word);
     }
+
+    @GetMapping("/{userId}")
+    public LocationResponse getLocationByUserId(@PathVariable String userId){
+        return this.service.getLocationByOwnerId(userId);
+    }
 }

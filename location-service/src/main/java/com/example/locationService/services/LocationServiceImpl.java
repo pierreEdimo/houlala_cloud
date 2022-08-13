@@ -218,6 +218,21 @@ public class LocationServiceImpl implements LocationService {
         return locationResponses;
     }
 
+    @Override
+    public LocationResponse getLocationByOwnerId(String ownerId) {
+        Optional<Location> locationOptional = this.repository.findLocationByUserId(ownerId);
+
+        if(locationOptional.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "There are no locations");
+        }
+
+        try {
+            return this.toLocationResponse(locationOptional.get());
+        } catch (LocationServiceException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+    }
+
 
     private LocationResponse toLocationResponse(Location location) throws LocationServiceException {
 

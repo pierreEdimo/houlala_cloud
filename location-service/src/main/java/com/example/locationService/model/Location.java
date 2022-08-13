@@ -16,6 +16,9 @@ public class Location {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
+    private String userId;
+
     private String name;
 
     @Column(length = 100000)
@@ -46,6 +49,7 @@ public class Location {
 
     @Column(unique = true)
     private String uniqueIdentifier;
+
     public Location() {
     }
 
@@ -58,7 +62,8 @@ public class Location {
                     String email,
                     String website,
                     String uniqueIdentifier,
-                    String imageUrl
+                    String imageUrl,
+                    String userId
     ) {
         this.name = name;
         this.description = description;
@@ -70,6 +75,7 @@ public class Location {
         this.website = website;
         this.uniqueIdentifier = uniqueIdentifier;
         this.imageUrl = imageUrl;
+        this.userId = userId;
     }
 
 }

@@ -12,6 +12,8 @@ public interface LocationRepository extends JpaRepository<Location, Long> {
 
     Optional<Location> findLocationByUniqueIdentifier(String uniqueIdentifier);
 
+    Optional<Location> findLocationByUserId(String userId); 
+
     @Query("SELECT s from Location as s WHERE s.isStore = true ")
     List<Location> getStore();
 
