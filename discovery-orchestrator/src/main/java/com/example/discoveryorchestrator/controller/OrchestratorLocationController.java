@@ -99,6 +99,15 @@ public class OrchestratorLocationController {
         }
     }
 
+    @GetMapping("/users/{userId}")
+    public List<LocationResponse> getLocationsByUserId(@PathVariable String userId){
+        try {
+            return this.placeServiceFeignClient.getLocationsByUserId(userId);
+        } catch (OrchestratorException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+    }
+
     @GetMapping("/store")
     public List<LocationResponse> getAllStores(@RequestParam(required = false) Long limit) {
 

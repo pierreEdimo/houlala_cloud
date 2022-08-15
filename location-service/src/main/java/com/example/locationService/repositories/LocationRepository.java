@@ -8,11 +8,14 @@ import java.util.List;
 import java.util.Optional;
 
 public interface LocationRepository extends JpaRepository<Location, Long> {
-    List<Location> findLocationByCountryId(Long id);
+    List<Location> findLocationsByCountryId(Long id);
 
     Optional<Location> findLocationByUniqueIdentifier(String uniqueIdentifier);
 
-    Optional<Location> findLocationByUserId(String userId); 
+    Optional<Location> findLocationByUserId(String userId);
+
+    @Query("SELECT s from Location as s WHERE s.userId = :userId AND s.isStore = true")
+    List<Location> getStoreByOwnerId(String userId);
 
     @Query("SELECT s from Location as s WHERE s.isStore = true ")
     List<Location> getStore();

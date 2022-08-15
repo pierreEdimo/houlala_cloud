@@ -28,12 +28,12 @@ public class OrderController {
         return this.orderService.getNonConfirmedOrders(userId);
     }
 
-    @GetMapping("/orders/location/{id}")
+    @GetMapping("/location/{id}")
     public List<OrderDto> getConfirmedOrdersByLocationId(@PathVariable("id") String locationId) {
         return this.orderService.getConfirmedOrdersByLocationId(locationId);
     }
 
-    @GetMapping("/orders/location/{id}/status/{status}")
+    @GetMapping("/location/{id}/status/{status}")
     public List<OrderDto> getConfirmedOrdersByLocationIdAndStatus(@PathVariable("id") String locationId, @PathVariable String status) {
         return this.orderService.getConfirmedOrderByLocationIdAndStatus(locationId, status);
     }
@@ -85,5 +85,20 @@ public class OrderController {
     @ResponseStatus(HttpStatus.CREATED)
     public OrderDto sendUnregisteredUserOrder(@RequestBody CreateUnregisteredUserOrder order){
         return this.orderService.sendUnregisteredUserOrder(order);
+    }
+
+    @GetMapping("/total/{locationId}")
+    public long getTotalOrderCount(@PathVariable String locationId){
+        return this.orderService.getOrderTotalCount(locationId);
+    }
+
+    @GetMapping("/sold/{locationId}")
+    public long getOrderSoldCount(@PathVariable String locationId){
+        return this.orderService.getOrderSoldCount(locationId);
+    }
+
+    @GetMapping("/canceled/{locationId}")
+    public long getCanceledOrderCount(@PathVariable String locationId){
+        return this.orderService.getOrderCanceledCount(locationId);
     }
 }

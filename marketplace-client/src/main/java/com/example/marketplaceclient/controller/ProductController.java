@@ -97,5 +97,10 @@ public class ProductController {
         return this.productService.getRandomProductsByCategoryId(categoryId, size);
     }
 
+    @GetMapping("/total/{locationId}")
+    public long getProductTotalCount(@PathVariable String locationId){
+        return this.productService.productTotalCount(locationId);
+    }
+
 }
 

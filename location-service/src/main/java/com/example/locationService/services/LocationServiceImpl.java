@@ -29,6 +29,9 @@ public class LocationServiceImpl implements LocationService {
 
     private final LocationRoomFeignClient roomFeignClient;
 
+    private final MarketPlaceServiceFeignClient marketPlaceFeignClient;
+
+
 
     @Override
     public LocationResponse getLocation(long id) {
@@ -116,7 +119,7 @@ public class LocationServiceImpl implements LocationService {
         List<LocationResponse> existingLocations = new ArrayList<>();
 
 
-        List<Location> locations = this.repository.findLocationByCountryId(id);
+        List<Location> locations = this.repository.findLocationsByCountryId(id);
 
         for (Location location : locations) {
             try {
@@ -222,7 +225,7 @@ public class LocationServiceImpl implements LocationService {
     public LocationResponse getLocationByOwnerId(String ownerId) {
         Optional<Location> locationOptional = this.repository.findLocationByUserId(ownerId);
 
-        if(locationOptional.isEmpty()){
+        if (locationOptional.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "There are no locations");
         }
 
@@ -233,6 +236,24 @@ public class LocationServiceImpl implements LocationService {
         }
     }
 
+    @Override
+    public List<LocationResponse> getLocationsByOwnerId(String userId) {
+        List<LocationResponse> locationResponseList = new ArrayList<>();
+        List<Location> locationList;
+
+        locationList = this.repository.getStoreByOwnerId(userId);
+
+        locationList.forEach(location -> {
+            try {
+                locationResponseList.add(this.toLocationResponse(location));
+            } catch (LocationServiceException e) {
+                throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+            }
+        });
+
+        return locationResponseList;
+    }
+
 
     private LocationResponse toLocationResponse(Location location) throws LocationServiceException {
 
@@ -240,6 +261,10 @@ public class LocationServiceImpl implements LocationService {
         Category categoryLocation = this.categoryClient.getSingleCategory(location.getCategoryId());
         ReviewResponseDto reviews = this.reviewFeignClient.getReviewsByLocation(location.getUniqueIdentifier());
         RoomOverviewDto rooms = this.roomFeignClient.getRoomsFromLocationId(location.getUniqueIdentifier());
+        long orderTotalCount = this.marketPlaceFeignClient.getTotalOrderCount(location.getUniqueIdentifier());
+        long orderSoldCount = this.marketPlaceFeignClient.getOrderSoldCount(location.getUniqueIdentifier());
+        long orderCanceledCount = this.marketPlaceFeignClient.getCanceledOrderCount(location.getUniqueIdentifier());
+        long productTotalCount = this.marketPlaceFeignClient.getProductTotalCount(location.getUniqueIdentifier());
 
         LocationResponse response = new LocationResponse();
 
@@ -256,6 +281,10 @@ public class LocationServiceImpl implements LocationService {
         response.setAddress(location.getAddress());
         response.setUniqueIdentifier(location.getUniqueIdentifier());
         response.setImageUrl(location.getImageUrl());
+        response.setOrderCanceledCount(orderCanceledCount);
+        response.setOrderSoldCount(orderSoldCount);
+        response.setOrderTotalCount(orderTotalCount);
+        response.setProductTotalCount(productTotalCount);
 
 
         if (response.getCategory().getName().equals("Hotel")) {

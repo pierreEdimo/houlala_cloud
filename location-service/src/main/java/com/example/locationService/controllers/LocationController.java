@@ -68,4 +68,9 @@ public class LocationController {
     public LocationResponse getLocationByUserId(@PathVariable String userId){
         return this.service.getLocationByOwnerId(userId);
     }
+
+    @GetMapping("/users/{userId}")
+    public List<LocationResponse> getLocationsByUserId(@PathVariable String userId){
+        return  this.service.getLocationsByOwnerId(userId);
+    }
 }

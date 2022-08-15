@@ -34,4 +34,10 @@ public interface OrderService {
     void deleteItemFromOrder(String id, String sku);
 
     OrderDto sendUnregisteredUserOrder(CreateUnregisteredUserOrder order);
+
+    long getOrderTotalCount(String locationId);
+
+    long getOrderSoldCount(String locationId);
+
+    long getOrderCanceledCount(String locationId);
 }

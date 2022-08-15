@@ -30,4 +30,6 @@ public interface LocationService {
     List<LocationResponse> filterStoreByName(String searchWord);
 
     LocationResponse getLocationByOwnerId(String ownerId);
+
+    List<LocationResponse> getLocationsByOwnerId(String userId);
 }

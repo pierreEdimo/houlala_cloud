@@ -35,4 +35,12 @@ public class LocationResponse {
     private String uniqueIdentifier;
 
     private String imageUrl;
+
+    private long orderTotalCount;
+
+    private long orderSoldCount;
+
+    private long orderCanceledCount;
+
+    private long productTotalCount;
 }

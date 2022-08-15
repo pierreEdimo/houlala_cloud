@@ -338,6 +338,16 @@ public class ProductServiceImpl implements ProductService {
         return productDtoList;
     }
 
+    @Override
+    public long productTotalCount(String locationId) {
+        try {
+            return this.feignClient.getAllProducts().
+                    stream().filter(product -> product.getLocationId().equalsIgnoreCase(locationId)).count();
+        } catch (MarketplaceException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+    }
+
     private ProductDto toProductDto(Product response, ProductAdditionalInformation additionalInformation) {
 
         Location location;

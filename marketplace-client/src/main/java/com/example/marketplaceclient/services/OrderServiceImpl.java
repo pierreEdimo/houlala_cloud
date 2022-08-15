@@ -172,7 +172,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void decreaseQuantity(String id, String sku) {
         try {
-            this.feignClient.decreaseQuantity(id,sku);
+            this.feignClient.decreaseQuantity(id, sku);
         } catch (MarketplaceException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
@@ -192,12 +192,44 @@ public class OrderServiceImpl implements OrderService {
         Order createdOrder;
 
         try {
-            createdOrder =  this.feignClient.sendOrderFromUnregisteredUsers(order);
+            createdOrder = this.feignClient.sendOrderFromUnregisteredUsers(order);
         } catch (MarketplaceException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
 
         return this.toOrderDto(createdOrder);
+    }
+
+    @Override
+    public long getOrderTotalCount(String locationId) {
+        try {
+            return this.feignClient.getAllOrders().stream()
+                    .filter(order -> order.getLocationId().equalsIgnoreCase(locationId)).count();
+        } catch (MarketplaceException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+    }
+
+    @Override
+    public long getOrderSoldCount(String locationId) {
+        try {
+            return this.feignClient.getAllOrders().stream()
+                    .filter(order -> order.getLocationId().equalsIgnoreCase(locationId)
+                            && order.getStatus().equalsIgnoreCase("Delivre")).count();
+        } catch (MarketplaceException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+    }
+
+    @Override
+    public long getOrderCanceledCount(String locationId) {
+        try {
+            return this.feignClient.getAllOrders().stream().
+                    filter(order -> order.getLocationId().equalsIgnoreCase(locationId)
+                            && order.getStatus().equalsIgnoreCase("Annule")).count();
+        } catch (MarketplaceException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
     }
 
     private OrderDto toOrderDto(Order order) {
