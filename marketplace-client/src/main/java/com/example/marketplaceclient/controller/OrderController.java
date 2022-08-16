@@ -101,4 +101,9 @@ public class OrderController {
     public long getCanceledOrderCount(@PathVariable String locationId){
         return this.orderService.getOrderCanceledCount(locationId);
     }
+
+    @GetMapping("/all/{locationId}")
+    public List<OrderDto> getAllOrdersFromLocationId(@PathVariable String locationId){
+        return this.orderService.getAllOrdersByLocationId(locationId);
+    }
 }

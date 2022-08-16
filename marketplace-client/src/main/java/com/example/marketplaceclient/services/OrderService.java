@@ -40,4 +40,6 @@ public interface OrderService {
     long getOrderSoldCount(String locationId);
 
     long getOrderCanceledCount(String locationId);
+
+    List<OrderDto> getAllOrdersByLocationId(String locationId);
 }

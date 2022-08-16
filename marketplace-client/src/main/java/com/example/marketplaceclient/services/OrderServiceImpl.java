@@ -232,6 +232,22 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
+    @Override
+    public List<OrderDto> getAllOrdersByLocationId(String locationId) {
+        List<Order> orderList;
+        List<OrderDto> orderDtoList = new ArrayList<>();
+
+        try {
+            orderList = this.feignClient.getAllOrders().stream().filter(order -> order.getLocationId().equalsIgnoreCase(locationId)).toList();
+        } catch (MarketplaceException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+
+        orderList.forEach(order -> orderDtoList.add(this.toOrderDto(order)));
+
+        return orderDtoList;
+    }
+
     private OrderDto toOrderDto(Order order) {
         List<CartItemDto> cartItemDtos = new ArrayList<>();
         Location location = new Location();
