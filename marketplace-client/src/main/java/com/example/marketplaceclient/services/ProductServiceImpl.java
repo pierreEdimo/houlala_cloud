@@ -69,7 +69,7 @@ public class ProductServiceImpl implements ProductService {
 
         try {
             product = this.feignClient.getSingleProduct(id);
-            info = this.stockerServiceFeignClient.getASingleInfo(product.get_id());
+            info = this.stockerServiceFeignClient.getASingleInfo(product.getProductSku());
         } catch (MarketplaceException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
@@ -387,7 +387,7 @@ public class ProductServiceImpl implements ProductService {
         String locationIdFirst3Chars = this.getThreeFirstChars(locationId);
         String productFirst3Chars = this.getThreeFirstChars(productName);
         String originFirst3Chars = this.getThreeFirstChars(originLabel);
-        result = locationIdFirst3Chars + "-" + productFirst3Chars + "-" + originFirst3Chars + "-" + year + "-" + hour + "" + min;
+        result = locationIdFirst3Chars +  productFirst3Chars + originFirst3Chars + year +  hour +  min;
         return result;
     }
 

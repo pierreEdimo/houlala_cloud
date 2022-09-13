@@ -6,3 +6,9 @@ server:
 spring:
   application:
     name: authentication
+
+eureka:
+  client:
+    service-url:
+      defaultzone: http://localhost:8761/eureka
+

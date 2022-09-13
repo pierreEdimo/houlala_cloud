@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/orchestrator/api.iml" filepath="$PROJECT_DIR$/orchestrator/api.iml" />
       <module fileurl="file://$PROJECT_DIR$/authentication-client/authentication-client.iml" filepath="$PROJECT_DIR$/authentication-client/authentication-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/category-service/category-service.iml" filepath="$PROJECT_DIR$/category-service/category-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/config/config.iml" filepath="$PROJECT_DIR$/config/config.iml" />
       <module fileurl="file://$PROJECT_DIR$/country-service/country-service.iml" filepath="$PROJECT_DIR$/country-service/country-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/discovery/discovery.iml" filepath="$PROJECT_DIR$/discovery/discovery.iml" />
       <module fileurl="file://$PROJECT_DIR$/discovery-orchestrator/discovery-orchestrator.iml" filepath="$PROJECT_DIR$/discovery-orchestrator/discovery-orchestrator.iml" />

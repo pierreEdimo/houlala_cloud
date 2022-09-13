@@ -45,11 +45,6 @@ public class Controller {
         return this.service.getStockFromLocationId(locationId);
     }
 
-    @GetMapping("/getInfoBySku")
-    public ProductInformation getProductBySku(@RequestParam String productSku){
-        return this.service.getInfoBySku(productSku);
-    }
-
     @PutMapping("/getInfoAndUdateQuantity")
     public void updateQuantitySoldForProduct(@RequestParam String productSku, @RequestParam int quantity){
         this.service.getInfoAndUpdateQuantity(productSku, quantity);

@@ -101,6 +101,5 @@ public class ProductController {
     public long getProductTotalCount(@PathVariable String locationId){
         return this.productService.productTotalCount(locationId);
     }
-
 }
 

@@ -19,6 +19,7 @@
         <module name="room-service" />
         <module name="api" />
         <module name="country-service" />
+        <module name="config" />
         <module name="gateway" />
         <module name="discovery-orchestrator" />
       </profile>
@@ -29,6 +30,7 @@
       <module name="booking-service" target="17" />
       <module name="booking_service" target="17" />
       <module name="category-service" target="17" />
+      <module name="config" target="17" />
       <module name="country-service" target="17" />
       <module name="discovery" target="17" />
       <module name="discovery-orchestrator" target="17" />
@@ -54,6 +56,7 @@
       <module name="booking-service" options="-parameters" />
       <module name="booking_service" options="-parameters" />
       <module name="category-service" options="-parameters" />
+      <module name="config" options="-parameters" />
       <module name="country-service" options="-parameters" />
       <module name="discovery" options="-parameters" />
       <module name="discovery-orchestrator" options="-parameters" />

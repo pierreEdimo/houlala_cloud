@@ -25,8 +25,6 @@ public class EmailServiceImpl implements EmailService {
     private final Configuration configuration;
     private final NotificationFeignClient feignClient;
 
-    private final OrderFeignClient orderFeignClient;
-
     @Override
     public void sendEmail(SendEmaildto newEmailDto) {
         try {

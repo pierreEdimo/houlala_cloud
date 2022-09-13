@@ -34,6 +34,6 @@ public interface LocationServiceFeignClient {
     @GetMapping("/search")
     List<LocationResponse> filterStoreByName(@RequestParam String word) throws OrchestratorException;
 
-    @GetMapping("/users/{userId}")
+    @GetMapping("/user/{userId}")
     List<LocationResponse> getLocationsByUserId(@PathVariable String userId) throws OrchestratorException;
 }

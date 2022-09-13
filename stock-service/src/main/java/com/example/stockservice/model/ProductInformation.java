@@ -26,7 +26,6 @@ public class ProductInformation {
     private String locationId;
 
     @ManyToOne(targetEntity = Origin.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "origin_id", referencedColumnName = "id")
     private Origin originLabel;
 
 

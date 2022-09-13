@@ -23,8 +23,12 @@ public class BootstrapData implements CommandLineRunner {
 
         Origin origin1 = new Origin("Ghana");
 
+        Origin origin3 = new Origin("Nigeria");
+
+        Origin origin4 = new Origin("Ethiopia");
+
         ProductInformation info = new ProductInformation(
-                "anasku",
+                "mutmaccam20222243",
                 10,
                 LocalDate.now(),
                 123,
@@ -33,7 +37,7 @@ public class BootstrapData implements CommandLineRunner {
         );
 
         ProductInformation info2 = new ProductInformation(
-                "folesku",
+                "mutmaccam20221911",
                 20,
                 LocalDate.now(),
                 222,
@@ -41,8 +45,28 @@ public class BootstrapData implements CommandLineRunner {
                 "Mut"
         );
 
+        ProductInformation info3 = new ProductInformation(
+                "mutmaccam2022334",
+                20,
+                LocalDate.now(),
+                222,
+                origin3.getLabel(),
+                "Mut"
+        );
+
+        ProductInformation info4 = new ProductInformation(
+                "mutharcam2022339",
+                20,
+                LocalDate.now(),
+                222,
+                origin4.getLabel(),
+                "Mut"
+        );
+
         this.repository.save(info);
         this.repository.save(info2);
+        this.repository.save(info3);
+        this.repository.save(info4);
 
     }
 }
