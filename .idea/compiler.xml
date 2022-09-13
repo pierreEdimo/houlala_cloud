@@ -30,7 +30,7 @@
       <module name="booking-service" target="17" />
       <module name="booking_service" target="17" />
       <module name="category-service" target="17" />
-      <module name="config" target="17" />
+      <module name="config" target="1.8" />
       <module name="country-service" target="17" />
       <module name="discovery" target="17" />
       <module name="discovery-orchestrator" target="17" />
