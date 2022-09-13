@@ -1,0 +1,164 @@
+version: '3'
+services:
+  discovery:
+    image: houlala-cloud-discovery:latest
+    hostname: localhost
+    ports:
+      - "8761:8761"
+  authentication-client:
+    image: houlala-authentication-client:latest
+    container_name: authentication-client
+    hostname: localhost
+    expose:
+      - 8088
+    ports:
+      - "8088:8088"
+    environment:
+      eureka.client.serviceUrl.defaultZone: http://discovery:8761/eureka
+  stock-service:
+    image: houlala-cloud-stock-service:latest
+    container_name: stock-service
+    hostname: localhost
+    expose:
+      - "8089"
+    ports:
+      - "8089:8089"
+    environment:
+      eureka.client.serviceUrl.defaultZone: http://discovery:8761/eureka
+  category-service:
+    image: houlala-cloud-category-service:latest
+    container_name: category-service
+    hostname: localhost
+    expose:
+      - "8084"
+    ports:
+      - "8084:8084"
+    environment:
+      eureka.client.serviceUrl.defaultZone: http://discovery:8761/eureka
+  country-service:
+    image: houlala-cloud-country-service:latest
+    container_name: country-service
+    hostname: localhost
+    expose:
+      - "8082"
+    ports:
+      - "8082:8082"
+    environment:
+      eureka.client.serviceUrl.defaultZone: http://discovery:8761/eureka
+  discovery-orchestrator:
+    image: houlala-cloud-orchestrator:latest
+    container_name: discovery-orchestrator
+    hostname: localhost
+    expose:
+      - "8081"
+    ports:
+      - "8081:8081"
+    environment:
+      eureka.client.serviceUrl.defaultZone: http://discovery:8761/eureka
+  gateway:
+    image: houlala-cloud-gateway:latest
+    container_name: gateway
+    hostname: localhost
+    expose:
+      - "8080"
+    ports:
+      - "8080:8080"
+    environment:
+      eureka.client.serviceUrl.defaultZone: http://discovery:8761/eureka
+  location-service:
+    image: houlala-cloud-location-service:latest
+    container_name: location-service
+    hostname: localhost
+    expose:
+      - "8083"
+    ports:
+      - "8083:8083"
+    environment:
+      eureka.client.serviceUrl.defaultZone: http://discovery:8761/eureka
+  inventory-service:
+    image: houlala-cloud-inventory-service:latest
+    container_name: inventory-service
+    hostname: localhost
+    expose:
+      - "8090"
+    ports:
+      - "8090:8090"
+    environment:
+      eureka.client.serviceUrl.defaultZone: http://discovery:8761/eureka
+  marketplace-client:
+    image: houlala-cloud-marketplace-client:latest
+    container_name: marketplace-client
+    hostname: localhost
+    expose:
+      - "8087"
+    ports:
+      - "8087:8087"
+    environment:
+      eureka.client.serviceUrl.defaultZone: http://discovery:8761/eureka
+  review-service:
+    image: houlala-cloud-review-service:latest
+    container_name: review-service
+    hostname: localhost
+    expose:
+      - "8086"
+    ports:
+      - "8086:8086"
+    environment:
+      eureka.client.serviceUrl.defaultZone: http://discovery:8761/eureka
+  room-service:
+    image: houlala-cloud-room-service:latest
+    container_name: room-service
+    hostname: localhost
+    expose:
+      - "8085"
+    ports:
+      - "8085:8085"
+    environment:
+      eureka.client.serviceUrl.defaultZone: http://discovery:8761/eureka
+  notification-client:
+    image: houlala-cloud-notification-client:latest
+    container_name: notification-client
+    hostname: localhost
+    expose:
+      - "8091"
+    ports:
+      - "8091:8091"
+    environment:
+      eureka.client.serviceUrl.defaultZone: http://discovery:8761/eureka
+  database:
+    image: mysql
+    restart: always
+    hostname: localhost
+    environment:
+      MYSQL_DATABASE: 'db'
+      MYSQL_USER: 'pierre'
+      MYSQL_PASSWORD: '28Janvier1995?'
+      MYSQL_ROOT_PASSWORD: '28Janvier1995?'
+    ports:
+      - "3306:3306"
+    expose:
+      - "3306"
+    volumes:
+      - my-db:/var/lib/mysql
+    networks:
+      - default
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: 'pierre'
+      MONGO_INITDB_ROOT_PASSWORD: '28Janvier1995?'
+    ports:
+      - "27017:27017"
+    expose:
+      - "27017"
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - "8092:80"
+    environment:
+      - PMA_ARBITRARY=1
+
+volumes:
+  my-db:
