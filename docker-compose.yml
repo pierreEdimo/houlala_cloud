@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 services:
   discovery:
     image: houlala-cloud-discovery:latest
@@ -142,8 +142,8 @@ services:
     container_name: marketplace-client
     expose:
       - "8087"
-    ports:
-      - "8087:8087"
+    depends_on:
+      - "discovery"
     environment:
       eureka.client.serviceUrl.defaultZone: http://discovery:8761/eureka
       EUREKA_INSTANCE_PREFER_IP_ADDRESS: "true"

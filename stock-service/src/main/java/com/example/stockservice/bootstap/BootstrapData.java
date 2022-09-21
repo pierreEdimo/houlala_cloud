@@ -19,54 +19,54 @@ public class BootstrapData implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        Origin origin  = new Origin("Cameroun");
-
-        Origin origin1 = new Origin("Ghana");
-
-        Origin origin3 = new Origin("Nigeria");
-
-        Origin origin4 = new Origin("Ethiopia");
-
-        ProductInformation info = new ProductInformation(
-                "mutmaccam20222243",
-                10,
-                LocalDate.now(),
-                123,
-                origin.getLabel(),
-                "Mut"
-        );
-
-        ProductInformation info2 = new ProductInformation(
-                "mutmaccam20221911",
-                20,
-                LocalDate.now(),
-                222,
-                origin1.getLabel(),
-                "Mut"
-        );
-
-        ProductInformation info3 = new ProductInformation(
-                "mutmaccam2022334",
-                20,
-                LocalDate.now(),
-                222,
-                origin3.getLabel(),
-                "Mut"
-        );
-
-        ProductInformation info4 = new ProductInformation(
-                "mutharcam2022339",
-                20,
-                LocalDate.now(),
-                222,
-                origin4.getLabel(),
-                "Mut"
-        );
-
-        this.repository.save(info);
-        this.repository.save(info2);
-        this.repository.save(info3);
-        this.repository.save(info4);
+//        Origin origin  = new Origin("Cameroun");
+//
+//        Origin origin1 = new Origin("Ghana");
+//
+//        Origin origin3 = new Origin("Nigeria");
+//
+//        Origin origin4 = new Origin("Ethiopia");
+//
+//        ProductInformation info = new ProductInformation(
+//                "mutmaccam20222243",
+//                10,
+//                LocalDate.now(),
+//                123,
+//                origin.getLabel(),
+//                "Mut"
+//        );
+//
+//        ProductInformation info2 = new ProductInformation(
+//                "mutmaccam20221911",
+//                20,
+//                LocalDate.now(),
+//                222,
+//                origin1.getLabel(),
+//                "Mut"
+//        );
+//
+//        ProductInformation info3 = new ProductInformation(
+//                "mutmaccam2022334",
+//                20,
+//                LocalDate.now(),
+//                222,
+//                origin3.getLabel(),
+//                "Mut"
+//        );
+//
+//        ProductInformation info4 = new ProductInformation(
+//                "mutharcam2022339",
+//                20,
+//                LocalDate.now(),
+//                222,
+//                origin4.getLabel(),
+//                "Mut"
+//        );
+//
+//        this.repository.save(info);
+//        this.repository.save(info2);
+//        this.repository.save(info3);
+//        this.repository.save(info4);
 
     }
 }
