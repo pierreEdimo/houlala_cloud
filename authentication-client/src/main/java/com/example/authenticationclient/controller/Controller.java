@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/users")
+    @RequestMapping("/users")
 public class Controller {
 
     private final AuthenticationFeignClient feignClient;

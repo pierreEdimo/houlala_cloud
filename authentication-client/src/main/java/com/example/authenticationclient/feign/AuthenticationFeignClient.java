@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(url = "https://houlala-login.herokuapp.com/api/", name = "authentication")
+@FeignClient(url = "http://houlala_authentication:8000/api/", name = "authentication")
 public interface AuthenticationFeignClient {
 
     @PostMapping("/User/Register")

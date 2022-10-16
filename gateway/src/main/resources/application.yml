@@ -12,7 +12,6 @@ spring:
       globalcors:
         cors-configurations:
           '[/**]':
-            allowed-origins: "http://localhost:8095/"
             allowedOrigins: "http://localhost:5285/"
             allowedMethods:
               - GET
@@ -22,8 +21,8 @@ spring:
           uri: lb://discovery-orchestrator
           predicates:
             Path=/discovery-orchestrator/**
-          filters:
-            - Jwt
+#          filters:
+#            - Jwt
         - id: authentication
           uri: lb://authentication
           predicates:
@@ -32,20 +31,20 @@ spring:
           uri: lb://marketplace
           predicates:
             Path=/marketplace/**
-          filters:
-            - Jwt
+#          filters:
+#            - Jwt
         - id: inventory
           uri: lb://inventory
           predicates:
             Path=/inventory/**
-          filters:
-            - Jwt
+#          filters:
+#            - Jwt
         - id: notification
           uri: lb://notification
           predicates:
             Path=/notification/**
-          filters:
-            - Jwt
+#          filters:
+#            - Jwt
 eureka:
   client:
     serviceUrl:

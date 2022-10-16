@@ -4,6 +4,7 @@ import com.example.discoveryorchestrator.exception.OrchestratorException;
 import com.example.discoveryorchestrator.model.Category;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface CategoryServiceFeignClient {
     Category getCategory(@PathVariable long id) throws OrchestratorException;
 
     @PostMapping("")
-    Category createCategory(@RequestBody Category newCategory) throws OrchestratorException;
+    Category createCategory(@RequestPart String name, @RequestPart MultipartFile image) throws OrchestratorException;
 
     @GetMapping("")
     List<Category> getAllCategories() throws OrchestratorException;

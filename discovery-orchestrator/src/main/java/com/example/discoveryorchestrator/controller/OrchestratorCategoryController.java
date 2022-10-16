@@ -5,6 +5,7 @@ import com.example.discoveryorchestrator.feign.CategoryServiceFeignClient;
 import com.example.discoveryorchestrator.model.Category;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -17,9 +18,9 @@ public class OrchestratorCategoryController {
     private final CategoryServiceFeignClient feignClient;
 
     @PostMapping("")
-    public Category createCategory(@RequestBody Category newCategory) {
+    public Category createCategory(@RequestPart String name, @RequestPart MultipartFile image) {
         try {
-            return this.feignClient.createCategory(newCategory);
+            return this.feignClient.createCategory(name, image);
         } catch (OrchestratorException ex) {
             throw new ResponseStatusException(ex.getHttpStatus(), ex.getMessage());
         }

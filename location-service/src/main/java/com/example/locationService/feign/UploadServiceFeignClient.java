@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
-@FeignClient(name = "upload", url = "https://houlala-storage.herokuapp.com/", configuration = FeignSupportConfig.class)
+@FeignClient(name = "upload", url = "http://houlala_storage:8001", configuration = FeignSupportConfig.class)
 public interface UploadServiceFeignClient {
     @PostMapping(value = "/api/Upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     String uploadImage(@RequestPart MultipartFile image) throws LocationServiceException;

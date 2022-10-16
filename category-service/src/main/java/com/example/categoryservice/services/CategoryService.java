@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 public interface CategoryService {
-    Category createCategory(String newCategory, MultipartFile image);
+    Category createCategory(String name, MultipartFile image);
 
     Category getCategory(long id);
 

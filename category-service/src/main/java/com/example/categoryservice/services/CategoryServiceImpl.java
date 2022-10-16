@@ -25,14 +25,14 @@ public class CategoryServiceImpl implements CategoryService {
     private final UploadFeignService feignService;
 
     @Override
-    public Category createCategory(String newCategory, MultipartFile image) {
+    public Category createCategory(String name, MultipartFile image) {
         CreateCategoryDto createCategoryDto;
         String imageUrl;
         Category category;
 
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-            createCategoryDto = objectMapper.readValue(newCategory, CreateCategoryDto.class);
+            createCategoryDto = objectMapper.readValue(name, CreateCategoryDto.class);
         } catch (IOException io) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, io.getMessage());
         }
