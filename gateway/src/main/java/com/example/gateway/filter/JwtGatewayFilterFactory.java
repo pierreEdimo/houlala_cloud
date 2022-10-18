@@ -32,10 +32,10 @@ public class JwtGatewayFilterFactory implements GatewayFilterFactory<JwtGatewayF
 
             return webClientBuilder.build()
                     .get()
-                    .uri("https://houlala-login.herokuapp.com/api/User/ValidateToken/" + headers.get(0))
+                    .uri("http://houlala_authentication:8000/api/User/ValidateToken/" + headers.get(0))
                     .retrieve().bodyToMono(String.class)
                     .map(str -> {
-                        String response = str.substring( 1, str.length() - 1 );
+                        String response = str.substring(1, str.length() - 1);
                         if (response.equals("NotValidated")) {
                             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Sorry mate, you have no business doing hier. ");
                         }
