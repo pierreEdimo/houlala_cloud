@@ -20,8 +20,8 @@ public class Controller {
     }
 
     @PostMapping("")
-    public Category createCategory(@RequestPart String name, @RequestPart MultipartFile image) {
-        return this.service.createCategory(name, image);
+    public Category createCategory(@RequestPart String newCategory, @RequestPart MultipartFile image) {
+        return this.service.createCategory(newCategory, image);
     }
 
     @GetMapping("/store")

@@ -18,9 +18,9 @@ public class OrchestratorCategoryController {
     private final CategoryServiceFeignClient feignClient;
 
     @PostMapping("")
-    public Category createCategory(@RequestPart String name, @RequestPart MultipartFile image) {
+    public Category createCategory(@RequestPart String newCategory, @RequestPart MultipartFile image) {
         try {
-            return this.feignClient.createCategory(name, image);
+            return this.feignClient.createCategory(newCategory, image);
         } catch (OrchestratorException ex) {
             throw new ResponseStatusException(ex.getHttpStatus(), ex.getMessage());
         }

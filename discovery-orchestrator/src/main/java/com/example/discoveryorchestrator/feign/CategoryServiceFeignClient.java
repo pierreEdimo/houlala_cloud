@@ -15,7 +15,7 @@ public interface CategoryServiceFeignClient {
     Category getCategory(@PathVariable long id) throws OrchestratorException;
 
     @PostMapping("")
-    Category createCategory(@RequestPart String name, @RequestPart MultipartFile image) throws OrchestratorException;
+    Category createCategory(@RequestPart String newCategory, @RequestPart MultipartFile image) throws OrchestratorException;
 
     @GetMapping("")
     List<Category> getAllCategories() throws OrchestratorException;
