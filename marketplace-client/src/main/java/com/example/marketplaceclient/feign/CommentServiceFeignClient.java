@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(url ="https://houlala.herokuapp.com/api/posts", name = "comments")
+@FeignClient(url ="http://houlala_marketplace:3000/api/posts", name = "comments")
 public interface CommentServiceFeignClient {
 
     @GetMapping("/comment/filter")

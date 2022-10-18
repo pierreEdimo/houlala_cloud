@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-@FeignClient(url = "https://houlala.herokuapp.com/api/posts", name = "posts")
+@FeignClient(url = "http://houlala_marketplace:3000/api/posts", name = "posts")
 public interface PostServiceFeignClient {
 
     @GetMapping("")

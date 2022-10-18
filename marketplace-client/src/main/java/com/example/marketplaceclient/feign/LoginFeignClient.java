@@ -6,7 +6,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(url = "https://houlala-login.herokuapp.com/api/", name = "authentication")
+@FeignClient(url = "http://houlala_authentication:8000/api/", name = "authentication")
 public interface LoginFeignClient {
 
     @GetMapping("/User/GetUserByEmail/{Email}")

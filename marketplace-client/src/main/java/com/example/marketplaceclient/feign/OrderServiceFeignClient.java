@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(url = "https://houlala.herokuapp.com/api/orders", name = "orders")
+@FeignClient(url = "http://houlala_marketplace:3000/api/orders", name = "orders")
 public interface OrderServiceFeignClient {
 
     @GetMapping("")

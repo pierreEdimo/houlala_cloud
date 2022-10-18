@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(url = "https://houlala.herokuapp.com/api/product-types", name = "products-types")
+@FeignClient(url = "http://houlala_marketplace:3000/api/product-types", name = "products-types")
 public interface ProductTypeFeignClient {
 
     @GetMapping("")
