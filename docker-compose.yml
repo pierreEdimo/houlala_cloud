@@ -212,7 +212,7 @@ services:
     ports:
       - "8001:8001"
   houlala_marketplace:
-    image: houlala-cloud-market-place:latest
+    image: houlala-cloud-marketplace:latest
     expose:
       - "3000"
     ports:
