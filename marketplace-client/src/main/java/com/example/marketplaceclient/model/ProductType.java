@@ -9,11 +9,13 @@ public class ProductType {
     private String _id;
     private String label;
     private String thumbNailUrl;
+    private String categoryId;
 
     public ProductType() {
     }
 
-    public ProductType(String label) {
+    public ProductType(String label, String categoryId) {
         this.label = label;
+        this.categoryId = categoryId;
     }
 }

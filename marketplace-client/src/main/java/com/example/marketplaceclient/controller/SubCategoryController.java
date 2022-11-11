@@ -34,21 +34,22 @@ public class SubCategoryController {
     }
 
     @PostMapping("")
-    public ProductType addSubCategory(@RequestPart String createType, @RequestPart MultipartFile image) {
+    public ProductType addSubCategory(@RequestPart String subCategory, @RequestPart MultipartFile image) {
         CreateSubCategoryDto subCategoryDto;
         String imageUrl;
         ProductType newType;
 
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-            subCategoryDto = objectMapper.readValue(createType, CreateSubCategoryDto.class);
+            subCategoryDto = objectMapper.readValue(subCategory, CreateSubCategoryDto.class);
         } catch (IOException io) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, io.getMessage());
         }
 
         newType = new ProductType(
-                subCategoryDto.getLabel()
-        );
+                subCategoryDto.getLabel(),
+                subCategoryDto.getCategoryId()
+                );
 
         try {
             imageUrl = this.uploadServiceFeignClient.uploadImage(image);

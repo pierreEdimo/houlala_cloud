@@ -7,4 +7,5 @@ import lombok.Setter;
 @Setter
 public class CreateSubCategoryDto {
     private String label;
+    private String categoryId; 
 }
