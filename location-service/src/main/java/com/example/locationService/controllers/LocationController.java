@@ -19,14 +19,24 @@ public class LocationController {
         return this.service.getLocation(id);
     }
 
-    @PostMapping("")
-    public Location addLocation(@RequestBody  Location newLocation) {
+    @PostMapping("/location")
+    public Location addLocation(@RequestBody Location newLocation) {
         return this.service.createNewLocation(newLocation);
+    }
+
+    @PostMapping("/store")
+    public Location createStore(@RequestBody Location newLocation) {
+        return this.service.createStore(newLocation);
     }
 
     @GetMapping("")
     public List<LocationResponse> getAllLocations() {
         return this.service.getAllLocations();
+    }
+
+    @GetMapping("/place")
+    public List<LocationResponse> getPlaces(){
+        return this.service.getLocations();
     }
 
     @PutMapping("/{id}")
@@ -65,12 +75,12 @@ public class LocationController {
     }
 
     @GetMapping("user/{userId}")
-    public LocationResponse getLocationByUserId(@PathVariable String userId){
+    public LocationResponse getLocationByUserId(@PathVariable String userId) {
         return this.service.getLocationByOwnerId(userId);
     }
 
     @GetMapping("/users/{userId}")
-    public List<LocationResponse> getLocationsByUserId(@PathVariable String userId){
-        return  this.service.getLocationsByOwnerId(userId);
+    public List<LocationResponse> getLocationsByUserId(@PathVariable String userId) {
+        return this.service.getLocationsByOwnerId(userId);
     }
 }

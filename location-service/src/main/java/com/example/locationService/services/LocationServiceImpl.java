@@ -32,7 +32,6 @@ public class LocationServiceImpl implements LocationService {
     private final MarketPlaceServiceFeignClient marketPlaceFeignClient;
 
 
-
     @Override
     public LocationResponse getLocation(long id) {
 
@@ -54,6 +53,16 @@ public class LocationServiceImpl implements LocationService {
     @Override
     public Location createNewLocation(Location location) {
         try {
+            return this.repository.save(location);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
+    @Override
+    public Location createStore(Location location) {
+        try {
+            location.setStore(true);
             return this.repository.save(location);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());

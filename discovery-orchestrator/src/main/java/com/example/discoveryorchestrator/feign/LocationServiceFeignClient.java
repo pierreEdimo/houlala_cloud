@@ -16,8 +16,11 @@ public interface LocationServiceFeignClient {
     @GetMapping("")
     List<LocationResponse> getAllLocations() throws OrchestratorException;
 
-    @PostMapping("")
+    @PostMapping("/location")
     Location addNewLocation(@RequestBody Location newLocation) throws OrchestratorException;
+
+    @PostMapping("/store")
+    Location createStore(@RequestBody Location newLocation) throws OrchestratorException;
 
     @PutMapping("/{id}")
     Location editLocation(@RequestBody Location newLocation, @PathVariable long id) throws OrchestratorException;
@@ -27,6 +30,9 @@ public interface LocationServiceFeignClient {
 
     @GetMapping("/store")
     List<LocationResponse> getAllStores(@RequestParam(required = false) Long limit) throws OrchestratorException;
+
+    @GetMapping("/place")
+    List<LocationResponse> getPlaces(@RequestParam(required = false) Long limit) throws OrchestratorException;
 
     @GetMapping("/category/{id}")
     List<LocationResponse> getStoreByCategoryId(@PathVariable("id") long categoryId) throws OrchestratorException;

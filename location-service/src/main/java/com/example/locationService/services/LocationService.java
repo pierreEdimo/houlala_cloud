@@ -11,6 +11,8 @@ public interface LocationService {
 
     Location createNewLocation(Location location);
 
+    Location createStore(Location location);
+
     List<LocationResponse> getAllLocations();
 
     Location editLocation(Location location, long id);
