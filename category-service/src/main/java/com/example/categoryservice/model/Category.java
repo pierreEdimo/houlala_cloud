@@ -18,23 +18,5 @@ public class Category {
     private Long id;
     private String thumbNail;
     private String name;
-
     private boolean storeCategory = false;
-
-    public Category() {
-    }
-
-    public Category(String thumbNail, String name) {
-        this.name = name;
-        this.thumbNail = thumbNail;
-    }
-
-    public Category(String thumbNail,
-                    String name,
-                    boolean storeCategory
-    ) {
-        this.name = name;
-        this.thumbNail = thumbNail;
-        this.storeCategory = storeCategory;
-    }
 }
