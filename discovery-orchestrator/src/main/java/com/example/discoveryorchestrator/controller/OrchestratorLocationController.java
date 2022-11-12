@@ -37,39 +37,39 @@ public class OrchestratorLocationController {
 
     @PostMapping("")
     public Location createLocation(@RequestPart String newLocation, @RequestPart MultipartFile image) {
-        CreateLocationDto createLocationDto;
         String imageUrl;
-        String uniqueIdentifier;
-
-        try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            createLocationDto = objectMapper.readValue(newLocation, CreateLocationDto.class);
-        } catch (IOException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
-        }
-
-        Location location = new Location(
-                createLocationDto.getName(),
-                createLocationDto.getDescription(),
-                createLocationDto.getCountryId(),
-                createLocationDto.getCategoryId(),
-                createLocationDto.getAddress(),
-                createLocationDto.getTelephoneNumber(),
-                createLocationDto.getEmail(),
-                createLocationDto.getWebsite()
-        );
-
-        uniqueIdentifier = this.skuGenerator(createLocationDto.getName());
+        Location location = this.createLocation(newLocation);
 
         try {
             imageUrl = this.uploadServiceFeignClient.uploadImage(image);
             location.setImageUrl(imageUrl);
-            location.setUniqueIdentifier(uniqueIdentifier);
             return this.placeServiceFeignClient.addNewLocation(location);
         } catch (OrchestratorException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
+    }
 
+    @PostMapping("/store")
+    public Location createStore(@RequestPart String newLocation, @RequestPart MultipartFile image) {
+        String imageUrl;
+        Location location = this.createLocation(newLocation);
+
+        try {
+            imageUrl = this.uploadServiceFeignClient.uploadImage(image);
+            location.setImageUrl(imageUrl);
+            return this.placeServiceFeignClient.createStore(location);
+        } catch (OrchestratorException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+    }
+
+    @GetMapping("/place")
+    public List<LocationResponse> getPLaces(@RequestParam(required = false) Long limit) {
+        try {
+            return this.placeServiceFeignClient.getPlaces(limit);
+        } catch (OrchestratorException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
     }
 
     @PutMapping("/{id}")
@@ -100,7 +100,7 @@ public class OrchestratorLocationController {
     }
 
     @GetMapping("/users/{userId}")
-    public List<LocationResponse> getLocationsByUserId(@PathVariable String userId){
+    public List<LocationResponse> getLocationsByUserId(@PathVariable String userId) {
         try {
             return this.placeServiceFeignClient.getLocationsByUserId(userId);
         } catch (OrchestratorException e) {
@@ -149,5 +149,33 @@ public class OrchestratorLocationController {
 
     private String getThreeFirstChars(String str) {
         return str.substring(0, Math.min(str.length(), 3));
+    }
+
+    private Location createLocation(String newLocation) {
+        CreateLocationDto createLocationDto;
+        String uniqueIdentifier;
+
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            createLocationDto = objectMapper.readValue(newLocation, CreateLocationDto.class);
+        } catch (IOException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+
+        Location location = new Location(
+                createLocationDto.getName(),
+                createLocationDto.getDescription(),
+                createLocationDto.getCountryId(),
+                createLocationDto.getCategoryId(),
+                createLocationDto.getAddress(),
+                createLocationDto.getTelephoneNumber(),
+                createLocationDto.getEmail(),
+                createLocationDto.getWebsite()
+        );
+
+        uniqueIdentifier = this.skuGenerator(createLocationDto.getName());
+        location.setUniqueIdentifier(uniqueIdentifier);
+
+        return location;
     }
 }
