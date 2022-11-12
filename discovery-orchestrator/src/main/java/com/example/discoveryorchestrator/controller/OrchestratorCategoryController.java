@@ -2,12 +2,17 @@ package com.example.discoveryorchestrator.controller;
 
 import com.example.discoveryorchestrator.exception.OrchestratorException;
 import com.example.discoveryorchestrator.feign.CategoryServiceFeignClient;
+import com.example.discoveryorchestrator.feign.UploadServiceFeignClient;
 import com.example.discoveryorchestrator.model.Category;
+import com.example.discoveryorchestrator.model.dto.CreateCategoryDto;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -17,10 +22,17 @@ public class OrchestratorCategoryController {
 
     private final CategoryServiceFeignClient feignClient;
 
+    private final UploadServiceFeignClient uploadServiceFeignClient;
+
     @PostMapping("")
     public Category createCategory(@RequestPart String newCategory, @RequestPart MultipartFile image) {
+
+        Category category = this.createCategory(newCategory);
+        String imageUrl;
         try {
-            return this.feignClient.createCategory(newCategory, image);
+            imageUrl = this.uploadServiceFeignClient.uploadImage(image);
+            category.setThumbNail(imageUrl);
+            return this.feignClient.createCategory(category);
         } catch (OrchestratorException ex) {
             throw new ResponseStatusException(ex.getHttpStatus(), ex.getMessage());
         }
@@ -72,11 +84,32 @@ public class OrchestratorCategoryController {
     }
 
     @PostMapping("/store")
-    public Category createCategorieStore(@RequestBody Category newCategory) {
+    public Category createCategorieStore(@RequestPart String newCategory, @RequestPart MultipartFile image) {
+        Category category = this.createCategory(newCategory);
+        String imageUrl;
         try {
-            return this.feignClient.createCategorieStore(newCategory);
+            imageUrl = this.uploadServiceFeignClient.uploadImage(image);
+            category.setThumbNail(imageUrl);
+            return this.feignClient.createCategorieStore(category);
         } catch (OrchestratorException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
+    }
+
+
+    private Category createCategory(String newCategory) {
+        CreateCategoryDto categoryDto;
+        Category category = new Category();
+
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            categoryDto = objectMapper.readValue(newCategory, CreateCategoryDto.class);
+        } catch (IOException io) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, io.getMessage());
+        }
+
+        category.setName(categoryDto.getName());
+
+        return category;
     }
 }
