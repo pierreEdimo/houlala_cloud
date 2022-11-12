@@ -4,7 +4,6 @@ import com.example.categoryservice.model.Category;
 import com.example.categoryservice.services.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -19,9 +18,9 @@ public class Controller {
         return this.service.getCategory(id);
     }
 
-    @PostMapping("")
-    public Category createCategory(@RequestPart String newCategory, @RequestPart MultipartFile image) {
-        return this.service.createCategory(newCategory, image);
+    @PostMapping("/newCategory")
+    public Category createCategory(@RequestBody Category newCategory) {
+        return this.service.createCategory(newCategory);
     }
 
     @GetMapping("/store")
@@ -30,8 +29,8 @@ public class Controller {
     }
 
     @PostMapping("/store")
-    public Category createCategorieStore(@RequestPart String newCategory, @RequestPart MultipartFile image) {
-        return this.service.createCategoryStore(newCategory, image);
+    public Category createCategorieStore(@RequestBody Category newCategory) {
+        return this.service.createCategoryStore(newCategory);
     }
 
     @GetMapping("")
