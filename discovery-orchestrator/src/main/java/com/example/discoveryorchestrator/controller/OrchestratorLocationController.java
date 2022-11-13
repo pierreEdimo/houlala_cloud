@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Random;
+
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -138,12 +140,14 @@ public class OrchestratorLocationController {
 
 
     private String skuGenerator(String name) {
+        Random rd = new Random();
         String result;
         LocalDateTime date = LocalDateTime.now();
         int year = date.getYear();
         int day = date.getDayOfMonth();
+        int randomNb = rd.nextInt(4000);
         String productFirst3Chars = this.getThreeFirstChars(name);
-        result = productFirst3Chars + "" + year + "" + day;
+        result = productFirst3Chars + "" + randomNb + "" + year + "" + day;
         return result;
     }
 

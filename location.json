@@ -1,0 +1,14 @@
+{
+  "name": "Houlala Sarl",
+  "description": "lorem ipsum",
+  "countryId": 1,
+  "categoryId": 223,
+  "address": {
+    "city": "Yaounde",
+    "streetName": "Tsinga",
+    "poBox": 3300
+  },
+  "telephoneNumber": "+237 6 99 91 74 62",
+  "email": "pierredimo@live.com",
+  "website": "www.houlala.store"
+}
