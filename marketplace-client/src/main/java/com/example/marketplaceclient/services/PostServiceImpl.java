@@ -3,6 +3,7 @@ package com.example.marketplaceclient.services;
 import com.example.marketplaceclient.exception.MarketplaceException;
 import com.example.marketplaceclient.feign.LocationServiceFeignClient;
 import com.example.marketplaceclient.feign.PostServiceFeignClient;
+import com.example.marketplaceclient.feign.UploadServiceFeignClient;
 import com.example.marketplaceclient.model.Location;
 import com.example.marketplaceclient.model.Post;
 import com.example.marketplaceclient.model.dto.CreatePost;
@@ -22,8 +23,9 @@ import java.util.List;
 public class PostServiceImpl implements PostService {
 
     private final PostServiceFeignClient feignClient;
-
     private final LocationServiceFeignClient serviceFeignClient;
+
+    private final UploadServiceFeignClient uploadServiceFeignClient;
 
     @Override
     public List<PostDto> getAllPosts() {
@@ -128,7 +130,9 @@ public class PostServiceImpl implements PostService {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             newPost = objectMapper.readValue(post, CreatePost.class);
-            createdPost = this.feignClient.createPostWithImage(newPost, file);
+            String imageUrl = this.uploadServiceFeignClient.uploadImage(file);
+            newPost.setImageUrl(imageUrl);
+            createdPost = this.feignClient.createPost(newPost);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }

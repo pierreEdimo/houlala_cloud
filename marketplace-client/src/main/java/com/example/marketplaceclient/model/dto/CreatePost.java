@@ -8,4 +8,5 @@ import lombok.Setter;
 public class CreatePost {
     String content;
     String locationId;
+    String imageUrl;
 }
