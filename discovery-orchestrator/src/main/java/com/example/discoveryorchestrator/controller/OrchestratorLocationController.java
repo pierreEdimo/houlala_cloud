@@ -102,7 +102,7 @@ public class OrchestratorLocationController {
     }
 
     @GetMapping("/users/{userId}")
-    public List<LocationResponse> getLocationsByUserId(@PathVariable String userId) {
+    public LocationResponse getLocationsByUserId(@PathVariable String userId) {
         try {
             return this.placeServiceFeignClient.getLocationsByUserId(userId);
         } catch (OrchestratorException e) {

@@ -41,5 +41,5 @@ public interface LocationServiceFeignClient {
     List<LocationResponse> filterStoreByName(@RequestParam String word) throws OrchestratorException;
 
     @GetMapping("/user/{userId}")
-    List<LocationResponse> getLocationsByUserId(@PathVariable String userId) throws OrchestratorException;
+    LocationResponse getLocationsByUserId(@PathVariable String userId) throws OrchestratorException;
 }

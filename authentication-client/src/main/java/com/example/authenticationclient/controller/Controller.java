@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-    @RequestMapping("/users")
+@RequestMapping("/users")
 public class Controller {
 
     private final AuthenticationFeignClient feignClient;
@@ -47,54 +47,54 @@ public class Controller {
     }
 
     @GetMapping("/getAllUsers")
-    public List<UserDto> getAllUsers() {
+    public List<UserDto> getAllUsers(@RequestHeader("Authorization") String jwt) {
         try {
-            return this.feignClient.getAllUsers();
+            return this.feignClient.getAllUsers("Bearer " + jwt);
         } catch (AuthenticationException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
     }
 
     @PostMapping("/renewPassword")
-    public UserToken renewPassWord(@RequestBody Login model) {
+    public UserToken renewPassWord(@RequestBody Login model, @RequestHeader("Authorization") String jwt) {
         try {
-            return this.feignClient.renewPassWord(model);
+            return this.feignClient.renewPassWord(model, "Bearer " + jwt);
         } catch (AuthenticationException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
     }
 
     @GetMapping("/{email}")
-    public UserDto getSingleUserByEmail(@PathVariable String email) {
+    public UserDto getSingleUserByEmail(@PathVariable String email, @RequestHeader("Authorization") String jwt) {
         try {
-            return this.feignClient.getSingleUserByEmail(email);
+            return this.feignClient.getSingleUserByEmail(email, "Bearer " + jwt);
         } catch (AuthenticationException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
     }
 
     @PutMapping("/singleUser/{email}")
-    public UserToken editPeronalData(@RequestBody PersonalData model, @PathVariable String email) {
+    public UserToken editPeronalData(@RequestBody PersonalData model, @PathVariable String email, @RequestHeader("Authorization") String jwt) {
         try {
-            return this.feignClient.editPersonalData(model, email);
+            return this.feignClient.editPersonalData(model, email, "Bearer " + jwt);
         } catch (AuthenticationException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
     }
 
     @PutMapping("/address/{email}")
-    public UserToken editAddressData(@RequestBody AddressData model, @PathVariable String email){
+    public UserToken editAddressData(@RequestBody AddressData model, @PathVariable String email, @RequestHeader("Authorization") String jwt) {
         try {
-            return this.feignClient.editAddressInfos(model, email);
+            return this.feignClient.editAddressInfos(model, email, "Bearer " + jwt);
         } catch (AuthenticationException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
     }
 
     @PutMapping("/email/{email}")
-    public UserToken editUserEmail(@RequestBody EditEmail model, @PathVariable String email){
+    public UserToken editUserEmail(@RequestBody EditEmail model, @PathVariable String email, @RequestHeader("Authorization") String jwt) {
         try {
-            return this.feignClient.editEmail(model, email);
+            return this.feignClient.editEmail(model, email, "Bearer " + jwt);
         } catch (AuthenticationException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }

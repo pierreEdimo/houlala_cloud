@@ -19,7 +19,8 @@ public class LocationController {
         return this.service.getLocation(id);
     }
 
-    @PostMapping("/location")
+    @PostMapping("/" +
+            "location")
     public Location addLocation(@RequestBody Location newLocation) {
         return this.service.createNewLocation(newLocation);
     }
