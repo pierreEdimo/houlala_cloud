@@ -1,41 +1,156 @@
 <html lang="fr" xmlns="http://www.w3.org/1999/xhtml">
-   <head>
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Poppins" rel="stylesheet">
-       <title>Houlala</title>
-   </head>
-   <body class="email-container">
-       <section class="order-container">
-           <div class="client-container">
-               <p>${userInformation.lastName} ${userInformation.firstName}</p>
-               <p>${userInformation.streetName}, ${userInformation.houseNumber}</p>
-               <p>${userInformation.poBox}, ${userInformation.city}</p>
-               <p>${userInformation.country}</p>
-           </div>
-           <div style="height: 30px"></div>
-           <div class="item-container">
-              <#list order.cartItems as item>
-                  <div class="item-content-container">
-                     <div class="img" >
-                        <img alt="product-image" src="${item.imageUrl}" class="product"/>
-                     </div>
-                     <div style="width: 30px"></div>
-                     <div class="name-content">
-                        <h3>${item.product}</h3>
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins" rel="stylesheet">
+    <title>Houlala</title>
+</head>
+
+<body>
+
+<div class="email-container">
+    <section class="center">
+        <h1>Houlala</h1>
+    </section>
+    <hr>
+    <section class="bestaetigung-container center">
+        <br>
+        <br>
+        <span class="title">
+                Confirmation de commande
+            </span>
+        <p>
+            Chère (cher) Madame, Monsieur Edimo, <br>
+
+            Nous vous remercions de votre achat sur houlala.store. Nous vous confirmons que nous avons bien reçu
+            votre
+            commande avec les informations ci-dessous.
+
+            Le Paiement se fait en cash.
+        </p>
+        <br>
+        <br>
+    </section>
+    <hr>
+    <section class="adress-container center">
+        <br>
+        <br>
+        <div class="client-container">
+                <span class="small-title">
+                    Adresse de livraison
+                </span>
+            <p>${userInformation.lastName} ${userInformation.firstName}</p>
+            <p>${userInformation.phoneNumber}</p>
+            <p>${userInformation.streetName},</p>
+            <p>${userInformation.country}</p>
+        </div>
+        <br>
+        <br>
+
+    </section>
+    <hr>
+    <section class="product-container center">
+        <br>
+        <br>
+        <div class="item-container">
+            <#list order.cartItems as item>
+                <br>
+                <br>
+                <div class="item-content-container">
+                    <div class="img">
+                        <img alt="product-image"
+                             src="${item.imageUrl}"
+                             class="product-image"/>
+                    </div>
+                    <br>
+                    <div class="name-content">
+                        <span class="small-title">${item.product}</span>
                         <div style="height: 5px"></div>
-                        <p>${item.price} FCFA</p>
+                        <p> ${item.price} FCFA</p>
                         <div style="height: 5px"></div>
                         <p>${item.quantity}</p>
-                     </div>
-                  </div>
-              </#list>
-           </div>
-           <div style="height: 20px"></div>
-           <div class="item-container-bottom">
-                  <P>Total: ${order.totalQuantity}</p>
-                  <p>Prix: ${order.totalPrice} FCFA</p>
-              </div>
-       </section>
-   </body>
+                    </div>
+                </div>
+                <br>
+                <br>
+            </#list>
+        </div>
+        <br>
+        <br>
+    </section>
+    <hr>
+    <section class="total-container center">
+        <br>
+        <br>
+        <div class="item-container-bottom">
+            <P><b>Total:</b> ${order.totalQuantity}</p>
+            <p><b>Prix:</b> ${order.totalPrice} FCFA</p>
+        </div>
+        <br>
+        <br>
+    </section>
+    <hr>
+    <section class="right center">
+        <p>Pour toute question, veuillez contacter le service clientèle du vendeur via son numero ${senderNumber}</p>
+        <p><b>Contact de Houlala:</b> +237 6 97 59 04 70</p>
+    </section>
+</div>
+
+</body>
+
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #ffffff;
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+
+    .title {
+        font-weight: bolder;
+        font-size: 22px;
+    }
+
+    .small-title {
+        font-weight: bolder;
+        font-size: 18px;
+    }
+
+    p {
+        margin: 0;
+        font-size: 14px;
+    }
+
+    .email-container {
+        padding: 20px;
+        width: 40%;
+        margin: auto;
+    }
+
+    .center {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .item-content-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .product-image {
+        width: 240px;
+    }
+
+    p {
+        text-align: center;
+    }
+</style>
+
 </html>

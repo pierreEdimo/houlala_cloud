@@ -12,4 +12,5 @@ public class SendEmaildto {
     private String subject;
     private String to;
     private Order order;
+    private String senderNumber;
 }

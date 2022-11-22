@@ -15,4 +15,5 @@ public class UserInformation {
     private String poBox;
     private String houseNumber;
     private String firstName;
+    private String phoneNumber;
 }
