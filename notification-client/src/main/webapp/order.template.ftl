@@ -18,14 +18,13 @@
         <br>
         <br>
         <span class="title">
-                Confirmation de commande
+                Nouvelle Commande
             </span>
         <p>
-            Chère (cher) Madame, Monsieur Edimo, <br>
+            Chère (cher) commerçant(e) <br>
 
-            Nous vous remercions de votre achat sur houlala.store. Nous vous confirmons que nous avons bien reçu
-            votre
-            commande avec les informations ci-dessous.
+            Nous vous annonçons avec joie que vous avez reçu une commande venant de ${userInformation.lastName}
+            ${userInformation.firstName}.
 
             Le Paiement se fait en cash.
         </p>
@@ -92,7 +91,7 @@
     </section>
     <hr>
     <section class="right center">
-        <p>Pour toute question, veuillez contacter le service clientèle du vendeur via son numero ${senderNumber}</p>
+        <p>Pour toute question, veuillez contacter l'acheteur via son numero: ${userInformation.phoneNumber}</p>
         <p><b>Contact de Houlala:</b> +237 6 97 59 04 70</p>
     </section>
 </div>

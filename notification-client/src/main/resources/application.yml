@@ -6,6 +6,3 @@ server:
 spring:
   application:
     name: notification
-  freemarker:
-    template-loader-path: classtpath:/templates
-    suffix: .ftl

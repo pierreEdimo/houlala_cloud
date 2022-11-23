@@ -1,0 +1,30 @@
+{
+  "userInformation": {
+    "lastName": "Edimo Nkoe",
+    "city": "Yaounde",
+    "country": "Cameroun",
+    "email": "pedimonkoe@yahoo.com",
+    "streetName": "Biyem-Assi",
+    "poBox": "36037",
+    "houseNumber": "0",
+    "firstName": "Pierre Patrice",
+    "phoneNumber": "+237 99 91 74 62"
+  },
+  "subject": "nouvelle commande",
+  "to": "pedimonkoe@yahoo.com",
+  "order": {
+    "status": "En Attente",
+    "payMentMode": "Cash",
+    "totalQuantity": 10,
+    "totalPrice": 2500,
+    "cartItems": [
+      {
+        "productSku": "aaaaaaaaa",
+        "price": 50,
+        "product": "Ananas",
+        "imageUrl": "https://upload.houlala.store/Images/73f95795-203e-41a6-9bb9-a5a473988f16.jpg",
+        "quantity": 123
+      }
+    ]
+  }
+}
