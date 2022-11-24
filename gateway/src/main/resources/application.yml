@@ -21,8 +21,8 @@ spring:
           uri: lb://discovery-orchestrator
           predicates:
             Path=/discovery-orchestrator/**
-#          filters:
-#            - Jwt
+        #          filters:
+        #            - Jwt
         - id: authentication
           uri: lb://authentication
           predicates:
@@ -31,18 +31,18 @@ spring:
           uri: lb://marketplace
           predicates:
             Path=/marketplace/**
-#          filters:
-#            - Jwt
+        #          filters:
+        #            - Jwt
         - id: inventory
           uri: lb://inventory
           predicates:
             Path=/inventory/**
-#          filters:
-#            - Jwt
-        - id: notification
-          uri: lb://notification
+        #          filters:
+        #            - Jwt
+        - id: email
+          uri: lb://email
           predicates:
-            Path=/notification/**
+            Path=/email/**
 #          filters:
 #            - Jwt
 eureka:
