@@ -13,7 +13,6 @@
         <module name="review-service" />
         <module name="marketplace-client" />
         <module name="authentication-client" />
-        <module name="notification-client" />
         <module name="inventory-service" />
         <module name="discovery" />
         <module name="email-service" />

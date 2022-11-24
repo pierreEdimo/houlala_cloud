@@ -182,17 +182,6 @@ services:
               "spring.jpa.hibernate.ddl-auto" : "update"
             }'
     restart: on-failure
-  notification-client:
-    image: houlala-cloud-notification-client:latest
-    container_name: notification-client
-    expose:
-      - "8091"
-    ports:
-      - "8091:8091"
-    environment:
-      eureka.client.serviceUrl.defaultZone: http://discovery:8761/eureka
-      EUREKA_INSTANCE_PREFER_IP_ADDRESS: "true"
-    restart: on-failure
   houlala_authentication:
     image: pierreedimo777/houlala-authentication
     expose:

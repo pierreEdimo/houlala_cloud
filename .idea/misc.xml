@@ -17,7 +17,6 @@
         <option value="$PROJECT_DIR$/authentication-client/pom.xml" />
         <option value="$PROJECT_DIR$/inventory-service/pom.xml" />
         <option value="$PROJECT_DIR$/stock-service/pom.xml" />
-        <option value="$PROJECT_DIR$/notification-client/pom.xml" />
         <option value="$PROJECT_DIR$/config/pom.xml" />
         <option value="$PROJECT_DIR$/email-service/pom.xml" />
       </list>
