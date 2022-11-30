@@ -42,4 +42,5 @@ public interface LocationServiceFeignClient {
 
     @GetMapping("/user/{userId}")
     LocationResponse getLocationsByUserId(@PathVariable String userId) throws OrchestratorException;
+
 }

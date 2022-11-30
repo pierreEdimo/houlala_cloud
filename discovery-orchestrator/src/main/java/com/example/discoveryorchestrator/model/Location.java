@@ -1,18 +1,20 @@
 package com.example.discoveryorchestrator.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Location {
     private Long id;
 
     private String name;
 
     private String description;
+
+    private String shortDescription;
 
     private long countryId;
 
@@ -32,8 +34,6 @@ public class Location {
 
     private String imageUrl;
 
-    public Location(){}
-
     public Location(
             String name,
             String description,
@@ -42,8 +42,9 @@ public class Location {
             Address address,
             String telephoneNumber,
             String email,
-            String website
-    ){
+            String website,
+            String shortDescription
+    ) {
         this.name = name;
         this.description = description;
         this.countryId = countryId;
@@ -52,5 +53,6 @@ public class Location {
         this.telephoneNumber = telephoneNumber;
         this.email = email;
         this.website = website;
+        this.shortDescription = shortDescription;
     }
 }

@@ -12,6 +12,8 @@ public class CreateLocationDto {
 
     private String description;
 
+    private String shortDescription;
+
     private long countryId;
 
     private long categoryId;

@@ -174,7 +174,8 @@ public class OrchestratorLocationController {
                 createLocationDto.getAddress(),
                 createLocationDto.getTelephoneNumber(),
                 createLocationDto.getEmail(),
-                createLocationDto.getWebsite()
+                createLocationDto.getWebsite(),
+                createLocationDto.getShortDescription()
         );
 
         uniqueIdentifier = this.skuGenerator(createLocationDto.getName());

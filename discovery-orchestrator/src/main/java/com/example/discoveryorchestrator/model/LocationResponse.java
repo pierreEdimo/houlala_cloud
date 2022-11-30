@@ -14,6 +14,8 @@ public class LocationResponse {
 
     private String description;
 
+    private String shortDescription;
+
     private Country country;
 
     private List<Availability> availabilityList;
