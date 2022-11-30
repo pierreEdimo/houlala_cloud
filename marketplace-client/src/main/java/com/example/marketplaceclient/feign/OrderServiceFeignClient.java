@@ -17,16 +17,16 @@ public interface OrderServiceFeignClient {
     List<Order> getAllOrders() throws MarketplaceException;
 
     @GetMapping("/carts")
-    List<Order> getNonConfirmedOrders(@RequestParam String userId) throws MarketplaceException;
+    List<Order> getNonConfirmedOrders(@RequestParam(value = "userId") String userId) throws MarketplaceException;
 
     @GetMapping("/confirmed")
-    List<Order> getConfirmedOrders(@RequestParam String userId) throws MarketplaceException;
+    List<Order> getConfirmedOrders(@RequestParam(value = "userId") String userId) throws MarketplaceException;
 
     @GetMapping("/confirmed/location/{id}")
-    List<Order> getConfirmedOrdersByLocationId(@PathVariable("id") String locationId) throws MarketplaceException;
+    List<Order> getConfirmedOrdersByLocationId(@PathVariable(value = "id") String locationId) throws MarketplaceException;
 
     @GetMapping("/confirmed/location/{id}/status/{status}")
-    List<Order> getConfirmedOrdersByLocationIdAndStatus(@PathVariable("id") String locationId, @PathVariable("status") String status) throws MarketplaceException;
+    List<Order> getConfirmedOrdersByLocationIdAndStatus(@PathVariable(value = "id") String locationId, @PathVariable("status") String status) throws MarketplaceException;
 
     @PutMapping("/command")
     void sendCommandToSeller(@RequestBody UserInformation userInformation) throws MarketplaceException;
@@ -41,13 +41,13 @@ public interface OrderServiceFeignClient {
     Order cancelOrder(@PathVariable(name = "id") String id) throws MarketplaceException;
 
     @PutMapping("/cartItems/increase/{id}/sku/{sku}")
-    void increaseQuantity(@PathVariable String id, @PathVariable String sku) throws MarketplaceException;
+    void increaseQuantity(@PathVariable(value = "id") String id, @PathVariable(value = "sku") String sku) throws MarketplaceException;
 
     @PutMapping("/cartItems/decrease/{id}/sku/{sku}")
-    void decreaseQuantity(@PathVariable String id, @PathVariable String sku) throws MarketplaceException;
+    void decreaseQuantity(@PathVariable(value = "id") String id, @PathVariable(value = "sku") String sku) throws MarketplaceException;
 
     @DeleteMapping("/cartItems/{id}/sku/{sku}")
-    void deleteItemFromOrder(@PathVariable String id, @PathVariable String sku) throws MarketplaceException;
+    void deleteItemFromOrder(@PathVariable(value = "id") String id, @PathVariable(value = "sku") String sku) throws MarketplaceException;
 
     @PostMapping("/unregistereds")
     Order sendOrderFromUnregisteredUsers(@RequestBody CreateUnregisteredUserOrder order) throws MarketplaceException;

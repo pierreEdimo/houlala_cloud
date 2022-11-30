@@ -17,12 +17,12 @@ public interface CountryServiceFeignClient {
     Country createCountry(@RequestBody Country newCountry) throws OrchestratorException;
 
     @GetMapping("/getSingleCountry/{id}")
-    Country getASingleCountry(@PathVariable long id) throws OrchestratorException;
+    Country getASingleCountry(@PathVariable(value = "id") long id) throws OrchestratorException;
 
     @DeleteMapping("/deleteCountry/{id}")
-    void deleteCountry(@PathVariable long id) throws OrchestratorException;
+    void deleteCountry(@PathVariable(value = "id") long id) throws OrchestratorException;
 
     @PutMapping("/editCountry/{id}")
-    Country editCountry(@RequestBody Country newCountry, @PathVariable long id) throws OrchestratorException;
+    Country editCountry(@RequestBody Country newCountry, @PathVariable(value = "id") long id) throws OrchestratorException;
 
 }

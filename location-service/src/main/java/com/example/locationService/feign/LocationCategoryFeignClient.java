@@ -10,5 +10,5 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface LocationCategoryFeignClient {
 
     @GetMapping("/{id}")
-    Category getSingleCategory(@PathVariable long id) throws LocationServiceException;
+    Category getSingleCategory(@PathVariable(value = "id") long id) throws LocationServiceException;
 }

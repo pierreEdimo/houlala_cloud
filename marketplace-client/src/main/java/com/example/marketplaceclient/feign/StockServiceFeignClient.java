@@ -11,7 +11,7 @@ import java.util.List;
 public interface StockServiceFeignClient {
 
     @GetMapping("/{id}")
-    ProductAdditionalInformation getASingleInfo(@PathVariable String id) throws MarketplaceException;
+    ProductAdditionalInformation getASingleInfo(@PathVariable("id") String id) throws MarketplaceException;
 
     @GetMapping("")
     List<ProductAdditionalInformation> getAllProductInfos() throws MarketplaceException;
@@ -20,6 +20,6 @@ public interface StockServiceFeignClient {
     ProductAdditionalInformation addInfo(@RequestBody ProductAdditionalInformation info) throws MarketplaceException;
 
     @PutMapping("/getInfoAndUdateQuantity")
-    void getProductAndUpdateQuantity(@RequestParam String productSku, @RequestParam int quantity) throws MarketplaceException;
+    void getProductAndUpdateQuantity(@RequestParam("productSku") String productSku, @RequestParam("quantity") int quantity) throws MarketplaceException;
 
 }

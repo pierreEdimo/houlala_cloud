@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface MarketPlaceServiceFeignClient {
 
     @GetMapping("orders/total/{locationId}")
-    long getTotalOrderCount(@PathVariable String locationId) throws LocationServiceException;
+    long getTotalOrderCount(@PathVariable(value = "locationId") String locationId) throws LocationServiceException;
 
     @GetMapping("orders/sold/{locationId}")
-    long getOrderSoldCount(@PathVariable String locationId) throws LocationServiceException;
+    long getOrderSoldCount(@PathVariable(value = "locationId") String locationId) throws LocationServiceException;
 
     @GetMapping("orders/canceled/{locationId}")
-    long getCanceledOrderCount(@PathVariable String locationId) throws LocationServiceException;
+    long getCanceledOrderCount(@PathVariable(value = "locationId") String locationId) throws LocationServiceException;
 
     @GetMapping("/products/total/{locationId}")
-    long getProductTotalCount(@PathVariable String locationId) throws LocationServiceException;
+    long getProductTotalCount(@PathVariable(value = "locationId") String locationId) throws LocationServiceException;
 }

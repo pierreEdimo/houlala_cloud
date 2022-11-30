@@ -13,7 +13,7 @@ import java.util.List;
 public interface CommentServiceFeignClient {
 
     @GetMapping("/comment/filter")
-    List<Comment> getCommentFromPostId(@RequestParam String postId) throws MarketplaceException;
+    List<Comment> getCommentFromPostId(@RequestParam(value = "postId") String postId) throws MarketplaceException;
 
     @PostMapping("/comment/{id}")
     void addComment(@PathVariable(name = "id") String postId, @RequestBody CreateCommentDto newComment) throws MarketplaceException;

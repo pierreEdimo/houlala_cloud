@@ -10,5 +10,5 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface UserFeignClient {
 
     @GetMapping("/User/GetUserById/{userId}")
-    Owner getSingleUserByEmail(@PathVariable("userId") String uid) throws LocationServiceException;
+    Owner getSingleUserByEmail(@PathVariable(value = "userId") String uid) throws LocationServiceException;
 }

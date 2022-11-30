@@ -14,23 +14,23 @@ public interface CategoryServiceFeignClient {
     List<Category> getAllCategories() throws MarketplaceException;
 
     @GetMapping("/filterCategoriesWithLimit")
-    List<Category> getCategoriesWithLimit(@RequestParam int limit) throws MarketplaceException;
+    List<Category> getCategoriesWithLimit(@RequestParam(value = "limit") int limit) throws MarketplaceException;
 
     @GetMapping("/search")
     List<Category> searchCategories(@RequestParam(name = "searchword") String search) throws MarketplaceException;
 
     @GetMapping("/{id}")
-    Category getSingleCategory(@PathVariable String id) throws MarketplaceException;
+    Category getSingleCategory(@PathVariable(value = "id") String id) throws MarketplaceException;
 
     @PostMapping("")
     Category addCategory(@RequestBody Category newCategory) throws MarketplaceException;
 
     @PatchMapping("/{id}")
-    Category editCategory(@PathVariable String id, @RequestBody Category newCategory) throws MarketplaceException;
+    Category editCategory(@PathVariable(value = "id") String id, @RequestBody Category newCategory) throws MarketplaceException;
 
     @DeleteMapping("/{id}")
-    Category deleteCategory(@PathVariable String id) throws MarketplaceException;
+    Category deleteCategory(@PathVariable(value = "id") String id) throws MarketplaceException;
 
     @GetMapping("/random")
-    List<Category> getRandomCategories(@RequestParam int size) throws MarketplaceException;
+    List<Category> getRandomCategories(@RequestParam(value = "size") int size) throws MarketplaceException;
 }

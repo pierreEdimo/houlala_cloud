@@ -13,6 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 public interface UploadServiceFeignClient {
 
     @PostMapping(value = "/api/Upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    String uploadImage(@RequestPart MultipartFile image) throws MarketplaceException;
+    String uploadImage(@RequestPart("image") MultipartFile image) throws MarketplaceException;
 
 }

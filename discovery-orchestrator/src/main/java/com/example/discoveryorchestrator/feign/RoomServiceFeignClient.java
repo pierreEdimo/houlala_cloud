@@ -22,12 +22,12 @@ public interface RoomServiceFeignClient {
     Room editRoom(@RequestBody Room newRoom, @PathVariable long id) throws OrchestratorException;
 
     @DeleteMapping("/deleteRoom/{id}")
-    void deleteRoom(@PathVariable long id) throws OrchestratorException;
+    void deleteRoom(@PathVariable(value = "id") long id) throws OrchestratorException;
 
     @GetMapping("/singleRoom/{id}")
-    RoomResponse getRoom(@PathVariable long id) throws OrchestratorException;
+    RoomResponse getRoom(@PathVariable(value = "id") long id) throws OrchestratorException;
 
     @GetMapping("/getRoomsByLocationId/{id}")
-    RoomOverviewDto getRoomByLocationId(@PathVariable long id) throws OrchestratorException;
+    RoomOverviewDto getRoomByLocationId(@PathVariable("id") long id) throws OrchestratorException;
 
 }

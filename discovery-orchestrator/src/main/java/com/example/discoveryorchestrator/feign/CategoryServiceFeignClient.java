@@ -11,7 +11,7 @@ import java.util.List;
 public interface CategoryServiceFeignClient {
 
     @GetMapping("/{id}")
-    Category getCategory(@PathVariable long id) throws OrchestratorException;
+    Category getCategory(@PathVariable(value = "id") long id) throws OrchestratorException;
 
     @PostMapping(value = "/newCategory")
     Category createCategory(@RequestBody Category category) throws OrchestratorException;
@@ -23,7 +23,7 @@ public interface CategoryServiceFeignClient {
     Category editCategory(@RequestBody Category newCategory, @PathVariable long id) throws OrchestratorException;
 
     @DeleteMapping("/{id}")
-    void deleteCategory(@PathVariable long id) throws OrchestratorException;
+    void deleteCategory(@PathVariable(value = "id") long id) throws OrchestratorException;
 
     @GetMapping("/store")
     List<Category> getCategoriesStore() throws OrchestratorException;

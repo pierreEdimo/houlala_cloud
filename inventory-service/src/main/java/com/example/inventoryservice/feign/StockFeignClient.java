@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface StockFeignClient {
 
     @GetMapping("/getInfoBySku")
-    ProductInformation getProductBySKu(@RequestParam String productSku) throws InventoryException;
+    ProductInformation getProductBySKu(@RequestParam(value = "sku") String productSku) throws InventoryException;
 
 
 }

@@ -12,13 +12,13 @@ import java.util.List;
 public interface ReviewServiceFeignClient {
 
     @GetMapping("/getSingleReview/{id}")
-    ReviewResponse getSingleReview(@PathVariable long id) throws OrchestratorException;
+    ReviewResponse getSingleReview(@PathVariable(value = "id") long id) throws OrchestratorException;
 
     @GetMapping("")
     List<ReviewResponse> getAllReviews() throws OrchestratorException;
 
     @DeleteMapping("/deleteReview/{id}")
-    void deleteReview(@PathVariable long id) throws OrchestratorException;
+    void deleteReview(@PathVariable(value = "id") long id) throws OrchestratorException;
 
     @PutMapping("/editReview/{id}")
     ReviewDto editReview(@RequestBody ReviewDto reviewDto, @PathVariable long id) throws OrchestratorException;

@@ -15,27 +15,27 @@ public interface PostServiceFeignClient {
     List<Post> getAllPosts() throws MarketplaceException;
 
     @GetMapping("/random")
-    List<Post> getRandomPosts(@RequestParam int size) throws MarketplaceException;
+    List<Post> getRandomPosts(@RequestParam(value = "size") int size) throws MarketplaceException;
 
     @GetMapping("/location/{id}")
-    List<Post> getPostByLocationId(@PathVariable("id") String locationId) throws MarketplaceException;
+    List<Post> getPostByLocationId(@PathVariable(value = "id") String locationId) throws MarketplaceException;
 
     @DeleteMapping("/{id}")
-    void deletePost(@PathVariable String id) throws MarketplaceException;
+    void deletePost(@PathVariable(value = "id") String id) throws MarketplaceException;
 
     @GetMapping("/random/location/{locationId}")
-    List<Post> getRandomPostsByLocationId(@RequestParam int size, @PathVariable String locationId) throws MarketplaceException;
+    List<Post> getRandomPostsByLocationId(@RequestParam(value = "size") int size, @PathVariable(value = "locationId") String locationId) throws MarketplaceException;
 
     @PostMapping("")
     Post createPost(@RequestBody CreatePost newPost) throws MarketplaceException;
 
     @PutMapping("/{id}")
-    void editPost(@PathVariable String id, @RequestBody CreatePost editPost) throws MarketplaceException;
+    void editPost(@PathVariable(value = "id") String id, @RequestBody CreatePost editPost) throws MarketplaceException;
 
     @GetMapping("/{id}")
-    Post getPostById(@PathVariable String id, @RequestParam String userId) throws MarketplaceException;
+    Post getPostById(@PathVariable(value = "id") String id, @RequestParam(value = "userId") String userId) throws MarketplaceException;
 
     @PutMapping("/like/{id}")
-    void likePost(@PathVariable String id, @RequestParam String userId) throws MarketplaceException;
+    void likePost(@PathVariable(value = "id") String id, @RequestParam(value = "userId") String userId) throws MarketplaceException;
 
 }

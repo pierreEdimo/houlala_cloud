@@ -10,5 +10,5 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface LoginFeignClient {
 
     @GetMapping("/User/GetUserByEmail/{Email}")
-    User getSingleUserByEmail(@PathVariable("Email") String email) throws MarketplaceException;
+    User getSingleUserByEmail(@PathVariable(value = "Email") String email) throws MarketplaceException;
 }

@@ -14,16 +14,16 @@ public interface ProductTypeFeignClient {
     List<ProductType> getAllProductTypes() throws MarketplaceException;
 
     @GetMapping("/{id}")
-    ProductType getSingleProductType(@PathVariable String id) throws MarketplaceException;
+    ProductType getSingleProductType(@PathVariable(value = "id") String id) throws MarketplaceException;
 
     @PostMapping("")
     ProductType addProductType(@RequestBody ProductType newType) throws MarketplaceException;
 
     @PatchMapping("/{id}")
-    ProductType editProductType(@RequestBody ProductType newType, @PathVariable String id) throws MarketplaceException;
+    ProductType editProductType(@RequestBody ProductType newType, @PathVariable(value = "id") String id) throws MarketplaceException;
 
     @DeleteMapping("/{id}")
-    ProductType deleteProductType(@PathVariable String id) throws MarketplaceException;
+    ProductType deleteProductType(@PathVariable(value = "id") String id) throws MarketplaceException;
 
     @GetMapping("/category/{id}")
     List<ProductType> getTypesByCategoryId(@PathVariable("id") String categoryId) throws MarketplaceException;

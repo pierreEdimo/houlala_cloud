@@ -93,7 +93,6 @@ services:
       - authentication-client
       - marketplace-client
       - inventory-service
-      - notification-client
     environment:
       EUREKA_INSTANCE_PREFER_IP_ADDRESS: "true"
       eureka.client.serviceUrl.defaultZone: http://discovery:8761/eureka

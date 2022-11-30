@@ -19,8 +19,7 @@ public class LocationController {
         return this.service.getLocation(id);
     }
 
-    @PostMapping("/" +
-            "location")
+    @PostMapping("/location")
     public Location addLocation(@RequestBody Location newLocation) {
         return this.service.createNewLocation(newLocation);
     }
@@ -36,7 +35,7 @@ public class LocationController {
     }
 
     @GetMapping("/place")
-    public List<LocationResponse> getPlaces(){
+    public List<LocationResponse> getPlaces() {
         return this.service.getLocations();
     }
 

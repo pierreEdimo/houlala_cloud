@@ -12,6 +12,6 @@ import java.util.List;
 public interface ProductServiceFeignClient {
 
     @GetMapping("/filterProductByPageId")
-    List<Product> getProductsByLocationId(@RequestParam String locationId, @RequestParam int limit) throws StockServiceException;
+    List<Product> getProductsByLocationId(@RequestParam(value = "locationId") String locationId, @RequestParam(value = "limit") int limit) throws StockServiceException;
 
 }
