@@ -1,5 +1,6 @@
 package com.example.marketplaceclient.services;
 
+import com.example.marketplaceclient.model.DeliveryDate;
 import com.example.marketplaceclient.model.UserInformation;
 import com.example.marketplaceclient.model.dto.CreateOrderDto;
 import com.example.marketplaceclient.model.dto.CreateUnregisteredUserOrder;
@@ -42,4 +43,6 @@ public interface OrderService {
     long getOrderCanceledCount(String locationId);
 
     List<OrderDto> getAllOrdersByLocationId(String locationId);
+
+    void updateDeliveryDate(String id, DeliveryDate newDate);
 }

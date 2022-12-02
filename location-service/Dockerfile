@@ -1,4 +1,4 @@
 FROM openjdk:17
 LABEL maintainers="pierre Edimo Nkoe"
-ADD target/location-service-0.0.2-SNAPSHOT.jar location-service.jar
-ENTRYPOINT ["java", "-jar", "location-service.jar"]
+ADD target/location-api.jar location-api.jar
+ENTRYPOINT ["java", "-jar", "location-api.jar"]

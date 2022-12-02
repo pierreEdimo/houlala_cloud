@@ -31,6 +31,8 @@ public class LocationServiceImpl implements LocationService {
 
     private final MarketPlaceServiceFeignClient marketPlaceFeignClient;
 
+    private final UserFeignClient userFeignClient;
+
 
     @Override
     public LocationResponse getLocation(long id) {
@@ -274,6 +276,7 @@ public class LocationServiceImpl implements LocationService {
         long orderSoldCount = this.marketPlaceFeignClient.getOrderSoldCount(location.getUniqueIdentifier());
         long orderCanceledCount = this.marketPlaceFeignClient.getCanceledOrderCount(location.getUniqueIdentifier());
         long productTotalCount = this.marketPlaceFeignClient.getProductTotalCount(location.getUniqueIdentifier());
+        Owner creator = this.userFeignClient.getSingleUserByUserId(location.getUserId());
 
         LocationResponse response = new LocationResponse();
 
@@ -294,6 +297,8 @@ public class LocationServiceImpl implements LocationService {
         response.setOrderSoldCount(orderSoldCount);
         response.setOrderTotalCount(orderTotalCount);
         response.setProductTotalCount(productTotalCount);
+        response.setCreator(creator);
+        response.setShortDescription(location.getShortDescription());
 
 
         if (response.getCategory().getName().equals("Hotel")) {

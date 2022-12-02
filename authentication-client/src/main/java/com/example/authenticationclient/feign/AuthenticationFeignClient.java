@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(url = "http://houlala_authentication:8000/api/", name = "authentication")
+@FeignClient(url = "https://authentication.houlala.store/api", name = "authentication")
 public interface AuthenticationFeignClient {
 
 

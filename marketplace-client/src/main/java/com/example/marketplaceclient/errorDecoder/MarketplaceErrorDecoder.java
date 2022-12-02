@@ -10,6 +10,7 @@ public class MarketplaceErrorDecoder implements ErrorDecoder {
 
     @Override
     public Exception decode(String methodKey, Response response) {
-        return new MarketplaceException("error", HttpStatus.resolve(response.status()));
+        return new MarketplaceException("sorry By calling the Products there were an error",
+                HttpStatus.resolve(response.status()));
     }
 }

@@ -1,6 +1,8 @@
 package com.example.locationService.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
@@ -11,22 +13,28 @@ import javax.persistence.Id;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Address {
+    /**
+     * l'identifiant unique de l'adresse
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * La ville de l'habitation
+     */
     private String city;
 
+    /**
+     * La rue de l'habitation
+     */
     private String streetName;
 
+    /**
+     * La boite postale
+     */
     private String poBox;
-
-    public Address(){}
-
-    public Address(String city, String streetName, String poBox){
-        this.city = city;
-        this.streetName  = streetName;
-        this.poBox = poBox;
-    }
 }

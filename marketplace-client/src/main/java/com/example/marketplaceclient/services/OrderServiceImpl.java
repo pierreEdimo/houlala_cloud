@@ -203,8 +203,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public long getOrderTotalCount(String locationId) {
         try {
-            return this.feignClient.getAllOrders().stream()
-                    .filter(order -> order.getLocationId().equalsIgnoreCase(locationId)).count();
+            return this.feignClient.getAllOrders().stream().filter(order -> order.getLocationId().equalsIgnoreCase(locationId)).count();
         } catch (MarketplaceException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
@@ -213,9 +212,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public long getOrderSoldCount(String locationId) {
         try {
-            return this.feignClient.getAllOrders().stream()
-                    .filter(order -> order.getLocationId().equalsIgnoreCase(locationId)
-                            && order.getStatus().equalsIgnoreCase("Delivre")).count();
+            return this.feignClient.getAllOrders().stream().filter(order -> order.getLocationId().equalsIgnoreCase(locationId) && order.getStatus().equalsIgnoreCase("Delivre")).count();
         } catch (MarketplaceException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
@@ -224,9 +221,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public long getOrderCanceledCount(String locationId) {
         try {
-            return this.feignClient.getAllOrders().stream().
-                    filter(order -> order.getLocationId().equalsIgnoreCase(locationId)
-                            && order.getStatus().equalsIgnoreCase("Annule")).count();
+            return this.feignClient.getAllOrders().stream().filter(order -> order.getLocationId().equalsIgnoreCase(locationId) && order.getStatus().equalsIgnoreCase("Annule")).count();
         } catch (MarketplaceException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
@@ -248,6 +243,15 @@ public class OrderServiceImpl implements OrderService {
         return orderDtoList;
     }
 
+    @Override
+    public void updateDeliveryDate(String id, DeliveryDate newDate) {
+        try {
+            this.feignClient.updateDeliveryDate(id, newDate);
+        } catch (MarketplaceException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+    }
+
     private OrderDto toOrderDto(Order order) {
         List<CartItemDto> cartItemDtos = new ArrayList<>();
         Location location = new Location();
@@ -258,14 +262,7 @@ public class OrderServiceImpl implements OrderService {
                 location = this.locationServiceFeignClient.getALocation(order.getLocationId());
                 Product product = this.productServiceFeignClient.getProductBySku(item.getProductSku());
 
-                CartItemDto cartItemDto = new CartItemDto(
-                        product.getProductSku(),
-                        product.getName(),
-                        product.getImageUrl(),
-                        item.getQuantity(),
-                        item.getPrice(),
-                        item.getInitialPrice()
-                );
+                CartItemDto cartItemDto = new CartItemDto(product.getProductSku(), product.getName(), product.getImageUrl(), item.getQuantity(), item.getPrice(), item.getInitialPrice());
 
                 cartItemDtos.add(cartItemDto);
             } catch (MarketplaceException e) {
@@ -273,17 +270,6 @@ public class OrderServiceImpl implements OrderService {
             }
         }
 
-        return new OrderDto(
-                order.get_id(),
-                order.getStatus(),
-                order.isConfirmed(),
-                order.getPayMentMode(),
-                order.getCreatedAt(),
-                order.getUpdatedAt(),
-                order.getUserInformation(),
-                cartItemDtos,
-                location,
-                order.getDeliveryDate()
-        );
+        return new OrderDto(order.get_id(), order.getStatus(), order.isConfirmed(), order.getPayMentMode(), order.getCreatedAt(), order.getUpdatedAt(), order.getUserInformation(), cartItemDtos, location, order.getDeliveryDate());
     }
 }

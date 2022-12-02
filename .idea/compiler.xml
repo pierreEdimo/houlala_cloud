@@ -26,26 +26,26 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="api" target="17" />
-      <module name="authentication-client" target="17" />
+      <module name="authentication-client" target="1.8" />
       <module name="booking-service" target="17" />
       <module name="booking_service" target="17" />
-      <module name="category-service" target="17" />
-      <module name="config" target="17" />
-      <module name="country-service" target="17" />
-      <module name="discovery" target="17" />
+      <module name="category-service" target="1.8" />
+      <module name="config" target="1.8" />
+      <module name="country-service" target="1.8" />
+      <module name="discovery" target="1.8" />
       <module name="discovery-orchestrator" target="17" />
-      <module name="email-service" target="17" />
-      <module name="gateway" target="17" />
+      <module name="email-service" target="1.8" />
+      <module name="gateway" target="1.8" />
       <module name="hotel-service" target="17" />
-      <module name="inventory-service" target="17" />
+      <module name="inventory-service" target="1.8" />
       <module name="location-service" target="17" />
       <module name="marketplace-client" target="17" />
       <module name="message-sender" target="17" />
       <module name="notification-client" target="17" />
       <module name="offer-service" target="17" />
-      <module name="review-service" target="17" />
-      <module name="room-service" target="17" />
-      <module name="stock-service" target="17" />
+      <module name="review-service" target="1.8" />
+      <module name="room-service" target="1.8" />
+      <module name="stock-service" target="1.8" />
       <module name="upload-client" target="17" />
       <module name="upload-service" target="17" />
     </bytecodeTargetLevel>

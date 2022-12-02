@@ -6,9 +6,9 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(url = "http://houlala_authentication:8000/api/", name = "authentication")
+@FeignClient(url = "https://authentication.houlala.store/api", name = "authentication")
 public interface LoginFeignClient {
 
-    @GetMapping("/User/GetUserByEmail/{Email}")
-    User getSingleUserByEmail(@PathVariable(value = "Email") String email) throws MarketplaceException;
+    @GetMapping("/User/GetUserById/{userId}")
+    User getSingleUserByUserId(@PathVariable(value = "userId") String userId) throws MarketplaceException;
 }

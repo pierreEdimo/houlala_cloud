@@ -1,5 +1,6 @@
 package com.example.marketplaceclient.controller;
 
+import com.example.marketplaceclient.model.DeliveryDate;
 import com.example.marketplaceclient.model.UserInformation;
 import com.example.marketplaceclient.model.dto.CreateOrderDto;
 import com.example.marketplaceclient.model.dto.CreateUnregisteredUserOrder;
@@ -83,27 +84,33 @@ public class OrderController {
 
     @PostMapping("/unregistereds")
     @ResponseStatus(HttpStatus.CREATED)
-    public OrderDto sendUnregisteredUserOrder(@RequestBody CreateUnregisteredUserOrder order){
+    public OrderDto sendUnregisteredUserOrder(@RequestBody CreateUnregisteredUserOrder order) {
         return this.orderService.sendUnregisteredUserOrder(order);
     }
 
     @GetMapping("/total/{locationId}")
-    public long getTotalOrderCount(@PathVariable String locationId){
+    public long getTotalOrderCount(@PathVariable String locationId) {
         return this.orderService.getOrderTotalCount(locationId);
     }
 
     @GetMapping("/sold/{locationId}")
-    public long getOrderSoldCount(@PathVariable String locationId){
+    public long getOrderSoldCount(@PathVariable String locationId) {
         return this.orderService.getOrderSoldCount(locationId);
     }
 
     @GetMapping("/canceled/{locationId}")
-    public long getCanceledOrderCount(@PathVariable String locationId){
+    public long getCanceledOrderCount(@PathVariable String locationId) {
         return this.orderService.getOrderCanceledCount(locationId);
     }
 
     @GetMapping("/all/{locationId}")
-    public List<OrderDto> getAllOrdersFromLocationId(@PathVariable String locationId){
+    public List<OrderDto> getAllOrdersFromLocationId(@PathVariable String locationId) {
         return this.orderService.getAllOrdersByLocationId(locationId);
+    }
+
+    @PutMapping("/deliveryDate/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateDeliveryDate(@PathVariable String id, @RequestBody DeliveryDate newDate) {
+        this.orderService.updateDeliveryDate(id, newDate);
     }
 }

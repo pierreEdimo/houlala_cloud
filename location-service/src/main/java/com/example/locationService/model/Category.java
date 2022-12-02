@@ -1,14 +1,24 @@
 package com.example.locationService.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Category {
+    /**
+     * L'identifiant unique de la categorie
+     */
     private Long id;
 
+    /**
+     * Le thumbnail de la categorie
+     */
     private String thumbNail;
 
+    /**
+     * le nom de la categorie
+     */
     private String name;
 }

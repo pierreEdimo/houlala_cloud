@@ -78,7 +78,7 @@ public class CommentController {
     private CommentDto toCommentDto(Comment comment) {
         User author;
         try {
-            author = this.loginFeignClient.getSingleUserByEmail(comment.getUserId());
+            author = this.loginFeignClient.getSingleUserByUserId(comment.getUserId());
         } catch (MarketplaceException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }

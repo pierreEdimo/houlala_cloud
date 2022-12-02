@@ -1,6 +1,7 @@
 package com.example.marketplaceclient.feign;
 
 import com.example.marketplaceclient.exception.MarketplaceException;
+import com.example.marketplaceclient.model.DeliveryDate;
 import com.example.marketplaceclient.model.Order;
 import com.example.marketplaceclient.model.UserInformation;
 import com.example.marketplaceclient.model.dto.CreateOrderDto;
@@ -51,4 +52,7 @@ public interface OrderServiceFeignClient {
 
     @PostMapping("/unregistereds")
     Order sendOrderFromUnregisteredUsers(@RequestBody CreateUnregisteredUserOrder order) throws MarketplaceException;
+
+    @PutMapping("/deliveryDate/{id}")
+    void updateDeliveryDate(@PathVariable(value = "id") String id, @RequestBody DeliveryDate date) throws MarketplaceException;
 }

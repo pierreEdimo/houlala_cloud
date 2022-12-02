@@ -51,7 +51,7 @@ public interface ProductServiceFeignClient {
     Product getProductByNameAndIsFavorite(@PathVariable("name") String name, @RequestParam(value = "userId") String userId) throws MarketplaceException;
 
     @GetMapping("random/location/{id}")
-    List<Product> getRandomProductsByLocationId(@PathVariable("id") String locationId, @RequestParam(value = "userId") int size) throws MarketplaceException;
+    List<Product> getRandomProductsByLocationId(@PathVariable("id") String locationId, @RequestParam(value = "size") int size) throws MarketplaceException;
 
     @GetMapping("type/{id}")
     List<Product> getProductsByType(@PathVariable("id") String typeId, @RequestParam(value = "limit") int limit) throws MarketplaceException;

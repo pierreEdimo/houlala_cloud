@@ -276,7 +276,7 @@ public class ProductServiceImpl implements ProductService {
             productList = this.feignClient.getRandomProductsByLocationId(locationId, size);
             informations = this.stockerServiceFeignClient.getAllProductInfos();
         } catch (MarketplaceException e) {
-            throw new RuntimeException(e);
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
 
         for (Product product : productList) {
@@ -387,7 +387,7 @@ public class ProductServiceImpl implements ProductService {
         String locationIdFirst3Chars = this.getThreeFirstChars(locationId);
         String productFirst3Chars = this.getThreeFirstChars(productName);
         String originFirst3Chars = this.getThreeFirstChars(originLabel);
-        result = locationIdFirst3Chars +  productFirst3Chars + originFirst3Chars + year +  hour +  min;
+        result = locationIdFirst3Chars + productFirst3Chars + originFirst3Chars + year + hour + min;
         return result;
     }
 

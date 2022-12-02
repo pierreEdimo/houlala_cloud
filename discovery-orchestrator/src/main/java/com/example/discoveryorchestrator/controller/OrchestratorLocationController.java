@@ -147,7 +147,7 @@ public class OrchestratorLocationController {
         int day = date.getDayOfMonth();
         int randomNb = rd.nextInt(4000);
         String productFirst3Chars = this.getThreeFirstChars(name);
-        result = productFirst3Chars + "" + randomNb + "" + year + "" + day;
+        result = productFirst3Chars.toLowerCase() + "" + randomNb + "" + year + "" + day;
         return result;
     }
 

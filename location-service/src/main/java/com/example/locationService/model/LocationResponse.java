@@ -103,4 +103,9 @@ public class LocationResponse {
      * le nombre total de produits disponibles
      */
     private long productTotalCount;
+
+    /**
+     * La personne qui a cree la location
+     */
+    private Owner creator;
 }
