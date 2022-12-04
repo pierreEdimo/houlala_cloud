@@ -24,7 +24,7 @@ public class CategoryController {
 
     private final UploadServiceFeignClient uploadServiceFeignClient;
 
-    @GetMapping("")
+    @GetMapping
     public List<Category> getAllCategories() {
         try {
             return this.feignClient.getAllCategories();
@@ -33,8 +33,8 @@ public class CategoryController {
         }
     }
 
-    @PostMapping("")
-    public Category addCategory(@RequestPart String category, @RequestPart MultipartFile image) {
+    @PostMapping
+    public Category addCategory(@RequestPart(value = "category") String category, @RequestPart(value = "image") MultipartFile image) {
         Category createdCategory;
         CreateCategoryDto newCategory;
         String imageUrl;
@@ -52,7 +52,7 @@ public class CategoryController {
         );
 
         try {
-            imageUrl = this.uploadServiceFeignClient.uploadImage(image);
+            imageUrl = this.uploadServiceFeignClient.uploadThumbnailImage(image);
             createdCategory.setImageUrl(imageUrl);
             return this.feignClient.addCategory(createdCategory);
         } catch (MarketplaceException e) {

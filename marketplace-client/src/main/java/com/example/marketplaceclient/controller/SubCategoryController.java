@@ -24,7 +24,7 @@ public class SubCategoryController {
 
     private final UploadServiceFeignClient uploadServiceFeignClient;
 
-    @GetMapping("")
+    @GetMapping
     public List<ProductType> getAllSubCategories() {
         try {
             return this.feignClient.getAllProductTypes();
@@ -33,7 +33,7 @@ public class SubCategoryController {
         }
     }
 
-    @PostMapping("")
+    @PostMapping
     public ProductType addSubCategory(@RequestPart String subCategory, @RequestPart MultipartFile image) {
         CreateSubCategoryDto subCategoryDto;
         String imageUrl;
@@ -49,10 +49,10 @@ public class SubCategoryController {
         newType = new ProductType(
                 subCategoryDto.getLabel(),
                 subCategoryDto.getCategoryId()
-                );
+        );
 
         try {
-            imageUrl = this.uploadServiceFeignClient.uploadImage(image);
+            imageUrl = this.uploadServiceFeignClient.uploadIconImage(image);
             newType.setThumbNailUrl(imageUrl);
             return this.feignClient.addProductType(newType);
         } catch (MarketplaceException e) {

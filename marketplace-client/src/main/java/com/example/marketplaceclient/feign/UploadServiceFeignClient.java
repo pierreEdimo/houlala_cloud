@@ -12,7 +12,10 @@ import org.springframework.web.multipart.MultipartFile;
 @FeignClient(url = "https://upload.houlala.store", name = "upload", configuration = FeignSupportConfig.class)
 public interface UploadServiceFeignClient {
 
-    @PostMapping(value = "/api/Upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    String uploadImage(@RequestPart("image") MultipartFile image) throws MarketplaceException;
+    @PostMapping(value = "/api/Upload/thumbnail", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    String uploadThumbnailImage(@RequestPart("image") MultipartFile image) throws MarketplaceException;
+
+    @PostMapping(value = "/api/Upload/icons", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    String uploadIconImage(@RequestPart("image") MultipartFile image) throws MarketplaceException;
 
 }
