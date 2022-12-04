@@ -239,7 +239,7 @@ public class ProductServiceImpl implements ProductService {
 
         try {
 
-            imageUrl = this.uploadServiceFeignClient.uploadImage(image);
+            imageUrl = this.uploadServiceFeignClient.uploadThumbnailImage(image);
             product.setImageUrl(imageUrl);
             this.feignClient.addProduct(product);
             this.stockerServiceFeignClient.addInfo(info);
