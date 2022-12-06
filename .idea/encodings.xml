@@ -2,6 +2,8 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-starter-parent/2.7.0/src/main/resources" charset="UTF-8" />
+    <file url="file://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-starter-parent/2.7.7-SNAPSHOT/src/main/resources" charset="UTF-8" />
+    <file url="file://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-starter-parent/3.0.0/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/authentication-client/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/booking-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/booking_service/src/main/java" charset="UTF-8" />
@@ -16,6 +18,7 @@
     <file url="file://$PROJECT_DIR$/inventory-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/location-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/marketplace-client/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/marketplace-client/store-client/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/message-sender/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/notification-client/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/offer-service/src/main/java" charset="UTF-8" />
@@ -23,6 +26,8 @@
     <file url="file://$PROJECT_DIR$/room-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/stock-service/inventory-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/stock-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/store-client/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/store-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/upload-client/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/upload-service/src/main/java" charset="UTF-8" />
   </component>

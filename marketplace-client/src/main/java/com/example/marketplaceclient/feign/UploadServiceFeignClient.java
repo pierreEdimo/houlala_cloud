@@ -18,4 +18,7 @@ public interface UploadServiceFeignClient {
     @PostMapping(value = "/api/Upload/icons", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     String uploadIconImage(@RequestPart("image") MultipartFile image) throws MarketplaceException;
 
+    @PostMapping(value = "/api/Upload/products")
+    String uploadProductThumbnail(@RequestPart("image") MultipartFile image) throws MarketplaceException;
+
 }

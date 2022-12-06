@@ -108,7 +108,7 @@ public class OrderController {
         return this.orderService.getAllOrdersByLocationId(locationId);
     }
 
-    @PutMapping("/deliveryDate/{id}")
+    @PutMapping("/d eliveryDate/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateDeliveryDate(@PathVariable String id, @RequestBody DeliveryDate newDate) {
         this.orderService.updateDeliveryDate(id, newDate);

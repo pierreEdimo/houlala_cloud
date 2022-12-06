@@ -12,13 +12,14 @@
         <option value="$PROJECT_DIR$/location-service/pom.xml" />
         <option value="$PROJECT_DIR$/review-service/pom.xml" />
         <option value="$PROJECT_DIR$/room-service/pom.xml" />
-        <option value="$PROJECT_DIR$/marketplace-client/pom.xml" />
         <option value="$PROJECT_DIR$/discovery-orchestrator/pom.xml" />
         <option value="$PROJECT_DIR$/authentication-client/pom.xml" />
         <option value="$PROJECT_DIR$/inventory-service/pom.xml" />
         <option value="$PROJECT_DIR$/stock-service/pom.xml" />
         <option value="$PROJECT_DIR$/config/pom.xml" />
         <option value="$PROJECT_DIR$/email-service/pom.xml" />
+        <option value="$PROJECT_DIR$/marketplace-client/store-client/pom.xml" />
+        <option value="$PROJECT_DIR$/marketplace-client/pom.xml" />
       </list>
     </option>
   </component>

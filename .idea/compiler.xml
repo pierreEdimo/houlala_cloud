@@ -46,6 +46,8 @@
       <module name="review-service" target="17" />
       <module name="room-service" target="17" />
       <module name="stock-service" target="17" />
+      <module name="store-client" target="19" />
+      <module name="store-service" target="17" />
       <module name="upload-client" target="17" />
       <module name="upload-service" target="17" />
     </bytecodeTargetLevel>
@@ -73,6 +75,8 @@
       <module name="review-service" options="-parameters" />
       <module name="room-service" options="-parameters" />
       <module name="stock-service" options="-parameters" />
+      <module name="store-client" options="-parameters" />
+      <module name="store-service" options="-parameters" />
       <module name="upload-client" options="-parameters" />
       <module name="upload-service" options="-parameters" />
     </option>

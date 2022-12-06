@@ -1,11 +1,11 @@
 package com.example.marketplaceclient.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Product {
     private String _id;
     private String name;
@@ -16,25 +16,5 @@ public class Product {
     private String locationId;
     private boolean bookMarked;
     private String productSku;
-
-
-
-    public Product(){}
-
-    public Product(
-            String name,
-            String description,
-            int weight,
-            int sellingPrice,
-            String locationId,
-            String productSku
-    ){
-        this.name = name;
-        this.description = description;
-        this.weight = weight;
-        this.sellingPrice = sellingPrice;
-        this.locationId = locationId;
-        this.productSku = productSku;
-    }
 }
 

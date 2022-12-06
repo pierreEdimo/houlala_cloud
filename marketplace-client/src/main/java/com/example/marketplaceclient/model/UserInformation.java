@@ -1,10 +1,10 @@
 package com.example.marketplaceclient.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserInformation {
     private String id;
     private String lastName;
