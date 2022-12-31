@@ -18,7 +18,7 @@ public interface AuthenticationFeignClient {
      * @return Un nouvel utilisateur en tant que JSON.
      * @throws AuthenticationException En Cas d'erreur.2
      */
-    @PostMapping("/User/Register")
+    @PostMapping("/Auth/Register")
     UserToken register(@RequestBody Register model) throws AuthenticationException;
 
     /**
@@ -28,17 +28,8 @@ public interface AuthenticationFeignClient {
      * @return Le token de l'utilisateur.
      * @throws AuthenticationException En cas d'erreur.
      */
-    @PostMapping("/User/Login")
+    @PostMapping("/Auth/Login")
     UserToken login(@RequestBody Login model) throws AuthenticationException;
-
-    /**
-     * Cherche les informations de l'utilisateur de Houla la.
-     *
-     * @return Un utilisateur connecte sous forme de Json.
-     * @throws AuthenticationException En cas d'erreur.
-     */
-    @GetMapping("/User/GetUser")
-    UserDto getUser() throws AuthenticationException;
 
     /**
      * Cherche la liste des Utilisateurs enregistres de la base de donnees.
@@ -47,7 +38,7 @@ public interface AuthenticationFeignClient {
      * @return La liste de tous les utilisateurs enregistres dans la base donnee.
      * @throws AuthenticationException En cas d'erreur.
      */
-    @GetMapping("/User/GetAllUsers")
+    @GetMapping("/Auth/GetAllUsers")
     List<UserDto> getAllUsers(@RequestHeader("Authorization") String auth) throws AuthenticationException;
 
     /**
@@ -69,7 +60,7 @@ public interface AuthenticationFeignClient {
      * @return Les informations personnelles de l'utilisateur.
      * @throws AuthenticationException En cas d'erreur.
      */
-    @GetMapping("/User/GetUserByEmail/{Email}")
+    @GetMapping("/Auth/GetUserByEmail/{Email}")
     UserDto getSingleUserByEmail(@PathVariable("Email") String email, @RequestHeader("Authorization") String auth) throws AuthenticationException;
 
     /**
@@ -81,7 +72,7 @@ public interface AuthenticationFeignClient {
      * @return L'utilisateur avec ses nouvelles informations modifiees.
      * @throws AuthenticationException En cas d'erreur
      */
-    @PutMapping("/User/editUserInformations/{Email}")
+    @PutMapping("/Auth/editUserInformations/{Email}")
     UserToken editPersonalData(@RequestBody PersonalData model, @PathVariable("Email") String email, @RequestHeader("Authorization") String auth) throws AuthenticationException;
 
     /**
@@ -93,7 +84,7 @@ public interface AuthenticationFeignClient {
      * @return La nouvelle adresse de l'utilisateur.
      * @throws AuthenticationException En cas d'erreur.
      */
-    @PutMapping("/User/editAddressInformations/{Email}")
+    @PutMapping("/Auth/editAddressInformations/{Email}")
     UserToken editAddressInfos(@RequestBody AddressData model, @PathVariable("Email") String email, @RequestHeader("Authorization") String auth) throws AuthenticationException;
 
     /**
@@ -105,6 +96,6 @@ public interface AuthenticationFeignClient {
      * @return La nouvelle adresse E-mail de l'utilisateur.
      * @throws AuthenticationException En cas d'erreur-
      */
-    @PutMapping("/User/editUserEmail/{Email}")
+    @PutMapping("/Auth/editUserEmail/{Email}")
     UserToken editEmail(@RequestBody EditEmail model, @PathVariable("Email") String email, @RequestHeader("Authorization") String auth) throws AuthenticationException;
 }

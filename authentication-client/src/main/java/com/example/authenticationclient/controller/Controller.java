@@ -4,6 +4,7 @@ import com.example.authenticationclient.exception.AuthenticationException;
 import com.example.authenticationclient.feign.AuthenticationFeignClient;
 import com.example.authenticationclient.model.*;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -13,6 +14,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/users")
+@Slf4j
 public class Controller {
 
     private final AuthenticationFeignClient feignClient;
@@ -23,6 +25,7 @@ public class Controller {
         try {
             return this.feignClient.register(model);
         } catch (AuthenticationException e) {
+            log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
     }
@@ -33,15 +36,7 @@ public class Controller {
         try {
             return this.feignClient.login(model);
         } catch (AuthenticationException e) {
-            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
-        }
-    }
-
-    @GetMapping("/singleUser")
-    public UserDto getUser() {
-        try {
-            return this.feignClient.getUser();
-        } catch (AuthenticationException e) {
+            log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
     }
@@ -51,6 +46,7 @@ public class Controller {
         try {
             return this.feignClient.getAllUsers("Bearer " + jwt);
         } catch (AuthenticationException e) {
+            log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
     }
@@ -60,6 +56,7 @@ public class Controller {
         try {
             return this.feignClient.renewPassWord(model, "Bearer " + jwt);
         } catch (AuthenticationException e) {
+            log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
     }
@@ -69,6 +66,7 @@ public class Controller {
         try {
             return this.feignClient.getSingleUserByEmail(email, "Bearer " + jwt);
         } catch (AuthenticationException e) {
+            log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
     }
@@ -78,6 +76,7 @@ public class Controller {
         try {
             return this.feignClient.editPersonalData(model, email, "Bearer " + jwt);
         } catch (AuthenticationException e) {
+            log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
     }
@@ -87,6 +86,7 @@ public class Controller {
         try {
             return this.feignClient.editAddressInfos(model, email, "Bearer " + jwt);
         } catch (AuthenticationException e) {
+            log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
     }
@@ -96,6 +96,7 @@ public class Controller {
         try {
             return this.feignClient.editEmail(model, email, "Bearer " + jwt);
         } catch (AuthenticationException e) {
+            log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
     }

@@ -388,7 +388,7 @@ public class ProductServiceImpl implements ProductService {
         String productFirst3Chars = this.getThreeFirstChars(productName);
         String originFirst3Chars = this.getThreeFirstChars(originLabel);
         result = locationIdFirst3Chars + productFirst3Chars + originFirst3Chars + year + hour + min;
-        return result;
+        return result.toLowerCase();
     }
 
     private String getThreeFirstChars(String str) {

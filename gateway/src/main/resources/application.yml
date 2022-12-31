@@ -12,9 +12,14 @@ spring:
       globalcors:
         cors-configurations:
           '[/**]':
-            allowedOrigins: "http://localhost:5285/"
+            allowed-origins: "*"
             allowedMethods:
               - GET
+              - POST
+              - PUT
+              - DELETE
+              - PATCH
+            allowedHeaders: "*"
       discovery.locator.enabled: true
       routes:
         - id: discovery-orchestrator
