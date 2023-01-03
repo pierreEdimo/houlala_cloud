@@ -49,7 +49,7 @@ public interface AuthenticationFeignClient {
      * @return L'utilisateur ainsi que son nouveau mot de passe.
      * @throws AuthenticationException En cas d'erreur
      */
-    @PostMapping("/User/renewPassWord")
+    @PostMapping("/Auth/renewPassWord")
     UserToken renewPassWord(@RequestBody Login model, @RequestHeader("Authorization") String auth) throws AuthenticationException;
 
     /**

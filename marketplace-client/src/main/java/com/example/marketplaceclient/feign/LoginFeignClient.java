@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient(url = "https://authentication.houlala.store/api", name = "authentication")
 public interface LoginFeignClient {
 
-    @GetMapping("/User/GetUserById/{userId}")
+    @GetMapping("/Auth/GetUserById/{userId}")
     User getSingleUserByUserId(@PathVariable(value = "userId") String userId) throws MarketplaceException;
 }

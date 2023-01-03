@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RequestHeader;
 @FeignClient(url = "https://authentication.houlala.store/api", name = "authentication")
 public interface UserFeignClient {
 
-    @GetMapping("/User/GetUserById/{userId}")
+    @GetMapping("/Auth/GetUserById/{userId}")
     Owner getSingleUserByUserId(@PathVariable(value = "userId") String uid) throws LocationServiceException;
 }
