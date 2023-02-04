@@ -33,6 +33,8 @@ public interface ProductService {
 
     ProductDto getProductByNameAndIsFavorite(String name, String userId);
 
+    ProductDto getProductBySkuAndIsFavorite(String productSku, String userId);
+
     List<ProductDto> getRandomProductsByLocationId(String locationId, int size);
 
     List<ProductDto> getProductsByType(String typeId, int limit);

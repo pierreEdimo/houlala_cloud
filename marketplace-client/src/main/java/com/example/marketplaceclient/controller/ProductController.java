@@ -66,6 +66,11 @@ public class ProductController {
         return this.productService.getProductByIdAndIsFavorite(id, userId);
     }
 
+    @GetMapping("/favorite/sku/{sku}")
+    public ProductDto getProductBySkuAndIsFavorite(@PathVariable String sku, @RequestParam String userId) {
+        return this.productService.getProductBySkuAndIsFavorite(sku, userId);
+    }
+
     @GetMapping("/filter")
     public List<ProductDto> getProductsWithLimit(@RequestParam int limit) {
         return this.productService.getProductsWithLimit(limit);
@@ -93,12 +98,12 @@ public class ProductController {
     }
 
     @GetMapping("/random/category/{id}")
-    public List<ProductDto> getRandomProductsByCategoryId(@PathVariable("id") String categoryId, @RequestParam int size){
+    public List<ProductDto> getRandomProductsByCategoryId(@PathVariable("id") String categoryId, @RequestParam int size) {
         return this.productService.getRandomProductsByCategoryId(categoryId, size);
     }
 
     @GetMapping("/total/{locationId}")
-    public long getProductTotalCount(@PathVariable String locationId){
+    public long getProductTotalCount(@PathVariable String locationId) {
         return this.productService.productTotalCount(locationId);
     }
 }

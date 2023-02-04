@@ -267,6 +267,21 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public ProductDto getProductBySkuAndIsFavorite(String productSku, String userId) {
+        Product product;
+        ProductAdditionalInformation information;
+
+        try {
+            product = this.feignClient.getProductBySkuAndIsFavorite(productSku, userId);
+            information = this.stockerServiceFeignClient.getASingleInfo(product.getProductSku());
+        } catch (MarketplaceException ex) {
+            throw new ResponseStatusException(ex.getHttpStatus(), ex.getMessage());
+        }
+
+        return this.toProductDto(product, information);
+    }
+
+    @Override
     public List<ProductDto> getRandomProductsByLocationId(String locationId, int size) {
         List<Product> productList;
         List<ProductDto> productDtoList = new ArrayList<>();
