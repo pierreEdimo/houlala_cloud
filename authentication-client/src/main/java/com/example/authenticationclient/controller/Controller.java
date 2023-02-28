@@ -52,9 +52,9 @@ public class Controller {
     }
 
     @PostMapping("/renewPassword")
-    public UserToken renewPassWord(@RequestBody Login model, @RequestHeader("Authorization") String jwt) {
+    public UserToken renewPassWord(@RequestBody Login model) {
         try {
-            return this.feignClient.renewPassWord(model, "Bearer " + jwt);
+            return this.feignClient.renewPassWord(model);
         } catch (AuthenticationException e) {
             log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());

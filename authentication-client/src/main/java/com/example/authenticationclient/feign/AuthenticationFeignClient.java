@@ -45,12 +45,11 @@ public interface AuthenticationFeignClient {
      * Permet a un utilisateur de changer son mot de passe.
      *
      * @param model Le mot de passe de l'utilisateur, et son adresse E-mail.
-     * @param auth  Le Token de l'utilisateur dans le header.
      * @return L'utilisateur ainsi que son nouveau mot de passe.
      * @throws AuthenticationException En cas d'erreur
      */
     @PostMapping("/Auth/renewPassWord")
-    UserToken renewPassWord(@RequestBody Login model, @RequestHeader("Authorization") String auth) throws AuthenticationException;
+    UserToken renewPassWord(@RequestBody Login model) throws AuthenticationException;
 
     /**
      * Permet de chercher les informations d'un utilisateur a partir de son E-mail.
