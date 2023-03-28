@@ -11,6 +11,7 @@ import com.example.marketplaceclient.model.dto.CreateOrderDto;
 import com.example.marketplaceclient.model.dto.CreateUnregisteredUserOrder;
 import com.example.marketplaceclient.model.dto.OrderDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class OrderServiceImpl implements OrderService {
 
     private final OrderServiceFeignClient feignClient;
@@ -38,6 +40,7 @@ public class OrderServiceImpl implements OrderService {
         try {
             orderList = this.feignClient.getAllOrders();
         } catch (MarketplaceException e) {
+            log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
 
@@ -53,6 +56,7 @@ public class OrderServiceImpl implements OrderService {
         try {
             orderList = this.feignClient.getNonConfirmedOrders(userId);
         } catch (MarketplaceException e) {
+            log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
 
@@ -68,6 +72,7 @@ public class OrderServiceImpl implements OrderService {
         try {
             orderList = this.feignClient.getConfirmedOrdersByLocationId(locationId);
         } catch (MarketplaceException e) {
+            log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
 
@@ -81,6 +86,7 @@ public class OrderServiceImpl implements OrderService {
         try {
             this.feignClient.sendCommandToSeller(userInformation);
         } catch (MarketplaceException e) {
+            log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
     }
@@ -92,6 +98,7 @@ public class OrderServiceImpl implements OrderService {
         try {
             order = this.feignClient.addProductToCarts(orderDto);
         } catch (MarketplaceException e) {
+            log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
 
@@ -105,6 +112,7 @@ public class OrderServiceImpl implements OrderService {
         try {
             order = this.feignClient.updateStatus(id);
         } catch (MarketplaceException e) {
+            log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
 
@@ -126,6 +134,7 @@ public class OrderServiceImpl implements OrderService {
         try {
             this.feignClient.cancelOrder(id);
         } catch (MarketplaceException e) {
+            log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
     }
@@ -138,6 +147,7 @@ public class OrderServiceImpl implements OrderService {
         try {
             orders = this.feignClient.getConfirmedOrders(userId);
         } catch (MarketplaceException e) {
+            log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
 
@@ -151,6 +161,7 @@ public class OrderServiceImpl implements OrderService {
         try {
             this.feignClient.increaseQuantity(id, sku);
         } catch (MarketplaceException e) {
+            log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
     }
@@ -160,6 +171,7 @@ public class OrderServiceImpl implements OrderService {
         try {
             this.feignClient.decreaseQuantity(id, sku);
         } catch (MarketplaceException e) {
+            log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
     }
@@ -169,6 +181,7 @@ public class OrderServiceImpl implements OrderService {
         try {
             this.feignClient.deleteItemFromOrder(id, sku);
         } catch (MarketplaceException e) {
+            log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
     }
@@ -180,6 +193,7 @@ public class OrderServiceImpl implements OrderService {
         try {
             createdOrder = this.feignClient.sendOrderFromUnregisteredUsers(order);
         } catch (MarketplaceException e) {
+            log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
 
@@ -191,6 +205,7 @@ public class OrderServiceImpl implements OrderService {
         try {
             return this.feignClient.getAllOrders().stream().filter(order -> order.getLocationId().equalsIgnoreCase(locationId)).count();
         } catch (MarketplaceException e) {
+            log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
     }
@@ -200,6 +215,7 @@ public class OrderServiceImpl implements OrderService {
         try {
             return this.feignClient.getAllOrders().stream().filter(order -> order.getLocationId().equalsIgnoreCase(locationId) && order.getStatus().equalsIgnoreCase("Delivre")).count();
         } catch (MarketplaceException e) {
+            log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
     }
@@ -209,6 +225,7 @@ public class OrderServiceImpl implements OrderService {
         try {
             return this.feignClient.getAllOrders().stream().filter(order -> order.getLocationId().equalsIgnoreCase(locationId) && order.getStatus().equalsIgnoreCase("Annule")).count();
         } catch (MarketplaceException e) {
+            log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
     }
@@ -218,6 +235,7 @@ public class OrderServiceImpl implements OrderService {
         try {
             this.feignClient.updateDeliveryDate(id, newDate);
         } catch (MarketplaceException e) {
+            log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
     }
@@ -235,6 +253,7 @@ public class OrderServiceImpl implements OrderService {
             }
 
         } catch (MarketplaceException e) {
+            log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
 
@@ -264,6 +283,7 @@ public class OrderServiceImpl implements OrderService {
 
                 cartItemDtos.add(cartItemDto);
             } catch (MarketplaceException e) {
+                log.error(e.getMessage());
                 throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
             }
         }
