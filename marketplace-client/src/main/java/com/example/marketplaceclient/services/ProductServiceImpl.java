@@ -16,7 +16,6 @@ import org.springframework.web.server.ResponseStatusException;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -381,7 +380,7 @@ public class ProductServiceImpl implements ProductService {
         List<ProductAdditionalInformation> informations;
 
         try {
-            productList = this.feignClient.getProductsByCategoryId(categoryId, size);
+            productList = this.feignClient.getRandomProductsByCategoryId(categoryId, size);
             informations = this.stockerServiceFeignClient.getAllProductInfos();
         } catch (MarketplaceException e) {
             log.error(e.getMessage());

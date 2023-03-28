@@ -9,6 +9,7 @@ import com.example.marketplaceclient.model.dto.CreateOrderDto;
 import com.example.marketplaceclient.model.dto.CreateUnregisteredUserOrder;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
+import org.yaml.snakeyaml.error.Mark;
 
 import java.util.List;
 
@@ -62,4 +63,23 @@ public interface OrderServiceFeignClient {
 
     @GetMapping("/top/{locationId}")
     List<SellReport> getTopOrders(@PathVariable(value = "locationId") String locationId) throws MarketplaceException;
+
+    @GetMapping("/count/today/location/{locationId}")
+    long getTodayOrderCountByLocationId(@PathVariable(value = "locationId") int locationId) throws MarketplaceException;
+
+    @GetMapping("/count/today/location/{locationId}/status/{status}")
+    long getTodayOrderCountByLocationIdAndStatus(@PathVariable(value = "locationId") int locationId, @PathVariable(value = "status") String status) throws MarketplaceException;
+
+    @GetMapping("/count/location/{locationId}")
+    long getOrderCountByLocationId(@PathVariable(value = "locationId") int locationId) throws MarketplaceException;
+
+    @GetMapping("/count/location/{locationId}/status/{status}")
+    long getOrderCountByLocationIdAndStatus(@PathVariable(value = "locationId") int locationId, @PathVariable(value = "status") String status) throws MarketplaceException;
+
+    @GetMapping("{id}")
+    Order getSingleOrder(@PathVariable(value = "id") String id) throws MarketplaceException;
+
+    @GetMapping("/location/{id}")
+    List<Order> getOrderListByLocationId(@PathVariable(value = "id") String locationId, @RequestParam(value = "size", required = false) int size) throws MarketplaceException;
+
 }
