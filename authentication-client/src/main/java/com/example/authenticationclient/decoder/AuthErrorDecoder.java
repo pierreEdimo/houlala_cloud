@@ -17,9 +17,9 @@ public class AuthErrorDecoder implements ErrorDecoder {
 
     /**
      * Decode l'erreur venant d'un feign service.
-     * @param methodKey
-     * @param response
-     * @return
+     * @param methodKey la cle de la methode
+     * @param response la reponse venant du backend
+     * @return l'erreur decode
      */
     @Override
     public Exception decode(String methodKey, Response response) {
