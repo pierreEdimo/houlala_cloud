@@ -200,7 +200,7 @@ services:
     ports:
       - "8001:8001"
   houlala_marketplace:
-    image: houlala-cloud-marketplace:latest
+    image: pierreedimo777/houlala-cloud-marketplace
     expose:
       - "3000"
     ports:

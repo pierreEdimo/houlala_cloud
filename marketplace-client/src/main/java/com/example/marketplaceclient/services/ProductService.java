@@ -15,6 +15,8 @@ public interface ProductService {
 
     List<ProductDto> searchProduct(String searchWord);
 
+    List<ProductDto> getProductSoonToBeOutOfStock(String locationId);
+
     Product deleteProduct(String id);
 
     Product editProduct(String id, CreateProduct newProduct);
@@ -40,6 +42,8 @@ public interface ProductService {
     List<ProductDto> getProductsByType(String typeId, int limit);
 
     List<ProductDto> getRandomProductsByCategoryId(String categoryId, int size);
+
+    List<ProductDto> getTopProductsByLocationId(String locationId);
 
     long productTotalCount(String locationId);
 }

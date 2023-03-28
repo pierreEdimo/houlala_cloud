@@ -16,6 +16,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -66,21 +67,6 @@ public class OrderServiceImpl implements OrderService {
 
         try {
             orderList = this.feignClient.getConfirmedOrdersByLocationId(locationId);
-        } catch (MarketplaceException e) {
-            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
-        }
-
-        orderList.forEach(order -> orderDtoList.add(this.toOrderDto(order)));
-        return orderDtoList;
-    }
-
-    @Override
-    public List<OrderDto> getConfirmedOrderByLocationIdAndStatus(String locationId, String status) {
-        List<Order> orderList;
-        List<OrderDto> orderDtoList = new ArrayList<>();
-
-        try {
-            orderList = this.feignClient.getConfirmedOrdersByLocationIdAndStatus(locationId, status);
         } catch (MarketplaceException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
@@ -228,28 +214,40 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderDto> getAllOrdersByLocationId(String locationId) {
-        List<Order> orderList;
-        List<OrderDto> orderDtoList = new ArrayList<>();
-
-        try {
-            orderList = this.feignClient.getAllOrders().stream().filter(order -> order.getLocationId().equalsIgnoreCase(locationId)).toList();
-        } catch (MarketplaceException e) {
-            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
-        }
-
-        orderList.forEach(order -> orderDtoList.add(this.toOrderDto(order)));
-
-        return orderDtoList;
-    }
-
-    @Override
     public void updateDeliveryDate(String id, DeliveryDate newDate) {
         try {
             this.feignClient.updateDeliveryDate(id, newDate);
         } catch (MarketplaceException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
+    }
+
+    @Override
+    public List<OrderDto> getOrdersByLocationId(String locationId, String status) {
+        List<OrderDto> orderDtoList = new ArrayList<>();
+        List<Order> orders;
+
+        try {
+            orders = this.feignClient.getAllOrders();
+
+            if (locationId != null) {
+                orders = this.feignClient.getOrdersByLocationId(locationId);
+            }
+
+        } catch (MarketplaceException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+
+        if (status != null) {
+            orders = orders.stream()
+                    .filter(x -> x.getStatus().equalsIgnoreCase(status))
+                    .collect(Collectors.toList());
+
+        }
+
+        orders.forEach(order -> orderDtoList.add(this.toOrderDto(order)));
+
+        return orderDtoList;
     }
 
     private OrderDto toOrderDto(Order order) {

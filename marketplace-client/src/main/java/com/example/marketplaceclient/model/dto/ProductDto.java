@@ -1,13 +1,14 @@
 package com.example.marketplaceclient.model.dto;
 
 import com.example.marketplaceclient.model.Origin;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProductDto {
     private String _id;
     private String name;
@@ -22,38 +23,6 @@ public class ProductDto {
     private double buyingPrice;
     private String originLabel;
     private String productSku;
-
     private String locationName;
-
-    public ProductDto(
-            String id,
-            String name,
-            String description,
-            int weight,
-            String imageUrl,
-            int sellingPrice,
-            String locationId,
-            boolean bookMarked,
-            int quantity,
-            LocalDate arrivalDate,
-            double buyingPrice,
-            Origin originLabel,
-            String productSku,
-            String locationName
-    ){
-        this._id = id;
-        this.name = name;
-        this.description = description;
-        this.weight = weight;
-        this.imageUrl = imageUrl;
-        this.sellingPrice = sellingPrice;
-        this.locationId = locationId;
-        this.bookMarked = bookMarked;
-        this.quantity = quantity;
-        this.arrivalDate = arrivalDate;
-        this.buyingPrice = buyingPrice;
-        this.originLabel = originLabel.getLabel();
-        this.productSku = productSku;
-        this.locationName = locationName;
-    }
+    private int totalSell; 
 }

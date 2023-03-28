@@ -23,6 +23,11 @@ public class ProductController {
         return this.productService.getAllProducts();
     }
 
+    @GetMapping("/stock/{locationId}")
+    public List<ProductDto> getProductSoonTOBeout(@PathVariable String locationId) {
+        return this.productService.getProductSoonToBeOutOfStock(locationId);
+    }
+
     @GetMapping("/{id}")
     public ProductDto getSingleProduct(@PathVariable String id) {
         return this.productService.getProduct(id);
@@ -54,6 +59,11 @@ public class ProductController {
     @GetMapping("/favorites")
     public List<Product> getFavoritesProduct(@RequestParam String userId) {
         return this.productService.getFavoritesProduct(userId);
+    }
+
+    @GetMapping("/top/{locationId}")
+    public List<ProductDto> getTopProductsByLocationId(@PathVariable("locationId") String locationId){
+        return this.productService.getTopProductsByLocationId(locationId);
     }
 
     @GetMapping("/location/{id}")

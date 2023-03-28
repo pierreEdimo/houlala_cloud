@@ -3,6 +3,7 @@ package com.example.marketplaceclient.feign;
 import com.example.marketplaceclient.exception.MarketplaceException;
 import com.example.marketplaceclient.model.DeliveryDate;
 import com.example.marketplaceclient.model.Order;
+import com.example.marketplaceclient.model.SellReport;
 import com.example.marketplaceclient.model.UserInformation;
 import com.example.marketplaceclient.model.dto.CreateOrderDto;
 import com.example.marketplaceclient.model.dto.CreateUnregisteredUserOrder;
@@ -35,6 +36,9 @@ public interface OrderServiceFeignClient {
     @PostMapping("")
     Order addProductToCarts(@RequestBody CreateOrderDto newOrder) throws MarketplaceException;
 
+    @GetMapping("/location/{id}")
+    List<Order> getOrdersByLocationId(@PathVariable("id") String locationId) throws MarketplaceException;
+
     @PutMapping("/status/{id}")
     Order updateStatus(@PathVariable(name = "id") String id) throws MarketplaceException;
 
@@ -55,4 +59,7 @@ public interface OrderServiceFeignClient {
 
     @PutMapping("/deliveryDate/{id}")
     void updateDeliveryDate(@PathVariable(value = "id") String id, @RequestBody DeliveryDate date) throws MarketplaceException;
+
+    @GetMapping("/top/{locationId}")
+    List<SellReport> getTopOrders(@PathVariable(value = "locationId") String locationId) throws MarketplaceException;
 }

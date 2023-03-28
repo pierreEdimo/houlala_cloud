@@ -1,14 +1,8 @@
 package com.example.marketplaceclient.services;
 
 import com.example.marketplaceclient.exception.MarketplaceException;
-import com.example.marketplaceclient.feign.LocationServiceFeignClient;
-import com.example.marketplaceclient.feign.StockServiceFeignClient;
-import com.example.marketplaceclient.feign.ProductServiceFeignClient;
-import com.example.marketplaceclient.feign.UploadServiceFeignClient;
-import com.example.marketplaceclient.model.CreateProduct;
-import com.example.marketplaceclient.model.Location;
-import com.example.marketplaceclient.model.ProductAdditionalInformation;
-import com.example.marketplaceclient.model.Product;
+import com.example.marketplaceclient.feign.*;
+import com.example.marketplaceclient.model.*;
 import com.example.marketplaceclient.model.dto.CreateProductDto;
 import com.example.marketplaceclient.model.dto.ProductDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,7 +15,10 @@ import org.springframework.web.server.ResponseStatusException;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -35,6 +32,8 @@ public class ProductServiceImpl implements ProductService {
     private final UploadServiceFeignClient uploadServiceFeignClient;
 
     private final LocationServiceFeignClient locationFeignClient;
+
+    private final OrderServiceFeignClient orderServiceFeignClient;
 
 
     @Override
@@ -54,7 +53,7 @@ public class ProductServiceImpl implements ProductService {
         for (Product response : productResponses) {
             for (ProductAdditionalInformation info : infos) {
                 if (response.getProductSku().equals(info.getProductSku())) {
-                    productDtoList.add(this.toProductDto(response, info));
+                    productDtoList.add(this.toProductDto(response, info, 0));
                 }
             }
         }
@@ -74,7 +73,7 @@ public class ProductServiceImpl implements ProductService {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
 
-        return this.toProductDto(product, info);
+        return this.toProductDto(product, info, 0);
     }
 
     @Override
@@ -93,12 +92,39 @@ public class ProductServiceImpl implements ProductService {
         for (Product response : productResponses) {
             for (ProductAdditionalInformation info : infos) {
                 if (response.getProductSku().equals(info.getProductSku())) {
-                    productDtoList.add(this.toProductDto(response, info));
+                    productDtoList.add(this.toProductDto(response, info, 0));
                 }
             }
         }
 
         return productDtoList;
+    }
+
+    @Override
+    public List<ProductDto> getProductSoonToBeOutOfStock(String locationId) {
+        List<Product> productResponses;
+        List<ProductDto> productDtoList = new ArrayList<>();
+        List<ProductAdditionalInformation> infos;
+
+        try {
+            productResponses = this.feignClient.getProductByLocationId(locationId, 0);
+            infos = this.stockerServiceFeignClient.getAllProductInfos();
+        } catch (MarketplaceException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+
+        for (Product response : productResponses) {
+            for (ProductAdditionalInformation info : infos) {
+                if (response.getProductSku().equalsIgnoreCase(info.getProductSku())) {
+                    productDtoList.add(this.toProductDto(response, info, 0));
+                }
+            }
+        }
+
+        return productDtoList
+            .stream().filter((x) -> x.getQuantity() < 5)
+            .collect(Collectors.toList());
+
     }
 
     @Override
@@ -153,7 +179,7 @@ public class ProductServiceImpl implements ProductService {
         for (Product product : productList) {
             for (ProductAdditionalInformation info : infos) {
                 if (product.getProductSku().equalsIgnoreCase(info.getProductSku())) {
-                    productDtoList.add(this.toProductDto(product, info));
+                    productDtoList.add(this.toProductDto(product, info, 0));
                 }
             }
         }
@@ -174,7 +200,7 @@ public class ProductServiceImpl implements ProductService {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
 
-        return this.toProductDto(response, additionalInformation);
+        return this.toProductDto(response, additionalInformation, 0);
     }
 
     @Override
@@ -194,7 +220,7 @@ public class ProductServiceImpl implements ProductService {
         for (Product product : productList) {
             for (ProductAdditionalInformation info : informations) {
                 if (product.getProductSku().equalsIgnoreCase(info.getProductSku())) {
-                    productDtoList.add(this.toProductDto(product, info));
+                    productDtoList.add(this.toProductDto(product, info, 0));
                 }
             }
         }
@@ -219,22 +245,22 @@ public class ProductServiceImpl implements ProductService {
         String productSku = this.skuGenerator(newProduct.getName(), newProduct.getOriginLabel(), newProduct.getLocationId());
 
         CreateProduct product = new CreateProduct(
-                newProduct.getName(),
-                newProduct.getDescription(),
-                newProduct.getWeight(),
-                newProduct.getSellingPrice(),
-                newProduct.getLocationId(),
-                productSku.toLowerCase(),
-                newProduct.getCategoryId(),
-                newProduct.getProductType()
+            newProduct.getName(),
+            newProduct.getDescription(),
+            newProduct.getWeight(),
+            newProduct.getSellingPrice(),
+            newProduct.getLocationId(),
+            productSku.toLowerCase(),
+            newProduct.getCategoryId(),
+            newProduct.getProductType()
         );
 
         ProductAdditionalInformation info = new ProductAdditionalInformation(
-                productSku.toLowerCase(),
-                newProduct.getQuantity(),
-                newProduct.getBuyingPrice(),
-                newProduct.getOriginLabel(),
-                newProduct.getLocationId()
+            productSku.toLowerCase(),
+            newProduct.getQuantity(),
+            newProduct.getBuyingPrice(),
+            newProduct.getOriginLabel(),
+            newProduct.getLocationId()
         );
 
         try {
@@ -263,7 +289,7 @@ public class ProductServiceImpl implements ProductService {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
 
-        return this.toProductDto(product, information);
+        return this.toProductDto(product, information, 0);
     }
 
     @Override
@@ -278,7 +304,7 @@ public class ProductServiceImpl implements ProductService {
             throw new ResponseStatusException(ex.getHttpStatus(), ex.getMessage());
         }
 
-        return this.toProductDto(product, information);
+        return this.toProductDto(product, information, 0);
     }
 
     @Override
@@ -297,7 +323,7 @@ public class ProductServiceImpl implements ProductService {
         for (Product product : productList) {
             for (ProductAdditionalInformation info : informations) {
                 if (product.getProductSku().equalsIgnoreCase(info.getProductSku())) {
-                    productDtoList.add(this.toProductDto(product, info));
+                    productDtoList.add(this.toProductDto(product, info, 0));
                 }
             }
         }
@@ -321,7 +347,7 @@ public class ProductServiceImpl implements ProductService {
         for (Product product : productList) {
             for (ProductAdditionalInformation info : informations) {
                 if (product.getProductSku().equalsIgnoreCase(info.getProductSku())) {
-                    productDtoList.add(this.toProductDto(product, info));
+                    productDtoList.add(this.toProductDto(product, info, 0));
                 }
             }
         }
@@ -345,7 +371,7 @@ public class ProductServiceImpl implements ProductService {
         for (Product product : productList) {
             for (ProductAdditionalInformation info : informations) {
                 if (product.getProductSku().equalsIgnoreCase(info.getProductSku())) {
-                    productDtoList.add(this.toProductDto(product, info));
+                    productDtoList.add(this.toProductDto(product, info, 0));
                 }
             }
         }
@@ -354,16 +380,44 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<ProductDto> getTopProductsByLocationId(String locationId) {
+        List<Product> productList;
+        List<ProductDto> productDtoList = new ArrayList<>();
+        List<SellReport> sellReports;
+        List<ProductAdditionalInformation> informations;
+
+        try {
+            productList = this.feignClient.getProductByLocationId(locationId, 0);
+            sellReports = this.orderServiceFeignClient.getTopOrders(locationId);
+            informations = this.stockerServiceFeignClient.getAllProductInfos();
+        } catch (MarketplaceException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+
+        for (Product product : productList) {
+            for (ProductAdditionalInformation info : informations) {
+                for (SellReport report : sellReports) {
+                    if (product.getProductSku().equalsIgnoreCase(report.get_id()) && product.getProductSku().equalsIgnoreCase(info.getProductSku())) {
+                        productDtoList.add(this.toProductDto(product, info, report.getTotal()));
+                    }
+                }
+            }
+        }
+
+        return productDtoList.stream().sorted(Comparator.comparing(ProductDto::getTotalSell)).collect(Collectors.toList());
+    }
+
+    @Override
     public long productTotalCount(String locationId) {
         try {
             return this.feignClient.getAllProducts().
-                    stream().filter(product -> product.getLocationId().equalsIgnoreCase(locationId)).count();
+                stream().filter(product -> product.getLocationId().equalsIgnoreCase(locationId)).count();
         } catch (MarketplaceException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
     }
 
-    private ProductDto toProductDto(Product response, ProductAdditionalInformation additionalInformation) {
+    private ProductDto toProductDto(Product response, ProductAdditionalInformation additionalInformation, int totalSells) {
 
         Location location;
 
@@ -374,20 +428,21 @@ public class ProductServiceImpl implements ProductService {
         }
 
         return new ProductDto(
-                response.get_id(),
-                response.getName(),
-                response.getDescription(),
-                response.getWeight(),
-                response.getImageUrl(),
-                response.getSellingPrice(),
-                response.getLocationId(),
-                response.isBookMarked(),
-                additionalInformation.getQuantity(),
-                additionalInformation.getArrivalDate(),
-                additionalInformation.getBuyingPrice(),
-                additionalInformation.getOriginLabel(),
-                additionalInformation.getProductSku(),
-                location.getName()
+            response.get_id(),
+            response.getName(),
+            response.getDescription(),
+            response.getWeight(),
+            response.getImageUrl(),
+            response.getSellingPrice(),
+            response.getLocationId(),
+            response.isBookMarked(),
+            additionalInformation.getQuantity(),
+            additionalInformation.getArrivalDate(),
+            additionalInformation.getBuyingPrice(),
+            additionalInformation.getOriginLabel().getLabel(),
+            additionalInformation.getProductSku(),
+            location.getName(),
+            totalSells
         );
     }
 
@@ -403,7 +458,7 @@ public class ProductServiceImpl implements ProductService {
         String productFirst3Chars = this.getThreeFirstChars(productName);
         String originFirst3Chars = this.getThreeFirstChars(originLabel);
         result = locationIdFirst3Chars + productFirst3Chars + originFirst3Chars + year + hour + min;
-        return result.toLowerCase();
+        return result.toUpperCase();
     }
 
     private String getThreeFirstChars(String str) {

@@ -19,24 +19,15 @@ public class OrderController {
 
     private final OrderService orderService;
 
-    @GetMapping("")
-    public List<OrderDto> getAllOrders() {
-        return this.orderService.getAllOrders();
-    }
 
     @GetMapping("/carts")
-    public List<OrderDto> getCartItems(@RequestParam String userId) {
+    public List<OrderDto> getCartItems(@RequestParam(value = "userId") String userId) {
         return this.orderService.getNonConfirmedOrders(userId);
     }
 
     @GetMapping("/location/{id}")
     public List<OrderDto> getConfirmedOrdersByLocationId(@PathVariable("id") String locationId) {
         return this.orderService.getConfirmedOrdersByLocationId(locationId);
-    }
-
-    @GetMapping("/location/{id}/status/{status}")
-    public List<OrderDto> getConfirmedOrdersByLocationIdAndStatus(@PathVariable("id") String locationId, @PathVariable String status) {
-        return this.orderService.getConfirmedOrderByLocationIdAndStatus(locationId, status);
     }
 
     @PutMapping("/confirm")
@@ -52,12 +43,12 @@ public class OrderController {
     }
 
     @PutMapping("/status/{id}")
-    public void updateStatus(@PathVariable String id) {
+    public void updateStatus(@PathVariable(value = "id") String id) {
         this.orderService.updateOrder(id);
     }
 
     @PutMapping("/cancel/{id}")
-    public void cancelOrder(@PathVariable String id) {
+    public void cancelOrder(@PathVariable(value = "id") String id) {
         this.orderService.cancelOrder(id);
     }
 
@@ -68,17 +59,17 @@ public class OrderController {
     }
 
     @PutMapping("/cartItems/increase/{id}/sku/{sku}")
-    public void increaseQuantity(@PathVariable String id, @PathVariable String sku) {
+    public void increaseQuantity(@PathVariable(value = "id") String id, @PathVariable(value = "sku") String sku) {
         this.orderService.increaseQuantity(id, sku);
     }
 
     @PutMapping("/cartItems/decrease/{id}/sku/{sku}")
-    public void decreaseQuantity(@PathVariable String id, @PathVariable String sku) {
+    public void decreaseQuantity(@PathVariable(value = "id") String id, @PathVariable(value = "sku") String sku) {
         this.orderService.decreaseQuantity(id, sku);
     }
 
     @DeleteMapping("/cartItems/{id}/sku/{sku}")
-    public void deleteItemFromOrder(@PathVariable String id, @PathVariable String sku) {
+    public void deleteItemFromOrder(@PathVariable(value = "id") String id, @PathVariable(value = "sku") String sku) {
         this.orderService.deleteItemFromOrder(id, sku);
     }
 
@@ -88,29 +79,30 @@ public class OrderController {
         return this.orderService.sendUnregisteredUserOrder(order);
     }
 
+    @GetMapping("/location/filter")
+    public List<OrderDto> filterOrdersByLocationId(@RequestParam(value = "locationId", required = false) String locationId,
+                                                   @RequestParam(value = "status", required = false) String status) {
+        return this.orderService.getOrdersByLocationId(locationId, status);
+    }
+
     @GetMapping("/total/{locationId}")
-    public long getTotalOrderCount(@PathVariable String locationId) {
+    public long getTotalOrderCount(@PathVariable(value = "locationId") String locationId) {
         return this.orderService.getOrderTotalCount(locationId);
     }
 
     @GetMapping("/sold/{locationId}")
-    public long getOrderSoldCount(@PathVariable String locationId) {
+    public long getOrderSoldCount(@PathVariable(value = "locationId") String locationId) {
         return this.orderService.getOrderSoldCount(locationId);
     }
 
     @GetMapping("/canceled/{locationId}")
-    public long getCanceledOrderCount(@PathVariable String locationId) {
+    public long getCanceledOrderCount(@PathVariable(value = "locationId") String locationId) {
         return this.orderService.getOrderCanceledCount(locationId);
     }
 
-    @GetMapping("/all/{locationId}")
-    public List<OrderDto> getAllOrdersFromLocationId(@PathVariable String locationId) {
-        return this.orderService.getAllOrdersByLocationId(locationId);
-    }
-
-    @PutMapping("/d eliveryDate/{id}")
+    @PutMapping("/deliveryDate/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateDeliveryDate(@PathVariable String id, @RequestBody DeliveryDate newDate) {
+    public void updateDeliveryDate(@PathVariable(value = "id") String id, @RequestBody DeliveryDate newDate) {
         this.orderService.updateDeliveryDate(id, newDate);
     }
 }

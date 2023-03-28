@@ -16,8 +16,6 @@ public interface OrderService {
 
     List<OrderDto> getConfirmedOrdersByLocationId(String locationId);
 
-    List<OrderDto> getConfirmedOrderByLocationIdAndStatus(String locationId, String status);
-
     void sendCommentToSeller(UserInformation userInformation);
 
     OrderDto addProductToCartItems(CreateOrderDto orderDto);
@@ -42,7 +40,7 @@ public interface OrderService {
 
     long getOrderCanceledCount(String locationId);
 
-    List<OrderDto> getAllOrdersByLocationId(String locationId);
-
     void updateDeliveryDate(String id, DeliveryDate newDate);
+
+    List<OrderDto> getOrdersByLocationId(String locationId, String status);
 }
