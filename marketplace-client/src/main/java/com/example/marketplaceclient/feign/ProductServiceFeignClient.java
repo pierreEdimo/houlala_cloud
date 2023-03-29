@@ -65,5 +65,8 @@ public interface ProductServiceFeignClient {
     @GetMapping("/category/{id}")
     List<Product> getProductsByCategoryId(@PathVariable("id") String categoryId, @RequestParam(value = "size", required = false) int size) throws MarketplaceException;
 
+    @GetMapping("/count/location/{id}")
+    long getProductTotalCount(@PathVariable(value = "id") String locationId) throws MarketplaceException;
+
 
 }
