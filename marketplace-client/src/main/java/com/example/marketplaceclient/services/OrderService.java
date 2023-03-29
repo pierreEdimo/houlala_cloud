@@ -43,4 +43,5 @@ public interface OrderService {
     void updateDeliveryDate(String id, DeliveryDate newDate);
 
     List<OrderDto> getOrdersByLocationId(String locationId, String status, int size);
+    OrderDto getSingleOrder(String id);
 }

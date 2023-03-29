@@ -1,6 +1,7 @@
 package com.example.marketplaceclient.feign;
 
 import com.example.marketplaceclient.exception.MarketplaceException;
+import com.example.marketplaceclient.model.Count;
 import com.example.marketplaceclient.model.CreateProduct;
 import com.example.marketplaceclient.model.Product;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -66,7 +67,7 @@ public interface ProductServiceFeignClient {
     List<Product> getProductsByCategoryId(@PathVariable("id") String categoryId, @RequestParam(value = "size", required = false) int size) throws MarketplaceException;
 
     @GetMapping("/count/location/{id}")
-    long getProductTotalCount(@PathVariable(value = "id") String locationId) throws MarketplaceException;
+    Count getProductTotalCount(@PathVariable(value = "id") String locationId) throws MarketplaceException;
 
 
 }

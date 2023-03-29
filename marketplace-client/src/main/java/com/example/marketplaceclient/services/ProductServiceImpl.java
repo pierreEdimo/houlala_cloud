@@ -454,13 +454,14 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public long productTotalCount(String locationId) {
+        Count count;
         try {
-            return this.feignClient.getAllProducts().
-                    stream().filter(product -> product.getLocationId().equalsIgnoreCase(locationId)).count();
+            count =  this.feignClient.getProductTotalCount(locationId);
         } catch (MarketplaceException e) {
             log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
+        return count.getValue();
     }
 
     private ProductDto toProductDto(Product response, ProductAdditionalInformation additionalInformation, int totalSells) {

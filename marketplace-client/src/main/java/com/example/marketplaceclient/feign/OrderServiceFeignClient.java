@@ -1,10 +1,7 @@
 package com.example.marketplaceclient.feign;
 
 import com.example.marketplaceclient.exception.MarketplaceException;
-import com.example.marketplaceclient.model.DeliveryDate;
-import com.example.marketplaceclient.model.Order;
-import com.example.marketplaceclient.model.SellReport;
-import com.example.marketplaceclient.model.UserInformation;
+import com.example.marketplaceclient.model.*;
 import com.example.marketplaceclient.model.dto.CreateOrderDto;
 import com.example.marketplaceclient.model.dto.CreateUnregisteredUserOrder;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -65,16 +62,16 @@ public interface OrderServiceFeignClient {
     List<SellReport> getTopOrders(@PathVariable(value = "locationId") String locationId) throws MarketplaceException;
 
     @GetMapping("/count/today/location/{locationId}")
-    long getTodayOrderCountByLocationId(@PathVariable(value = "locationId") int locationId) throws MarketplaceException;
+    Count getTodayOrderCountByLocationId(@PathVariable(value = "locationId") int locationId) throws MarketplaceException;
 
     @GetMapping("/count/today/location/{locationId}/status/{status}")
-    long getTodayOrderCountByLocationIdAndStatus(@PathVariable(value = "locationId") int locationId, @PathVariable(value = "status") String status) throws MarketplaceException;
+    Count getTodayOrderCountByLocationIdAndStatus(@PathVariable(value = "locationId") int locationId, @PathVariable(value = "status") String status) throws MarketplaceException;
 
     @GetMapping("/count/location/{locationId}")
-    long getOrderCountByLocationId(@PathVariable(value = "locationId") String locationId) throws MarketplaceException;
+    Count getOrderCountByLocationId(@PathVariable(value = "locationId") String locationId) throws MarketplaceException;
 
     @GetMapping("/count/location/{locationId}/status/{status}")
-    long getOrderCountByLocationIdAndStatus(@PathVariable(value = "locationId") String locationId, @PathVariable(value = "status") String status) throws MarketplaceException;
+    Count getOrderCountByLocationIdAndStatus(@PathVariable(value = "locationId") String locationId, @PathVariable(value = "status") String status) throws MarketplaceException;
 
     @GetMapping("{id}")
     Order getSingleOrder(@PathVariable(value = "id") String id) throws MarketplaceException;

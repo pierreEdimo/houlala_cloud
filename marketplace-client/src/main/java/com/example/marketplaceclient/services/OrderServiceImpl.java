@@ -202,32 +202,38 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public long getOrderTotalCount(String locationId) {
+        Count count;
         try {
-            return this.feignClient.getOrderCountByLocationId(locationId);
+            count = this.feignClient.getOrderCountByLocationId(locationId);
         } catch (MarketplaceException e) {
             log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
+        return count.getValue();
     }
 
     @Override
     public long getOrderSoldCount(String locationId) {
+        Count count;
         try {
-            return this.feignClient.getOrderCountByLocationIdAndStatus(locationId, "Delivre");
+            count = this.feignClient.getOrderCountByLocationIdAndStatus(locationId, "Delivre");
         } catch (MarketplaceException e) {
             log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
+        return count.getValue();
     }
 
     @Override
     public long getOrderCanceledCount(String locationId) {
+        Count count;
         try {
-            return this.feignClient.getOrderCountByLocationIdAndStatus(locationId, "Annule");
+            count = this.feignClient.getOrderCountByLocationIdAndStatus(locationId, "Annule");
         } catch (MarketplaceException e) {
             log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
+        return count.getValue();
     }
 
     @Override
@@ -267,6 +273,18 @@ public class OrderServiceImpl implements OrderService {
         orders.forEach(order -> orderDtoList.add(this.toOrderDto(order)));
 
         return orderDtoList;
+    }
+
+    @Override
+    public OrderDto getSingleOrder(String id) {
+        Order order;
+        try {
+            order = this.feignClient.getSingleOrder(id);
+        } catch (MarketplaceException e) {
+            log.error("errorMessage: " + e.getMessage());
+            throw new RuntimeException(e);
+        }
+        return this.toOrderDto(order);
     }
 
     private OrderDto toOrderDto(Order order) {
