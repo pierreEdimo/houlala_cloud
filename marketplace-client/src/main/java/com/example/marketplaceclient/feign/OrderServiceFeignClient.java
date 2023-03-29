@@ -38,7 +38,7 @@ public interface OrderServiceFeignClient {
     Order addProductToCarts(@RequestBody CreateOrderDto newOrder) throws MarketplaceException;
 
     @GetMapping("/location/{id}")
-    List<Order> getOrdersByLocationId(@PathVariable("id") String locationId) throws MarketplaceException;
+    List<Order> getOrdersByLocationId(@PathVariable("id") String locationId, @RequestParam(value = "size", required = false) int size) throws MarketplaceException;
 
     @PutMapping("/status/{id}")
     Order updateStatus(@PathVariable(name = "id") String id) throws MarketplaceException;
@@ -71,15 +71,12 @@ public interface OrderServiceFeignClient {
     long getTodayOrderCountByLocationIdAndStatus(@PathVariable(value = "locationId") int locationId, @PathVariable(value = "status") String status) throws MarketplaceException;
 
     @GetMapping("/count/location/{locationId}")
-    long getOrderCountByLocationId(@PathVariable(value = "locationId") int locationId) throws MarketplaceException;
+    long getOrderCountByLocationId(@PathVariable(value = "locationId") String locationId) throws MarketplaceException;
 
     @GetMapping("/count/location/{locationId}/status/{status}")
-    long getOrderCountByLocationIdAndStatus(@PathVariable(value = "locationId") int locationId, @PathVariable(value = "status") String status) throws MarketplaceException;
+    long getOrderCountByLocationIdAndStatus(@PathVariable(value = "locationId") String locationId, @PathVariable(value = "status") String status) throws MarketplaceException;
 
     @GetMapping("{id}")
     Order getSingleOrder(@PathVariable(value = "id") String id) throws MarketplaceException;
-
-    @GetMapping("/location/{id}")
-    List<Order> getOrderListByLocationId(@PathVariable(value = "id") String locationId, @RequestParam(value = "size", required = false) int size) throws MarketplaceException;
 
 }

@@ -203,7 +203,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public long getOrderTotalCount(String locationId) {
         try {
-            return this.feignClient.getAllOrders().stream().filter(order -> order.getLocationId().equalsIgnoreCase(locationId)).count();
+            return this.feignClient.getOrderCountByLocationId(locationId);
         } catch (MarketplaceException e) {
             log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
@@ -213,7 +213,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public long getOrderSoldCount(String locationId) {
         try {
-            return this.feignClient.getAllOrders().stream().filter(order -> order.getLocationId().equalsIgnoreCase(locationId) && order.getStatus().equalsIgnoreCase("Delivre")).count();
+            return this.feignClient.getOrderCountByLocationIdAndStatus(locationId, "Delivre");
         } catch (MarketplaceException e) {
             log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
@@ -223,7 +223,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public long getOrderCanceledCount(String locationId) {
         try {
-            return this.feignClient.getAllOrders().stream().filter(order -> order.getLocationId().equalsIgnoreCase(locationId) && order.getStatus().equalsIgnoreCase("Annule")).count();
+            return this.feignClient.getOrderCountByLocationIdAndStatus(locationId, "Annule");
         } catch (MarketplaceException e) {
             log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
@@ -241,7 +241,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderDto> getOrdersByLocationId(String locationId, String status) {
+    public List<OrderDto> getOrdersByLocationId(String locationId, String status, int size) {
         List<OrderDto> orderDtoList = new ArrayList<>();
         List<Order> orders;
 
@@ -249,7 +249,7 @@ public class OrderServiceImpl implements OrderService {
             orders = this.feignClient.getAllOrders();
 
             if (locationId != null) {
-                orders = this.feignClient.getOrdersByLocationId(locationId);
+                orders = this.feignClient.getOrdersByLocationId(locationId, size);
             }
 
         } catch (MarketplaceException e) {

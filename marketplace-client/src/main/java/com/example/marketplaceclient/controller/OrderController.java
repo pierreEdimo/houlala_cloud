@@ -81,8 +81,10 @@ public class OrderController {
 
     @GetMapping("/location/filter")
     public List<OrderDto> filterOrdersByLocationId(@RequestParam(value = "locationId", required = false) String locationId,
-                                                   @RequestParam(value = "status", required = false) String status) {
-        return this.orderService.getOrdersByLocationId(locationId, status);
+                                                   @RequestParam(value = "status", required = false) String status,
+                                                   @RequestParam(value = "size", required = false) int size
+    ) {
+        return this.orderService.getOrdersByLocationId(locationId, status, size);
     }
 
     @GetMapping("/total/{locationId}")
