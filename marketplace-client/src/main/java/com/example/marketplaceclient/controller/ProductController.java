@@ -62,7 +62,7 @@ public class ProductController {
     }
 
     @GetMapping("/top/{locationId}")
-    public List<ProductDto> getTopProductsByLocationId(@PathVariable("locationId") String locationId){
+    public List<ProductDto> getTopProductsByLocationId(@PathVariable("locationId") String locationId) {
         return this.productService.getTopProductsByLocationId(locationId);
     }
 
@@ -110,6 +110,11 @@ public class ProductController {
     @GetMapping("/random/category/{id}")
     public List<ProductDto> getRandomProductsByCategoryId(@PathVariable("id") String categoryId, @RequestParam int size) {
         return this.productService.getRandomProductsByCategoryId(categoryId, size);
+    }
+
+    @GetMapping("/category/{id}")
+    public List<ProductDto> getProductsByCategoryId(@PathVariable("id") String categoryId, @RequestParam(required = false) int size) {
+        return this.productService.getProductListCategoryId(categoryId, size);
     }
 
     @GetMapping("/total/{locationId}")

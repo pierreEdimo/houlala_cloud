@@ -428,6 +428,31 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<ProductDto> getProductListCategoryId(String categoryId, int size) {
+        List<Product> productList;
+        List<ProductDto> productDtoList = new ArrayList<>();
+        List<ProductAdditionalInformation> informations;
+
+        try {
+            productList = this.feignClient.getProductsByCategoryId(categoryId, size);
+            informations = this.stockerServiceFeignClient.getAllProductInfos();
+        } catch (MarketplaceException e) {
+            log.error(e.getMessage());
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+
+        for (Product product : productList) {
+            for (ProductAdditionalInformation info : informations) {
+                if (product.getProductSku().equalsIgnoreCase(info.getProductSku())) {
+                    productDtoList.add(this.toProductDto(product, info, 0));
+                }
+            }
+        }
+
+        return productDtoList;
+    }
+
+    @Override
     public long productTotalCount(String locationId) {
         try {
             return this.feignClient.getAllProducts().

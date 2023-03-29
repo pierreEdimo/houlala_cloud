@@ -45,5 +45,7 @@ public interface ProductService {
 
     List<ProductDto> getTopProductsByLocationId(String locationId);
 
+    List<ProductDto> getProductListCategoryId(String categoryId, int size);
+
     long productTotalCount(String locationId);
 }
