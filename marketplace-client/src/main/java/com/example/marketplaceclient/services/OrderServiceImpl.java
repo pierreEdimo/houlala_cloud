@@ -247,7 +247,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderDto> getOrdersByLocationId(String locationId, String status, int size) {
+    public List<OrderDto> getOrdersByLocationId(String locationId, String status, Integer size) {
         List<OrderDto> orderDtoList = new ArrayList<>();
         List<Order> orders;
 
@@ -267,7 +267,6 @@ public class OrderServiceImpl implements OrderService {
             orders = orders.stream()
                     .filter(x -> x.getStatus().equalsIgnoreCase(status))
                     .collect(Collectors.toList());
-
         }
 
         orders.forEach(order -> orderDtoList.add(this.toOrderDto(order)));
