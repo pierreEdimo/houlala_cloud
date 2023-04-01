@@ -10,7 +10,7 @@ import org.yaml.snakeyaml.error.Mark;
 
 import java.util.List;
 
-@FeignClient(url = "http://houlala_marketplace:3000/api/orders", name = "orders")
+@FeignClient(url = "http://localhost:5000/api/orders", name = "orders")
 public interface OrderServiceFeignClient {
 
     @GetMapping("")
@@ -35,7 +35,7 @@ public interface OrderServiceFeignClient {
     Order addProductToCarts(@RequestBody CreateOrderDto newOrder) throws MarketplaceException;
 
     @GetMapping("/location/{id}")
-    List<Order> getOrdersByLocationId(@PathVariable("id") String locationId, @RequestParam(value = "size", required = false) int size) throws MarketplaceException;
+    List<Order> getOrdersByLocationId(@PathVariable("id") String locationId, @RequestParam(value = "size", required = false) Integer size) throws MarketplaceException;
 
     @PutMapping("/status/{id}")
     Order updateStatus(@PathVariable(name = "id") String id) throws MarketplaceException;

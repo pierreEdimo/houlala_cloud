@@ -255,6 +255,10 @@ public class OrderServiceImpl implements OrderService {
             orders = this.feignClient.getAllOrders();
 
             if (locationId != null) {
+                orders = this.feignClient.getOrdersByLocationId(locationId, null);
+            }
+
+            if (size != null && locationId != null) {
                 orders = this.feignClient.getOrdersByLocationId(locationId, size);
             }
 
