@@ -1,16 +1,8 @@
 package com.example.locationService.bootstrap;
-
-import com.example.locationService.model.Address;
-import com.example.locationService.model.Availability;
-import com.example.locationService.model.Location;
-import com.example.locationService.repositories.LocationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Component

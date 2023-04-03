@@ -1,6 +1,5 @@
 package com.example.marketplaceclient.model.dto;
 
-import com.example.marketplaceclient.model.Origin;
 import lombok.*;
 
 import java.time.LocalDate;

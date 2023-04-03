@@ -1,6 +1,5 @@
 package com.example.inventoryservice.model.dto;
 
-import com.example.inventoryservice.model.InventoryItem;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;

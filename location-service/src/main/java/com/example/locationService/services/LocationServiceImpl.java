@@ -33,7 +33,6 @@ public class LocationServiceImpl implements LocationService {
 
     private final UserFeignClient userFeignClient;
 
-
     @Override
     public LocationResponse getLocation(long id) {
 
@@ -129,7 +128,6 @@ public class LocationServiceImpl implements LocationService {
     public List<LocationResponse> getLocationsByCountryId(long id) {
         List<LocationResponse> existingLocations = new ArrayList<>();
 
-
         List<Location> locations = this.repository.findLocationsByCountryId(id);
 
         for (Location location : locations) {
@@ -163,7 +161,6 @@ public class LocationServiceImpl implements LocationService {
         List<LocationResponse> locationResponses = new ArrayList<>();
 
         List<Location> locationsList = this.repository.getStore();
-
 
         locationsList.forEach(location -> {
             try {
@@ -219,7 +216,10 @@ public class LocationServiceImpl implements LocationService {
     public List<LocationResponse> filterStoreByName(String searchWord) {
         List<LocationResponse> locationResponses = new ArrayList<>();
 
-        List<Location> locations = this.repository.getStore().stream().filter(location -> location.getName().toLowerCase().contains(searchWord.toLowerCase())).toList();
+        List<Location> locations = this.repository.getStore()
+                .stream()
+                .filter(location -> location.getName().toLowerCase().contains(searchWord.toLowerCase()))
+                .toList();
 
         locations.forEach(location -> {
             try {
@@ -265,7 +265,6 @@ public class LocationServiceImpl implements LocationService {
         return locationResponseList;
     }
 
-
     private LocationResponse toLocationResponse(Location location) throws LocationServiceException {
 
         Country countryLocation = this.client.getASingleCountry(location.getCountryId());
@@ -300,7 +299,6 @@ public class LocationServiceImpl implements LocationService {
         response.setCreator(creator);
         response.setShortDescription(location.getShortDescription());
 
-
         if (response.getCategory().getName().equals("Hotel")) {
             response.setAvailableRooms(rooms);
         }
@@ -308,4 +306,3 @@ public class LocationServiceImpl implements LocationService {
         return response;
     }
 }
-

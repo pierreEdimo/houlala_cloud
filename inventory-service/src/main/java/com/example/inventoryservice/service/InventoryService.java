@@ -1,6 +1,5 @@
 package com.example.inventoryservice.service;
 
-import com.example.inventoryservice.model.Inventory;
 import com.example.inventoryservice.model.dto.CreateInventoryDto;
 import com.example.inventoryservice.model.dto.InventoryDto;
 
