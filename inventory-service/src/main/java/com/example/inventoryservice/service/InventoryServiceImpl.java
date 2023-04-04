@@ -19,7 +19,6 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -78,13 +77,10 @@ public class InventoryServiceImpl implements InventoryService {
 
     @Override
     public InventoryDto getASingleInventory(long id) {
-        Optional<Inventory> optionalInventory = this.inventoryRepository.findById(id);
-
-        if (optionalInventory.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Inventory not found");
-        }
-
-        return this.toInventoryDto(optionalInventory.get());
+        Inventory inventory = this.inventoryRepository
+                .findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Inventory not found"));
+        return this.toInventoryDto(inventory);
     }
 
     @Override
@@ -105,24 +101,18 @@ public class InventoryServiceImpl implements InventoryService {
 
     @Override
     public void deleteInventory(long id) {
-        Optional<Inventory> optionalInventory = this.inventoryRepository.findById(id);
-
-        if (optionalInventory.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Inventory not found");
-        }
-
-        this.inventoryRepository.delete(optionalInventory.get());
+        Inventory inventory = this.inventoryRepository
+                .findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Inventory not found"));
+        this.inventoryRepository.delete(inventory);
     }
 
     @Override
     public InventoryDto editInventory(long id, CreateInventoryDto newInventory) {
-        Optional<Inventory> optionalInventory = this.inventoryRepository.findById(id);
+        Inventory inventory = this.inventoryRepository
+                .findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Inventory not found"));
 
-        if (optionalInventory.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Inventory not found");
-        }
-
-        Inventory inventory = optionalInventory.get();
         List<InventoryItem> items = inventory.getProductList();
 
         for (InventoryItem item : items) {
