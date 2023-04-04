@@ -19,10 +19,14 @@ public class OrderController {
 
     private final OrderService orderService;
 
-
     @GetMapping("/carts")
     public List<OrderDto> getCartItems(@RequestParam(value = "userId") String userId) {
         return this.orderService.getNonConfirmedOrders(userId);
+    }
+
+    @GetMapping("{id}")
+    public OrderDto getSingleOrder(@PathVariable("id") String id){
+        return this.orderService.getSingleOrder(id);
     }
 
     @GetMapping("/location/{id}")
