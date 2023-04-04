@@ -36,13 +36,8 @@ public class LocationServiceImpl implements LocationService {
     @Override
     public LocationResponse getLocation(long id) {
 
-        Optional<Location> location = this.repository.findById(id);
-
-        if (location.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Location not found");
-        }
-
-        Location existingLocation = location.get();
+        Location existingLocation = this.repository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Location doesn't exist"));
 
         try {
             return this.toLocationResponse(existingLocation);
@@ -90,36 +85,26 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     public Location editLocation(Location newLocation, long id) {
-        Optional<Location> location = this.repository.findById(id);
-
-        if (location.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Location not found");
-        }
-
-        Location existingLocation = location.get();
-
+        Location existingLocation = this.repository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Location doesn't exist"));
         existingLocation.setName(newLocation.getName());
         existingLocation.setEmail(newLocation.getEmail());
         existingLocation.setDescription(newLocation.getDescription());
         existingLocation.setWebsite(newLocation.getWebsite());
-        existingLocation.setAddress(newLocation.getAddress());
+        existingLocation.getAddress().setCity(newLocation.getAddress().getCity());
+        existingLocation.getAddress().setStreetName(newLocation.getAddress().getStreetName());
+        existingLocation.getAddress().setPoBox(newLocation.getAddress().getPoBox());
         existingLocation.setAvailabilityList(newLocation.getAvailabilityList());
         existingLocation.setCountryId(newLocation.getCountryId());
         existingLocation.setCategoryId(newLocation.getCategoryId());
         existingLocation.setTelephoneNumber(newLocation.getTelephoneNumber());
-
         return this.repository.save(existingLocation);
     }
 
     @Override
     public void deleteLocation(long id) {
-        Optional<Location> location = this.repository.findById(id);
-
-        if (location.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Location doesn't exist");
-        }
-
-        Location existingLocation = location.get();
+        Location existingLocation = this.repository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Location doen't exist"));
 
         this.repository.delete(existingLocation);
     }
@@ -127,7 +112,6 @@ public class LocationServiceImpl implements LocationService {
     @Override
     public List<LocationResponse> getLocationsByCountryId(long id) {
         List<LocationResponse> existingLocations = new ArrayList<>();
-
         List<Location> locations = this.repository.findLocationsByCountryId(id);
 
         for (Location location : locations) {
@@ -143,14 +127,11 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     public LocationResponse getLocationByUniqueIdentifier(String uniqueIdentifier) {
-        Optional<Location> locationOptional = this.repository.findLocationByUniqueIdentifier(uniqueIdentifier);
-
-        if (locationOptional.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Location doesn't exist");
-        }
-
+        Location location = this.repository
+                .findLocationByUniqueIdentifier(uniqueIdentifier)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Location doesn't exist"));
         try {
-            return this.toLocationResponse(locationOptional.get());
+            return this.toLocationResponse(location);
         } catch (LocationServiceException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
@@ -159,7 +140,6 @@ public class LocationServiceImpl implements LocationService {
     @Override
     public List<LocationResponse> getStores(Long limit) {
         List<LocationResponse> locationResponses = new ArrayList<>();
-
         List<Location> locationsList = this.repository.getStore();
 
         locationsList.forEach(location -> {
@@ -181,7 +161,6 @@ public class LocationServiceImpl implements LocationService {
     @Override
     public List<LocationResponse> getStoreByCategoryId(long categoryId) {
         List<LocationResponse> locationResponses = new ArrayList<>();
-
         List<Location> locationList = this.repository.getStoreByCategoryId(categoryId);
 
         locationList.forEach(location -> {
@@ -234,14 +213,12 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     public LocationResponse getLocationByOwnerId(String ownerId) {
-        Optional<Location> locationOptional = this.repository.findLocationByUserId(ownerId);
-
-        if (locationOptional.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "There are no locations");
-        }
+        Location location = this.repository
+                .findLocationByUserId(ownerId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Location doesn't exist"));
 
         try {
-            return this.toLocationResponse(locationOptional.get());
+            return this.toLocationResponse(location);
         } catch (LocationServiceException e) {
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }

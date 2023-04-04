@@ -3,6 +3,7 @@ package com.example.locationService.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
+import javax.annotation.Nullable;
 import javax.persistence.*;
 import java.util.List;
 
@@ -13,7 +14,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Location {
-
 
     /**
      * l'Id unique d'une Location
@@ -82,6 +82,7 @@ public class Location {
     /**
      * L'adresse URl du vendeur
      */
+    @Column(nullable = false)
     private String website;
 
     /**
