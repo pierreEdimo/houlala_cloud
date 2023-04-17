@@ -97,4 +97,15 @@ public interface AuthenticationFeignClient {
      */
     @PutMapping("/Auth/editUserEmail/{Email}")
     UserToken editEmail(@RequestBody EditEmail model, @PathVariable("Email") String email, @RequestHeader("Authorization") String auth) throws AuthenticationException;
+
+    /**
+     * Permet de modifier les informations du vendeur
+     *
+     * @param info Les informations du Vendeur.
+     * @param auth Le Token de l'utilisateur dans le header.
+     * @return La nouveau userName et l'Email.
+     * @throws AuthenticationException En cas d'erreur.
+     */
+    @PutMapping("Auth/editSellerInfo")
+    UserToken editSellerInfo(@RequestBody SellerInfo info, @RequestHeader("Authorization") String auth) throws AuthenticationException;
 }

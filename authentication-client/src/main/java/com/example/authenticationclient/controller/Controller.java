@@ -91,6 +91,16 @@ public class Controller {
         }
     }
 
+    @PutMapping("/seller")
+    public UserToken editSellerInfo(@RequestBody SellerInfo info, @RequestHeader("Authorization") String jwt) {
+        try {
+            return this.feignClient.editSellerInfo(info, jwt);
+        } catch (AuthenticationException e) {
+            log.error(e.getMessage());
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+    }
+
     @PutMapping("/email/{email}")
     public UserToken editUserEmail(@RequestBody EditEmail model, @PathVariable String email, @RequestHeader("Authorization") String jwt) {
         try {
