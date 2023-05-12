@@ -28,7 +28,6 @@
       <module name="api" target="17" />
       <module name="booking-service" target="17" />
       <module name="booking_service" target="17" />
-      <module name="email-service" target="1.8" />
       <module name="hotel-service" target="17" />
       <module name="message-sender" target="17" />
       <module name="notification-client" target="17" />

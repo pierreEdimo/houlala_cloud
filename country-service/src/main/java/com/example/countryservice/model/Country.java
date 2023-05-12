@@ -1,6 +1,8 @@
 package com.example.countryservice.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
@@ -11,19 +13,13 @@ import javax.persistence.Id;
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Country {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
-
+    private Long id;
     private String name;
-
     private String code;
-
-    public Country(){}
-
-    public Country(String name, String code){
-        this.name = name;
-        this.code = code;
-    }
+    private String currency;
 }

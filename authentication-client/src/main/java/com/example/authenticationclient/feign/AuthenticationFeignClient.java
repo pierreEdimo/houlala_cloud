@@ -106,6 +106,6 @@ public interface AuthenticationFeignClient {
      * @return La nouveau userName et l'Email.
      * @throws AuthenticationException En cas d'erreur.
      */
-    @PutMapping("Auth/editSellerInfo")
-    UserToken editSellerInfo(@RequestBody SellerInfo info, @RequestHeader("Authorization") String auth) throws AuthenticationException;
+    @PutMapping("Auth/editSellerInfo/{Email}")
+    UserToken editSellerInfo(@RequestBody SellerInfo info, @PathVariable("Email") String email, @RequestHeader("Authorization") String auth) throws AuthenticationException;
 }
