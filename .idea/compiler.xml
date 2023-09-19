@@ -9,9 +9,8 @@
         <outputRelativeToContentRoot value="true" />
         <module name="stock-service" />
         <module name="category-service" />
-        <module name="location-service" />
         <module name="review-service" />
-        <module name="marketplace-client" />
+        <module name="location-service" />
         <module name="authentication-client" />
         <module name="inventory-service" />
         <module name="discovery" />
@@ -21,6 +20,7 @@
         <module name="country-service" />
         <module name="config" />
         <module name="gateway" />
+        <module name="houlala-marketplace" />
         <module name="discovery-orchestrator" />
       </profile>
     </annotationProcessing>
@@ -29,6 +29,7 @@
       <module name="booking-service" target="17" />
       <module name="booking_service" target="17" />
       <module name="hotel-service" target="17" />
+      <module name="marketplace-client" target="17" />
       <module name="message-sender" target="17" />
       <module name="notification-client" target="17" />
       <module name="offer-service" target="17" />
@@ -52,6 +53,7 @@
       <module name="email-service" options="-parameters" />
       <module name="gateway" options="-parameters" />
       <module name="hotel-service" options="-parameters" />
+      <module name="houlala-marketplace" options="-parameters" />
       <module name="inventory-service" options="-parameters" />
       <module name="location-service" options="-parameters" />
       <module name="marketplace-client" options="-parameters" />

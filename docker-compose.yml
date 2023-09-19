@@ -1,14 +1,12 @@
 version: '3.8'
 services:
   discovery:
-    image: houlala-cloud-discovery:latest
-    hostname: localhost
+    image: pierreedimo777/houlala-cloud-discovery
     ports:
       - "8761:8761"
     restart: on-failure
   authentication-client:
-    image: houlala-authentication-client:latest
-    container_name: authentication-client
+    image: pierreedimo777/houlala-cloud-authentication-client
     expose:
       - 8088
     ports:
@@ -18,7 +16,7 @@ services:
       EUREKA_INSTANCE_PREFER_IP_ADDRESS: "true"
     restart: on-failure
   stock-service:
-    image: houlala-cloud-stock-service:latest
+    image: pierreedimo777/houlala-cloud-stock-service
     container_name: stock-service
     expose:
       - "8089"
@@ -36,7 +34,7 @@ services:
             }'
     restart: on-failure
   category-service:
-    image: houlala-category-service:latest
+    image: pierreedimo777/houlala-cloud-category-service
     container_name: category-service
     expose:
       - "8084"
@@ -54,7 +52,7 @@ services:
             }'
     restart: on-failure
   country-service:
-    image: houlala-cloud-country-service:latest
+    image: pierreedimo777/houlala-cloud-country-service
     container_name: country-service
     expose:
       - "8082"
@@ -72,7 +70,7 @@ services:
             }'
     restart: on-failure
   discovery-orchestrator:
-    image: houlala-cloud-discovery-orchestrator:latest
+    image: pierreedimo777/houlala-cloud-discovery-orchestrator
     container_name: discovery-orchestrator
     expose:
       - "8081"
@@ -83,23 +81,22 @@ services:
       EUREKA_INSTANCE_PREFER_IP_ADDRESS: "true"
     restart: on-failure
   gateway:
-    image: houlala-cloud-gateway:latest
-    container_name: gateway
-    expose:
+    image: pierreedimo777/houlala-cloud-gateway
+    ports:
       - "8080"
     depends_on:
       - discovery
       - discovery-orchestrator
       - authentication-client
-      - marketplace-client
       - inventory-service
+      - houlala-marketplace-client
     environment:
       EUREKA_INSTANCE_PREFER_IP_ADDRESS: "true"
       eureka.client.serviceUrl.defaultZone: http://discovery:8761/eureka
       SPRING_PROFILES_ACTIVE: path
     restart: on-failure
   location-service:
-    image: houlala-cloud-location-service:latest
+    image: pierreedimo777/houlala-cloud-location-service
     container_name: location-service
     expose:
       - "8083"
@@ -117,7 +114,7 @@ services:
             }'
     restart: on-failure
   inventory-service:
-    image: houlala-cloud-inventory-service:latest
+    image: pierreedimo777/houlala-cloud-inventory-service
     container_name: inventory-service
     expose:
       - "8090"
@@ -134,19 +131,8 @@ services:
               "spring.jpa.hibernate.ddl-auto" : "update"
             }'
     restart: on-failure
-  marketplace-client:
-    image: houlala-cloud-marketplace-client:latest
-    container_name: marketplace-client
-    expose:
-      - "8087"
-    depends_on:
-      - "discovery"
-    environment:
-      eureka.client.serviceUrl.defaultZone: http://discovery:8761/eureka
-      EUREKA_INSTANCE_PREFER_IP_ADDRESS: "true"
-    restart: on-failure
   review-service:
-    image: houlala-cloud-review-service:latest
+    image: pierreedimo777/houlala-cloud-review-service
     container_name: review-service
     expose:
       - "8086"
@@ -164,7 +150,7 @@ services:
             }'
     restart: on-failure
   room-service:
-    image: houlala-cloud-room-service:latest
+    image: pierreedimo777/houlala-cloud-room-service
     container_name: room-service
     expose:
       - "8085"
@@ -184,12 +170,12 @@ services:
   houlala_authentication:
     image: pierreedimo777/houlala-authentication
     expose:
-      - "8000"
+      - "8010"
     ports:
-      - "8000:8000"
+      - "8010:8010"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
-      - ASPNETCORE_URLS=http://+:8000
+      - ASPNETCORE_URLS=http://+:8010
   houlala_storage:
     image: pierreedimo777/houlala-cloud-storage
     expose:
@@ -199,12 +185,25 @@ services:
       - ASPNETCORE_URLS=http://+:8001
     ports:
       - "8001:8001"
-  houlala_marketplace:
-    image: pierreedimo777/houlala-cloud-marketplace
+  houlala-marketplace-client:
+    image: pierreedimo777/houlala-cloud-houlala-marketplace:latest
+    container_name: houlala-marketplace-client
     expose:
-      - "3000"
+      - "9090"
+    depends_on:
+      - "discovery"
+    environment:
+      eureka.client.serviceUrl.defaultZone: http://discovery:8761/eureka
+      EUREKA_INSTANCE_PREFER_IP_ADDRESS: "true"
+    restart: on-failure
+  marketplace-api:
+    image: pierreedimo777/marketplace-api
+    depends_on:
+      - database
     ports:
       - "3000:3000"
+    networks:
+      - default
   MS_SQL:
     image: mcr.microsoft.com/mssql/server:2019-latest
     volumes:
@@ -234,13 +233,14 @@ services:
       PORT_con1: 1433
       ENGINE_con1: mssql@dbgate-plugin-mssql
   database:
-    image: mysql
+    image: mysql:8.0
     restart: always
     environment:
       MYSQL_DATABASE: 'db'
       MYSQL_USER: 'pierre'
       MYSQL_PASSWORD: '28Janvier1995?'
       MYSQL_ROOT_PASSWORD: '28Janvier1995?'
+      MYSQL_AUTHENTICATION_PLUGIN: mysql_native_password
     ports:
       - "3306:3306"
     expose:
@@ -249,26 +249,6 @@ services:
       - my-db:/var/lib/mysql
     networks:
       - default
-  mongoexpress:
-    image: mongo-express
-    restart: always
-    hostname: localhost
-    ports:
-      - "8000:8081"
-    expose:
-      - "8000"
-    environment:
-      - PMA_ARBITRARY=1
-  mongo:
-    image: mongo
-    restart: always
-    hostname: localhost
-    ports:
-      - "27017:27017"
-    expose:
-      - "27017"
-    volumes:
-      - my-db:/var/lib/mongodb
   phpmyadmin:
     image: phpmyadmin
     restart: always
@@ -279,3 +259,4 @@ services:
 volumes:
   my-db:
   ms-server-volume:
+

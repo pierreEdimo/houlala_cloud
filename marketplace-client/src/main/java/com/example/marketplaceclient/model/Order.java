@@ -8,7 +8,7 @@ import java.util.List;
 @Getter
 @Setter
 public class Order {
-    private String _id;
+    private int id;
     private String status;
     private String locationId;
     private boolean confirmed;

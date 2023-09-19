@@ -12,7 +12,7 @@ public interface OrderService {
 
     List<OrderDto> getAllOrders();
 
-    List<OrderDto> getNonConfirmedOrders(String userId);
+    List<OrderDto> getCartList(String userId);
 
     List<OrderDto> getConfirmedOrdersByLocationId(String locationId);
 
@@ -20,17 +20,17 @@ public interface OrderService {
 
     OrderDto addProductToCartItems(CreateOrderDto orderDto);
 
-    void updateOrder(String id);
+    void updateOrder(int id);
 
-    void cancelOrder(String id);
+    void cancelOrder(int id);
 
     List<OrderDto> getConfirmedOrders(String userId);
 
-    void increaseQuantity(String id, String sku);
+    void increaseQuantity(int id, String sku);
 
-    void decreaseQuantity(String id, String sku);
+    void decreaseQuantity(int id, String sku);
 
-    void deleteItemFromOrder(String id, String sku);
+    void deleteItemFromOrder(int id, String sku);
 
     OrderDto sendUnregisteredUserOrder(CreateUnregisteredUserOrder order);
 
@@ -40,8 +40,8 @@ public interface OrderService {
 
     long getOrderCanceledCount(String locationId);
 
-    void updateDeliveryDate(String id, DeliveryDate newDate);
+    void updateDeliveryDate(int id, DeliveryDate newDate);
 
     List<OrderDto> getOrdersByLocationId(String locationId, String status, Integer size);
-    OrderDto getSingleOrder(String id);
+    OrderDto getSingleOrder(int id);
 }

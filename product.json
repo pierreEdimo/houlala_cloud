@@ -3,9 +3,9 @@
   "description": "lorem",
   "weight": 120,
   "sellingPrice": 50,
-  "locationId": "Hou625202214",
-  "categoryId": "637062247d728921c4e3fa19",
-  "productType": "63706a8e7d728921c4e3fa41",
+  "locationUniqueId": "Hou625202214",
+  "categoryId": 1,
+  "subCategoryId": "63706a8e7d728921c4e3fa41",
   "originLabel": "Cameroun",
   "buyingPrice": 120,
   "quantity": 10

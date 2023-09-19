@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Category {
-    private String _id;
+    private int id;
 
     private String name;
 

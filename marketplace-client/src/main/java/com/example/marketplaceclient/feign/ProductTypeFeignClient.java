@@ -1,7 +1,7 @@
 package com.example.marketplaceclient.feign;
 
 import com.example.marketplaceclient.exception.MarketplaceException;
-import com.example.marketplaceclient.model.ProductType;
+import com.example.marketplaceclient.model.SubCategory;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,20 +11,20 @@ import java.util.List;
 public interface ProductTypeFeignClient {
 
     @GetMapping("")
-    List<ProductType> getAllProductTypes() throws MarketplaceException;
+    List<SubCategory> getAllProductTypes() throws MarketplaceException;
 
     @GetMapping("/{id}")
-    ProductType getSingleProductType(@PathVariable(value = "id") String id) throws MarketplaceException;
+    SubCategory getSingleProductType(@PathVariable(value = "id") String id) throws MarketplaceException;
 
     @PostMapping("")
-    ProductType addProductType(@RequestBody ProductType newType) throws MarketplaceException;
+    SubCategory addProductType(@RequestBody SubCategory newType) throws MarketplaceException;
 
     @PatchMapping("/{id}")
-    ProductType editProductType(@RequestBody ProductType newType, @PathVariable(value = "id") String id) throws MarketplaceException;
+    SubCategory editProductType(@RequestBody SubCategory newType, @PathVariable(value = "id") String id) throws MarketplaceException;
 
     @DeleteMapping("/{id}")
-    ProductType deleteProductType(@PathVariable(value = "id") String id) throws MarketplaceException;
+    SubCategory deleteProductType(@PathVariable(value = "id") String id) throws MarketplaceException;
 
     @GetMapping("/category/{id}")
-    List<ProductType> getTypesByCategoryId(@PathVariable("id") String categoryId) throws MarketplaceException;
+    List<SubCategory> getTypesByCategoryId(@PathVariable("id") String categoryId) throws MarketplaceException;
 }

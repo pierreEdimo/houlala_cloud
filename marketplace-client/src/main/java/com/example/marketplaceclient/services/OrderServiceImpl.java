@@ -49,12 +49,12 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderDto> getNonConfirmedOrders(String userId) {
+    public List<OrderDto> getCartList(String userId) {
         List<Order> orderList;
         List<OrderDto> orderDtoList = new ArrayList<>();
 
         try {
-            orderList = this.feignClient.getNonConfirmedOrders(userId);
+            orderList = this.feignClient.getCartList(userId);
         } catch (MarketplaceException e) {
             log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
@@ -70,7 +70,7 @@ public class OrderServiceImpl implements OrderService {
         List<OrderDto> orderDtoList = new ArrayList<>();
 
         try {
-            orderList = this.feignClient.getConfirmedOrdersByLocationId(locationId);
+            orderList = this.feignClient.getOrdersByLocationId(locationId);
         } catch (MarketplaceException e) {
             log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
@@ -84,7 +84,7 @@ public class OrderServiceImpl implements OrderService {
     public void sendCommentToSeller(UserInformation userInformation) {
 
         try {
-            this.feignClient.sendCommandToSeller(userInformation);
+            this.feignClient.confirmOrder(userInformation);
         } catch (MarketplaceException e) {
             log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
@@ -96,7 +96,7 @@ public class OrderServiceImpl implements OrderService {
         Order order;
 
         try {
-            order = this.feignClient.addProductToCarts(orderDto);
+            order = this.feignClient.addProducts(orderDto);
         } catch (MarketplaceException e) {
             log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
@@ -106,11 +106,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void updateOrder(String id) {
+    public void updateOrder(int id) {
         Order order;
 
         try {
-            order = this.feignClient.updateStatus(id);
+            order = this.feignClient.updateStatusOfOrder(id);
         } catch (MarketplaceException e) {
             log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
@@ -130,7 +130,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void cancelOrder(String id) {
+    public void cancelOrder(int id) {
         try {
             this.feignClient.cancelOrder(id);
         } catch (MarketplaceException e) {
@@ -145,7 +145,7 @@ public class OrderServiceImpl implements OrderService {
         List<Order> orders;
 
         try {
-            orders = this.feignClient.getConfirmedOrders(userId);
+            orders = this.feignClient.getUserOrders(userId);
         } catch (MarketplaceException e) {
             log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
@@ -157,9 +157,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void increaseQuantity(String id, String sku) {
+    public void increaseQuantity(int id, String sku) {
         try {
-            this.feignClient.increaseQuantity(id, sku);
+            this.feignClient.increaseItemQuantity(id, sku);
         } catch (MarketplaceException e) {
             log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
@@ -167,9 +167,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void decreaseQuantity(String id, String sku) {
+    public void decreaseQuantity(int id, String sku) {
         try {
-            this.feignClient.decreaseQuantity(id, sku);
+            this.feignClient.decreaseItemQuantity(id, sku);
         } catch (MarketplaceException e) {
             log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
@@ -177,9 +177,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void deleteItemFromOrder(String id, String sku) {
+    public void deleteItemFromOrder(int id, String sku) {
         try {
-            this.feignClient.deleteItemFromOrder(id, sku);
+            this.feignClient.removeItemFromOrder(id, sku);
         } catch (MarketplaceException e) {
             log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
@@ -191,7 +191,7 @@ public class OrderServiceImpl implements OrderService {
         Order createdOrder;
 
         try {
-            createdOrder = this.feignClient.sendOrderFromUnregisteredUsers(order);
+            createdOrder = this.feignClient.confirmUnregisteredUsersOrders(order);
         } catch (MarketplaceException e) {
             log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
@@ -204,7 +204,7 @@ public class OrderServiceImpl implements OrderService {
     public long getOrderTotalCount(String locationId) {
         Count count;
         try {
-            count = this.feignClient.getOrderCountByLocationId(locationId);
+            count = this.feignClient.getTotalOrderCount(locationId);
         } catch (MarketplaceException e) {
             log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
@@ -216,7 +216,7 @@ public class OrderServiceImpl implements OrderService {
     public long getOrderSoldCount(String locationId) {
         Count count;
         try {
-            count = this.feignClient.getOrderCountByLocationIdAndStatus(locationId, "Delivre");
+            count = this.feignClient.getOrdersCountByLocationIdAndStatus(locationId, "Delivre");
         } catch (MarketplaceException e) {
             log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
@@ -228,7 +228,7 @@ public class OrderServiceImpl implements OrderService {
     public long getOrderCanceledCount(String locationId) {
         Count count;
         try {
-            count = this.feignClient.getOrderCountByLocationIdAndStatus(locationId, "Annule");
+            count = this.feignClient.getOrdersCountByLocationIdAndStatus(locationId, "Annule");
         } catch (MarketplaceException e) {
             log.error(e.getMessage());
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
@@ -237,7 +237,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void updateDeliveryDate(String id, DeliveryDate newDate) {
+    public void updateDeliveryDate(int id, DeliveryDate newDate) {
         try {
             this.feignClient.updateDeliveryDate(id, newDate);
         } catch (MarketplaceException e) {
@@ -255,7 +255,7 @@ public class OrderServiceImpl implements OrderService {
             orders = this.feignClient.getAllOrders();
 
             if (locationId != null) {
-                orders = this.feignClient.getOrdersByLocationId(locationId, null);
+                orders = this.feignClient.getOrdersByLocationId(locationId, 0);
             }
 
             if (size != null && locationId != null) {
@@ -279,7 +279,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderDto getSingleOrder(String id) {
+    public OrderDto getSingleOrder(int id) {
         Order order;
         try {
             order = this.feignClient.getSingleOrder(id);

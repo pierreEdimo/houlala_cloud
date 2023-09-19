@@ -7,6 +7,6 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SellReport {
-    String _id;
+    int id;
     int total;
 }

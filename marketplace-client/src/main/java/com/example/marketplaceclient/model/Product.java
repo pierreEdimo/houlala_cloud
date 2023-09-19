@@ -7,7 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Product {
-    private String _id;
+    private int id;
     private String name;
     private String description;
     private int weight;

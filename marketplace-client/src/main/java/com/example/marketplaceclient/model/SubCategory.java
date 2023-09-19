@@ -5,16 +5,16 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ProductType {
-    private String _id;
+public class SubCategory {
+    private int id;
     private String label;
     private String thumbNailUrl;
-    private String categoryId;
+    private int categoryId;
 
-    public ProductType() {
+    public SubCategory() {
     }
 
-    public ProductType(String label, String categoryId) {
+    public SubCategory(String label, int categoryId) {
         this.label = label;
         this.categoryId = categoryId;
     }

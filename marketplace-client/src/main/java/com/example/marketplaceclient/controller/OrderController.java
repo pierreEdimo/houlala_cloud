@@ -21,11 +21,11 @@ public class OrderController {
 
     @GetMapping("/carts")
     public List<OrderDto> getCartItems(@RequestParam(value = "userId") String userId) {
-        return this.orderService.getNonConfirmedOrders(userId);
+        return this.orderService.getCartList(userId);
     }
 
     @GetMapping("{id}")
-    public OrderDto getSingleOrder(@PathVariable("id") String id){
+    public OrderDto getSingleOrder(@PathVariable("id") int id) {
         return this.orderService.getSingleOrder(id);
     }
 
@@ -47,12 +47,12 @@ public class OrderController {
     }
 
     @PutMapping("/status/{id}")
-    public void updateStatus(@PathVariable(value = "id") String id) {
+    public void updateStatus(@PathVariable(value = "id") int id) {
         this.orderService.updateOrder(id);
     }
 
     @PutMapping("/cancel/{id}")
-    public void cancelOrder(@PathVariable(value = "id") String id) {
+    public void cancelOrder(@PathVariable(value = "id") int id) {
         this.orderService.cancelOrder(id);
     }
 
@@ -63,17 +63,17 @@ public class OrderController {
     }
 
     @PutMapping("/cartItems/increase/{id}/sku/{sku}")
-    public void increaseQuantity(@PathVariable(value = "id") String id, @PathVariable(value = "sku") String sku) {
+    public void increaseQuantity(@PathVariable(value = "id") int id, @PathVariable(value = "sku") String sku) {
         this.orderService.increaseQuantity(id, sku);
     }
 
     @PutMapping("/cartItems/decrease/{id}/sku/{sku}")
-    public void decreaseQuantity(@PathVariable(value = "id") String id, @PathVariable(value = "sku") String sku) {
+    public void decreaseQuantity(@PathVariable(value = "id") int id, @PathVariable(value = "sku") String sku) {
         this.orderService.decreaseQuantity(id, sku);
     }
 
     @DeleteMapping("/cartItems/{id}/sku/{sku}")
-    public void deleteItemFromOrder(@PathVariable(value = "id") String id, @PathVariable(value = "sku") String sku) {
+    public void deleteItemFromOrder(@PathVariable(value = "id") int id, @PathVariable(value = "sku") String sku) {
         this.orderService.deleteItemFromOrder(id, sku);
     }
 
@@ -108,7 +108,7 @@ public class OrderController {
 
     @PutMapping("/deliveryDate/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateDeliveryDate(@PathVariable(value = "id") String id, @RequestBody DeliveryDate newDate) {
+    public void updateDeliveryDate(@PathVariable(value = "id") int id, @RequestBody DeliveryDate newDate) {
         this.orderService.updateDeliveryDate(id, newDate);
     }
 }

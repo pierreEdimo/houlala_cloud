@@ -20,7 +20,7 @@ public class Controller {
         return this.service.getProductInfoById(id);
     }
 
-    @PostMapping("/newProduct")
+    @PostMapping("/products")
     public ProductInformation addProductInfo(@RequestBody CreateProductInfoDto info) {
         return this.service.addProduct(info);
     }
@@ -41,12 +41,12 @@ public class Controller {
     }
 
     @GetMapping("/getStock")
-    public Stock getStockFromLocationId(@RequestParam String locationId){
+    public Stock getStockFromLocationId(@RequestParam String locationId) {
         return this.service.getStockFromLocationId(locationId);
     }
 
-    @PutMapping("/getInfoAndUdateQuantity")
-    public void updateQuantitySoldForProduct(@RequestParam String productSku, @RequestParam int quantity){
+    @PutMapping("/products/{sku}/quantity/{quantity}")
+    public void updateQuantitySoldForProduct(@PathVariable(value = "sku") String productSku, @PathVariable(value = "quantity") int quantity) {
         this.service.getInfoAndUpdateQuantity(productSku, quantity);
     }
 
