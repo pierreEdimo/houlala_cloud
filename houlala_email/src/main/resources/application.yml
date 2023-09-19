@@ -1,0 +1,13 @@
+server:
+  port: 8083
+  servlet:
+    context-path: /location
+
+
+spring:
+  application:
+    name: location
+
+  h2:
+    console:
+      enabled: true
