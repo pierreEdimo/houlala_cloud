@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="stock-service" />
         <module name="category-service" />
+        <module name="marketplace" />
         <module name="review-service" />
         <module name="location-service" />
         <module name="authentication-client" />
@@ -56,6 +57,7 @@
       <module name="houlala-marketplace" options="-parameters" />
       <module name="inventory-service" options="-parameters" />
       <module name="location-service" options="-parameters" />
+      <module name="marketplace" options="-parameters" />
       <module name="marketplace-client" options="-parameters" />
       <module name="message-sender" options="-parameters" />
       <module name="notification-client" options="-parameters" />
