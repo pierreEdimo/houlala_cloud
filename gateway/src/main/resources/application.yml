@@ -44,12 +44,6 @@ spring:
             Path=/inventory/**
         #          filters:
         #            - Jwt
-        - id: email
-          uri: lb://email
-          predicates:
-            Path=/email/**
-#          filters:
-#            - Jwt
 eureka:
   client:
     serviceUrl:
