@@ -3,6 +3,7 @@ package com.example.discoveryorchestrator.feign;
 import com.example.discoveryorchestrator.model.Location;
 import com.example.discoveryorchestrator.exception.OrchestratorException;
 import com.example.discoveryorchestrator.model.LocationResponse;
+import com.example.discoveryorchestrator.model.SimpleLocation;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,5 +46,8 @@ public interface LocationServiceFeignClient {
 
     @GetMapping("/user/{userId}")
     LocationResponse getLocationsByUserId(@PathVariable(value = "userId") String userId) throws OrchestratorException;
+
+    @GetMapping("/simple/unique/{luid}")
+    SimpleLocation getSimpleLocationByLuid(@PathVariable String luid) throws OrchestratorException;
 
 }

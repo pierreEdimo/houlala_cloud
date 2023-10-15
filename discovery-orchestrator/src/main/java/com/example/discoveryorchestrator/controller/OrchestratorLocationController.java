@@ -5,6 +5,7 @@ import com.example.discoveryorchestrator.feign.LocationServiceFeignClient;
 import com.example.discoveryorchestrator.feign.UploadServiceFeignClient;
 import com.example.discoveryorchestrator.model.Location;
 import com.example.discoveryorchestrator.model.LocationResponse;
+import com.example.discoveryorchestrator.model.SimpleLocation;
 import com.example.discoveryorchestrator.model.dto.CreateLocationDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -106,6 +107,15 @@ public class OrchestratorLocationController {
         try {
             return this.placeServiceFeignClient.getLocationsByUserId(userId);
         } catch (OrchestratorException e) {
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+    }
+
+    @GetMapping("/simple/unique/{luid}")
+    public SimpleLocation getSimpleLocationByLuid(@PathVariable String luid){
+        try {
+            return this.placeServiceFeignClient.getSimpleLocationByLuid(luid);
+        } catch (OrchestratorException e){
             throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
         }
     }
