@@ -13,6 +13,9 @@ public interface LocationServiceFeignClient {
     @GetMapping("/{id}")
     LocationResponse getSingleLocation(@PathVariable(value = "id") long id) throws OrchestratorException;
 
+    @GetMapping("/uniqueIdentifier/{uid}")
+    LocationResponse getLocationByUniqueIdentifiers(@PathVariable(value = "uid") String luid) throws OrchestratorException;
+
     @GetMapping("")
     List<LocationResponse> getAllLocations() throws OrchestratorException;
 
