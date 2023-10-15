@@ -34,4 +34,6 @@ public interface LocationService {
     LocationResponse getLocationByOwnerId(String ownerId);
 
     List<LocationResponse> getLocationsByOwnerId(String userId);
+
+    Location getSimplifiedLocationByLuid(String luid);
 }
