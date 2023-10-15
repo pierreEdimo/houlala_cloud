@@ -138,6 +138,15 @@ public class OrchestratorLocationController {
         }
     }
 
+    @GetMapping("/uniqueIdentifier/{uid}")
+    public LocationResponse getSingleLocationByUniqueId(@PathVariable(value = "uid") String luid){
+        try{
+            return this.placeServiceFeignClient.getLocationByUniqueIdentifiers(luid);
+        } catch (OrchestratorException e){
+            throw new ResponseStatusException(e.getHttpStatus(), e.getMessage());
+        }
+    }
+
 
     private String skuGenerator(String name) {
         Random rd = new Random();
