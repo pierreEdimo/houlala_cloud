@@ -79,6 +79,11 @@ public class LocationController {
         return this.service.getLocationByOwnerId(userId);
     }
 
+    @GetMapping("/simple/unique/{luid}")
+    public Location getSimplefiedLocationByLuid(@PathVariable String luid){
+        return this.service.getSimplifiedLocationByLuid(luid);
+    }
+
     @GetMapping("/users/{userId}")
     public List<LocationResponse> getLocationsByUserId(@PathVariable String userId) {
         return this.service.getLocationsByOwnerId(userId);
