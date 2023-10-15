@@ -265,6 +265,12 @@ public class LocationServiceImpl implements LocationService {
         return locationResponseList;
     }
 
+    @Override
+    public Location getSimplifiedLocationByLuid(String luid) {
+        return this.repository.findLocationByUniqueIdentifier(luid)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Location was not found"));
+    }
+
 
     private LocationResponse toLocationResponse(Location location) throws LocationServiceException {
 
