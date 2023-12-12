@@ -7,22 +7,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="stock-service" />
-        <module name="category-service" />
-        <module name="marketplace" />
-        <module name="review-service" />
-        <module name="location-service" />
-        <module name="authentication-client" />
-        <module name="inventory-service" />
-        <module name="discovery" />
         <module name="email-service" />
-        <module name="room-service" />
         <module name="api" />
-        <module name="country-service" />
-        <module name="config" />
-        <module name="gateway" />
         <module name="houlala-marketplace" />
-        <module name="discovery-orchestrator" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -36,6 +23,7 @@
       <module name="offer-service" target="17" />
       <module name="store-client" target="19" />
       <module name="store-service" target="17" />
+      <module name="test-app" target="21" />
       <module name="upload-client" target="17" />
       <module name="upload-service" target="17" />
     </bytecodeTargetLevel>
@@ -67,6 +55,7 @@
       <module name="stock-service" options="-parameters" />
       <module name="store-client" options="-parameters" />
       <module name="store-service" options="-parameters" />
+      <module name="test" options="-parameters" />
       <module name="upload-client" options="-parameters" />
       <module name="upload-service" options="-parameters" />
     </option>
