@@ -278,9 +278,6 @@ public class LocationServiceImpl implements LocationService {
         Category categoryLocation = this.categoryClient.getSingleCategory(location.getCategoryId());
         ReviewResponseDto reviews = this.reviewFeignClient.getReviewsByLocation(location.getUniqueIdentifier());
         RoomOverviewDto rooms = this.roomFeignClient.getRoomsFromLocationId(location.getUniqueIdentifier());
-        long orderTotalCount = this.marketPlaceFeignClient.getTotalOrderCount(location.getUniqueIdentifier());
-        long orderSoldCount = this.marketPlaceFeignClient.getOrderSoldCount(location.getUniqueIdentifier());
-        long orderCanceledCount = this.marketPlaceFeignClient.getCanceledOrderCount(location.getUniqueIdentifier());
         long productTotalCount = this.marketPlaceFeignClient.getProductTotalCount(location.getUniqueIdentifier());
         Owner creator = this.userFeignClient.getSingleUserByUserId(location.getUserId());
 
@@ -299,9 +296,9 @@ public class LocationServiceImpl implements LocationService {
         response.setAddress(location.getAddress());
         response.setUniqueIdentifier(location.getUniqueIdentifier());
         response.setImageUrl(location.getImageUrl());
-        response.setOrderCanceledCount(orderCanceledCount);
-        response.setOrderSoldCount(orderSoldCount);
-        response.setOrderTotalCount(orderTotalCount);
+        response.setOrderCanceledCount(0);
+        response.setOrderSoldCount(0);
+        response.setOrderTotalCount(0);
         response.setProductTotalCount(productTotalCount);
         response.setCreator(creator);
         response.setShortDescription(location.getShortDescription());

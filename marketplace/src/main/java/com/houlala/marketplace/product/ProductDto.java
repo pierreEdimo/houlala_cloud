@@ -25,4 +25,6 @@ public class ProductDto {
     private String originLabel;
     private int totalSell;
     private String locationName;
+    private String categoryName;
+    private String subCategoryName;
 }

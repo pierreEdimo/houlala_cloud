@@ -11,4 +11,5 @@ public class SubCategory {
     private int id;
     private String label;
     private String imageUrl;
+    private String categoryName;
 }

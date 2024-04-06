@@ -17,4 +17,6 @@ public class Product {
     private String imageUrl;
     private String productSku;
     private String locationUniqueId;
+    private int categoryId;
+    private int subCategoryId;
 }

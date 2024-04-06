@@ -2,13 +2,15 @@ package com.houlala.marketplace.product;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.houlala.marketplace.category.Category;
+import com.houlala.marketplace.category.CategoryFeign;
 import com.houlala.marketplace.location.Location;
 import com.houlala.marketplace.location.LocationFeign;
-import com.houlala.marketplace.order.OrderFeign;
-import com.houlala.marketplace.order.SellReport;
 import com.houlala.marketplace.stock.Origin;
 import com.houlala.marketplace.stock.ProductAdditionalInformation;
 import com.houlala.marketplace.stock.StockFeignClient;
+import com.houlala.marketplace.subCategories.SubCategory;
+import com.houlala.marketplace.subCategories.SubCategoryFeign;
 import com.houlala.marketplace.upload.UploadFeign;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,7 +20,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,7 +35,10 @@ public class ProductServiceImpl implements ProductService {
 
     private final UploadFeign uploadFeign;
 
-    private final OrderFeign orderFeign;
+    private final CategoryFeign categoryFeign;
+
+    private final SubCategoryFeign subCategoryFeign;
+
 
     @Override
     public List<ProductDto> getAllProducts() {
@@ -178,20 +182,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductDto> getTopSellingProductsByLocationId(String luid) {
-        List<Product> productList = this.productFeignClient.getProductsByLocationId(luid, 0);
-        List<SellReport> reports = this.orderFeign.getTopOrders(luid);
-        List<ProductDto> productDtos = new ArrayList<>();
-
-        for (Product product : productList) {
-            for (SellReport report : reports) {
-                if (product.getProductSku().equalsIgnoreCase(report.getProductSku())) {
-                    productDtos.add(this.toProductDto(product, report.getTotal()));
-                }
-            }
-        }
-
-        return productDtos.stream().sorted(Comparator.comparing(ProductDto::getTotalSell)).collect(Collectors.toList());
+        return List.of();
     }
+
 
     @Override
     public List<ProductDto> getProductSoonOutOfStock(String luid) {
@@ -210,6 +203,8 @@ public class ProductServiceImpl implements ProductService {
 
     private ProductDto toProductDto(Product product) {
         Location productLocation = this.locationFeign.getALocation(product.getLocationUniqueId());
+        Category category = this.categoryFeign.getSingleCategory(product.getCategoryId());
+        SubCategory subCategory = this.subCategoryFeign.getSingleCategory(product.getSubCategoryId());
         ProductAdditionalInformation additionalInformation = this.stockFeignClient.getASingleInfo(product.getProductSku());
         return new ProductDto(
                 product.getId(),
@@ -226,29 +221,9 @@ public class ProductServiceImpl implements ProductService {
                 additionalInformation.getBuyingPrice(),
                 additionalInformation.getOriginLabel().getLabel(),
                 0,
-                productLocation.getName()
-        );
-    }
-
-    private ProductDto toProductDto(Product product, int totalSell) {
-        Location productLocation = this.locationFeign.getALocation(product.getLocationUniqueId());
-        ProductAdditionalInformation additionalInformation = this.stockFeignClient.getASingleInfo(product.getProductSku());
-        return new ProductDto(
-                product.getId(),
-                product.getName(),
-                product.getDescription(),
-                product.getWeight(),
-                product.getSellingPrice(),
-                product.isBookMarked(),
-                product.getImageUrl(),
-                product.getProductSku(),
-                product.getLocationUniqueId(),
-                additionalInformation.getQuantity(),
-                additionalInformation.getArrivalDate(),
-                additionalInformation.getBuyingPrice(),
-                additionalInformation.getOriginLabel().getLabel(),
-                totalSell,
-                productLocation.getName()
+                productLocation.getName(),
+                category.getName(),
+                subCategory.getLabel()
         );
     }
 
