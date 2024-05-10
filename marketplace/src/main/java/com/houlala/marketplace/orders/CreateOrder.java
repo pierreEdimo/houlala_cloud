@@ -13,7 +13,7 @@ import lombok.*;
 @ToString
 public class CreateOrder{
     private String locationUniqueId; 
-    private int PaymentMethodId; 
-    private UserInformation userInformation; 
+    private int paymentMethodId;
+    private UserInformation user;
     private List<CartItem> items;
 }

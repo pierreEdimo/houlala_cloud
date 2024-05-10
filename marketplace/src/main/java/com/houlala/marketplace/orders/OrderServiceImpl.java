@@ -43,8 +43,10 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public void addProductToCart(CreateOrder order) {
-        orderFeign.addProductToCart(order);
+    public OrderDto addProductToCart(CreateOrder order) {
+        Order createdOrder = orderFeign.addProductToCart(order);
+        Location location = locationFeign.getALocation(order.getLocationUniqueId());
+        return ordersMapper.toOrderDto(createdOrder, location);
     }
 
     @Override

@@ -33,8 +33,8 @@ public class OrdersController {
 
     @PutMapping("/carts")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void addProductToCart(@RequestBody CreateOrder order) {
-        orderService.addProductToCart(order);
+    public OrderDto addProductToCart(@RequestBody CreateOrder order) {
+        return orderService.addProductToCart(order);
     }
 
     @DeleteMapping("/carts/{orderNumber}/products/{productSku}")

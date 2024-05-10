@@ -22,7 +22,7 @@ public interface OrderFeign {
     List<Order> getLocationsOrders(@PathVariable String locationId) throws MarketplaceException;
 
     @PostMapping
-    void addProductToCart(@RequestBody CreateOrder order) throws MarketplaceException;
+    Order addProductToCart(@RequestBody CreateOrder order) throws MarketplaceException;
 
     @DeleteMapping("{orderNumber}/products/{productSku}")
     void removeProductFromCart(@PathVariable String orderNumber, @PathVariable  String productSku) throws MarketplaceException;

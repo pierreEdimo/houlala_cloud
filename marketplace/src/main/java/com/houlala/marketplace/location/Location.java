@@ -12,4 +12,5 @@ public class Location {
     private long id;
     private String imageUrl;
     private String email;
+    private String uniqueIdentifier;
 }
